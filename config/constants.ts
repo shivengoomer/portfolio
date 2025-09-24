@@ -60,7 +60,11 @@ export type ValidSkills =
   | "FastAPI"
   | "SQL"
   | "NoSQL"
-  | "Framer Motion";
+  | "Framer Motion"
+  | "GROQ API"
+  | "Express"
+  | "Recharts"
+  | "OpenCV";
 
 export type ValidCategory =
   | "Full Stack"

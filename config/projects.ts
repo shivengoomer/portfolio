@@ -28,408 +28,337 @@ export interface ProjectInterface {
 }
 
 export const Projects: ProjectInterface[] = [
+  // ----------------------- PROFESSIONAL -----------------------
   {
-    id: "built-design",
-    companyName: "Builtdesign",
+    id: "matty",
+    companyName: "Matty",
     type: "Professional",
-    category: ["Web Dev", "Full Stack", "UI/UX"],
+    category: ["Full Stack", "Web Dev", "UI/UX"],
     shortDescription:
-      "Developed and optimized a high-performing website catering to over 4000 users, emphasizing efficiency and maintainability.",
-    websiteLink: "https://builtdesign.in",
-    techStack: [
-      "Next.js",
-      "React",
-      "Node.js",
-      "MongoDB",
-      "GraphQL",
-      "Nest.js",
-      "Typescript",
-    ],
-    startDate: new Date("2021-07-01"),
-    endDate: new Date("2022-07-01"),
-    companyLogoImg: "/projects/builtdesign/logo.png",
+      "Worked on Matty — an AI-powered web platform helping users plan and manage events with modern UI and scalable backend.",
+    websiteLink: "https://matty.ai",
+    githubLink: "https://github.com/shivengoomer/matty", // if repo exists, else remove
+    techStack: ["Next.js", "React", "Typescript", "Node.js", "MongoDB", "Tailwind CSS"],
+    startDate: new Date("2024-08-01"),
+    endDate: new Date("2025-01-01"),
+    companyLogoImg: "/projects/matty/logo.png",
     pagesInfoArr: [
       {
-        title: "Landing Page",
-        description:
-          "Modern and responsive landing page showcasing company services and portfolio",
-        imgArr: [
-          "/projects/builtdesign/landing_1.webp",
-          "/projects/builtdesign/landing_3.webp",
-          "/projects/builtdesign/landing_5.webp",
-          "/projects/builtdesign/landing_6.webp",
-          "/projects/builtdesign/landing_2.webp",
-          "/projects/builtdesign/landing_4.webp",
-        ],
+        title: "Dashboard",
+        description: "Event management dashboard with analytics and AI features",
+        imgArr: ["/projects/matty/dashboard_1.png"],
       },
       {
-        title: "Custom PDF Reader and optimizer",
-        description:
-          "Specialized PDF viewer with optimization features for improved performance and user experience",
-        imgArr: ["/projects/builtdesign/pdf_opt.webp"],
-      },
-      {
-        title: "Clients Dashboard",
-        description:
-          "Comprehensive client portal with project tracking, document management, and communication tools",
-        imgArr: [
-          "/projects/builtdesign/cli_dashboard_1.webp",
-          "/projects/builtdesign/cli_dashboard_2.webp",
-          "/projects/builtdesign/cli_dashboard_3.webp",
-        ],
-      },
-      {
-        title: "Admin Dashboard",
-        description:
-          "Powerful administrative interface for managing users, projects, and system settings",
-        imgArr: ["/projects/builtdesign/logo.png"],
+        title: "AI Event Planner",
+        description: "Helps users create and manage events with AI suggestions",
+        imgArr: ["/projects/matty/ai_planner.png"],
       },
     ],
     descriptionDetails: {
       paragraphs: [
-        "During my time at Builtdesign, I had the opportunity to work on a dynamic and user-focused project that involved designing and optimizing a website catering to a user base of over 4000 individuals. My role as a full-stack web developer was to ensure a seamless experience for users by creating an efficient and maintainable platform.",
-        "I collaborated closely with the product team to integrate cutting-edge features, employing technologies like Next.js and React with TypeScript for captivating front-end experiences. Additionally, I contributed significantly to the backend by utilizing Node.js, MongoDB, and GraphQL to design robust APIs and ensure smooth system functionality.",
-        "This experience allowed me to enhance my skills in various areas of web development and deliver a high-quality product. I gained proficiency in front-end technologies such as Material UI and Tailwind CSS, as well as backend technologies including Nest.js and MySQL. The project's success in catering to a large user base and providing an intuitive user interface has further motivated me to pursue excellence in web development.",
+        "At Matty, I contributed as a full-stack developer to build an AI-powered event management platform. I worked on both the front-end and back-end, ensuring seamless user experience and scalable architecture.",
+        "Key responsibilities included integrating AI-based recommendations, implementing secure authentication, and designing clean and responsive UI components using Tailwind CSS.",
       ],
       bullets: [
-        "Developed and optimized a high-performing website catering to over 4000 users.",
-        "Collaborated closely with the product team to implement cutting-edge features.",
-        "Created an intuitive admin dashboard to efficiently manage and announce contest winners.",
-        "Leveraged Next.js, React with TypeScript for captivating front-end experiences.",
-        "Utilized Node.js, MongoDB, and GraphQL to design and manage databases.",
+        "Developed AI-powered event planning features using Node.js and Next.js.",
+        "Designed modern, responsive UI with Tailwind CSS and React.",
+        "Implemented secure authentication & user dashboards.",
+        "Worked closely with the design team to ensure consistent UX.",
       ],
     },
   },
+
+  // ----------------------- PERSONAL (MAIN REPOS) -----------------------
   {
-    id: "the-super-quotes",
-    companyName: "The Super Quotes",
-    type: "Professional",
-    category: ["Mobile Dev", "Full Stack", "UI/UX"],
-    shortDescription:
-      "Elevated The Super Quotes app with JavaScript, React Native, APIs, Redux magic, and Google Play Store debut.",
-    websiteLink:
-      "https://play.google.com/store/apps/details?id=com.thesuperlife",
-    techStack: ["React Native", "Node.js", "MongoDB", "Javascript"],
-    startDate: new Date("2021-07-01"),
-    endDate: new Date("2022-07-01"),
-    companyLogoImg: "/projects/superquotes/logo.png",
-    pagesInfoArr: [
-      {
-        title: "Quotes View Page",
-        description:
-          "Elegantly designed quotes display with customizable themes and sharing options",
-        imgArr: ["/projects/superquotes/app_2.webp"],
-      },
-      {
-        title: "Quotes Download Component",
-        description:
-          "Feature allowing users to download quotes as beautiful images for social media sharing",
-        imgArr: [
-          "/projects/superquotes/app_4.webp",
-          "/projects/superquotes/app_7.webp",
-        ],
-      },
-      {
-        title: "Account Management",
-        description:
-          "User profile management with favorites, history, and personalization settings",
-        imgArr: ["/projects/superquotes/app_6.webp"],
-      },
-      {
-        title: "Interest Selection and Update Page",
-        description:
-          "Interactive interface for users to select and update their quote preferences and interests",
-        imgArr: [
-          "/projects/superquotes/app_1.webp",
-          "/projects/superquotes/app_3.webp",
-        ],
-      },
-      {
-        title: "Responsiveness",
-        description:
-          "Adaptive design ensuring optimal user experience across various device sizes and orientations",
-        imgArr: ["/projects/superquotes/app_5.webp"],
-      },
-    ],
-    descriptionDetails: {
-      paragraphs: [
-        `Venturing into the world of creativity at The Super Quotes was an exhilarating journey. As a passionate developer, I led the charge in crafting a compelling application from inception to completion, using the dynamic duo of JavaScript and React Native.`,
-        `The heart of my achievement lay in the seamless integration of APIs, threading a tapestry of data flow that propelled the application's functionality to new heights.`,
-        `With the wizardry of Redux, I choreographed a symphony of state management and performance optimization, orchestrating a ballet of responsiveness that wowed users with every interaction.`,
-        `A crescendo awaited as I unveiled the culmination of my work on the grand stage of the Google Play Store. The app's debut marked an epoch, opening doors to an expansive audience eager to embrace the charm of The Super Quotes.`,
-      ],
-      bullets: [
-        "Led the end-to-end development of a captivating application using JavaScript and React Native.",
-        "Championed the integration of APIs, harmonizing data flow and enhancing application functionality.",
-        "Conducted Redux magic to ensure state management and optimize performance, delivering a mesmerizing user experience.",
-        "Premiered the application on the Google Play Store, capturing hearts and expanding its user base.",
-      ],
-    },
-  },
-  {
-    id: "apex-shopping",
-    companyName: "Apex Shopping App",
+    id: "vibeStudio",
+    companyName: "VibeStudio",
     type: "Personal",
-    category: ["Mobile Dev", "Full Stack", "UI/UX"],
+    category: ["Full Stack", "Web Dev"],
     shortDescription:
-      "Developed a feature-rich mobile shopping application with admin panel, user authentication, and seamless product management using React Native and Firebase.",
-    githubLink: "https://github.com/namanbarkiya/apex-shopping-app",
-    techStack: ["React Native", "Javascript", "Redux", "Node.js", "express.js"],
-    startDate: new Date("2021-07-14"),
-    endDate: new Date("2022-07-01"),
-    companyLogoImg: "/projects/apex/logo.png",
-    pagesInfoArr: [
-      {
-        title: "Splash Screen",
-        description: "Custom animated splash screen with app branding",
-        imgArr: ["/projects/apex/app_7.webp"],
-      },
-      {
-        title: "Login/Signup Authentication",
-        description: "Secure user authentication system with Firebase",
-        imgArr: ["/projects/apex/app_1.webp"],
-      },
-      {
-        title: "All Products Explore Screen",
-        description: "Interactive product browsing with categories and filters",
-        imgArr: ["/projects/apex/app_3.webp"],
-      },
-      {
-        title: "Admin Panel",
-        description:
-          "Comprehensive admin dashboard for product and order management",
-        imgArr: ["/projects/apex/app_4.webp", "/projects/apex/app_6.webp"],
-      },
-      {
-        title: "Sidenav Navigation",
-        description: "Intuitive side navigation for easy app navigation",
-        imgArr: ["/projects/apex/app_5.webp"],
-      },
-      {
-        title: "Firebase Database",
-        description:
-          "Real-time database structure for efficient data management",
-        imgArr: ["/projects/apex/db.webp"],
-      },
-    ],
+      "Terminal-based AI productivity tool using Groq API with modular plugin architecture and Docker support.",
+    githubLink: "https://github.com/shivengoomer/vibeStudio",
+    techStack: ["Node.js", "Typescript", "Docker", "Javascript"],
+    startDate: new Date("2025-06-01"),
+    endDate: new Date("2025-07-01"),
+    companyLogoImg: "/projects/vibeStudio/logo.png",
+    pagesInfoArr: [],
     descriptionDetails: {
       paragraphs: [
-        "The Apex Shopping App represents a comprehensive mobile e-commerce solution that I developed from the ground up using React Native and Firebase. This project showcases my ability to create a full-featured shopping application with both user and admin functionalities.",
-        "The application features a robust authentication system, allowing users to securely sign up and log in. The product exploration interface is designed with user experience in mind, incorporating smooth navigation and intuitive filtering options.",
-        "One of the key highlights is the admin panel, which provides complete control over product management, order processing, and inventory tracking. The integration with Firebase ensures real-time data synchronization and reliable data persistence.",
-        "The app's architecture emphasizes scalability and performance, utilizing Redux for state management and following best practices for mobile app development. The UI/UX design focuses on providing a seamless shopping experience across different device sizes.",
+        "Built VibeStudio — a terminal-based AI productivity tool powered by the Groq API.",
+        "Supports modular plugin architecture, shell command execution, and containerized deployment with Docker.",
       ],
       bullets: [
-        "Implemented secure user authentication and authorization using Firebase",
-        "Designed and developed an intuitive product browsing and shopping cart system",
-        "Created a comprehensive admin panel for product and order management",
-        "Integrated real-time data synchronization using Firebase Database",
-        "Implemented state management using Redux for optimal performance",
-        "Designed responsive UI components following mobile-first principles",
-        "Incorporated smooth animations and transitions for enhanced user experience",
+        "Integrated Groq API for fast LLM responses.",
+        "Interactive CLI with Inquirer prompts.",
+        "Shell execution & modular plugin system.",
+        "Dockerized for easy deployment.",
       ],
     },
   },
   {
-    id: "builtdesign-blogs",
-    companyName: "Builtdesign Blogs",
-    type: "Professional",
-    category: ["Web Dev", "Full Stack", "UI/UX"],
+    id: "chatbot",
+    companyName: "AI Chatbot",
+    type: "Personal",
+    category: ["Full Stack", "Web Dev"],
     shortDescription:
-      "Crafted Builtdesign's vibrant Blogs Website using Netlify CMS and React for engaging content experiences.",
-    websiteLink: "https://blog.builtdesign.in",
-    techStack: ["Next.js", "React", "Node.js", "MongoDB", "Typescript"],
+      "AI-powered chatbot web app with real-time conversation support.",
+    githubLink: "https://github.com/shivengoomer/chatbot",
+    techStack: ["Node.js", "Express", "React", "Socket.io"],
+    startDate: new Date("2025-03-01"),
+    endDate: new Date("2025-04-01"),
+    companyLogoImg: "/projects/chatbot/logo.png",
+    pagesInfoArr: [],
+    descriptionDetails: {
+      paragraphs: [
+        "Developed a real-time chatbot with Node.js, Express, and Socket.io.",
+        "Integrated LLM API for intelligent conversation handling.",
+      ],
+      bullets: ["Socket.io real-time chat", "AI-based responses", "Responsive chat UI"],
+    },
+  },
+  {
+    id: "donation-tracker",
+    companyName: "Donation Tracker",
+    type: "Personal",
+    category: ["Full Stack", "Web Dev", "UI/UX"],
+    shortDescription:
+      "Donation tracking dashboard with analytics, user management, and reporting.",
+    githubLink: "https://github.com/shivengoomer/donation-tracker",
+    techStack: ["React", "Node.js", "MongoDB", "Tailwind CSS", "Recharts"],
+    startDate: new Date("2025-08-01"),
+    endDate: new Date("2025-09-01"),
+    companyLogoImg: "/projects/donation-tracker/logo.png",
+    pagesInfoArr: [],
+    descriptionDetails: {
+      paragraphs: [
+        "Created an admin dashboard to track donations and users.",
+        "Visualized analytics using Recharts and enabled report downloads.",
+      ],
+      bullets: [
+        "Donation and user management.",
+        "Graphs & analytics with Recharts.",
+        "Print-ready reports (separate pages).",
+      ],
+    },
+  },
+  {
+    id: "face-track-project",
+    companyName: "Face Track",
+    type: "Personal",
+    category: ["Frontend", "Web Dev"],
+    shortDescription: "Face detection and tracking using OpenCV and Python.",
+    githubLink: "https://github.com/shivengoomer/face-track-project",
+    techStack: ["Python", "OpenCV"],
+    startDate: new Date("2024-06-01"),
+    endDate: new Date("2024-07-01"),
+    companyLogoImg: "/projects/face-track/logo.png",
+    pagesInfoArr: [],
+    descriptionDetails: {
+      paragraphs: [
+        "Developed a face tracking application using OpenCV for real-time webcam detection.",
+      ],
+      bullets: ["Real-time video feed", "Face detection & bounding boxes"],
+    },
+  },
+  {
+    id: "fake_news_detector",
+    companyName: "Fake News Detector",
+    type: "Personal",
+    category: ["Full Stack", "Web Dev"],
+    shortDescription:
+      "Fake news detection web app with NLP pipeline for classification.",
+    githubLink: "https://github.com/shivengoomer/fake_news_detector",
+    techStack: ["Python", "Flask"],
+    startDate: new Date("2024-05-01"),
+    endDate: new Date("2024-06-01"),
+    companyLogoImg: "/projects/fake_news/logo.png",
+    pagesInfoArr: [],
+    descriptionDetails: {
+      paragraphs: [
+        "Built a fake news detection pipeline using NLP models.",
+        "Deployed with Flask web interface.",
+      ],
+      bullets: ["Text preprocessing", "ML classification", "Flask API"],
+    },
+  },
+  {
+    id: "adopt-me",
+    companyName: "Adopt Me",
+    type: "Personal",
+    category: ["Full Stack", "Web Dev", "UI/UX"],
+    shortDescription: "Pet adoption platform with listings and user profiles.",
+    githubLink: "https://github.com/shivengoomer/adopt-me",
+    techStack: ["React", "Node.js", "express.js", "MongoDB"],
+    startDate: new Date("2024-03-01"),
+    endDate: new Date("2024-04-01"),
+    companyLogoImg: "/projects/adoptme/logo.png",
+    pagesInfoArr: [],
+    descriptionDetails: {
+      paragraphs: ["Created an adoption portal where users can list and adopt pets."],
+      bullets: ["User auth", "Pet listings", "Contact owners"],
+    },
+  },
+  {
+    id: "wpbot-news",
+    companyName: "WPBot News",
+    type: "Personal",
+    category: ["Backend", "Web Dev"],
+    shortDescription:
+      "WhatsApp/WordPress integrated news bot to fetch and send latest news.",
+    githubLink: "https://github.com/shivengoomer/wpbot-news",
+    techStack: ["Node.js", "Javascript"],
+    startDate: new Date("2024-02-01"),
+    endDate: new Date("2024-03-01"),
+    companyLogoImg: "/projects/wpbot-news/logo.png",
+    pagesInfoArr: [],
+    descriptionDetails: {
+      paragraphs: ["Bot fetching news and delivering through chat channels."],
+      bullets: ["API fetch", "WhatsApp integration", "News delivery"],
+    },
+  },
+  {
+    id: "snippetly",
+    companyName: "Snippetly",
+    type: "Personal",
+    category: ["Full Stack", "Web Dev"],
+    shortDescription: "Snippet manager for saving and organizing code snippets.",
+    githubLink: "https://github.com/shivengoomer/snippetly",
+    techStack: ["React", "Javascript"],
+    startDate: new Date("2024-07-01"),
+    endDate: new Date("2024-08-01"),
+    companyLogoImg: "/projects/snippetly/logo.png",
+    pagesInfoArr: [],
+    descriptionDetails: {
+      paragraphs: ["Web tool to save and organize code snippets."],
+      bullets: ["CRUD operations", "Syntax highlight", "Search & filter"],
+    },
+  },
+  {
+    id: "newnaanstop",
+    companyName: "NewNaanStop",
+    type: "Personal",
+    category: ["Full Stack", "Web Dev", "UI/UX"],
+    shortDescription:
+      "AI-powered recipe & cooking platform with Gemini API recommendations.",
+    githubLink: "https://github.com/shivengoomer/newnaanstop",
+    techStack: ["React", "Node.js", "Tailwind CSS"],
+    startDate: new Date("2025-01-01"),
+    endDate: new Date("2025-02-01"),
+    companyLogoImg: "/projects/newnaanstop/logo.png",
+    pagesInfoArr: [],
+    descriptionDetails: {
+      paragraphs: [
+        "Created NewNaanStop, a recipe app with AI suggestions using Gemini API and Foodish images.",
+      ],
+      bullets: ["Recipe AI", "YouTube integration", "Tailwind UI"],
+    },
+  },
+
+  // ----------------------- BASIC HTML/CSS/JS PRACTICE -----------------------
+  {
+    id: "amazon-clone",
+    companyName: "Amazon Clone",
+    type: "Personal",
+    category: ["Frontend", "Web Dev"],
+    shortDescription:
+      "Amazon UI clone with product listing, cart, and responsive design.",
+    githubLink: "https://github.com/shivengoomer/amazon-clone",
+    techStack: ["HTML 5", "CSS 3", "Javascript"],
+    startDate: new Date("2022-01-01"),
+    endDate: new Date("2022-01-20"),
+    companyLogoImg: "/projects/amazon/logo.png",
+    pagesInfoArr: [],
+    descriptionDetails: {
+      paragraphs: ["Practiced building e-commerce style layout and cart logic."],
+      bullets: ["Product grid", "Cart logic", "Responsive design"],
+    },
+  },
+  {
+    id: "yt-clone",
+    companyName: "YouTube Clone",
+    type: "Personal",
+    category: ["Frontend", "Web Dev"],
+    shortDescription:
+      "YouTube UI clone with video grid and player page using mock data.",
+    githubLink: "https://github.com/shivengoomer/YT-CLONE",
+    techStack: ["HTML 5", "CSS 3", "Javascript"],
+    startDate: new Date("2022-02-01"),
+    endDate: new Date("2022-02-20"),
+    companyLogoImg: "/projects/ytclone/logo.png",
+    pagesInfoArr: [],
+    descriptionDetails: {
+      paragraphs: ["UI recreation of YouTube home and watch pages."],
+      bullets: ["Grid layout", "Sidebar filters", "Responsive player page"],
+    },
+  },
+  {
+    id: "todo-list",
+    companyName: "To-Do List",
+    type: "Personal",
+    category: ["Frontend", "Web Dev"],
+    shortDescription:
+      "To-Do List app with add, delete, mark complete and local storage.",
+    githubLink: "https://github.com/shivengoomer/ToDo-List",
+    techStack: ["HTML 5", "CSS 3", "Javascript"],
     startDate: new Date("2022-03-01"),
-    endDate: new Date("2022-07-01"),
-    companyLogoImg: "/projects/builtdesign-blogs/logo.png",
-    pagesInfoArr: [
-      {
-        title: "Blog Landing Page",
-        description:
-          "Modern and responsive landing page showcasing featured articles",
-        imgArr: ["/projects/builtdesign-blogs/blog_2.webp"],
-      },
-      {
-        title: "Blog Listing",
-        description:
-          "Organized display of all blog posts with search and filtering",
-        imgArr: ["/projects/builtdesign-blogs/blog_3.webp"],
-      },
-      {
-        title: "Category Navigation",
-        description: "Intuitive category-based navigation system",
-        imgArr: ["/projects/builtdesign-blogs/blog_1.webp"],
-      },
-      {
-        title: "Article View",
-        description:
-          "Clean and readable article layout with rich media support",
-        imgArr: [
-          "/projects/builtdesign-blogs/blog_4.webp",
-          "/projects/builtdesign-blogs/blog_5.webp",
-        ],
-      },
-    ],
+    endDate: new Date("2022-03-10"),
+    companyLogoImg: "/projects/todo/logo.png",
+    pagesInfoArr: [],
     descriptionDetails: {
-      paragraphs: [
-        "As part of the Builtdesign platform, I developed a sophisticated blog website that serves as a content hub for the company's thought leadership and industry insights. The project leveraged Next.js and React to create a fast, SEO-friendly platform.",
-        "The blog platform features a modern, responsive design that prioritizes readability and user engagement. I implemented a robust content management system using Netlify CMS, enabling the content team to easily publish and manage blog posts.",
-        "The architecture includes server-side rendering for optimal performance and SEO, while MongoDB provides flexible content storage. TypeScript ensures code reliability and maintainability throughout the application.",
-        "Key features include category-based navigation, search functionality, and a rich text editor for content creation. The platform supports various content types including images, code snippets, and embedded media.",
-      ],
-      bullets: [
-        "Developed a modern blog platform using Next.js and React with TypeScript",
-        "Implemented Netlify CMS for efficient content management",
-        "Created a responsive design that prioritizes readability and user engagement",
-        "Built server-side rendering for optimal performance and SEO",
-        "Integrated MongoDB for flexible content storage and management",
-        "Developed category-based navigation and search functionality",
-        "Implemented rich text editing capabilities for content creation",
-      ],
+      paragraphs: ["Simple task manager to practice DOM and storage."],
+      bullets: ["Add/delete tasks", "LocalStorage persistence", "Responsive"],
     },
   },
   {
-    id: "portfolio-card",
-    companyName: "Portfolio Card",
+    id: "qrcode-generator",
+    companyName: "QR Code Generator",
     type: "Personal",
-    category: ["Web Dev", "Frontend", "3D Modeling"],
+    category: ["Frontend", "Web Dev"],
     shortDescription:
-      "Forged an immersive 3D Portfolio Card utilizing the prowess of Three.js and Blender, where art and technology converge in an interactive masterpiece.",
-    websiteLink: "https://card.namanbarkiya.xyz/",
-    githubLink: "https://github.com/namanbarkiya/3d-portfolio-card",
-    techStack: ["React", "Javascript", "HTML 5", "CSS 3"],
-    startDate: new Date("2022-03-01"),
-    endDate: new Date("2022-07-01"),
-    companyLogoImg: "/projects/card/logo.png",
-    pagesInfoArr: [
-      {
-        title: "Card Views",
-        description: "Front and back views of the interactive 3D card",
-        imgArr: ["/projects/card/card_2.webp", "/projects/card/card_3.webp"],
-      },
-      {
-        title: "Interactive Elements",
-        description:
-          "Custom links embedded in the 3D model with interactive animations",
-        imgArr: ["/projects/card/card_1.webp"],
-      },
-      {
-        title: "3D Model Development",
-        description: "Blender project showcasing the model creation process",
-        imgArr: ["/projects/card/card_4.webp"],
-      },
-    ],
+      "QR Code generator from user input with PNG download feature.",
+    githubLink: "https://github.com/shivengoomer/QrCode-Genrator",
+    techStack: ["HTML 5", "CSS 3", "Javascript"],
+    startDate: new Date("2022-04-01"),
+    endDate: new Date("2022-04-10"),
+    companyLogoImg: "/projects/qrcode/logo.png",
+    pagesInfoArr: [],
     descriptionDetails: {
-      paragraphs: [
-        "In my personal, I've ventured into the world of creativity, fashioning a distinctive portfolio card through the utilization of Three.js.",
-        "This portfolio card transcends convention; it emerges as a captivating 3D model, adorned with meticulous lighting arrangements that conjure a spellbinding visual journey.",
-        "To materialize this concept, I've harnessed the combined potential of Three.js and Blender, orchestrating a meticulous crafting of the central 3D model that serves as the cornerstone of the card's allure.",
-        "Yet, the allure extends beyond aesthetics. I've ingeniously interwoven custom links directly into the fabric of Three.js components. Through the creation and seamless integration of novel components, these additions elegantly rest upon the card's surface, mirroring its rotations and delivering an interactive dimension to my portfolio.",
-        "The portfolio card itself is an opus of motion, perpetually swaying in an auto-rotational dance that unfurls its multifaceted essence. As an enhancement, I've introduced an instinctive user interaction element. A simple, intuitive drag of the card in specific directions grants viewers a comprehensive vantage, enabling exploration from every conceivable angle.",
-        "At its core, my personal epitomizes technical finesse, artistic expression, and interactive design. The amalgamation of Three.js, Blender's prowess, and the innovation of component integration has birthed not only a portfolio card, but a dynamic encounter leaving an indelible imprint on all who partake.",
-      ],
-      bullets: [
-        "Conceptualized and realized a distinct portfolio card using Three.js, highlighting creative exploration.",
-        "Crafted a mesmerizing 3D model enhanced by thoughtful lighting arrangements, resulting in a captivating visual voyage.",
-        "Leveraged the synergy of Three.js and Blender to meticulously sculpt and refine the central 3D model, embodying meticulous attention to detail.",
-        "Innovatively integrated custom links within Three.js components, introducing an interactive layer via seamlessly incorporated new elements.",
-        "Enabled an auto-rotating feature for the portfolio card, perpetually showcasing its various facets to observers.",
-        "Introduced an instinctual user interaction mechanism, allowing viewers to comprehensively explore the card's dimensions through simple, intuitive dragging motions.",
-        "Represented a fusion of technical prowess, artistic ingenuity, and interactive design in a project that reshapes the boundaries of conventional portfolio representation.",
-      ],
+      paragraphs: ["Practice with JS libraries and canvas download."],
+      bullets: ["QR generation", "Download as PNG"],
     },
   },
   {
-    id: "cirql-dashboard",
-    companyName: "Cirql Dashboard",
+    id: "calculator",
+    companyName: "Calculator",
     type: "Personal",
-    category: ["Web Dev", "Frontend", "UI/UX"],
-    shortDescription:
-      "Created a dashboard project using React and Tailwind CSS, focusing on UI design and routing implementation.",
-    websiteLink: "https://cirql-ui.namanbarkiya.xyz/",
-    techStack: ["React", "Tailwind CSS", "Google Auth"],
-    startDate: new Date("2023-01-01"),
-    endDate: new Date("2023-02-15"),
-    companyLogoImg: "/projects/cirql/logo.png",
-    pagesInfoArr: [
-      {
-        title: "Dashboard Home",
-        description:
-          "Main dashboard view with analytics widgets and data visualization",
-        imgArr: ["/projects/cirql/web_1.png", "/projects/cirql/web_2.png"],
-      },
-      {
-        title: "Profile Page",
-        description:
-          "User profile management interface with customization options",
-        imgArr: ["/projects/cirql/web_3.png", "/projects/cirql/web_4.png"],
-      },
-    ],
-    descriptionDetails: {
-      paragraphs: [
-        "For the 'Cirql Dashboard' personal, I aimed to enhance my UI design skills and deepen my understanding of routing within a React application.",
-        "I utilized React and Tailwind CSS to craft an intuitive dashboard interface that provides users with an organized overview of data and functionalities. The UI components were thoughtfully designed to ensure a seamless user experience.",
-        "Incorporating Google Sign-In Authentication further fortified the project by adding a layer of security and convenience. Users are required to authenticate before accessing certain routes, ensuring the safety of sensitive information.",
-        "The routing system was meticulously implemented to enable smooth navigation between different sections of the dashboard, simulating real-world use cases.",
-        "Through this project, I've gained valuable insights into UI/UX design principles and the implementation of secure and efficient routing in React applications.",
-      ],
-      bullets: [
-        "Created a user-friendly dashboard project using React and Tailwind CSS.",
-        "Implemented Google Sign-In Authentication to ensure secure access to sensitive routes.",
-        "Designed UI components to provide an intuitive and visually pleasing experience.",
-        "Focused on implementing a smooth routing system to simulate real-world use cases.",
-        "Enhanced my skills in UI design, routing, and component architecture.",
-      ],
-    },
-  },
-  {
-    id: "inscript-hindi-typing",
-    companyName: "Inscript Hindi Typing",
-    type: "Personal",
-    category: ["Web Dev", "UI/UX"],
-    shortDescription:
-      "Developed a user-friendly website for Inscript Hindi typing, addressing the need for a simple tool for Hindi writers to convey data digitally.",
-    websiteLink: "https://hindityping.namanbarkiya.xyz",
-    githubLink: "https://github.com/namanbarkiya/inscript-hindi-keyboard",
+    category: ["Frontend", "Web Dev"],
+    shortDescription: "Basic Calculator with JS operations.",
+    githubLink: "https://github.com/shivengoomer/calculator",
     techStack: ["HTML 5", "CSS 3", "Javascript"],
     startDate: new Date("2022-05-01"),
-    endDate: new Date("2022-06-15"),
-    companyLogoImg: "/projects/hindi-keyboard/logo.png",
-    pagesInfoArr: [
-      {
-        title: "Typing Interface",
-        description: "Minimal and user-friendly Inscript Hindi typing area",
-        imgArr: ["/projects/hindi-keyboard/web_1.png"],
-      },
-      {
-        title: "Copy and Download the file",
-        description:
-          "Export functionality allowing users to copy text or download as a document file",
-        imgArr: [
-          "/projects/hindi-keyboard/web_2.png",
-          "/projects/hindi-keyboard/web_3.png",
-        ],
-      },
-    ],
+    endDate: new Date("2022-05-05"),
+    companyLogoImg: "/projects/calculator/logo.png",
+    pagesInfoArr: [],
     descriptionDetails: {
-      paragraphs: [
-        "The 'Inscript Hindi Typing Website' project emerged from the need to provide a simple and accessible tool for Hindi writers, especially those in digital news and media, who wished to convey data in Hindi.",
-        "Recognizing the challenges posed by complex software in the market, I set out to create a minimalistic typing area that catered to the needs of a vast community of Hindi typists in India.",
-        "The project was designed to address the specific requirements of users familiar with the Inscript keyboard layout, mapping English and Hindi alphabets for seamless typing. The intuitive interface allowed users to effortlessly switch between languages, streamlining the process of content creation.",
-        "Leveraging HTML and CSS, I crafted the website's UI to ensure a user-friendly experience. Additionally, Local Storage was utilized to enable users to save and retrieve their work, enhancing convenience and productivity.",
-        "The website's focus on user experience and simplicity proved to be a key factor in its popularity among Hindi writers. By offering a tool that reduced the barriers to entry, I contributed to the digital empowerment of Hindi typists who previously faced challenges in conveying their message effectively.",
-        "This project marked one of my initial forays into web development and highlighted the transformative potential of technology in addressing real-world challenges.",
-      ],
-      bullets: [
-        "Developed a user-friendly website for Inscript Hindi typing.",
-        "Catered to the needs of Hindi writers in digital news and media.",
-        "Created a minimalistic and intuitive typing interface for the Inscript keyboard layout.",
-        "Mapped English and Hindi alphabets to provide a seamless typing experience.",
-        "Utilized HTML and CSS to design a user-friendly UI.",
-        "Implemented Local Storage to enable users to save and retrieve their work.",
-        "Contributed to the digital empowerment of Hindi typists by offering a simple tool.",
-        "Marked one of my first web development projects, showcasing technology's potential for addressing real-world needs.",
-      ],
+      paragraphs: ["Built to practice JavaScript DOM events and math ops."],
+      bullets: ["Basic math ops", "Keyboard input", "Responsive"],
+    },
+  },
+  {
+    id: "landing-page",
+    companyName: "Landing Page",
+    type: "Personal",
+    category: ["Frontend", "Web Dev", "UI/UX"],
+    shortDescription: "Modern landing page with flexbox & animations.",
+    githubLink: "https://github.com/shivengoomer/landing-page",
+    techStack: ["HTML 5", "CSS 3", "Javascript"],
+    startDate: new Date("2022-06-01"),
+    endDate: new Date("2022-06-05"),
+    companyLogoImg: "/projects/landing/logo.png",
+    pagesInfoArr: [],
+    descriptionDetails: {
+      paragraphs: ["Experimented with hero sections, CSS animations."],
+      bullets: ["Responsive hero", "Scroll animations", "Contact section"],
     },
   },
 ];

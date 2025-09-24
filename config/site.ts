@@ -1,11 +1,11 @@
 import { url } from "inspector";
 
 export const siteConfig = {
-  name: "Naman Barkiya | Developer Portfolio",
-  authorName: "Naman Barkiya",
+  name: "Shiven Goomer | Developer Portfolio",
+  authorName: "Shiven Goomer",
   username: "namanbarkiya",
   description:
-    "Naman Barkiya's portfolio - A modern, responsive Next.js portfolio for developers. This open-source template can be customized to showcase your own skills, projects, and professional experience.",
+    "Shiven Goomer's portfolio - A modern, responsive Next.js portfolio for developers. This open-source template can be customized to showcase your own skills, projects, and professional experience.",
     url:"localhost:300",
   links: {
     twitter: "https://x.com/namanbarkiya",
@@ -17,7 +17,7 @@ export const siteConfig = {
   logoIcon:
     "",
   keywords: [
-    "Naman Barkiya",
+    "Shiven Goomer",
     "Full Stack Developer",
     "Web Developer Portfolio",
     "Next.js portfolio template",

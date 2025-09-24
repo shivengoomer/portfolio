@@ -9,6 +9,27 @@ export interface skillsInterface {
 
 export const skillsUnsorted: skillsInterface[] = [
   {
+    name: "Docker",
+    description:
+      "Containerize apps for portability, easy deployment, and efficient scaling.",
+    rating: 4,
+    icon: Icons.docker,
+  },
+  {
+    name: "AWS",
+    description:
+      "Utilize Amazon Web Services to build and deploy scalable, reliable, and secure applications.",
+    rating: 4,
+    icon: Icons.amazonaws,
+  },
+  {
+    name: "Git ",
+    description:
+      "Version control and automate deployments with Git, pipelines, and CI/CD workflows.",
+    rating: 4,
+    icon: Icons.gitBranch,
+  },
+  {
     name: "Next.js",
     description:
       "Effortlessly build dynamic apps with routing, layouts, loading UI, and API routes.",
@@ -22,33 +43,69 @@ export const skillsUnsorted: skillsInterface[] = [
     rating: 5,
     icon: Icons.react,
   },
-  {
-    name: "GraphQL",
-    description:
-      "Fetch data precisely with a powerful query language for APIs and runtime execution.",
-    rating: 4,
-    icon: Icons.graphql,
-  },
-  {
-    name: "Nest.js",
-    description:
-      "Create scalable and modular applications with a progressive Node.js framework.",
-    rating: 4,
-    icon: Icons.nestjs,
-  },
-  {
-    name: "express.js",
-    description:
-      "Build web applications and APIs quickly using a fast, unopinionated Node.js framework.",
-    rating: 5,
-    icon: Icons.express,
-  },
+
   {
     name: "Node.js",
     description:
       "Run JavaScript on the server side, enabling dynamic and responsive applications.",
     rating: 5,
     icon: Icons.nodejs,
+  },
+  {
+    name: "Express.js",
+    description:
+      "Build web applications and APIs quickly using a fast, unopinionated Node.js framework.",
+    rating: 5,
+    icon: Icons.express,
+  },
+  {
+    name: "TypeScript",
+    description:
+      "Enhance JavaScript with static types, making code more understandable and reliable.",
+    rating: 5,
+    icon: Icons.typescript,
+  },
+  {
+    name: "JavaScript",
+    description:
+      "Create interactive and dynamic web experiences with the versatile scripting language.",
+    rating: 5,
+    icon: Icons.javascript,
+  },
+  {
+    name: "Python",
+    description:
+      "Write efficient scripts, automation tools, and data-driven apps with Python’s rich ecosystem.",
+    rating: 4,
+    icon: Icons.python // generic code/AI icon since no specific Python icon was imported
+  },
+  {
+    name: "Java",
+    description:
+      "Develop reliable, object-oriented applications and backend systems with Java.",
+    rating: 4,
+    icon: Icons.java,
+  },
+  {
+    name: "C++",
+    description:
+      "Implement high-performance applications and system-level solutions with C++.",
+    rating: 3,
+    icon: Icons.cpp,
+  },
+  {
+    name: "C",
+    description:
+      "Understand low-level programming and build system-level applications using C.",
+    rating: 3,
+    icon: Icons.javascript,
+  },
+  {
+    name: "PostgreSQL",
+    description:
+      "Design and query relational databases with advanced SQL features and reliability.",
+    rating: 4,
+    icon: Icons.postgres,
   },
   {
     name: "MongoDB",
@@ -58,69 +115,19 @@ export const skillsUnsorted: skillsInterface[] = [
     icon: Icons.mongodb,
   },
   {
-    name: "Typescript",
+    name: "MySQL",
     description:
-      "Enhance JavaScript with static types, making code more understandable and reliable.",
-    rating: 5,
-    icon: Icons.typescript,
-  },
-  {
-    name: "Javascript",
-    description:
-      "Create interactive and dynamic web experiences with the versatile scripting language.",
-    rating: 5,
-    icon: Icons.javascript,
-  },
-  {
-    name: "HTML 5",
-    description:
-      "Structure web content beautifully with the latest version of HyperText Markup Language.",
-    rating: 4,
-    icon: Icons.html5,
-  },
-  {
-    name: "CSS 3",
-    description:
-      "Style web pages creatively with the latest iteration of Cascading Style Sheets.",
-    rating: 4,
-    icon: Icons.css3,
-  },
-  {
-    name: "React Native",
-    description:
-      "Develop cross-platform mobile apps using React for consistent and engaging experiences.",
-    rating: 4,
-    icon: Icons.react,
-  },
-  {
-    name: "Angular",
-    description:
-      "Build dynamic web apps with a TypeScript-based open-source framework by Google.",
+      "Manage and organize relational databases efficiently for data-driven applications.",
     rating: 3,
-    icon: Icons.angular,
+    icon: Icons.mysql,
   },
   {
-    name: "Redux",
+    name: "Prisma ORM",
     description:
-      "Manage app state effectively using a predictable and centralized state container.",
+      "Model and access databases in a type-safe way with the modern Prisma ORM.",
     rating: 4,
-    icon: Icons.redux,
+    icon: Icons.pyramid,
   },
-  {
-    name: "Socket.io",
-    description:
-      "Enable real-time, bidirectional communication between clients and servers effortlessly.",
-    rating: 3,
-    icon: Icons.socketio,
-  },
-  {
-    name: "Material UI",
-    description:
-      "Create stunning and responsive UIs with a popular React UI framework.",
-    rating: 4,
-    icon: Icons.mui,
-  },
-
   {
     name: "Tailwind CSS",
     description:
@@ -129,30 +136,23 @@ export const skillsUnsorted: skillsInterface[] = [
     icon: Icons.tailwindcss,
   },
   {
-    name: "AWS",
+    name: "AI & APIs",
     description:
-      "Utilize Amazon Web Services to build and deploy scalable, reliable, and secure applications.",
+      "Integrate AI models and APIs such as Groq, Gemini, and Postman for advanced features.",
+    rating: 4,
+    icon: Icons.brain,
+  },
+  {
+    name: "Flask",
+    description:
+      "Build lightweight backend services and APIs with the Python Flask microframework.",
     rating: 3,
-    icon: Icons.amazonaws,
-  },
-  {
-    name: "Bootstrap",
-    description:
-      "Quickly create responsive and appealing web designs using a popular CSS framework.",
-    rating: 2,
-    icon: Icons.bootstrap,
-  },
-  {
-    name: "MySQL",
-    description:
-      "Manage and organize relational databases efficiently for data-driven applications.",
-    rating: 2,
-    icon: Icons.mysql,
+    icon: Icons.flask,
   },
   {
     name: "Netlify",
     description:
-      "Manage and organize relational databases efficiently for data-driven applications.",
+      "Deploy modern frontend apps easily with automated builds and global CDN.",
     rating: 4,
     icon: Icons.netlify,
   },

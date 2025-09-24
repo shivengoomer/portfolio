@@ -33,8 +33,13 @@ import {
   Zap,
 } from "lucide-react";
 import { AiFillStar } from "react-icons/ai";
-import { BiLaugh, BiSolidUser } from "react-icons/bi";
+import { BiLaugh, BiPyramid, BiSolidUser , BiLogoPostgresql } from "react-icons/bi";
 import { BsInfoCircle, BsQuestionCircle } from "react-icons/bs";
+import { FaDocker,FaJava,FaPython } from "react-icons/fa";
+import { TbBrandCpp} from "react-icons/tb";
+import { LuBrainCog } from "react-icons/lu";
+
+
 import {
   HiBriefcase,
   HiOutlineExternalLink,
@@ -65,9 +70,21 @@ import {
   SiTailwindcss,
   SiTwitter,
   SiTypescript,
+  SiWebstorm,
+  SiWolfram,
+  SiFlask,
+  
 } from "react-icons/si";
 
 export const Icons = {
+  brain:LuBrainCog,
+  postgres:BiLogoPostgresql,
+  docker:FaDocker,
+  java:FaJava,
+  cpp:TbBrandCpp,
+  flask:SiFlask,
+  python: FaPython,
+  pyramid:BiPyramid,
   contact: Phone,
   gitRepoIcon: BookMarked,
   gitOrgBuilding: Building,
