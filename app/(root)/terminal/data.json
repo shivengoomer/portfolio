@@ -1,0 +1,34 @@
+{
+  "home": {
+    "about.txt": "Hi, I'm Shiven Goomer, a Full Stack Developer passionate about building scalable web apps and learning new technologies.",
+    "skills": {
+      "frontend.txt": "React, Next.js, HTML, CSS, Tailwind, JavaScript, TypeScript",
+      "backend.txt": "Node.js, Express.js, MongoDB, PostgreSQL, REST APIs",
+      "other.txt": "Docker, AWS, Git, Prisma ORM, Flask, Netlify"
+    },
+    "projects": {
+      "chatapp.txt": "Real-time chat application using React, Node.js, Express, Socket.IO, and MongoDB.",
+      "topicwise.txt": "AI-based syllabus learning app with topic extraction, flashcards, and interactive Q&A.",
+      "portfolio.txt": "My personal portfolio built with Next.js, showcasing projects, skills, and interactive terminal experience."
+    },
+    "contact": {
+      "github.txt": "https://github.com/shivengoomer",
+      "linkedin.txt": "https://www.linkedin.com/in/shiven-goomer/",
+      "gmail.txt": "shivengoomer@gmail.com"
+    }
+  },
+  "experience": {
+    "gncipl.txt": "Position: Full Stack Web Development Intern\nCompany: Global Next Consulting India Pvt. Ltd. (GNCIPL)\nLocation: India\nDuration: 2025-07-01 to 2025-08-01\nDescription: Developed full-stack features using React.js, Node.js, MongoDB.\nAchievements: Delivered production-ready codebase and final project report.\nSkills: React, Node.js, MongoDB, Javascript, Typescript",
+    "geekroom.txt": "Position: Head – Emerging Technology\nCompany: Geek Room\nLocation: India\nDuration: 2024-01-01 to 2025-12-31\nDescription: Conducted sessions on Docker, Linux basics, and Web Development.\nAchievements: Developed Flask-based backend for automated bulk mailing.\nSkills: Docker, Linux, Flask, Python, Web-Dev",
+    "ieee.txt": "Position: Core Committee Member\nCompany: IEEE Student Branch\nLocation: India\nDuration: 2024-01-01 to 2025-12-31\nDescription: Managed event logistics and program planning.\nAchievements: Supported multiple successful events.\nSkills: Event Management, Leadership, Collaboration, Planning"
+  },
+  "pages": {
+    "home.txt": "Welcome to my portfolio website.",
+    "skills.txt": "Key skills that define my professional identity.",
+    "projects.txt": "Showcasing impactful projects and technical achievements.",
+    "contact.txt": "Let's connect and explore collaborations.",
+    "contributions.txt": "Open-source contributions and community involvement.",
+    "resume.txt": "Shiven Goomer's resume.",
+    "experience.txt": "Professional journey and career timeline."
+  }
+}

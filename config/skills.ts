@@ -162,4 +162,4 @@ export const skills = skillsUnsorted
   .slice()
   .sort((a, b) => b.rating - a.rating);
 
-export const featuredSkills = skills.slice(0, 6);
+export const featuredSkills = skills.slice(0, 5);

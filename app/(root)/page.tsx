@@ -20,6 +20,7 @@ import { siteConfig } from "@/config/site";
 import { featuredSkills } from "@/config/skills";
 import { cn } from "@/lib/utils";
 import profileImg from "@/public/profile-img.jpg";
+import { ShivenTerminal } from "./terminal/ShivenTerminal";
 
 export const metadata: Metadata = {
   title: `${pagesConfig.home.metadata.title} | Modern Next.js Developer Portfolio Template`,
@@ -73,17 +74,17 @@ export default function IndexPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareSchema) }}
       />
 
-      <section className="space-y-6 pb-8 pt-6 mb-0 md:pb-12 md:py-20 lg:py-32 h-screen flex items-center">
-        <div className="container flex max-w-[80rem] flex-col items-center gap-4 text-center -mt-20">
+      <section className="flex flex-col lg:flex-row h-screen items-center justify-center gap-10 lg:gap-20 py-10 px-4 lg:px-20">
+        <div className="container flex max-w-[40rem] flex-col items-center gap-4 text-center -mt-20">
           <Image
             src={profileImg}
             height={100}
             width={100}
-            sizes="100vw"
-            className="bg-primary rounded-full mb-0 h-auto md:mb-2 w-[60%] max-w-[16rem] border-1 border-primary border"
+            sizes="90vw"
+            className="bg-primary rounded-full mb-0 h-auto md:mb-2 w-[60%] max-w-[16rem] border border-primary"
             alt="Shiven Goomer - Full Stack Developer Portfolio"
             priority
-          />  
+          />
           <AnimatedText
             as="h1"
             delay={0.2}
@@ -114,10 +115,7 @@ export default function IndexPage() {
                 href={"/contact"}
                 rel="noreferrer"
                 className={cn(
-                  buttonVariants({
-                    variant: "outline",
-                    size: "lg",
-                  })
+                  buttonVariants({ variant: "outline", size: "lg" })
                 )}
                 aria-label="Contact Shiven Goomer"
               >
@@ -129,7 +127,25 @@ export default function IndexPage() {
             <Icons.chevronDown className="h-6 w-6 mt-10" />
           </AnimatedText>
         </div>
+        <div className="flex-1 w-full lg:h-[700px] rounded-3xl p-4 overflow-auto flex flex-col transition-colors duration-500 ">
+          <AnimatedText
+            as="h3"
+            delay={0.2}
+            className="font-heading text-center mb-4"
+          >
+            Type{" "}
+            <span className="font-mono bg-black/30 px-2 py-1 rounded">
+              help
+            </span>{" "}
+            for available commands
+          </AnimatedText>
+
+          <div className="flex-1 w-full overflow-y-auto">
+            <ShivenTerminal />
+          </div>
+        </div>
       </section>
+
       <AnimatedSection
         className="container space-y-6 bg-muted py-10"
         id="skills"
@@ -201,37 +217,6 @@ export default function IndexPage() {
                         See all the relevant experiences.
                     </p>
                 </div> */}
-      </AnimatedSection>
-      <AnimatedSection
-        direction="down"
-        className="container space-y-6 bg-muted py-10 my-14"
-        id="contributions"
-      >
-        <div className="mx-auto flex max-w-[58rem] flex-col items-center space-y-4 text-center">
-          <AnimatedText
-            as="h2"
-            className="font-heading text-3xl leading-[1.1] sm:text-3xl md:text-6xl"
-          >
-            {pagesConfig.contributions.title}
-          </AnimatedText>
-          <AnimatedText
-            as="p"
-            delay={0.2}
-            className="max-w-[85%] leading-normal text-muted-foreground sm:text-lg sm:leading-7"
-          >
-            {pagesConfig.contributions.description}
-          </AnimatedText>
-        </div>
-        <div className="mx-auto justify-center gap-4 md:w-full lg:grid-cols-3">
-          <ContributionCard contributions={featuredContributions} />
-        </div>
-        <AnimatedText delay={0.4} className="flex justify-center">
-          <Link href="/contributions">
-            <Button variant={"outline"} className="rounded-xl">
-              <Icons.chevronDown className="mr-2 h-4 w-4" /> View All
-            </Button>
-          </Link>
-        </AnimatedText>
       </AnimatedSection>
       <AnimatedSection
         direction="left"
