@@ -7,28 +7,6 @@ interface AnimatedPageTransitionProps {
   children: ReactNode;
 }
 
-const pageVariants = {
-  initial: {
-    opacity: 0,
-    y: 20,
-  },
-  animate: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.2,
-      ease: "easeInOut",
-    },
-  },
-  exit: {
-    opacity: 0,
-    y: -20,
-    transition: {
-      duration: 0.2,
-      ease: "easeInOut",
-    },
-  },
-};
 
 export const AnimatedPageTransition = ({
   children,
@@ -38,7 +16,6 @@ export const AnimatedPageTransition = ({
       initial="initial"
       animate="animate"
       exit="exit"
-      variants={pageVariants}
       className="w-full"
     >
       {children}

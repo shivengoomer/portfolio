@@ -1,5 +1,3 @@
-import { ValidSkills } from "./constants";
-
 export interface ExperienceInterface {
   id: string;
   position: string;
@@ -9,7 +7,7 @@ export interface ExperienceInterface {
   endDate: Date | "Present";
   description: string[];
   achievements: string[];
-  skills: ValidSkills[];
+  skills: string[];
   companyUrl?: string;
   logo?: string;
 }

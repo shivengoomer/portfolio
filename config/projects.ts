@@ -1,4 +1,4 @@
-import { ValidCategory, ValidExpType, ValidSkills } from "./constants";
+import { ValidCategory, ValidExpType } from "./constants";
 
 interface PagesInfoInterface {
   title: string;
@@ -19,7 +19,7 @@ export interface ProjectInterface {
   shortDescription: string;
   websiteLink?: string;
   githubLink?: string;
-  techStack: ValidSkills[];
+  techStack: string[];
   startDate: Date;
   endDate: Date;
   companyLogoImg: any;

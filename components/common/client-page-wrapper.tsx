@@ -27,7 +27,6 @@ export const ClientPageWrapper = ({ children }: ClientPageWrapperProps) => {
     <motion.div
       initial="initial"
       animate="animate"
-      variants={pageVariants}
       className="w-full"
     >
       {children}

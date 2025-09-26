@@ -67,7 +67,6 @@ export function MainNav({ items, children }: MainNavProps) {
               custom={index}
               initial="hidden"
               animate="visible"
-              variants={navItemVariants}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >

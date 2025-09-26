@@ -1,6 +1,5 @@
 export type ValidSkills =
   | "Linux"
-  |
   | "Next.js"
   | "React"
   | "GraphQL"

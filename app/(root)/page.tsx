@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import Script from "next/script";
+import ProfileCard from "@/components/common/ProfileCard"
 
 import { AnimatedSection } from "@/components/common/animated-section";
 import { AnimatedText } from "@/components/common/animated-text";
@@ -32,6 +33,7 @@ export const metadata: Metadata = {
 
 export default function IndexPage() {
   // Structured data for personal portfolio
+  
   const personSchema = {
     "@context": "https://schema.org",
     "@type": "Person",
@@ -62,6 +64,7 @@ export default function IndexPage() {
   };
 
   return (
+    
     <ClientPageWrapper>
       <Script
         id="schema-person"
@@ -76,15 +79,26 @@ export default function IndexPage() {
 
       <section className="flex flex-col lg:flex-row h-screen items-center justify-center gap-10 lg:gap-20 py-10 px-4 lg:px-20">
         <div className="container flex max-w-[40rem] flex-col items-center gap-4 text-center -mt-20">
-          <Image
-            src={profileImg}
-            height={100}
-            width={100}
-            sizes="90vw"
-            className="bg-primary rounded-full mb-0 h-auto md:mb-2 w-[60%] max-w-[16rem] border border-primary"
-            alt="Shiven Goomer - Full Stack Developer Portfolio"
-            priority
-          />
+          {/* <ProfileCard
+          name="Shiven Goomer"
+          title="Full Stack Developer"
+          handle="shivengoomer"
+          contactText="Contact Me"
+          avatarUrl="@/public/profile-img.jpg"
+          showUserInfo={true}
+          enableTilt={true}
+          enableMobileTilt={false}
+        /> */}
+            <Image
+              src={profileImg}
+              height={200}
+              width={200}
+              sizes="90vw"
+              style={{ objectFit: "cover" }}
+              className="rounded-full bg-primary mb-0 h-56 w-62 md:mb-2 border border-primary object-cover"
+              alt="Shiven Goomer - Full Stack Developer Portfolio"
+              priority
+            />
           <AnimatedText
             as="h1"
             delay={0.2}

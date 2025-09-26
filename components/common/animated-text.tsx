@@ -10,22 +10,6 @@ interface AnimatedTextProps {
   as?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "span" | "div";
 }
 
-const textVariants = {
-  hidden: {
-    opacity: 0,
-    y: 20,
-  },
-  visible: (delay: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: {
-      delay,
-      duration: 0.6,
-      ease: "easeOut",
-    },
-  }),
-};
-
 export const AnimatedText = ({
   children,
   delay = 0,
@@ -39,7 +23,6 @@ export const AnimatedText = ({
       initial="hidden"
       animate="visible"
       custom={delay}
-      variants={textVariants}
       className={className}
     >
       {children}
