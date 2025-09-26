@@ -24,7 +24,7 @@ import profileImg from "@/public/profile-img.jpg";
 import { ShivenTerminal } from "./terminal/ShivenTerminal";
 
 export const metadata: Metadata = {
-  title: `${pagesConfig.home.metadata.title} | Modern Next.js Developer Portfolio Template`,
+  title: "Shiven Goomer",
   description: `${pagesConfig.home.metadata.description} This open-source Next.js portfolio template is customizable to showcase your skills and projects.`,
   alternates: {
     canonical: siteConfig.url,
