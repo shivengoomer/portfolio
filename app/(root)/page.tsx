@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import Script from "next/script";
-import ProfileCard from "@/components/common/ProfileCard"
+// import ProfileCard from "@/components/common/ProfileCard"
 
 import { AnimatedSection } from "@/components/common/animated-section";
 import { AnimatedText } from "@/components/common/animated-text";
@@ -77,8 +77,8 @@ export default function IndexPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareSchema) }}
       />
 
-      <section className="flex flex-col lg:flex-row h-screen items-center justify-center gap-10 lg:gap-20 py-10 px-4 lg:px-20">
-        <div className="container flex max-w-[40rem] flex-col items-center gap-4 text-center -mt-20">
+      <section className="flex flex-col lg:flex-row min-h-[70vh] md:h-screen items-center justify-center gap-8 lg:gap-20 py-10 px-4 lg:px-20">
+        <div className="container flex max-w-[40rem] flex-col items-center gap-4 text-center">
           {/* <ProfileCard
           name="Shiven Goomer"
           title="Full Stack Developer"
@@ -93,9 +93,9 @@ export default function IndexPage() {
               src={profileImg}
               height={200}
               width={200}
-              sizes="90vw"
+              sizes="(max-width: 640px) 40vw, 200px"
               style={{ objectFit: "cover" }}
-              className="rounded-full bg-primary mb-0 h-56 w-62 md:mb-2 border border-primary object-cover"
+              className="rounded-full bg-primary mb-0 h-32 w-32 sm:h-40 sm:w-40 md:h-48 md:w-48 md:mb-2 border border-primary object-cover"
               alt="Shiven Goomer - Full Stack Developer Portfolio"
               priority
             />
@@ -141,7 +141,7 @@ export default function IndexPage() {
             <Icons.chevronDown className="h-6 w-6 mt-10" />
           </AnimatedText>
         </div>
-        <div className="flex-1 w-full lg:h-[700px] rounded-3xl p-4 overflow-auto flex flex-col transition-colors duration-500 ">
+        <div className="flex-1 w-full h-[380px] sm:h-[480px] lg:h-[700px] rounded-3xl p-4 overflow-auto flex flex-col transition-colors duration-500 ">
           <AnimatedText
             as="h3"
             delay={0.2}

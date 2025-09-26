@@ -14,12 +14,12 @@ export default function manifest(): MetadataRoute.Manifest {
       {
         src: "/favicon.ico",
         sizes: "64x64",
-        type: "image/png",
+        type: "image/x-icon",
       },
       {
         src: "/favicon.ico",
         sizes: "64x64",
-        type: "image/png",
+        type: "image/x-icon",
         purpose: "maskable",
       },
     ],
