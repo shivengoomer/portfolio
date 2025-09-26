@@ -3,7 +3,9 @@
 import React, { useState, useRef, useEffect } from "react";
 import dataJson from "./data.json";
 
-type Directory = Record<string, Directory | string>;
+interface Directory {
+  [key: string]: Directory | string;
+}
 
 // Resolve absolute/relative paths
 const resolvePath = (cwd: string[], path: string): string[] => {
@@ -50,8 +52,11 @@ export const ShivenTerminal: React.FC = () => {
   const getDir = (path: string[]): Directory | string => {
     let dir: Directory | string = dataJson as Directory;
     for (const p of path) {
-      if (dir[p] !== undefined) dir = dir[p] as Directory | string;
-      else return "Invalid path";
+      if (typeof dir === "object" && dir !== null && p in dir) {
+        dir = (dir as Directory)[p];
+      } else {
+        return "Invalid path";
+      }
     }
     return dir;
   };
