@@ -20,7 +20,7 @@ export const experiences: ExperienceInterface[] = [
     position: "Full Stack Web Development Intern",
     company: "Global Next Consulting India Pvt. Ltd. (GNCIPL)",
     location: "India",
-    startDate: new Date("2025-07-01"),
+    startDate: new Date("2025-05-01"),
     endDate: new Date("2025-08-01"),
     description: [
       "Developed and deployed full-stack web features (React.js, Node.js, MongoDB) for client-facing applications.",
@@ -40,8 +40,8 @@ export const experiences: ExperienceInterface[] = [
     position: "Head – Emerging Technology",
     company: "Geek Room",
     location: "India",
-    startDate: new Date("2024-01-01"),
-    endDate: new Date("202-12-31"),
+    startDate: new Date("2025-01-01"),
+    endDate: new Date("2025-12-31"),
     description: [
       "Conducted sessions on Docker, Linux basics, and Web Development with a focus on real-world deployment.",
       "Built Flask backend for an inter-departmental bulk mail sender project.",

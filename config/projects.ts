@@ -185,23 +185,49 @@ export const Projects: ProjectInterface[] = [
     },
   },
   {
-    id: "wpbot-news",
-    companyName: "WPBot News",
-    type: "Personal",
-    category: ["Backend", "Web Dev"],
-    shortDescription:
-      "WhatsApp/WordPress integrated news bot to fetch and send latest news.",
-    githubLink: "https://github.com/shivengoomer/wpbot-news",
-    techStack: ["Node.js", "Javascript"],
-    startDate: new Date("2024-02-01"),
-    endDate: new Date("2024-03-01"),
-    companyLogoImg: "/projects/wpbot-news/logo.png",
-    pagesInfoArr: [],
-    descriptionDetails: {
-      paragraphs: ["Bot fetching news and delivering through chat channels."],
-      bullets: ["API fetch", "WhatsApp integration", "News delivery"],
-    },
+  id: "wpbot-news",
+  companyName: "For Real (Hackathon Winner)",
+  type: "Professional",
+  category: ["Backend", "Web Dev"],
+  shortDescription:
+    "A WhatsApp integrated bot for detecting fake news, phishing links, and deepfakes.",
+  githubLink: "https://github.com/shivengoomer/fake_news_detector",
+  techStack: ["Node.js", "JavaScript", "WhatsApp API", "FaceForensics++", "FAISS"],
+  startDate: new Date("2024-02-01"),
+  endDate: new Date("2024-03-01"),
+  companyLogoImg: "/projects/wpbot-news/logo.png",
+  pagesInfoArr: [],
+  descriptionDetails: {
+    paragraphs: [
+      "WPBot News is a Node.js-powered WhatsApp and WordPress bot built to tackle the rising problem of misinformation online. It detects and flags fake news articles, phishing links, and deepfake media before delivering information to end users.",
+      "The project combined cybersecurity checks with automated content distribution, ensuring that only verified and safe content was shared. By leveraging APIs, FaceForensics++, and similarity search via FAISS, the bot provided users with a reliability score for any piece of content."
+    ],
+    bullets: [
+      // Problem Statement
+      "Problem: Users are constantly exposed to misinformation, phishing attacks, and deepfakes without simple verification tools integrated into their daily communication platforms.",
+
+      // Workflow & Tech Stack
+      "Workflow & Tech Stack: User Input → Node.js Verification Engine → FAISS Similarity Check & FaceForensics++ → Output Verdict → Delivered via WhatsApp/WordPress.",
+      "Node.js backend orchestrates the verification pipeline.",
+      "FaceForensics++ used for deepfake detection.",
+      "FAISS indexing used for similarity and credibility scoring.",
+      "WhatsApp API delivers instant reports; WordPress API enables secure publishing of verified content.",
+
+      // Working & Testing
+      "Working: User sends a news link, video, or text → Bot analyzes the source, checks for phishing patterns, compares media against forensic datasets, and returns a verdict (Real/Fake/Phishing).",
+      "Testing: Validated against sample phishing datasets, deepfake test videos, and fake/real news articles to measure accuracy and reliability.",
+
+      // Revenue / Use Case Model
+      "Revenue Generation Model:",
+      "• B2B: Offer verification as a service for media houses, educational institutions, and enterprises.",
+      "• B2C: Subscription-based WhatsApp bot for individuals to verify links and news in real-time.",
+
+      // Outcome
+      "Outcome: Reduced exposure to misinformation, educated users about cybersecurity risks, and demonstrated integration of ML-based verification into chat workflows.",
+
+    ],
   },
+},
   {
     id: "snippetly",
     companyName: "Snippetly",
@@ -282,44 +308,8 @@ export const Projects: ProjectInterface[] = [
     descriptionDetails: {
       paragraphs: ["Practiced building e-commerce style layout and cart logic."],
       bullets: ["Product grid", "Cart logic", "Responsive design"],
-    },
-  },
-  {
-    id: "todo-list",
-    companyName: "To-Do List",
-    type: "Personal",
-    category: ["Frontend", "Web Dev"],
-    shortDescription:
-      "To-Do List app with add, delete, mark complete and local storage.",
-    githubLink: "https://github.com/shivengoomer/ToDo-List",
-    techStack: ["HTML 5", "CSS 3", "Javascript"],
-    startDate: new Date("2022-03-01"),
-    endDate: new Date("2022-03-10"),
-    companyLogoImg: "/projects/todo/logo.png",
-    pagesInfoArr: [],
-    descriptionDetails: {
-      paragraphs: ["Simple task manager to practice DOM and storage."],
-      bullets: ["Add/delete tasks", "LocalStorage persistence", "Responsive"],
-    },
-  },
-  {
-    id: "qrcode-generator",
-    companyName: "QR Code Generator",
-    type: "Personal",
-    category: ["Frontend", "Web Dev"],
-    shortDescription:
-      "QR Code generator from user input with PNG download feature.",
-    githubLink: "https://github.com/shivengoomer/QrCode-Genrator",
-    techStack: ["HTML 5", "CSS 3", "Javascript"],
-    startDate: new Date("2022-04-01"),
-    endDate: new Date("2022-04-10"),
-    companyLogoImg: "/projects/qrcode/logo.png",
-    pagesInfoArr: [],
-    descriptionDetails: {
-      paragraphs: ["Practice with JS libraries and canvas download."],
-      bullets: ["QR generation", "Download as PNG"],
-    },
-  },
+    }
+  }
 ];
 
 export const featuredProjects = Projects.slice(0, 3);
