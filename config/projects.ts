@@ -96,7 +96,7 @@ export const Projects: ProjectInterface[] = [
     techStack: ["Node.js", "Typescript", "Docker", "Javascript"],
     startDate: new Date("2025-06-01"),
     endDate: new Date("2025-07-01"),
-    companyLogoImg: "/projects/vibeStudio/logo.png",
+    companyLogoImg: "/projects/vibestudio/logo.png",
     pagesInfoArr: [],
     descriptionDetails: {
       paragraphs: [
