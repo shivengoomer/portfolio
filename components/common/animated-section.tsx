@@ -14,7 +14,7 @@ interface AnimatedSectionProps {
 export const AnimatedSection = ({
   children,
   className = "",
-  delay = 0,
+  delay = 1,
   direction = "up",
   id,
 }: AnimatedSectionProps) => {

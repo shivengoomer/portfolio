@@ -9,19 +9,12 @@ import { Icons } from "@/components/common/icons";
 import { Button } from "@/components/ui/button";
 import { ExperienceInterface } from "@/config/experience";
 
-// Helper function to extract year from date
-const getYearFromDate = (date: Date): string => {
-  return new Date(date).getFullYear().toString();
-};
+// Helper functions
+const getYearFromDate = (date: Date): string => new Date(date).getFullYear().toString();
 
-// Helper function to get duration text
-const getDurationText = (
-  startDate: Date,
-  endDate: Date | "Present"
-): string => {
+const getDurationText = (startDate: Date, endDate: Date | "Present"): string => {
   const startYear = getYearFromDate(startDate);
-  const endYear =
-    typeof endDate === "string" ? "Present" : getYearFromDate(endDate);
+  const endYear = typeof endDate === "string" ? "Present" : getYearFromDate(endDate);
   return `${startYear} - ${endYear}`;
 };
 
@@ -30,22 +23,35 @@ interface TimelineProps {
 }
 
 const Timeline: React.FC<TimelineProps> = ({ experiences }) => {
-  // Sort experiences by date (most recent first)
-  const sortedExperiences = [...experiences].sort((a, b) => {
+  // ✅ Split pinned and non-pinned
+  const pinned = experiences.filter((exp) => exp.pinned);
+  const others = experiences.filter((exp) => !exp.pinned);
+
+  // Sort others by date (most recent first)
+  const sortedOthers = [...others].sort((a, b) => {
     const dateA = a.endDate === "Present" ? new Date() : a.endDate;
     const dateB = b.endDate === "Present" ? new Date() : b.endDate;
     return dateB.getTime() - dateA.getTime();
   });
 
+  // Combine pinned first, then sorted others
+  const finalList = [...pinned, ...sortedOthers];
+
   return (
     <div className="space-y-4">
-      {sortedExperiences.map((experience, index) => (
+      {finalList.map((experience, index) => (
         <AnimatedSection
           key={experience.id}
           delay={0.1 * (index + 1)}
           direction="up"
         >
-          <div className="w-full p-4 sm:p-6 bg-background border border-border rounded-lg transition-all duration-300">
+          <div
+            className={`w-full p-4 sm:p-6 bg-background border border-border rounded-lg transition-all duration-300 ${
+              experience.pinned
+                ? "border-primary shadow-md ring-1 ring-primary/20" // highlight pinned one
+                : ""
+            }`}
+          >
             <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
               <div className="flex items-start gap-4 flex-1 min-w-0">
                 {experience.logo && (
@@ -65,10 +71,7 @@ const Timeline: React.FC<TimelineProps> = ({ experiences }) => {
                       {experience.position}
                     </h3>
                     <span className="inline-flex items-center px-3 py-1 rounded-full text-xs sm:text-sm font-medium bg-primary/10 text-primary border border-primary/20 w-fit">
-                      {getDurationText(
-                        experience.startDate,
-                        experience.endDate
-                      )}
+                      {getDurationText(experience.startDate, experience.endDate)}
                     </span>
                   </div>
                   <div className="flex items-center gap-2 mb-1">

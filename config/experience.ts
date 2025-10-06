@@ -10,6 +10,7 @@ export interface ExperienceInterface {
   skills: string[];
   companyUrl?: string;
   logo?: string;
+  pinned?: boolean | false;
 }
 
 export const experiences: ExperienceInterface[] = [
@@ -17,22 +18,36 @@ export const experiences: ExperienceInterface[] = [
     id: "gncipl",
     position: "Full Stack Web Development Intern",
     company: "Global Next Consulting India Pvt. Ltd. (GNCIPL)",
-    location: "India",
-    startDate: new Date("2025-05-01"),
-    endDate: new Date("2025-08-01"),
+    location: "Delhi,India",
+    startDate: new Date("2025-07-03"),
+    endDate: new Date("2025-08-14"),
     description: [
-      "Developed and deployed full-stack web features (React.js, Node.js, MongoDB) for client-facing applications.",
-      "Enhanced workflows and ensured secure, reliable performance of applications.",
-      "Collaborated with clients and technical leadership to deliver a final project report & production-ready codebase.",
+      "Completed a six-week Full Stack Web Development Internship delivering client-facing applications using React.js, Node.js, and MongoDB.",
+      "Implemented multiple mini-projects within the internship, each focusing on building production-ready features for client workflows.",
+      "Worked closely with clients and technical leadership to ensure secure, reliable, and high-quality code delivery.",
     ],
     achievements: [
-      "Successfully delivered production-ready codebase adhering to strict confidentiality and ownership standards.",
-      "Improved client workflows by building reliable and secure full-stack features.",
-      "Presented a final project report to clients and technical leadership with positive feedback.",
+      "Successfully delivered 6 mini-projects during the internship, all production-ready and adhering to strict confidentiality policies.",
+      "Improved client workflows and system performance with full-stack features.",
+      "Presented final project reports and deployed working applications to clients with positive feedback.",
+      "Gained hands-on experience with Docker-based deployments and workflow automation.",
+      "Maintained high professional standards and client communication throughout the internship.",
+      "Received recognition from technical leadership for quality, reliability, and adherence to deadlines.",
     ],
-    skills: ["React", "Node.js", "MongoDB", "Javascript", "Typescript"],
+    skills: [
+      "React",
+      "Node.js",
+      "MongoDB",
+      "JavaScript",
+      "TypeScript",
+      "Docker",
+      "Full Stack Development",
+    ],
+    companyUrl: "https://www.gncipl.com",
     logo: "/experience/gncipl-logo.png",
+    pinned: true,
   },
+
   {
     id: "geekroom",
     position: "Head – Emerging Technology",
@@ -50,6 +65,7 @@ export const experiences: ExperienceInterface[] = [
     ],
     skills: ["Docker", "Linux", "Flask", "Python", "Web-Dev"],
     logo: "/experience/geekroom-logo.png",
+    companyUrl: "https://www.linkedin.com/company/geek-room-msit/",
   },
   {
     id: "ieee",
@@ -67,5 +83,6 @@ export const experiences: ExperienceInterface[] = [
     ],
     skills: ["Event Management", "Leadership", "Collaboration", "Planning"],
     logo: "/experience/ieee-logo.png",
+    companyUrl: "https://www.msit.in/society",
   },
 ];
