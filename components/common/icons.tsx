@@ -33,21 +33,25 @@ import {
   Zap,
 } from "lucide-react";
 import { AiFillStar } from "react-icons/ai";
-import { BiLaugh, BiPyramid, BiSolidUser , BiLogoPostgresql } from "react-icons/bi";
+import {
+  BiLaugh,
+  BiPyramid,
+  BiSolidUser,
+  BiLogoPostgresql,
+} from "react-icons/bi";
 import { BsInfoCircle, BsQuestionCircle } from "react-icons/bs";
-import { FaDocker,FaJava,FaPython } from "react-icons/fa";
-import { TbBrandCpp} from "react-icons/tb";
+import { FaDocker, FaJava, FaPython,FaAws } from "react-icons/fa";
+import { TbBrandCpp } from "react-icons/tb";
 import { LuBrainCog } from "react-icons/lu";
-
 
 import {
   HiBriefcase,
   HiOutlineExternalLink,
   HiOutlineLink,
 } from "react-icons/hi";
+import { FcCommandLine } from "react-icons/fc";
 import { IoIosGitBranch } from "react-icons/io";
 import {
-  SiAmazonaws,
   SiAngular,
   SiBootstrap,
   SiCss3,
@@ -68,23 +72,23 @@ import {
   SiRedux,
   SiSocketdotio,
   SiTailwindcss,
-  SiTwitter,
+  SiX,
   SiTypescript,
   SiWebstorm,
   SiWolfram,
   SiFlask,
-  
+  SiN8N,
 } from "react-icons/si";
 
 export const Icons = {
-  brain:LuBrainCog,
-  postgres:BiLogoPostgresql,
-  docker:FaDocker,
-  java:FaJava,
-  cpp:TbBrandCpp,
-  flask:SiFlask,
+  brain: LuBrainCog,
+  postgres: BiLogoPostgresql,
+  docker: FaDocker,
+  java: FaJava,
+  cpp: TbBrandCpp,
+  flask: SiFlask,
   python: FaPython,
-  pyramid:BiPyramid,
+  pyramid: BiPyramid,
   contact: Phone,
   gitRepoIcon: BookMarked,
   gitOrgBuilding: Building,
@@ -118,7 +122,7 @@ export const Icons = {
   link: HiOutlineLink,
   externalLink: HiOutlineExternalLink,
   star: AiFillStar,
-  amazonaws: SiAmazonaws,
+  amazonaws: FaAws,
   angular: SiAngular,
   bootstrap: SiBootstrap,
   css3: SiCss3,
@@ -139,10 +143,12 @@ export const Icons = {
   tailwindcss: SiTailwindcss,
   typescript: SiTypescript,
   gmail: SiGmail,
-  twitter: SiTwitter,
+  twitter: SiX,
   linkedin: SiLinkedin,
   userFill: BiSolidUser,
   work: HiBriefcase,
+  n8n: SiN8N,
+  c:FcCommandLine,
   gitHub: ({ ...props }: LucideProps) => (
     <svg
       aria-hidden="true"

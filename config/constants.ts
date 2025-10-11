@@ -65,7 +65,8 @@ export type ValidSkills =
   | "GROQ API"
   | "Express"
   | "Recharts"
-  | "OpenCV";
+  | "OpenCV"
+  | "Automation";
 
 export type ValidCategory =
   | "Full Stack"
@@ -74,6 +75,9 @@ export type ValidCategory =
   | "UI/UX"
   | "Web Dev"
   | "Mobile Dev"
+  | "Automation"
+  | "n8n"
+  | "API Integration"
   | "3D Modeling";
 
 export type ValidExpType = "Personal" | "Professional";

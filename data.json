@@ -1,0 +1,144 @@
+{
+  "name": "WhatsApp to Google Drive via Gemini",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "whatsapp-drive",
+        "httpMethod": "POST",
+        "responseMode": "onReceived"
+      },
+      "id": "WebhookTrigger",
+      "name": "Webhook Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "functionCode": "const input = $json[\"message\"]?.trim() || '';\nconst parts = input.split(/\\s+/);\nconst command = parts[0].toUpperCase();\nreturn [{ command, args: parts.slice(1), from: $json.from, hasFile: !!$json.file_url, file_url: $json.file_url }];"
+      },
+      "id": "ParseCommand",
+      "name": "Parse Command",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [450, 300]
+    },
+    {
+      "parameters": {
+        "propertyName": "command",
+        "rules": [
+          { "operation": "equal", "value": "LIST", "output": 1 },
+          { "operation": "equal", "value": "DELETE", "output": 2 },
+          { "operation": "equal", "value": "MOVE", "output": 3 },
+          { "operation": "equal", "value": "SUMMARY", "output": 4 },
+          { "operation": "equal", "value": "RENAME", "output": 5 },
+          { "operation": "equal", "value": "UPLOAD", "output": 6 }
+        ]
+      },
+      "id": "RouteCommand",
+      "name": "Route Command",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 1,
+      "position": [650, 300]
+    },
+    {
+      "parameters": {
+        "operation": "list",
+        "filters": { "q": "'{{$json.args[0]}}' in parents" }
+      },
+      "id": "ListFiles",
+      "name": "List Files (LIST)",
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 2,
+      "position": [850, 100],
+      "credentials": { "googleApi": "Google Drive OAuth2" }
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "fileId": "={{$json.args[0]}}"
+      },
+      "id": "DeleteFile",
+      "name": "Delete File (DELETE)",
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 2,
+      "position": [850, 200],
+      "credentials": { "googleApi": "Google Drive OAuth2" }
+    },
+    {
+      "parameters": {
+        "operation": "move",
+        "fileId": "={{$json.args[0]}}",
+        "folderId": "={{$json.args[1]}}"
+      },
+      "id": "MoveFile",
+      "name": "Move File (MOVE)",
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 2,
+      "position": [850, 300],
+      "credentials": { "googleApi": "Google Drive OAuth2" }
+    },
+    {
+      "parameters": {
+        "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent",
+        "method": "POST",
+        "authentication": "headerAuth",
+        "headerAuth": {
+          "name": "Authorization",
+          "value": "Bearer {{$credentials.geminiApiKey}}"
+        },
+        "bodyParametersJson": "={\"contents\":[{\"parts\":[{\"text\":\"Summarize this folder's content:\\n\" + $json.folderText}]}]}"
+      },
+      "id": "GeminiSummary",
+      "name": "Gemini Summary (SUMMARY)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 2,
+      "position": [850, 400]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "fileId": "={{$json.args[0]}}",
+        "updateFields": { "name": "={{$json.args[1]}}" }
+      },
+      "id": "RenameFile",
+      "name": "Rename File (RENAME)",
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 2,
+      "position": [850, 500],
+      "credentials": { "googleApi": "Google Drive OAuth2" }
+    },
+    {
+      "parameters": {
+        "operation": "upload",
+        "fileName": "={{$json.args[1]}}",
+        "parentId": "={{$json.args[0]}}",
+        "binaryPropertyName": "data"
+      },
+      "id": "UploadFile",
+      "name": "Upload File (UPLOAD)",
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 2,
+      "position": [850, 600],
+      "credentials": { "googleApi": "Google Drive OAuth2" }
+    }
+  ],
+  "connections": {
+    "Webhook Trigger": {
+      "main": [[{ "node": "Parse Command", "type": "main", "index": 0 }]]
+    },
+    "Parse Command": {
+      "main": [[{ "node": "Route Command", "type": "main", "index": 0 }]]
+    },
+    "Route Command": {
+      "main": [
+        [{ "node": "List Files (LIST)", "type": "main", "index": 0 }],
+        [{ "node": "Delete File (DELETE)", "type": "main", "index": 0 }],
+        [{ "node": "Move File (MOVE)", "type": "main", "index": 0 }],
+        [{ "node": "Gemini Summary (SUMMARY)", "type": "main", "index": 0 }],
+        [{ "node": "Rename File (RENAME)", "type": "main", "index": 0 }],
+        [{ "node": "Upload File (UPLOAD)", "type": "main", "index": 0 }]
+      ]
+    }
+  }
+}

@@ -62,7 +62,7 @@ export const skillsUnsorted: skillsInterface[] = [
     name: "TypeScript",
     description:
       "Enhance JavaScript with static types, making code more understandable and reliable.",
-    rating: 5,
+    rating: 3.5,
     icon: Icons.typescript,
   },
   {
@@ -90,7 +90,7 @@ export const skillsUnsorted: skillsInterface[] = [
     name: "C++",
     description:
       "Implement high-performance applications and system-level solutions with C++.",
-    rating: 3,
+    rating: 4,
     icon: Icons.cpp,
   },
   {
@@ -98,7 +98,7 @@ export const skillsUnsorted: skillsInterface[] = [
     description:
       "Understand low-level programming and build system-level applications using C.",
     rating: 3,
-    icon: Icons.javascript,
+    icon: Icons.c,
   },
   {
     name: "PostgreSQL",
@@ -118,7 +118,7 @@ export const skillsUnsorted: skillsInterface[] = [
     name: "MySQL",
     description:
       "Manage and organize relational databases efficiently for data-driven applications.",
-    rating: 3,
+    rating: 4,
     icon: Icons.mysql,
   },
   {
@@ -155,6 +155,13 @@ export const skillsUnsorted: skillsInterface[] = [
       "Deploy modern frontend apps easily with automated builds and global CDN.",
     rating: 4,
     icon: Icons.netlify,
+  },
+  {
+    name: "n8n",
+    description:
+      "Automaions and Lead capture and follow-up",
+    rating: 4,
+    icon: Icons.n8n,
   },
 ];
 

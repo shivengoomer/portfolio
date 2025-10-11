@@ -4,7 +4,7 @@ import { redirect } from "next/navigation";
 
 import { Icons } from "@/components/common/icons";
 import ProjectDescription from "@/components/projects/project-description";
-import { buttonVariants } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import ChipContainer from "@/components/ui/chip-container";
 import CustomTooltip from "@/components/ui/custom-tooltip";
 import { Projects } from "@/config/projects";
@@ -47,12 +47,14 @@ export default function Project({ params }: ProjectPageProps) {
         </time>
         <h1 className="flex items-center justify-between mt-2 font-heading text-4xl leading-tight lg:text-5xl">
           {project.companyName}
+
           <div className="flex items-center">
             {project.githubLink && (
               <CustomTooltip text="Link to the source code.">
                 <Link href={project.githubLink} target="_blank">
                   <Icons.gitHub className="w-6 ml-4 text-muted-foreground hover:text-foreground" />
                 </Link>
+                
               </CustomTooltip>
             )}
             {project.websiteLink && (
@@ -72,7 +74,7 @@ export default function Project({ params }: ProjectPageProps) {
           >
             <Image
               src={profileImg}
-              alt={"naman"}
+              alt={"shivengoomer"}
               width={42}
               height={42}
               className="rounded-full bg-background"
@@ -97,7 +99,7 @@ export default function Project({ params }: ProjectPageProps) {
         priority
       />
 
-      <div className="mb-7 ">
+      <div className="mb-7 justify-between ">
         <h2 className="inline-block font-heading text-3xl leading-tight lg:text-3xl mb-2">
           Tech Stack
         </h2>
