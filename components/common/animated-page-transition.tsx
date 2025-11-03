@@ -10,7 +10,7 @@ interface AnimatedPageTransitionProps {
 
 export const AnimatedPageTransition = ({
   children,
-  duration = 0.6,
+  duration = 0.3,
 }: AnimatedPageTransitionProps) => {
   return (
     <motion.div

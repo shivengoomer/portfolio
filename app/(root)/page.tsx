@@ -8,12 +8,12 @@ import { AnimatedSection } from "@/components/common/animated-section";
 import { AnimatedText } from "@/components/common/animated-text";
 import { ClientPageWrapper } from "@/components/common/client-page-wrapper";
 import { Icons } from "@/components/common/icons";
-import ContributionCard from "@/components/contributions/contribution-card";
+import CertificationCard from "@/components/contributions/contribution-card";
 import ExperienceCard from "@/components/experience/experience-card";
 import ProjectCard from "@/components/projects/project-card";
 import SkillsCard from "@/components/skills/skills-card";
 import { Button, buttonVariants } from "@/components/ui/button";
-import { featuredContributions } from "@/config/contributions";
+import { certsUnsorted } from "@/config/certs";
 import { experiences } from "@/config/experience";
 import { pagesConfig } from "@/config/pages";
 import { featuredProjects } from "@/config/projects";
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
 
 export default function IndexPage() {
   // Structured data for personal portfolio
-  
+
   const personSchema = {
     "@context": "https://schema.org",
     "@type": "Person",
@@ -64,7 +64,6 @@ export default function IndexPage() {
   };
 
   return (
-    
     <ClientPageWrapper>
       <Script
         id="schema-person"
@@ -89,16 +88,16 @@ export default function IndexPage() {
           enableTilt={true}
           enableMobileTilt={false}
         /> */}
-            <Image
-              src={profileImg}
-              height={200}
-              width={200}
-              sizes="(max-width: 640px) 40vw, 200px"
-              style={{ objectFit: "cover" }}
-              className="rounded-full bg-primary mb-0 h-32 w-32 sm:h-40 sm:w-40 md:h-48 md:w-48 md:mb-2 border border-primary object-cover"
-              alt="Shiven Goomer - Full Stack Developer Portfolio"
-              priority
-            />
+          <Image
+            src={profileImg}
+            height={200}
+            width={200}
+            sizes="(max-width: 640px) 40vw, 200px"
+            style={{ objectFit: "cover" }}
+            className="rounded-full bg-primary mb-0 h-32 w-32 sm:h-40 sm:w-40 md:h-48 md:w-48 md:mb-2 border border-primary object-cover"
+            alt="Shiven Goomer - Full Stack Developer Portfolio"
+            priority
+          />
           <AnimatedText
             as="h1"
             delay={0.2}

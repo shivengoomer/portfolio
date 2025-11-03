@@ -46,13 +46,13 @@ export const pagesConfig: PagesConfig = {
       description: "Contact Shiven Goomer.",
     },
   },
-  contributions: {
-    title: "Contributions",
-    description: "Open-source contributions and community involvement.",
+  certificates: {
+    title: "Certifications",
+    description: "Professional certifications and credentials.",
     metadata: {
-      title: "Contributions",
+      title: "Certifications",
       description:
-        "Shiven Goomer's open-source contributions and community involvement.",
+        "Shiven Goomer's professional certifications and credentials.",
     },
   },
   resume: {
