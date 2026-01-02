@@ -36,8 +36,8 @@ export const Projects: ProjectInterface[] = [
     category: ["Full Stack", "Web Dev", "UI/UX"],
     shortDescription:
       "Matty — an AI-powered MERN platform that combines event planning and graphic design with modern UI, cloud storage, and scalable backend.",
-    websiteLink: "https://matty.ai",
-    githubLink: "https://github.com/shivengoomer/matty",
+    websiteLink: "",
+    githubLink: "https://github.com/shivengoomer",
     techStack: [
       "Next.js",
       "React",
