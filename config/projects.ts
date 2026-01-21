@@ -569,7 +569,7 @@ export const Projects: ProjectInterface[] = [
     category: ["Automation", "Backend", "n8n"],
     shortDescription:
       "Automated workflow using n8n and Baileys to send Google Drive files directly to WhatsApp via webhook.",
-    githubLink: "https://github.com/shivengoomer/n8n-drive-whatsapp", // add if uploaded
+    githubLink: "https://github.com/shivengoomer/bot_n8n",
     techStack: ["n8n", "Baileys", "Node.js", "Google Drive API", "Webhook"],
     startDate: new Date("2025-10-01"),
     endDate: new Date("2025-10-05"),
