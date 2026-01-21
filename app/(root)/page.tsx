@@ -25,7 +25,7 @@ import { ShivenTerminal } from "./terminal/ShivenTerminal";
 
 export const metadata: Metadata = {
   title: "Shiven Goomer",
-  description: `${pagesConfig.home.metadata.description} This open-source Next.js portfolio template is customizable to showcase your skills and projects.`,
+  description: `${pagesConfig.home.metadata.description}`,
   alternates: {
     canonical: siteConfig.url,
   },
