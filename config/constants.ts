@@ -78,7 +78,8 @@ export type ValidCategory =
   | "Automation"
   | "n8n"
   | "API Integration"
-  | "3D Modeling";
+  | "3D Modeling"
+  | "Analytics";
 
 export type ValidExpType = "Personal" | "Professional";
 

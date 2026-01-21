@@ -128,7 +128,7 @@ export default function IndexPage() {
                 href={"/contact"}
                 rel="noreferrer"
                 className={cn(
-                  buttonVariants({ variant: "outline", size: "lg" })
+                  buttonVariants({ variant: "outline", size: "lg" }),
                 )}
                 aria-label="Contact Shiven Goomer"
               >

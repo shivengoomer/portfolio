@@ -84,6 +84,76 @@ export const Projects: ProjectInterface[] = [
     priority: 1,
   },
   {
+    id: "clix",
+    companyName: "Clix",
+    type: "Personal",
+    category: ["Full Stack", "Web Dev", "Analytics"],
+    shortDescription:
+      "Clix — a full-stack MERN URL shortening app with authentication, analytics dashboard, and admin controls.",
+    websiteLink: "https://clix.works",
+    githubLink: "https://github.com/shivengoomer/url-shortner",
+    techStack: [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Node.js",
+      "Express",
+      "MongoDB",
+      "Mongoose",
+      "Tailwind CSS",
+      "React Router",
+      "JWT",
+      "shortid",
+      "Recharts",
+    ],
+    startDate: new Date("2024-01-01"),
+    endDate: new Date("2024-03-01"),
+    companyLogoImg:
+      "https://raw.githubusercontent.com/shivengoomer/url-shortner/main/frontend/public/clix-img.png",
+    pagesInfoArr: [
+      {
+        title: "Dashboard & Analytics",
+        description:
+          "Responsive analytics dashboard showing clicks, visit trends, and URL management with charts.",
+        imgArr: [
+          "https://raw.githubusercontent.com/shivengoomer/url-shortner/main/frontend/public/screenshots/dashboard-github.png",
+        ],
+      },
+      {
+        title: "URL Creation & Redirection",
+        description:
+          "Shorten long URLs with unique IDs and auto-redirect functionality with visit tracking.",
+        imgArr: [
+          "https://raw.githubusercontent.com/shivengoomer/url-shortner/main/frontend/public/screenshots/analytics-github.png",
+        ],
+      },
+      {
+        title: "User & Admin Management",
+        description:
+          "Authentication with JWT, role-based access control for users and admin panel.",
+        imgArr: ["/projects/clix/admin.png"],
+      },
+    ],
+    descriptionDetails: {
+      paragraphs: [
+        "Clix is a full-stack URL shortening solution built with the MERN stack with robust authentication and analytics support.",
+        "I developed both backend APIs and frontend interfaces, integrating JWT-based security, MongoDB persistence, and dynamic user analytics.",
+        "The platform includes role-based access control and an admin dashboard for system-wide management.",
+      ],
+      bullets: [
+        "Unique short URLs with redirection and click tracking",
+        "User authentication with JWT & role-based access control (user, admin)",
+        "Dashboard with realtime analytics & charts",
+        "Frontend built with React, Next.js & Tailwind CSS",
+        "Backend REST APIs with Node.js, Express, and MongoDB/Mongoose",
+        "Responsive UI with protected routes & form validation",
+        "Short ID generation with `shortid` library",
+        "Users can manage their own URLs; admins can manage all system data",
+      ],
+    },
+    priority: 2,
+  },
+  {
     id: "vibeStudio",
     companyName: "VibeStudio",
     type: "Personal",
@@ -354,7 +424,8 @@ export const Projects: ProjectInterface[] = [
     pagesInfoArr: [
       {
         title: "UI",
-        description: "Simple and clean UI for creating and organizing snippets.",
+        description:
+          "Simple and clean UI for creating and organizing snippets.",
         imgArr: ["/projects/snippetly/ui.png"],
       },
       {
@@ -377,83 +448,89 @@ export const Projects: ProjectInterface[] = [
     priority: 4,
   },
   {
-  id: "adopt-me",
-  companyName: "Adopt Me",
-  type: "Personal",
-  category: ["Full Stack", "Web Dev", "UI/UX"],
-  shortDescription:
-    "Pet adoption platform with location-based search, listings, and user profiles.",
-  githubLink: "https://github.com/shivengoomer/adopt-me",
-  techStack: ["React", "Node.js", "Express.js", "MongoDB", "Tailwind CSS"],
-  startDate: new Date("2024-03-01"),
-  endDate: new Date("2024-04-01"),
-  companyLogoImg: "/projects/adoptme/logo.png",
-  pagesInfoArr: [
-    {
-      title: "Home Page",
-      description:
-        "Homepage featuring a clean UI with a location-based search bar to find pets nearby and featured adoption listings.",
-      imgArr: ["/projects/adoptme/homepage.png"],
-    },
-    {
-      title: "Pet Listings",
-      description:
-        "Displays detailed cards for available pets with filters for type, age, and location.",
-      imgArr: ["/projects/adoptme/homepage.png"],
-    },
-  ],
-  descriptionDetails: {
-    paragraphs: [
-      "Built a full-stack pet adoption platform enabling users to browse, search, and connect with pet owners.",
-      "Implemented a location-based search feature on the homepage, allowing users to find pets available for adoption nearby.",
-      "Designed a responsive, user-friendly interface with intuitive navigation and quick pet detail previews.",
+    id: "adopt-me",
+    companyName: "Adopt Me",
+    type: "Personal",
+    category: ["Full Stack", "Web Dev", "UI/UX"],
+    shortDescription:
+      "Pet adoption platform with location-based search, listings, and user profiles.",
+    githubLink: "https://github.com/shivengoomer/adopt-me",
+    techStack: ["React", "Node.js", "Express.js", "MongoDB", "Tailwind CSS"],
+    startDate: new Date("2024-03-01"),
+    endDate: new Date("2024-04-01"),
+    companyLogoImg: "/projects/adoptme/logo.png",
+    pagesInfoArr: [
+      {
+        title: "Home Page",
+        description:
+          "Homepage featuring a clean UI with a location-based search bar to find pets nearby and featured adoption listings.",
+        imgArr: ["/projects/adoptme/homepage.png"],
+      },
+      {
+        title: "Pet Listings",
+        description:
+          "Displays detailed cards for available pets with filters for type, age, and location.",
+        imgArr: ["/projects/adoptme/homepage.png"],
+      },
     ],
-    bullets: [
-      "Integrated location-based pet search on the homepage.",
-      "User authentication and profile management.",
-      "CRUD operations for pet listings and adoptions.",
-      "Used MongoDB for storing user and pet data.",
-      "Responsive UI built with Tailwind CSS and React.",
-    ],
+    descriptionDetails: {
+      paragraphs: [
+        "Built a full-stack pet adoption platform enabling users to browse, search, and connect with pet owners.",
+        "Implemented a location-based search feature on the homepage, allowing users to find pets available for adoption nearby.",
+        "Designed a responsive, user-friendly interface with intuitive navigation and quick pet detail previews.",
+      ],
+      bullets: [
+        "Integrated location-based pet search on the homepage.",
+        "User authentication and profile management.",
+        "CRUD operations for pet listings and adoptions.",
+        "Used MongoDB for storing user and pet data.",
+        "Responsive UI built with Tailwind CSS and React.",
+      ],
+    },
+    priority: 9,
   },
-  priority: 9,
-}
-,
   {
-  id: "face-track-project",
-  companyName: "Face Track",
-  type: "Personal",
-  category: ["Full Stack", "Web Dev"],
-  shortDescription:
-    "Real-time face detection and tracking web app using TensorFlow and OpenCV APIs.",
-  githubLink: "https://github.com/shivengoomer/face-track-project",
-  techStack: ["TensorFlow", "OpenCV", "Python", "Flask", "HTML", "JavaScript"],
-  startDate: new Date("2024-06-01"),
-  endDate: new Date("2024-07-01"),
-  companyLogoImg: "/projects/face-track/logo.png",
-  pagesInfoArr: [
-    {
-      title: "Face Track Page",
-      description:
-        "Web interface for real-time webcam-based face detection and tracking powered by TensorFlow and OpenCV APIs.",
-      imgArr: ["/projects/face-track/facetrack.png"],
+    id: "face-track-project",
+    companyName: "Face Track",
+    type: "Personal",
+    category: ["Full Stack", "Web Dev"],
+    shortDescription:
+      "Real-time face detection and tracking web app using TensorFlow and OpenCV APIs.",
+    githubLink: "https://github.com/shivengoomer/face-track-project",
+    techStack: [
+      "TensorFlow",
+      "OpenCV",
+      "Python",
+      "Flask",
+      "HTML",
+      "JavaScript",
+    ],
+    startDate: new Date("2024-06-01"),
+    endDate: new Date("2024-07-01"),
+    companyLogoImg: "/projects/face-track/logo.png",
+    pagesInfoArr: [
+      {
+        title: "Face Track Page",
+        description:
+          "Web interface for real-time webcam-based face detection and tracking powered by TensorFlow and OpenCV APIs.",
+        imgArr: ["/projects/face-track/facetrack.png"],
+      },
+    ],
+    descriptionDetails: {
+      paragraphs: [
+        "Developed a web-based face tracking app using TensorFlow and OpenCV APIs for real-time face detection through webcam input.",
+        "Integrated Flask as a lightweight backend to serve video frames and process detection results in real-time.",
+        "Designed a clean and responsive web UI to visualize bounding boxes and detected faces directly in the browser.",
+      ],
+      bullets: [
+        "Used TensorFlow for face recognition and OpenCV for video frame processing.",
+        "Built Flask-based backend to stream real-time video detection.",
+        "Interactive web interface to view live bounding boxes.",
+        "Lightweight deployment suitable for browser access.",
+      ],
     },
-  ],
-  descriptionDetails: {
-    paragraphs: [
-      "Developed a web-based face tracking app using TensorFlow and OpenCV APIs for real-time face detection through webcam input.",
-      "Integrated Flask as a lightweight backend to serve video frames and process detection results in real-time.",
-      "Designed a clean and responsive web UI to visualize bounding boxes and detected faces directly in the browser.",
-    ],
-    bullets: [
-      "Used TensorFlow for face recognition and OpenCV for video frame processing.",
-      "Built Flask-based backend to stream real-time video detection.",
-      "Interactive web interface to view live bounding boxes.",
-      "Lightweight deployment suitable for browser access.",
-    ],
+    priority: 4,
   },
-  priority: 4,
-},
   {
     id: "amazon-clone",
     companyName: "Amazon Clone",
@@ -487,48 +564,48 @@ export const Projects: ProjectInterface[] = [
     priority: 11,
   },
   {
-  id: "n8n-drive-whatsapp",
-  companyName: "Drive to WhatsApp Automation",
-  type: "Personal",
-  category: ["Automation", "Backend", "n8n", ],
-  shortDescription:
-    "Automated workflow using n8n and Baileys to send Google Drive files directly to WhatsApp via webhook.",
-  githubLink: "https://github.com/shivengoomer/n8n-drive-whatsapp", // add if uploaded
-  techStack: ["n8n", "Baileys", "Node.js", "Google Drive API", "Webhook"],
-  startDate: new Date("2025-10-01"),
-  endDate: new Date("2025-10-05"),
-  companyLogoImg: "/projects/n8n-drive/logo.png",
-  pagesInfoArr: [
-    {
-      title: "Automation Flow",
-      description:
-        "Workflow built in n8n that connects Google Drive and WhatsApp using Baileys Webhook. It fetches Drive files and sends details directly to WhatsApp chats.",
-      imgArr: ["/projects/n8n-drive/flow.png"],
-    },
-    {
-      title: "WhatsApp Integration",
-      description:
-        "Messages and Drive file links are automatically sent to users or groups through the Baileys WhatsApp API, with status logs visible in n8n.",
-      imgArr: ["/projects/n8n-drive/whatsapp.png"],
-    },
-  ],
-  descriptionDetails: {
-    paragraphs: [
-      "Developed an automation workflow in n8n that integrates Google Drive with WhatsApp using the Baileys library and webhook triggers.",
-      "The system checks Drive for files or folders and sends the details, including file links, directly to WhatsApp chats through Baileys.",
-      "This setup enables seamless communication and file sharing without manual intervention, enhancing productivity and real-time access.",
+    id: "n8n-drive-whatsapp",
+    companyName: "Drive to WhatsApp Automation",
+    type: "Personal",
+    category: ["Automation", "Backend", "n8n"],
+    shortDescription:
+      "Automated workflow using n8n and Baileys to send Google Drive files directly to WhatsApp via webhook.",
+    githubLink: "https://github.com/shivengoomer/n8n-drive-whatsapp", // add if uploaded
+    techStack: ["n8n", "Baileys", "Node.js", "Google Drive API", "Webhook"],
+    startDate: new Date("2025-10-01"),
+    endDate: new Date("2025-10-05"),
+    companyLogoImg: "/projects/n8n-drive/logo.png",
+    pagesInfoArr: [
+      {
+        title: "Automation Flow",
+        description:
+          "Workflow built in n8n that connects Google Drive and WhatsApp using Baileys Webhook. It fetches Drive files and sends details directly to WhatsApp chats.",
+        imgArr: ["/projects/n8n-drive/flow.png"],
+      },
+      {
+        title: "WhatsApp Integration",
+        description:
+          "Messages and Drive file links are automatically sent to users or groups through the Baileys WhatsApp API, with status logs visible in n8n.",
+        imgArr: ["/projects/n8n-drive/whatsapp.png"],
+      },
     ],
-    bullets: [
-      "Integrated Google Drive API and Baileys WhatsApp library.",
-      "Automated message delivery using n8n webhook triggers.",
-      "Dynamic file search and sharing workflow.",
-      "Custom logic for file type detection and smart responses.",
-    ],
+    descriptionDetails: {
+      paragraphs: [
+        "Developed an automation workflow in n8n that integrates Google Drive with WhatsApp using the Baileys library and webhook triggers.",
+        "The system checks Drive for files or folders and sends the details, including file links, directly to WhatsApp chats through Baileys.",
+        "This setup enables seamless communication and file sharing without manual intervention, enhancing productivity and real-time access.",
+      ],
+      bullets: [
+        "Integrated Google Drive API and Baileys WhatsApp library.",
+        "Automated message delivery using n8n webhook triggers.",
+        "Dynamic file search and sharing workflow.",
+        "Custom logic for file type detection and smart responses.",
+      ],
+    },
+    priority: 3,
   },
-  priority: 3,
-},
 ];
 
 export const featuredProjects = Projects.sort(
-  (a, b) => a.priority - b.priority
+  (a, b) => a.priority - b.priority,
 ).slice(0, 3);
