@@ -15,6 +15,36 @@ export interface ExperienceInterface {
 
 export const experiences: ExperienceInterface[] = [
   {
+    id: "houseofcotton",
+    position: "Full Stack Developer",
+    company: "House of Cotton Private Limited",
+    location: "India",
+    startDate: new Date("2025-08-01"),
+    endDate: "Present",
+    description: [
+      "Working as a Part-time Full Stack Developer building scalable web applications using modern JavaScript frameworks.",
+      "Developing and maintaining frontend interfaces with React while implementing backend APIs using Node.js.",
+      "Collaborating with the product and design teams to deliver responsive, user-friendly, and performance-optimized features."
+    ],
+    achievements: [
+      "Built and deployed multiple production-ready features improving platform usability and performance.",
+      "Integrated backend APIs and database systems to support scalable application workflows.",
+      "Contributed to improving code quality and maintainability through modular development practices.",
+      "Worked in an agile environment delivering updates and features in iterative development cycles."
+    ],
+    skills: [
+      "React",
+      "Node.js",
+      "MongoDB",
+      "JavaScript",
+      "TypeScript",
+      "REST APIs",
+      "Full Stack Development"
+    ],
+    companyUrl: "",
+    logo: "https://media.licdn.com/dms/image/v2/C560BAQFairlu33bMJw/company-logo_200_200/company-logo_200_200/0/1630604650807?e=1774483200&v=beta&t=BPDBqXspFuelchLRcuHZxlFaJD0joBXqqsoIFzfQL00", pinned: true
+  },
+  {
     id: "gncipl",
     position: "Full Stack Web Development Intern",
     company: "Global Next Consulting India Pvt. Ltd. (GNCIPL)",
@@ -46,6 +76,42 @@ export const experiences: ExperienceInterface[] = [
     companyUrl: "https://www.gncipl.com",
     logo: "/experience/gncipl-logo.png",
     pinned: true,
+  }, {
+    id: "houseofcotton",
+    position: "Full Stack Developer",
+    company: "House of Cotton Private Limited",
+    location: "Remote, India",
+    startDate: new Date("2025-08-01"),
+    endDate: "Present",
+    description: [
+      "Working as a Part-time Full Stack Developer building scalable applications using the MERN stack and Python-based services.",
+      "Developing full-stack features including responsive React interfaces, Node.js APIs, and MongoDB database architectures.",
+      "Collaborating with internal teams and clients to deliver reliable production-ready solutions and integrations."
+    ],
+    achievements: [
+      "Built and deployed multiple production-ready web applications using MERN stack and Python services.",
+      "Designed and implemented RESTful APIs with centralized error handling, input validation, and role-based authentication using JWT.",
+      "Integrated external client systems and third-party services with retry-safe request handling to ensure reliable API operations.",
+      "Developed asynchronous AI processing pipelines and backend services to automate data workflows.",
+      "Improved application performance by identifying blocking network calls and optimizing API request patterns, increasing Lighthouse performance score by 25%.",
+      "Contributed to scalable system architecture and modular codebases improving maintainability and development speed."
+    ],
+    skills: [
+      "React",
+      "Node.js",
+      "MongoDB",
+      "Express",
+      "Python",
+      "JavaScript",
+      "TypeScript",
+      "REST APIs",
+      "JWT Authentication",
+      "MERN Stack",
+      "Full Stack Development"
+    ],
+    companyUrl: "",
+    logo: "https://media.licdn.com/dms/image/v2/C560BAQFairlu33bMJw/company-logo_200_200/company-logo_200_200/0/1630604650807?e=1774483200&v=beta&t=BPDBqXspFuelchLRcuHZxlFaJD0joBXqqsoIFzfQL00",
+    pinned: true
   },
 
   {

@@ -2,6 +2,7 @@
 const nextConfig = {
   images: {
     domains: ["raw.githubusercontent.com"],
+    domains: ["media.licdn.com"],
   },
   async headers() {
     return [
