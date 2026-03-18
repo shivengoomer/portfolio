@@ -107,24 +107,19 @@ export const Projects: ProjectInterface[] = [
     ],
     startDate: new Date("2024-01-01"),
     endDate: new Date("2024-03-01"),
-    companyLogoImg:
-      "https://raw.githubusercontent.com/shivengoomer/url-shortner/main/frontend/public/clix-img.png",
+    companyLogoImg: "/projects/clix/logo.png",
     pagesInfoArr: [
       {
         title: "Dashboard & Analytics",
         description:
           "Responsive analytics dashboard showing clicks, visit trends, and URL management with charts.",
-        imgArr: [
-          "https://raw.githubusercontent.com/shivengoomer/url-shortner/main/frontend/public/screenshots/dashboard-github.png",
-        ],
+        imgArr: ["/projects/clix/dashboard.png"],
       },
       {
         title: "URL Creation & Redirection",
         description:
           "Shorten long URLs with unique IDs and auto-redirect functionality with visit tracking.",
-        imgArr: [
-          "https://raw.githubusercontent.com/shivengoomer/url-shortner/main/frontend/public/screenshots/analytics-github.png",
-        ],
+        imgArr: ["/projects/clix/shorten.png"],
       },
       {
         title: "User & Admin Management",
@@ -191,7 +186,7 @@ export const Projects: ProjectInterface[] = [
         "Docker-based deployments",
       ],
     },
-    priority: 2,
+    priority: 3,
   },
   {
     id: "chatbot",
@@ -602,6 +597,47 @@ export const Projects: ProjectInterface[] = [
       ],
     },
     priority: 3,
+  },
+  {
+    id: "p2p-file-share",
+    companyName: "P2P WebRTC File Share",
+    type: "Personal",
+    category: ["Full Stack", "Web Dev", "Backend"],
+    shortDescription:
+      "A peer-to-peer file sharing application using WebRTC for direct transfer and FastAPI for WebSocket signaling, with no server-side storage.",
+    techStack: ["FastAPI", "WebSockets", "WebRTC", "Python", "JavaScript"],
+    startDate: new Date("2025-02-01"),
+    endDate: new Date("2025-03-01"),
+    companyLogoImg: "/projects/file-share/logo.png",
+    pagesInfoArr: [
+      {
+        title: "Room Join & Signaling",
+        description:
+          "Users join a room via WebSocket. The FastAPI server manages room state and relays WebRTC signaling data (offer, answer, ICE candidates) between peers.",
+        imgArr: ["/projects/file-share/signaling.png"],
+      },
+      {
+        title: "P2P DataChannel Transfer",
+        description:
+          "Files are transferred directly between peers using WebRTC DataChannels in 16KB chunks, bypassing the server entirely for maximum privacy.",
+        imgArr: ["/projects/file-share/transfer.png"],
+      },
+    ],
+    descriptionDetails: {
+      paragraphs: [
+        "Built a direct peer-to-peer file sharing application that guarantees privacy by ensuring no files are uploaded to any central server.",
+        "The architecture leverages FastAPI and WebSockets exclusively for signaling (exchanging connection details like SDP offers/answers and ICE candidates).",
+        "Once a WebRTC connection is established, files are chunked into 16KB packets and sent directly via DataChannels from the uploader to the downloader, after which they are reassembled locally."
+      ],
+      bullets: [
+        "FastAPI and WebSockets for real-time signaling and room management",
+        "WebRTC DataChannels for secure, direct P2P data transfer",
+        "No server-side file storage; fully decentralized transfer",
+        "Binary chunking and local reassembly using browser Blob APIs",
+        "Real-time peer presence and offline state handling"
+      ],
+    },
+    priority: 2,
   },
 ];
 
