@@ -358,50 +358,71 @@ export const Projects: ProjectInterface[] = [
     priority: 3,
   },
   {
-    id: "wpbot-news",
+    id: "dtox",
     companyName: "For Real | D-TOX (Hackathon Winner)",
     type: "Professional",
-    category: ["Backend", "Web Dev"],
+    category: ["Backend", "AI", "Automation", "Security"],
     shortDescription:
-      "A WhatsApp-integrated assistant that detects fake news, phishing links, and deepfakes to keep messaging secure.",
+      "D-TOX — an AI-powered WhatsApp safety assistant combining fake news detection, emergency SOS system, and real-time moderation to secure digital communication.",
     githubLink: "https://github.com/shivengoomer/fake_news_detector",
     techStack: [
       "Node.js",
       "JavaScript",
       "Baileys (WhatsApp Web API)",
-      "FaceForensics++",
+      "Gemini API",
+      "Perplexity AI",
       "FAISS",
+      "FaceForensics++",
       "NLP",
     ],
     startDate: new Date("2024-02-01"),
     endDate: new Date("2024-03-01"),
     companyLogoImg: "/projects/wpbot-news/logo.png",
+
     pagesInfoArr: [
       {
-        title: "Phishing Link Detection",
+        title: "🚨 Emergency SOS System",
         description:
-          "Detects malicious links in real time using heuristics and reputation scoring.",
-        imgArr: ["/projects/wpbot-news/phishing.png"],
+          "Real-time emergency alert system allowing users to instantly notify trusted contacts with IP-based location and optional live location tracking.",
+        imgArr: ["/projects/wpbot-news/sos.png"],
       },
       {
-        title: "Fake News Analysis",
+        title: "📰 AI News Verification",
         description:
-          "NLP-based news source verification and similarity detection via FAISS.",
+          "Multi-stage AI pipeline using Perplexity for fact-checking and Gemini for source validation, delivering verified results with references.",
         imgArr: ["/projects/wpbot-news/fakenews.png"],
       },
+      {
+        title: "🛡️ Moderation & Abuse Detection",
+        description:
+          "Advanced moderation engine detecting spam, abuse (Hinglish + English), and enabling admin controls like shadow banning and dynamic sensitivity levels.",
+        imgArr: ["/projects/wpbot-news/moderation.png"],
+      },
     ],
+
     descriptionDetails: {
       paragraphs: [
-        "Won a Hackathon for architecting an AI-powered WhatsApp assistant that keeps messaging secure and scam-free.",
+        "D-TOX is a hackathon-winning AI-powered WhatsApp assistant designed to enhance digital safety through intelligent automation, real-time moderation, and emergency response systems.",
+
+        "The system integrates multiple AI services to detect fake news, verify sources, and generate trustworthy insights, while simultaneously protecting users from spam, abuse, and phishing attacks.",
+
+        "A key innovation is the built-in Emergency SOS system, enabling users to instantly share their approximate location or continuous live updates with trusted contacts during critical situations.",
       ],
+
       bullets: [
-        "Deepfake detection using FaceForensics++",
-        "Phishing link detection",
-        "Fake news scoring via NLP and FAISS",
-        "WhatsApp integration using Baileys",
+        "🚨 Built real-time SOS system with IP-based + live location tracking",
+        "🧠 AI pipeline: Perplexity (fact-check) + Gemini (source validation)",
+        "🛡️ Hinglish + English abuse detection with configurable sensitivity (0–10)",
+        "⚡ Spam detection with rate-limiting & temporary bans",
+        "👥 Role-based group management (admin controls, tagging, shadow bans)",
+        "🔗 URL scanning for phishing detection",
+        "🖼️ OCR for extracting text from images",
+        "📡 WhatsApp automation using Baileys Web API",
+        "🏆 Won Hackathon for real-world impact & system design",
       ],
     },
-    priority: 2,
+
+    priority: 1,
   },
   {
     id: "snippetly",

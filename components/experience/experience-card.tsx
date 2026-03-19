@@ -6,6 +6,8 @@ import React from "react";
 import { Icons } from "@/components/common/icons";
 import { Button } from "@/components/ui/button";
 import { ExperienceInterface } from "@/config/experience";
+import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
+
 // Helper function to extract year from date
 const getYearFromDate = (date: Date): string => {
   return new Date(date).getFullYear().toString();
@@ -69,9 +71,10 @@ const ExperienceCard: React.FC<ExperienceCardProps> = ({ experience }) => {
               </span>
             </div>
           </div>
-          <p className="mt-2 sm:mt-3 text-sm text-muted-foreground line-clamp-2">
-            {experience.description[0]}
-          </p>
+          <TextGenerateEffect
+            words={experience.description[0]}
+            className="mt-2 text-sm text-neutral-500 font-normal line-clamp-2 dark:text-neutral-400 !mb-0 pb-0"
+          />
           <div className="mt-3 sm:mt-4 flex flex-wrap gap-1">
             {experience.skills.slice(0, 2).map((skill, index) => (
               <span

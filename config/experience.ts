@@ -76,50 +76,13 @@ export const experiences: ExperienceInterface[] = [
     companyUrl: "https://www.gncipl.com",
     logo: "/experience/gncipl-logo.png",
     pinned: true,
-  }, {
-    id: "houseofcotton",
-    position: "Full Stack Developer",
-    company: "House of Cotton Private Limited",
-    location: "Remote, India",
-    startDate: new Date("2025-08-01"),
-    endDate: "Present",
-    description: [
-      "Working as a Part-time Full Stack Developer building scalable applications using the MERN stack and Python-based services.",
-      "Developing full-stack features including responsive React interfaces, Node.js APIs, and MongoDB database architectures.",
-      "Collaborating with internal teams and clients to deliver reliable production-ready solutions and integrations."
-    ],
-    achievements: [
-      "Built and deployed multiple production-ready web applications using MERN stack and Python services.",
-      "Designed and implemented RESTful APIs with centralized error handling, input validation, and role-based authentication using JWT.",
-      "Integrated external client systems and third-party services with retry-safe request handling to ensure reliable API operations.",
-      "Developed asynchronous AI processing pipelines and backend services to automate data workflows.",
-      "Improved application performance by identifying blocking network calls and optimizing API request patterns, increasing Lighthouse performance score by 25%.",
-      "Contributed to scalable system architecture and modular codebases improving maintainability and development speed."
-    ],
-    skills: [
-      "React",
-      "Node.js",
-      "MongoDB",
-      "Express",
-      "Python",
-      "JavaScript",
-      "TypeScript",
-      "REST APIs",
-      "JWT Authentication",
-      "MERN Stack",
-      "Full Stack Development"
-    ],
-    companyUrl: "",
-    logo: "https://media.licdn.com/dms/image/v2/C560BAQFairlu33bMJw/company-logo_200_200/company-logo_200_200/0/1630604650807?e=1774483200&v=beta&t=BPDBqXspFuelchLRcuHZxlFaJD0joBXqqsoIFzfQL00",
-    pinned: true
   },
-
   {
     id: "geekroom",
     position: "Head – Emerging Technology",
     company: "Geek Room",
     location: "India",
-    startDate: new Date("2025-01-01"),
+    startDate: new Date("2023-01-01"),
     endDate: new Date("2025-12-31"),
     description: [
       "Conducted sessions on Docker, Linux basics, and Web Development with a focus on real-world deployment.",
