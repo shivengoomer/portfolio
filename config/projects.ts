@@ -30,6 +30,124 @@ export interface ProjectInterface {
 
 export const Projects: ProjectInterface[] = [
   {
+    id: "satyam-journal-portal",
+    companyName: "SATYAM – MSIT Journal of Research",
+    type: "Professional",
+    category: ["Full Stack", "Web Dev"],
+    shortDescription:
+      "Full-stack academic journal portal for MSIT's peer-reviewed multidisciplinary research publication (ISSN: 2319-7897).",
+    githubLink: "https://github.com/shivengoomer/satyam-journal-portal",
+    techStack: [
+      "React",
+      "TypeScript",
+      "Vite",
+      "Tailwind CSS",
+      "shadcn/ui",
+      "Node.js",
+      "Express",
+      "SQLite",
+    ],
+    startDate: new Date("2024-01-01"),
+    endDate: new Date("2024-06-01"),
+    companyLogoImg: "/projects/satyam/logo.png",
+    pagesInfoArr: [
+      {
+        title: "Journal Archives",
+        description:
+          "Browse published volumes and access research articles across Computer Science, Electronics, IT, and Management Sciences.",
+        imgArr: ["/projects/satyam/archives.png"],
+      },
+      {
+        title: "Manuscript Submission",
+        description:
+          "Online submission portal for authors to upload manuscripts for blind peer review with status tracking.",
+        imgArr: ["/projects/satyam/submission.png"],
+      },
+      {
+        title: "Editorial Board",
+        description:
+          "Dedicated page showcasing the distinguished team of editors and reviewers managing the journal.",
+        imgArr: ["/projects/satyam/editorial.png"],
+      },
+      {
+        title: "Author Guidelines",
+        description:
+          "Comprehensive instructions page for manuscript preparation and submission requirements.",
+        imgArr: ["/projects/satyam/guidelines.png"],
+      },
+    ],
+    descriptionDetails: {
+      paragraphs: [
+        "Built the official web portal for SATYAM, a peer-reviewed academic journal published by the R&D Cell of Maharaja Surajmal Institute of Technology, New Delhi.",
+      ],
+      bullets: [
+        "Full-stack monorepo with React + TypeScript frontend and Express + SQLite backend",
+        "Manuscript submission system with file uploads and blind peer review workflow",
+        "RESTful APIs with authentication middleware and MVC architecture",
+        "Responsive UI with Tailwind CSS and shadcn/ui component library",
+      ],
+    },
+    priority: 2,
+  },
+  {
+    id: "mba-library",
+    companyName: "MBA Library – Maharaja Surajmal Institute",
+    type: "Professional",
+    category: ["Full Stack", "Web Dev", "UI/UX"],
+    shortDescription:
+      "Official digital library portal for the MBA department of Maharaja Surajmal Institute, featuring resources, staff info, and live collection stats.",
+    githubLink: "https://github.com/shivengoomer/mba-library",
+    techStack: [
+      "React",
+      "Node.js",
+      "Express",
+      "MongoDB",
+      "Tailwind CSS",
+    ],
+    startDate: new Date("2025-01-01"),
+    endDate: new Date("2025-03-01"),
+    companyLogoImg: "/projects/mba-library/logo.png",
+    pagesInfoArr: [
+      {
+        title: "Homepage & Notices",
+        description:
+          "Landing page with a live scrolling notices ticker for library events, announcements, and updates.",
+        imgArr: ["/projects/mba-library/homepage.png"],
+      },
+      {
+        title: "Library Services",
+        description:
+          "Showcases all library facilities including Wi-Fi, Koha software, EBSCO digital database access, printers, and case study resources.",
+        imgArr: ["/projects/mba-library/services.png"],
+      },
+      {
+        title: "Library Stats Dashboard",
+        description:
+          "Displays official collection statistics — 2,442 volumes, 468 titles, 1,067 e-journals, and 22,965 e-books — in a structured layout.",
+        imgArr: ["/projects/mba-library/stats.png"],
+      },
+      {
+        title: "Leadership & Staff",
+        description:
+          "Dedicated section showcasing MBA department leadership and library staff with photos and designations.",
+        imgArr: ["/projects/mba-library/team.png"],
+      },
+    ],
+    descriptionDetails: {
+      paragraphs: [
+        "Developed the official digital library portal for the MBA department of Maharaja Surajmal Institute (NAAC 'A' grade), serving students and faculty with comprehensive library information and digital resource access.",
+      ],
+      bullets: [
+        "Full-stack MERN application with REST API backend and React frontend",
+        "Live scrolling notices system for library events and announcements",
+        "Dynamic collection stats board displaying volumes, titles, e-journals and e-books",
+        "Integrated info on digital resources including EBSCO, NDL, NDLI, Swayam, and NPTEL",
+        "Responsive Tailwind CSS UI optimized for academic audiences",
+      ],
+    },
+    priority: 4,
+  },
+  {
     id: "matty",
     companyName: "Matty",
     type: "Professional",
