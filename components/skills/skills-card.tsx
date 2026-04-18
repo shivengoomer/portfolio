@@ -19,9 +19,17 @@ export default function SkillsCard({ skills }: SkillsCardProps) {
   }));
 
   return (
-    <div className="flex flex-col items-center justify-center w-full py-10 gap-8 overflow-hidden z-20">
+    <section className="overflow-hidden rounded-[2rem] border border-black/10 bg-white/75 px-4 py-8 shadow-[0_20px_60px_rgba(15,23,42,0.06)] backdrop-blur dark:border-white/10 dark:bg-white/5 sm:px-6 sm:py-10">
+      <div className="mb-6 max-w-2xl px-2">
+        <p className="text-sm leading-7 text-neutral-600 dark:text-neutral-300">
+          Strong frontend craft, reliable backend delivery, and practical tooling
+          across modern JavaScript and cloud workflows.
+        </p>
+      </div>
+      <div className="z-20 flex w-full flex-col items-center justify-center gap-6 overflow-hidden">
       <InfiniteMovingCards items={row1} direction="left" speed="normal" />
       <InfiniteMovingCards items={row2} direction="right" speed="normal" />
-    </div>
+      </div>
+    </section>
   );
 }

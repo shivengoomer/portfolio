@@ -55,17 +55,15 @@ export default function ContributionCard({
 
   return (
     <>
-      <div className="mx-auto flex flex-col gap-4 w-full max-w-4xl static">
+      <div className="mx-auto flex w-full max-w-5xl flex-col gap-5">
         {contributions.map((contribution, id) => (
           <div
             key={id}
-            className="group relative overflow-hidden rounded-lg border bg-background p-4 sm:p-6 transition-all duration-300"
+            className="group relative overflow-hidden rounded-[1.75rem] border border-black/10 bg-white/80 p-5 shadow-[0_20px_60px_rgba(15,23,42,0.06)] transition-all duration-300 backdrop-blur dark:border-white/10 dark:bg-white/5 sm:p-6"
           >
             <div className="flex items-start gap-3 sm:gap-4">
-              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg border-2 border-border overflow-hidden bg-white flex-shrink-0 flex items-center justify-center">
+              <div className="flex h-11 w-11 flex-shrink-0 items-center justify-center overflow-hidden rounded-2xl border border-black/10 bg-white sm:h-12 sm:w-12 dark:border-white/10">
                 {contribution.logo ? (
-                  // render issuer logo if available
-                  // eslint-disable-next-line @next/next/no-img-element
                   <img
                     src={contribution.logo}
                     alt={contribution.repoOwner + " logo"}
@@ -79,7 +77,7 @@ export default function ContributionCard({
               <div className="flex-1 min-w-0">
                 <div className="flex flex-col gap-1 sm:gap-2">
                   <div className="flex items-start sm:items-center gap-2">
-                    <h3 className="text-base sm:text-lg font-bold text-foreground line-clamp-2 sm:line-clamp-1">
+                    <h3 className="line-clamp-2 text-base font-semibold tracking-tight text-foreground sm:line-clamp-1 sm:text-lg">
                       {contribution.repo}
                     </h3>
                     <a
@@ -93,21 +91,21 @@ export default function ContributionCard({
                     </a>
                   </div>
 
-                  <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2 text-sm text-muted-foreground">
+                  <div className="flex flex-col gap-1 text-sm text-muted-foreground sm:flex-row sm:items-center sm:gap-2">
                     <span className="font-medium">
                       {contribution.repoOwner}
                     </span>
                   </div>
 
-                  <p className="mt-2 sm:mt-3 text-sm text-muted-foreground line-clamp-3">
+                  <p className="mt-2 text-sm leading-7 text-muted-foreground line-clamp-3 sm:mt-3">
                     {contribution.contibutionDescription}
                   </p>
 
-                  <div className="mt-3 sm:mt-4 flex justify-end">
+                  <div className="mt-4 flex flex-col justify-end gap-2 sm:flex-row">
                     <Button
                       variant="outline"
                       size="sm"
-                      className="rounded-lg w-full sm:w-auto mr-2"
+                      className="w-full rounded-full border-black/10 bg-white/80 sm:w-auto dark:border-white/10 dark:bg-white/[0.04]"
                       onClick={() => setSelected(contribution)}
                     >
                       View
@@ -115,7 +113,7 @@ export default function ContributionCard({
                     <Button
                       variant="ghost"
                       size="sm"
-                      className="rounded-lg"
+                      className="rounded-full"
                       onClick={() => openExternal(contribution.link)}
                     >
                       Open
@@ -137,12 +135,12 @@ export default function ContributionCard({
           onClick={() => setSelected(null)}
         >
           <div
-            className="relative max-h-[90vh] w-full max-w-4xl overflow-hidden rounded-md bg-popover p-4"
+            className="relative max-h-[90vh] w-full max-w-5xl overflow-hidden rounded-[1.75rem] border border-black/10 bg-popover p-4 shadow-2xl dark:border-white/10"
             onClick={(e) => e.stopPropagation()}
           >
             <button
               onClick={() => setSelected(null)}
-              className="absolute right-3 top-3 rounded-md bg-background p-2 text-muted-foreground hover:shadow"
+              className="absolute right-3 top-3 rounded-full bg-background p-2 text-muted-foreground hover:shadow"
               aria-label="Close preview"
             >
               <Icons.close size={18} />

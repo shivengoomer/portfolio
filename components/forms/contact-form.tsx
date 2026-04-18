@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
@@ -31,8 +32,7 @@ const formSchema = z.object({
 
 export function ContactForm() {
   const storeModal = useModalStore();
-
-  // const [open, setOpen] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -46,6 +46,8 @@ export function ContactForm() {
 
   // 2. Define a submit handler.
   async function onSubmit(values: z.infer<typeof formSchema>) {
+    setIsSubmitting(true);
+
     try {
       const response = await fetch("/api/contact", {
         method: "POST",
@@ -55,18 +57,28 @@ export function ContactForm() {
         body: JSON.stringify(values),
       });
 
-      form.reset();
-
       if (response.status === 200) {
+        form.reset();
         storeModal.onOpen({
-          title: "Thankyou!",
+          title: "Thank you!",
           description:
             "Your message has been received! I appreciate your contact and will get back to you shortly.",
           icon: Icons.successAnimated,
         });
+
+        return;
       }
+
+      form.setError("root", {
+        message: "Something went wrong. Please try again in a moment.",
+      });
     } catch (err) {
       console.log("Err!", err);
+      form.setError("root", {
+        message: "Unable to send right now. Please email me directly instead.",
+      });
+    } finally {
+      setIsSubmitting(false);
     }
   }
 
@@ -74,20 +86,23 @@ export function ContactForm() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-8 min-w-full"
+        className="min-w-full space-y-6"
       >
         <FormField
           control={form.control}
           name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Name</FormLabel>
+              <FormLabel className="text-sm font-medium text-neutral-700 dark:text-neutral-200">
+                Name
+              </FormLabel>
               <FormControl>
-                <Input placeholder="Enter your name" {...field} />
+                <Input
+                  placeholder="Enter your name"
+                  autoComplete="name"
+                  {...field}
+                />
               </FormControl>
-              {/* <FormDescription>
-                                This is your public display name.
-                            </FormDescription> */}
               <FormMessage />
             </FormItem>
           )}
@@ -97,9 +112,16 @@ export function ContactForm() {
           name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Email</FormLabel>
+              <FormLabel className="text-sm font-medium text-neutral-700 dark:text-neutral-200">
+                Email
+              </FormLabel>
               <FormControl>
-                <Input placeholder="Enter your email" {...field} />
+                <Input
+                  placeholder="Enter your email"
+                  autoComplete="email"
+                  type="email"
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -110,9 +132,15 @@ export function ContactForm() {
           name="message"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Message</FormLabel>
+              <FormLabel className="text-sm font-medium text-neutral-700 dark:text-neutral-200">
+                Message
+              </FormLabel>
               <FormControl>
-                <Textarea placeholder="Enter your message" {...field} />
+                <Textarea
+                  placeholder="Tell me a little about your project or role"
+                  rows={6}
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -123,18 +151,33 @@ export function ContactForm() {
           name="social"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Social (optional)</FormLabel>
+              <FormLabel className="text-sm font-medium text-neutral-700 dark:text-neutral-200">
+                Social (optional)
+              </FormLabel>
               <FormControl>
-                <Input placeholder="Link for social account" {...field} />
+                <Input
+                  placeholder="LinkedIn, GitHub, or website"
+                  autoComplete="url"
+                  {...field}
+                />
               </FormControl>
-              {/* <FormDescription>
-                                This is your public display name.
-                            </FormDescription> */}
               <FormMessage />
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+        {form.formState.errors.root?.message ? (
+          <p className="text-sm text-destructive">
+            {form.formState.errors.root.message}
+          </p>
+        ) : null}
+        <Button
+          type="submit"
+          size="lg"
+          disabled={isSubmitting}
+          className="h-12 rounded-full px-6"
+        >
+          {isSubmitting ? "Sending..." : "Send message"}
+        </Button>
       </form>
     </Form>
   );

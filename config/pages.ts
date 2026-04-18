@@ -15,10 +15,11 @@ type PagesConfig = {
 export const pagesConfig: PagesConfig = {
   home: {
     title: "Home",
-    description: "Welcome to my portfolio website.",
+    description: "",
     metadata: {
       title: "Home",
-      description: "Shiven Goomer's portfolio website.",
+      description:
+        "Portfolio of Shiven Goomer featuring modern frontend work, full-stack projects, experience, and contact information.",
     },
   },
   skills: {

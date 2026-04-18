@@ -16,7 +16,9 @@ export default function CertPage() {
       title={pagesConfig.certificates.title}
       description={pagesConfig.certificates.description}
     >
-      <ContributionCard contributions={certsUnsorted} />
+      <section className="rounded-[2rem] border border-black/10 bg-white/75 p-4 shadow-[0_20px_60px_rgba(15,23,42,0.06)] backdrop-blur dark:border-white/10 dark:bg-white/5 sm:p-6">
+        <ContributionCard contributions={certsUnsorted} />
+      </section>
     </PageContainer>
   );
 }

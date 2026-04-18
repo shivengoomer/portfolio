@@ -1,15 +1,14 @@
-import { url } from "inspector";
-
 export const siteConfig = {
   name: "Shiven Goomer | Developer Portfolio",
   authorName: "Shiven Goomer",
   username: "shivengoomer",
   description:
-    "Shiven Goomer's portfolio - A modern, responsive Next.js portfolio for developers. This open-source template can be customized to showcase your own skills, projects, and professional experience.",
-  url: "localhost:300",
+    "Portfolio of Shiven Goomer, a full stack developer crafting polished interfaces, performant web apps, and AI-powered developer experiences.",
+  url: "https://shivengoomer.vercel.app",
   links: {
     twitter: "https://x.com/shivengoomer",
     github: "https://github.com/shivengoomer",
+    linkedin: "https://www.linkedin.com/in/shiven-goomer/",
   },
   ogImage: "https://media.licdn.com/dms/image/v2/D5603AQHyWzU6h-mleA/profile-displayphoto-scale_400_400/B56Zg9EdqjHUAg-/0/1753371239937?e=1761782400&v=beta&t=riIo7SKQfjzQ1qXdTlOKTh80xE8H3KakuNxsSnj0Jew",
   iconIco:
@@ -17,5 +16,12 @@ export const siteConfig = {
   logoIcon:
     "",
   keywords: [
+    "Shiven Goomer",
+    "Full Stack Developer",
+    "Next.js Portfolio",
+    "React Developer",
+    "Frontend Engineer",
+    "Tailwind CSS",
+    "TypeScript",
   ],
 };
