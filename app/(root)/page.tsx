@@ -1,5 +1,4 @@
 import { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import Script from "next/script";
 
@@ -8,8 +7,6 @@ import { Icons } from "@/components/common/icons";
 import ProjectCard from "@/components/projects/project-card";
 import { buttonVariants } from "@/components/ui/button";
 import { HoverEffectGrid } from "@/components/ui/card-hover-effect";
-import { ParallaxHeroImages } from "@/components/ui/parallax-hero-images";
-import { Spotlight } from "@/components/ui/spotlight";
 import { pagesConfig } from "@/config/pages";
 import { featuredProjects } from "@/config/projects";
 import { SocialLinks } from "@/config/socials";
@@ -17,7 +14,6 @@ import { featuredSkills } from "@/config/skills";
 import { siteConfig } from "@/config/site";
 import { experiences } from "@/config/experience";
 import { cn, formatDateFromObj } from "@/lib/utils";
-import profileImg from "@/public/profile-img.jpg";
 
 export const metadata: Metadata = {
   title: "Shiven Goomer",
@@ -27,39 +23,9 @@ export const metadata: Metadata = {
   },
 };
 
-const stats = [
-  {
-    value: "12+",
-    label: "Projects shipped across product, AI, and full-stack work",
-  },
-  {
-    value: "3+",
-    label: "Years building communities, products, and developer workflows",
-  },
-  {
-    value: "5",
-    label: "Core skills featured with production-ready modern web tooling",
-  },
-];
-
-const heroParallaxImages = [
-  "/projects/matty/editor.png",
-  "/projects/clix/dashboard.png",
-  "/projects/chatbot/chatpage.png",
-  "/projects/newnaanstop/homepage.png",
-  "/projects/matty/logo.png",
-  "/projects/clix/logo.png",
-  "/projects/snippetly/ui.png",
-  "/projects/vibestudio/logo.png",
-];
-
 function formatExperienceDate(endDate: Date | "Present", startDate: Date) {
   const start = formatDateFromObj(startDate);
-
-  if (endDate === "Present") {
-    return `${start} - Present`;
-  }
-
+  if (endDate === "Present") return `${start} - Present`;
   return `${start} - ${formatDateFromObj(endDate)}`;
 }
 
@@ -89,201 +55,109 @@ export default function IndexPage() {
       />
 
       <div className="relative isolate">
-        <Spotlight
-          className="-top-32 left-1/2 h-[34rem] w-[34rem] -translate-x-1/2 opacity-60"
-          fill="#8aa0b8"
-        />
+        {/* ── HERO ── */}
+        <section
+          className="relative -mt-20 flex min-h-screen overflow-hidden bg-[url('/bg-portfolio.gif')] bg-cover bg-[62%_bottom] px-4 pb-20 pt-40 sm:px-6 lg:px-8"
+          aria-label="Hero"
+        >
+          <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-background/95 to-transparent" />
 
-        <section className="relative overflow-hidden px-4 pb-20 pt-10 sm:px-6 lg:px-8 lg:pb-28 lg:pt-16">
-          <ParallaxHeroImages
-            images={heroParallaxImages}
-            variant="edge-focus"
-            className="opacity-55 [mask-image:radial-gradient(circle_at_center,white,transparent_78%)]"
-            imageClassName="border border-black/10 bg-white/85 p-3 object-contain backdrop-blur dark:border-white/10 dark:bg-[#09090b]/85"
-          />
-          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.76),rgba(255,255,255,0.18)_42%,transparent_76%)] dark:bg-[radial-gradient(circle_at_center,rgba(10,10,12,0.82),rgba(10,10,12,0.28)_42%,transparent_76%)]" />
-          <div className="mx-auto grid w-full max-w-7xl gap-12 lg:grid-cols-[minmax(0,1.05fr)_minmax(420px,0.95fr)] lg:items-center xl:gap-16">
-            <div className="relative z-10 space-y-8">
-              <div className="inline-flex items-center rounded-full border border-black/10 bg-white/70 px-4 py-2 text-xs font-medium uppercase tracking-[0.24em] text-neutral-600 shadow-[0_1px_0_rgba(255,255,255,0.7)] backdrop-blur dark:border-white/10 dark:bg-white/5 dark:text-neutral-300">
-                Full Stack Developer • React • Next.js • AI Workflows
-              </div>
-
-              <div className="space-y-5">
-                <p className="max-w-xl text-sm leading-7 text-neutral-500 dark:text-neutral-400">
-                  {pagesConfig.home.description}
-                </p>
-                <h1 className="max-w-4xl font-heading text-5xl tracking-[-0.05em] text-neutral-950 dark:text-white sm:text-6xl lg:text-7xl">
-                  Building thoughtful products with clean interfaces and strong
-                  backend foundations.
+          <div className="relative z-10 mx-auto grid w-full max-w-6xl items-center gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
+            {/* Left — text */}
+            <div className="max-w-2xl space-y-6 rounded-2xl border border-white/35 bg-white/82 p-6 shadow-[0_24px_70px_rgba(15,23,42,0.16)] backdrop-blur-md dark:border-white/10 dark:bg-zinc-950/74 sm:p-8">
+              <div className="space-y-4">
+                <h1 className="relative font-heading text-5xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100 sm:text-6xl">
+                  Shiven Goomer
+                  <span className="ml-1 inline-block h-[1.1em] w-[3px] translate-y-[0.05em] animate-pulse bg-zinc-900 dark:bg-zinc-100" />
                 </h1>
-                <p className="max-w-2xl text-base leading-8 text-neutral-600 dark:text-neutral-300 sm:text-lg">
-                  I&apos;m Shiven Goomer, a developer focused on polished web
-                  experiences, scalable APIs, and AI-powered tooling that feels
-                  simple to use.
+                <p className="text-lg text-zinc-500 dark:text-zinc-400">
+                  Full Stack Developer · B.Tech CSE
+                </p>
+                <p className="max-w-lg text-base leading-7 text-zinc-600 dark:text-zinc-300">
+                  I build things for the web — polished interfaces, scalable
+                  APIs, and AI&#8209;powered tooling that feels simple to use.
                 </p>
               </div>
 
-              <div className="flex flex-col gap-3 sm:flex-row">
+              <div className="flex flex-wrap gap-3">
                 <Link
                   href="/projects"
                   className={cn(
                     buttonVariants({ size: "lg" }),
-                    "h-12 rounded-full px-6 text-sm shadow-[0_12px_30px_rgba(15,23,42,0.14)]",
+                    "h-11 rounded-full px-6 text-sm shadow-sm",
                   )}
                 >
                   View Projects
                   <Icons.arrowRight className="ml-2 h-4 w-4" />
                 </Link>
                 <Link
-                  href="/contact"
+                  href="/resume"
                   className={cn(
                     buttonVariants({ variant: "outline", size: "lg" }),
-                    "h-12 rounded-full border-black/10 bg-white/80 px-6 text-sm text-neutral-700 backdrop-blur hover:bg-white dark:border-white/10 dark:bg-white/5 dark:text-neutral-200 dark:hover:bg-white/10",
+                    "h-11 rounded-full border-zinc-200 bg-white/80 px-6 text-sm text-zinc-700 backdrop-blur hover:bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-900/80 dark:text-zinc-200 dark:hover:bg-zinc-800/80",
                   )}
                 >
-                  Let&apos;s Work Together
+                  Download CV
                 </Link>
               </div>
 
-              <div className="grid gap-4 sm:grid-cols-3">
-                {stats.map((stat) => (
-                  <div
-                    key={stat.value}
-                    className="rounded-3xl border border-black/10 bg-white/75 p-5 shadow-[0_20px_60px_rgba(15,23,42,0.06)] backdrop-blur dark:border-white/10 dark:bg-white/5"
-                  >
-                    <p className="text-2xl font-semibold tracking-tight text-neutral-950 dark:text-white">
-                      {stat.value}
-                    </p>
-                    <p className="mt-2 text-sm leading-6 text-neutral-600 dark:text-neutral-300">
-                      {stat.label}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="relative z-10 lg:justify-self-end lg:w-full lg:max-w-[36rem]">
-              <div className="absolute -inset-6 rounded-[2.5rem] bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.98),transparent_64%)] opacity-90 blur-3xl dark:bg-[radial-gradient(circle_at_top,rgba(148,163,184,0.18),transparent_64%)]" />
-              <div className="relative w-full overflow-hidden rounded-[2rem] border border-black/10 bg-white/85 p-4 shadow-[0_28px_90px_rgba(15,23,42,0.14)] backdrop-blur dark:border-white/10 dark:bg-[#09090b]/80 sm:p-5">
-                <div className="mb-4 flex items-center gap-2 px-2">
-                  <span className="h-3 w-3 rounded-full bg-[#ff5f57]" />
-                  <span className="h-3 w-3 rounded-full bg-[#febc2e]" />
-                  <span className="h-3 w-3 rounded-full bg-[#28c840]" />
-                </div>
-
-                <div className="grid gap-5 rounded-[1.6rem] border border-black/5 bg-[linear-gradient(180deg,rgba(255,255,255,0.96),rgba(244,244,245,0.9))] p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.8)] dark:border-white/10 dark:bg-[linear-gradient(180deg,rgba(24,24,27,0.92),rgba(10,10,12,0.98))] sm:p-6">
-                  <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
-                    <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-[1.5rem] border border-black/10 bg-neutral-200 shadow-[0_18px_40px_rgba(15,23,42,0.12)] dark:border-white/10 dark:bg-neutral-900">
-                      <Image
-                        src={profileImg}
-                        alt="Portrait of Shiven Goomer"
-                        fill
-                        sizes="96px"
-                        className="object-cover"
-                        priority
-                      />
-                    </div>
-
-                    <div className="space-y-2.5">
-                      <p className="text-xs font-medium uppercase tracking-[0.24em] text-neutral-500 dark:text-neutral-400">
-                        Currently building
-                      </p>
-                      <h2 className="text-2xl font-semibold tracking-tight text-neutral-950 dark:text-white sm:text-[1.75rem]">
-                        Fast, clean products that still feel personal.
-                      </h2>
-                      <p className="max-w-md text-sm leading-6 text-neutral-600 dark:text-neutral-300">
-                        Shipping with Next.js, TypeScript, Tailwind CSS,
-                        Node.js, and AI integrations.
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="grid gap-3 sm:grid-cols-2">
-                    {featuredSkills.slice(0, 4).map((skill) => {
-                      const SkillIcon = skill.icon;
-
-                      return (
-                        <div
-                          key={skill.name}
-                          className="rounded-2xl border border-black/5 bg-white/85 p-4 shadow-[0_12px_32px_rgba(15,23,42,0.05)] transition-transform duration-300 hover:-translate-y-1 dark:border-white/10 dark:bg-white/[0.04]"
-                        >
-                          <div className="flex items-center gap-3">
-                            <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-neutral-950 text-white shadow-[0_12px_24px_rgba(15,23,42,0.18)] dark:bg-white dark:text-neutral-950">
-                              <SkillIcon className="h-8 w-8" />
-                            </div>
-                            <div>
-                              <p className="text-base font-semibold text-neutral-900 dark:text-white">
-                                {skill.name}
-                              </p>
-                              <p className="mt-1 text-xs text-start leading-5 text-neutral-500 dark:text-neutral-400">
-                                {skill.description}
-                              </p>
-                            </div>
-                          </div>
-                        </div>
-                      );
-                    })}
-                  </div>
-
-                  <div className="flex flex-wrap items-center gap-3 border-t border-black/5 pt-3 dark:border-white/10">
-                    {SocialLinks.map((link) => {
-                      const Icon = link.icon;
-
-                      return (
-                        <Link
-                          key={link.name}
-                          href={link.link}
-                          target={
-                            link.link.startsWith("http") ? "_blank" : undefined
-                          }
-                          rel={
-                            link.link.startsWith("http")
-                              ? "noreferrer"
-                              : undefined
-                          }
-                          className="inline-flex items-center gap-2 rounded-full border border-black/10 bg-white px-4 py-2 text-sm text-neutral-700 transition-transform duration-300 hover:-translate-y-0.5 hover:text-neutral-950 dark:border-white/10 dark:bg-white/5 dark:text-neutral-200 dark:hover:text-white"
-                        >
-                          <Icon className="h-4 w-4" />
-                          {link.name}
-                        </Link>
-                      );
-                    })}
-                  </div>
-                </div>
+              {/* Social row */}
+              <div className="flex flex-wrap items-center gap-2 pt-1">
+                {SocialLinks.map((link) => {
+                  const Icon = link.icon;
+                  return (
+                    <Link
+                      key={link.name}
+                      href={link.link}
+                      target={
+                        link.link.startsWith("http") ? "_blank" : undefined
+                      }
+                      rel={
+                        link.link.startsWith("http")
+                          ? "noreferrer"
+                          : undefined
+                      }
+                      aria-label={link.name}
+                      className="inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-white/70 px-3.5 py-2 text-sm text-zinc-600 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-sm dark:border-zinc-800 dark:bg-zinc-900/70 dark:text-zinc-300"
+                    >
+                      <Icon className="h-4 w-4" />
+                      {link.name}
+                    </Link>
+                  );
+                })}
               </div>
             </div>
           </div>
         </section>
 
+        {/* ── FEATURED PROJECTS ── */}
         <section
           id="projects"
-          className="px-4 py-20 sm:px-6 lg:px-8 lg:py-24"
+          className="px-4 py-16 sm:px-6 md:py-24 lg:px-8"
           aria-labelledby="featured-projects-title"
         >
           <div className="mx-auto max-w-6xl">
             <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
               <div className="max-w-2xl space-y-3">
-                <p className="text-xs font-medium uppercase tracking-[0.24em] text-neutral-500 dark:text-neutral-400">
-                  Featured Work
-                </p>
                 <h2
                   id="featured-projects-title"
-                  className="font-heading text-3xl tracking-[-0.04em] text-neutral-950 dark:text-white sm:text-4xl"
+                  className="font-heading text-3xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-100"
                 >
-                  Selected projects with strong UX, clear systems, and real use
-                  cases.
+                  <span className="relative">
+                    Featured Work
+                    <span className="absolute -bottom-1 left-0 h-[3px] w-12 rounded-full bg-blue-500/60" />
+                  </span>
                 </h2>
-                <p className="text-base leading-7 text-neutral-600 dark:text-neutral-300">
-                  A curated look at products spanning analytics, AI workflows,
+                <p className="text-base leading-7 text-zinc-600 dark:text-zinc-300">
+                  A curated look at projects spanning analytics, AI workflows,
                   full-stack apps, and interaction-heavy interfaces.
                 </p>
               </div>
-
               <Link
                 href="/projects"
                 className={cn(
                   buttonVariants({ variant: "ghost" }),
-                  "justify-start rounded-full px-0 text-sm text-neutral-700 hover:bg-transparent hover:text-neutral-950 dark:text-neutral-300 dark:hover:text-white",
+                  "justify-start rounded-full px-0 text-sm text-zinc-700 hover:bg-transparent hover:text-zinc-900 dark:text-zinc-300 dark:hover:text-white",
                 )}
               >
                 Browse all work
@@ -299,121 +173,126 @@ export default function IndexPage() {
           </div>
         </section>
 
+        {/* ── ABOUT + EXPERIENCE — square symmetrical cards ── */}
         <section
           id="about"
-          className="px-4 pb-16 sm:px-6 lg:px-8 lg:pb-24"
+          className="px-4 py-16 sm:px-6 md:py-24 lg:px-8"
           aria-labelledby="about-title"
         >
-          <div className="mx-auto grid max-w-6xl gap-6 lg:grid-cols-[0.95fr_1.05fr]">
-            <div className="rounded-[2rem] border border-black/10 bg-white/80 p-8 shadow-[0_20px_60px_rgba(15,23,42,0.06)] backdrop-blur dark:border-white/10 dark:bg-white/5">
-              <p className="text-xs font-medium uppercase tracking-[0.24em] text-neutral-500 dark:text-neutral-400">
-                About
-              </p>
-              <h2
-                id="about-title"
-                className="mt-3 font-heading text-3xl tracking-[-0.04em] text-neutral-950 dark:text-white"
-              >
-                Clean visual design backed by practical engineering.
-              </h2>
-              <p className="mt-4 text-base leading-8 text-neutral-600 dark:text-neutral-300">
-                I enjoy the intersection of product thinking and engineering,
-                especially when a project needs both strong execution and a
-                calm, elegant interface. My work usually centers on React,
-                Next.js, Node.js, and AI-enabled developer tools.
-              </p>
-              <div className="mt-8 flex flex-wrap gap-3">
+          <div className="mx-auto grid max-w-6xl gap-6 md:grid-cols-2">
+            {/* About card */}
+            <article className="flex aspect-square flex-col justify-between rounded-2xl border border-zinc-200 bg-white/80 p-8 shadow-sm backdrop-blur dark:border-zinc-800 dark:bg-zinc-900/80">
+              <div>
+                <h2
+                  id="about-title"
+                  className="font-heading text-3xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-100"
+                >
+                  <span className="relative">
+                    About
+                    <span className="absolute -bottom-1 left-0 h-[3px] w-10 rounded-full bg-emerald-500/60" />
+                  </span>
+                </h2>
+                <p className="mt-4 text-base leading-8 text-zinc-600 dark:text-zinc-300">
+                  I enjoy the intersection of product thinking and engineering,
+                  especially when a project needs both strong execution and a
+                  calm, elegant interface. My work usually centers on React,
+                  Next.js, Node.js, and AI-enabled developer tools.
+                </p>
+              </div>
+              <div className="flex flex-wrap gap-2">
                 {featuredSkills.map((skill) => (
                   <span
                     key={skill.name}
-                    className="rounded-full border border-black/10 bg-neutral-50 px-4 py-2 text-sm text-neutral-700 dark:border-white/10 dark:bg-white/5 dark:text-neutral-200"
+                    className="rounded-full border border-zinc-200 bg-zinc-50 px-3 py-1.5 text-sm text-zinc-700 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-200"
                   >
                     {skill.name}
                   </span>
                 ))}
               </div>
-            </div>
+            </article>
 
-            <div className="rounded-[2rem] border border-black/10 bg-white/80 p-8 shadow-[0_20px_60px_rgba(15,23,42,0.06)] backdrop-blur dark:border-white/10 dark:bg-white/5">
-              <p className="text-xs font-medium uppercase tracking-[0.24em] text-neutral-500 dark:text-neutral-400">
-                Experience
-              </p>
-              <div className="mt-6 space-y-5">
-                {highlightedExperience.map((experience, index) => (
-                  <div
-                    key={experience.id}
-                    className={cn(
-                      "rounded-3xl border border-black/10 bg-white/80 p-5 dark:border-white/10 dark:bg-white/[0.04]",
-                      index === 1 && "lg:translate-x-6",
-                    )}
-                  >
-                    <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
-                      <div>
-                        <h3 className="text-lg font-semibold text-neutral-950 dark:text-white">
-                          {experience.position}
-                        </h3>
-                        <p className="text-sm text-neutral-500 dark:text-neutral-400">
-                          {experience.company} • {experience.location}
+            {/* Experience card */}
+            <article className="flex aspect-square flex-col justify-between rounded-2xl border border-zinc-200 bg-white/80 p-8 shadow-sm backdrop-blur dark:border-zinc-800 dark:bg-zinc-900/80">
+              <div>
+                <h2 className="font-heading text-3xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-100">
+                  <span className="relative">
+                    Experience
+                    <span className="absolute -bottom-1 left-0 h-[3px] w-10 rounded-full bg-amber-500/60" />
+                  </span>
+                </h2>
+                <div className="mt-6 space-y-4">
+                  {highlightedExperience.map((experience) => (
+                    <div
+                      key={experience.id}
+                      className="rounded-xl border border-zinc-200 bg-zinc-50/80 p-4 dark:border-zinc-700 dark:bg-zinc-800/50"
+                    >
+                      <div className="flex flex-col gap-1 sm:flex-row sm:items-start sm:justify-between">
+                        <div>
+                          <h3 className="text-base font-semibold text-zinc-900 dark:text-zinc-100">
+                            {experience.position}
+                          </h3>
+                          <p className="text-xs text-zinc-500 dark:text-zinc-400">
+                            {experience.company} · {experience.location}
+                          </p>
+                        </div>
+                        <p className="font-mono text-xs text-zinc-500 dark:text-zinc-400">
+                          {formatExperienceDate(
+                            experience.endDate,
+                            experience.startDate,
+                          )}
                         </p>
                       </div>
-                      <p className="text-sm text-neutral-500 dark:text-neutral-400">
-                        {formatExperienceDate(
-                          experience.endDate,
-                          experience.startDate,
-                        )}
+                      <p className="mt-2 text-sm leading-6 text-zinc-600 line-clamp-2 dark:text-zinc-300">
+                        {experience.description[0]}
                       </p>
                     </div>
-
-                    <p className="mt-4 text-sm leading-7 text-neutral-600 dark:text-neutral-300">
-                      {experience.description[0]}
-                    </p>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
 
               <Link
                 href="/experience"
                 className={cn(
                   buttonVariants({ variant: "outline" }),
-                  "mt-6 rounded-full border-black/10 bg-white/80 dark:border-white/10 dark:bg-white/5",
+                  "mt-4 rounded-full border-zinc-200 bg-white/80 dark:border-zinc-700 dark:bg-zinc-800/80",
                 )}
               >
                 View full experience
               </Link>
-            </div>
+            </article>
           </div>
         </section>
 
+        {/* ── CTA ── */}
         <section
           id="contact"
-          className="px-4 pb-24 sm:px-6 lg:px-8"
+          className="px-4 py-16 sm:px-6 md:py-24 lg:px-8"
           aria-labelledby="contact-title"
         >
-          <div className="mx-auto max-w-6xl overflow-hidden rounded-[2.5rem] border border-black/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.94),rgba(244,244,245,0.9))] p-8 shadow-[0_30px_90px_rgba(15,23,42,0.08)] dark:border-white/10 dark:bg-[linear-gradient(180deg,rgba(24,24,27,0.92),rgba(10,10,12,0.96))] lg:p-10">
+          <div className="mx-auto max-w-6xl overflow-hidden rounded-2xl border border-zinc-200 bg-white/90 p-8 shadow-sm backdrop-blur dark:border-zinc-800 dark:bg-zinc-900/90 lg:p-10">
             <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
               <div className="max-w-2xl">
-                <p className="text-xs font-medium uppercase tracking-[0.24em] text-neutral-500 dark:text-neutral-400">
-                  Contact
-                </p>
                 <h2
                   id="contact-title"
-                  className="mt-3 font-heading text-3xl tracking-[-0.04em] text-neutral-950 dark:text-white sm:text-4xl"
+                  className="font-heading text-3xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-100"
                 >
-                  Looking for a frontend engineer who cares about product
-                  polish?
+                  <span className="relative">
+                    Let&apos;s work together
+                    <span className="absolute -bottom-1 left-0 h-[3px] w-12 rounded-full bg-rose-500/60" />
+                  </span>
                 </h2>
-                <p className="mt-4 text-base leading-8 text-neutral-600 dark:text-neutral-300">
+                <p className="mt-4 text-base leading-8 text-zinc-600 dark:text-zinc-300">
                   I&apos;m open to freelance work, internships, and roles where
                   I can help shape clean interfaces and robust full-stack
                   systems.
                 </p>
               </div>
-
               <div className="flex flex-col gap-3 sm:flex-row">
                 <Link
                   href="/contact"
                   className={cn(
                     buttonVariants({ size: "lg" }),
-                    "h-12 rounded-full px-6 text-sm",
+                    "h-11 rounded-full px-6 text-sm",
                   )}
                 >
                   Start a Conversation
@@ -424,7 +303,7 @@ export default function IndexPage() {
                   rel="noreferrer"
                   className={cn(
                     buttonVariants({ variant: "outline", size: "lg" }),
-                    "h-12 rounded-full border-black/10 bg-white/80 px-6 text-sm dark:border-white/10 dark:bg-white/5",
+                    "h-11 rounded-full border-zinc-200 bg-white/80 px-6 text-sm dark:border-zinc-700 dark:bg-zinc-800/80",
                   )}
                 >
                   GitHub Profile

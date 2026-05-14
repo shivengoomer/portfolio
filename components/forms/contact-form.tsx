@@ -93,13 +93,14 @@ export function ContactForm() {
           name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="text-sm font-medium text-neutral-700 dark:text-neutral-200">
+              <FormLabel className="text-sm font-medium text-zinc-700 dark:text-zinc-200">
                 Name
               </FormLabel>
               <FormControl>
                 <Input
                   placeholder="Enter your name"
                   autoComplete="name"
+                  className="rounded-xl border-zinc-200 bg-white focus:ring-2 focus:ring-primary dark:border-zinc-700 dark:bg-zinc-900"
                   {...field}
                 />
               </FormControl>
@@ -120,6 +121,7 @@ export function ContactForm() {
                   placeholder="Enter your email"
                   autoComplete="email"
                   type="email"
+                  className="rounded-xl border-zinc-200 bg-white focus:ring-2 focus:ring-primary dark:border-zinc-700 dark:bg-zinc-900"
                   {...field}
                 />
               </FormControl>
@@ -139,6 +141,7 @@ export function ContactForm() {
                 <Textarea
                   placeholder="Tell me a little about your project or role"
                   rows={6}
+                  className="rounded-xl border-zinc-200 bg-white focus:ring-2 focus:ring-primary dark:border-zinc-700 dark:bg-zinc-900"
                   {...field}
                 />
               </FormControl>
@@ -158,6 +161,7 @@ export function ContactForm() {
                 <Input
                   placeholder="LinkedIn, GitHub, or website"
                   autoComplete="url"
+                  className="rounded-xl border-zinc-200 bg-white focus:ring-2 focus:ring-primary dark:border-zinc-700 dark:bg-zinc-900"
                   {...field}
                 />
               </FormControl>
@@ -174,9 +178,9 @@ export function ContactForm() {
           type="submit"
           size="lg"
           disabled={isSubmitting}
-          className="h-12 rounded-full px-6"
+          className="h-12 w-full rounded-xl px-6"
         >
-          {isSubmitting ? "Sending..." : "Send message"}
+          {isSubmitting ? "Sending..." : "Send Message →"}
         </Button>
       </form>
     </Form>

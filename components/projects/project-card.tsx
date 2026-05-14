@@ -1,76 +1,93 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 
 import { Icons } from "@/components/common/icons";
-import ChipContainer from "@/components/ui/chip-container";
 import { ProjectInterface } from "@/config/projects";
-import { CardContainer, CardBody, CardItem } from "@/components/ui/3d-card";
-import { GlowingEffect } from "@/components/ui/glowing-effect";
+
+const BorderGlow = dynamic(() => import("@/components/BorderGlow"), {
+  ssr: false,
+  loading: () => <div className="aspect-square animate-pulse rounded-[20px] bg-zinc-800" />,
+});
 
 interface ProjectCardProps {
   project: ProjectInterface;
 }
 
 export default function ProjectCard({ project }: ProjectCardProps) {
-  const isHackathonWinner =
-    project.companyName.toLowerCase().includes("winner") ||
-    project.shortDescription.toLowerCase().includes("winner");
-
   return (
-    <CardContainer className="inter-var w-full h-full">
-      <Link href={`/projects/${project.id}`} className="block w-full h-full hover:no-underline">
-        <CardBody className="relative flex h-full w-full cursor-pointer flex-col overflow-hidden rounded-[1.75rem] border border-black/10 bg-white/85 p-6 backdrop-blur-md transition-all duration-300 group/card dark:border-white/10 dark:bg-white/[0.04] dark:hover:shadow-2xl dark:hover:shadow-primary/[0.14]">
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/70 via-transparent to-slate-100/80 opacity-80 dark:from-white/[0.06] dark:to-transparent" />
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-primary/5 to-transparent opacity-0 transition-opacity duration-300 group-hover/card:opacity-100" />
-
-          {isHackathonWinner && (
-            <GlowingEffect glowClassName="from-yellow-300 via-yellow-500 to-amber-600 opacity-100 blur-sm" />
-          )}
-
-          <CardItem translateZ="80" className="relative z-10 mt-2 h-[220px] w-full overflow-hidden rounded-[1.35rem] border border-black/5 bg-[linear-gradient(180deg,rgba(255,255,255,0.95),rgba(244,244,245,0.88))] p-4 shadow-inner dark:border-white/10 dark:bg-[linear-gradient(180deg,rgba(24,24,27,0.96),rgba(10,10,12,0.96))]">
+    <Link
+      href={`/projects/${project.id}`}
+      className="group block h-full w-full hover:no-underline"
+    >
+      <BorderGlow
+        backgroundColor="hsl(var(--card))"
+        borderRadius={16}
+        glowIntensity={0.5}
+        colors={["#3b82f6", "#8b5cf6", "#06b6d4"]}
+        className="h-full"
+      >
+        <article className="flex h-full w-full cursor-pointer flex-col p-5">
+          {/* Square image */}
+          <div className="relative aspect-square w-full overflow-hidden rounded-xl border border-zinc-100 bg-gradient-to-b from-white to-zinc-50 p-4 dark:border-zinc-700 dark:from-zinc-800 dark:to-zinc-900">
             <Image
               src={project.companyLogoImg}
-              className="rounded-xl object-contain"
+              className="rounded-lg object-contain"
               alt={project.companyName}
               fill
+              sizes="(max-width: 768px) 100vw, 33vw"
             />
-          </CardItem>
-
-          <CardItem className="relative z-10 mt-6 flex items-center justify-between gap-3" translateZ="40">
-            <span className="rounded-full border border-black/10 bg-neutral-50 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.18em] text-neutral-500 dark:border-white/10 dark:bg-white/[0.04] dark:text-neutral-400">
-              {project.type}
-            </span>
-            <span className="text-sm text-neutral-500 dark:text-neutral-400">
-              {project.techStack.slice(0, 2).join(" • ")}
-            </span>
-          </CardItem>
-
-          <CardItem translateZ="60" className="z-10 mt-5 text-2xl font-heading font-bold tracking-tight text-neutral-900 dark:text-neutral-50">
-            {project.companyName}
-          </CardItem>
-
-          <CardItem translateZ="50" className="z-10 mt-3 flex-grow text-sm leading-7 text-neutral-600 line-clamp-3 dark:text-neutral-300">
-            {project.shortDescription}
-          </CardItem>
-
-          <CardItem translateZ="35" className="z-10 mt-6 flex flex-wrap gap-2">
-            <ChipContainer textArr={project.category} />
-          </CardItem>
-
-          <div className="z-10 mt-6 flex items-center justify-between border-t border-black/5 pt-6 dark:border-white/10">
-            <CardItem translateZ={20} className="flex items-center text-sm font-semibold text-primary transition-all group-hover/card:translate-x-1">
-              Read more <Icons.chevronRight className="w-4 h-4 ml-1" />
-            </CardItem>
-            <CardItem translateZ={20} className="rounded-full border border-black/10 bg-white/80 p-2.5 text-neutral-500 transition-colors group-hover/card:bg-primary group-hover/card:text-white dark:border-white/10 dark:bg-white/[0.04] dark:text-neutral-300">
-              {project.type === "Personal" ? (
-                <Icons.userFill className="h-4 w-4" />
-              ) : (
-                <Icons.work className="h-4 w-4" />
-              )}
-            </CardItem>
           </div>
-        </CardBody>
-      </Link>
-    </CardContainer>
+
+          {/* Title */}
+          <h3 className="mt-4 text-lg font-bold tracking-tight text-zinc-900 dark:text-zinc-100">
+            {project.companyName}
+          </h3>
+
+          {/* Description */}
+          <p className="mt-1.5 flex-grow text-sm leading-6 text-zinc-600 line-clamp-2 dark:text-zinc-300">
+            {project.shortDescription}
+          </p>
+
+          {/* Tech stack */}
+          <div className="mt-3 flex flex-wrap gap-1.5">
+            {project.techStack.slice(0, 3).map((tech) => (
+              <span
+                key={tech}
+                className="rounded-md border border-zinc-200 bg-zinc-50 px-2 py-0.5 text-[11px] font-medium text-zinc-600 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-400"
+              >
+                {tech}
+              </span>
+            ))}
+            {project.techStack.length > 3 && (
+              <span className="rounded-md border border-zinc-200 bg-zinc-50 px-2 py-0.5 text-[11px] font-medium text-zinc-500 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-500">
+                +{project.techStack.length - 3}
+              </span>
+            )}
+          </div>
+
+          {/* Footer */}
+          <div className="mt-4 flex items-center justify-between border-t border-zinc-100 pt-3 dark:border-zinc-800">
+            <span className="flex items-center text-sm font-semibold text-zinc-900 transition-all group-hover:translate-x-1 dark:text-zinc-100">
+              Read more <Icons.chevronRight className="ml-1 h-4 w-4" />
+            </span>
+            <div className="flex gap-2">
+              {project.githubLink && (
+                <span className="text-zinc-400 dark:text-zinc-500">
+                  <Icons.gitHub className="h-4 w-4" />
+                </span>
+              )}
+              {project.websiteLink && (
+                <span className="text-zinc-400 dark:text-zinc-500">
+                  <Icons.externalLink className="h-4 w-4" />
+                </span>
+              )}
+            </div>
+          </div>
+        </article>
+      </BorderGlow>
+    </Link>
   );
 }

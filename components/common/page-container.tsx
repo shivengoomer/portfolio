@@ -15,7 +15,7 @@ export default function PageContainer({
 }: PageContainerProps) {
   return (
     <ClientPageWrapper>
-      <div className="px-4 pb-20 pt-6 sm:px-6 lg:px-8 lg:pb-24 lg:pt-8">
+      <div className="px-4 py-16 sm:px-6 md:py-24 lg:px-8">
         <div className="mx-auto max-w-6xl space-y-8">
         <PageHeader title={title} description={description} />
           <div>{children}</div>

@@ -3,14 +3,13 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { existsSync } from "node:fs";
 import { join } from "node:path";
-import { IconLayoutKanban, IconTerminal2 } from "@tabler/icons-react";
+import { IconLayoutKanban } from "@tabler/icons-react";
 
 import { Icons } from "@/components/common/icons";
 import ProjectDescription from "@/components/projects/project-description";
 import { buttonVariants } from "@/components/ui/button";
-import ChipContainer from "@/components/ui/chip-container";
 import CustomTooltip from "@/components/ui/custom-tooltip";
-import { StickyScroll } from "@/components/ui/sticky-scroll-reveal";
+import ProjectStepper from "@/components/projects/project-stepper";
 import { Projects } from "@/config/projects";
 import { siteConfig } from "@/config/site";
 import { cn, formatDateFromObj } from "@/lib/utils";
@@ -30,61 +29,9 @@ interface ShowcaseItem {
 
 function getExistingImagePaths(imagePaths: string[]) {
   return imagePaths.filter((imagePath) => {
-    if (!imagePath.startsWith("/")) {
-      return false;
-    }
-
+    if (!imagePath.startsWith("/")) return false;
     return existsSync(join(process.cwd(), "public", imagePath));
   });
-}
-
-function ShowcaseMediaCard({
-  title,
-  images,
-  className,
-}: {
-  title: string;
-  images: string[];
-  className?: string;
-}) {
-  if (images.length === 0) {
-    return (
-      <div
-        className={cn(
-          "flex min-h-[240px] items-center justify-center rounded-[1.25rem] border border-dashed border-black/15 bg-neutral-50 px-6 text-center text-sm leading-6 text-neutral-500 dark:border-white/10 dark:bg-neutral-900/60 dark:text-neutral-400",
-          className,
-        )}
-      >
-        Product visuals for this workflow are being prepared.
-      </div>
-    );
-  }
-
-  return (
-    <div
-      className={cn(
-        "overflow-hidden rounded-[1.5rem] border border-black/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.98),rgba(244,244,245,0.94))] p-3 shadow-[0_20px_60px_rgba(15,23,42,0.08)] dark:border-white/10 dark:bg-[linear-gradient(180deg,rgba(24,24,27,0.94),rgba(10,10,12,0.98))]",
-        className,
-      )}
-    >
-      <div className="grid gap-3">
-        {images.map((imagePath, imageIndex) => (
-          <div
-            key={`${imagePath}-${imageIndex}`}
-            className="overflow-hidden rounded-[1rem] border border-black/5 bg-neutral-100 dark:border-white/10 dark:bg-neutral-900"
-          >
-            <Image
-              src={imagePath}
-              width={1400}
-              height={900}
-              className="h-auto w-full object-cover"
-              alt={`${title} screen ${imageIndex + 1}`}
-            />
-          </div>
-        ))}
-      </div>
-    </div>
-  );
 }
 
 function ShowcaseDetailsCard({
@@ -95,22 +42,34 @@ function ShowcaseDetailsCard({
   index: number;
 }) {
   return (
-    <article className="overflow-hidden rounded-[1.75rem] border border-black/10 bg-white/80 p-4 shadow-[0_20px_60px_rgba(15,23,42,0.06)] backdrop-blur dark:border-white/10 dark:bg-white/5">
-      <div className="mb-4 space-y-2">
-        <p className="text-xs font-medium uppercase tracking-[0.22em] text-neutral-500 dark:text-neutral-400">
+    <article className="overflow-hidden rounded-2xl border border-zinc-200 bg-white/90 p-4 shadow-sm backdrop-blur dark:border-zinc-800 dark:bg-zinc-900/90">
+      <div className="mb-3 space-y-1">
+        <p className="text-[10px] font-semibold uppercase tracking-widest text-zinc-400">
           Screen {index + 1}
         </p>
-        <h3 className="text-xl font-semibold tracking-tight text-neutral-950 dark:text-white">
+        <h3 className="text-base font-semibold tracking-tight text-zinc-900 dark:text-zinc-100">
           {item.title}
         </h3>
-        {item.description ? (
-          <p className="text-sm leading-7 text-neutral-600 dark:text-neutral-300">
+        {item.description && (
+          <p className="text-sm leading-6 text-zinc-500 dark:text-zinc-400">
             {item.description}
           </p>
-        ) : null}
+        )}
       </div>
-
-      <ShowcaseMediaCard title={item.title} images={item.validImages} />
+      {item.validImages.map((img, imgIdx) => (
+        <div
+          key={`${img}-${imgIdx}`}
+          className="overflow-hidden rounded-xl border border-zinc-100 bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-800"
+        >
+          <Image
+            src={img}
+            width={800}
+            height={500}
+            className="h-auto w-full object-cover"
+            alt={`${item.title} screen ${imgIdx + 1}`}
+          />
+        </div>
+      ))}
     </article>
   );
 }
@@ -133,175 +92,202 @@ export default function Project({ params }: ProjectPageProps) {
 
   return (
     <article className="px-4 pb-20 pt-6 sm:px-6 lg:px-8 lg:pb-24 lg:pt-8">
-      <div className="mx-auto max-w-6xl space-y-8">
+      <div className="mx-auto max-w-6xl space-y-10">
+        {/* Back nav */}
         <Link
           href="/projects"
-          className="inline-flex items-center rounded-full border border-black/10 bg-white/80 px-4 py-2 text-sm font-medium text-neutral-600 transition-colors hover:text-neutral-950 dark:border-white/10 dark:bg-white/5 dark:text-neutral-300 dark:hover:text-white"
+          className="group inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-white/80 px-4 py-2 text-sm font-medium text-zinc-500 backdrop-blur transition-all hover:border-zinc-300 hover:text-zinc-900 dark:border-zinc-800 dark:bg-zinc-900/80 dark:text-zinc-400 dark:hover:border-zinc-700 dark:hover:text-zinc-100"
         >
-          <Icons.chevronLeft className="mr-2 h-4 w-4" />
+          <Icons.chevronLeft className="h-4 w-4 transition-transform group-hover:-translate-x-0.5" />
           Back to projects
         </Link>
 
-        <section className="rounded-[2rem] border border-black/10 bg-white/80 p-6 shadow-[0_20px_60px_rgba(15,23,42,0.06)] backdrop-blur dark:border-white/10 dark:bg-white/5 sm:p-8">
-          <div className="grid gap-8 lg:grid-cols-[1fr_260px] lg:items-start">
-            <div className="space-y-5">
-              <time
-                dateTime={project.startDate.toISOString()}
-                className="inline-flex items-center rounded-full border border-black/10 bg-neutral-50 px-3 py-1 text-xs font-medium uppercase tracking-[0.2em] text-neutral-500 dark:border-white/10 dark:bg-white/[0.04] dark:text-neutral-400"
-              >
-                {formatDateFromObj(project.startDate)}
-              </time>
-              <div className="space-y-4">
-                <h1 className="font-heading text-4xl tracking-[-0.05em] text-neutral-950 dark:text-white sm:text-5xl lg:text-6xl">
-                  {project.companyName}
-                </h1>
-                <p className="max-w-2xl text-base leading-8 text-neutral-600 dark:text-neutral-300">
-                  {project.shortDescription}
-                </p>
-              </div>
-              <ChipContainer textArr={project.category} />
-            </div>
+        {/* ── HERO HEADER ── */}
+        <section className="overflow-hidden rounded-2xl border border-zinc-200 bg-white/90 shadow-sm backdrop-blur dark:border-zinc-800 dark:bg-zinc-900/90">
+          {/* Top gradient accent bar */}
+          <div className="h-1 w-full bg-gradient-to-r from-blue-500 via-violet-500 to-cyan-500" />
 
-            <div className="space-y-4">
-              <div className="flex h-[180px] items-center justify-center rounded-[1.5rem] border border-black/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.98),rgba(244,244,245,0.94))] p-6 dark:border-white/10 dark:bg-[linear-gradient(180deg,rgba(24,24,27,0.94),rgba(10,10,12,0.98))]">
-                <div className="relative h-full w-full max-w-[180px]">
-                  <Image
-                    src={project.companyLogoImg}
-                    alt={project.companyName}
-                    fill
-                    className="object-contain"
-                    priority
-                  />
+          <div className="p-6 sm:p-8">
+            <div className="grid gap-8 lg:grid-cols-[1fr_220px] lg:items-start">
+              {/* Left — project info */}
+              <div className="space-y-5">
+                <time
+                  dateTime={project.startDate.toISOString()}
+                  className="inline-flex items-center rounded-full border border-zinc-200 bg-zinc-50 px-3 py-1 text-[10px] font-semibold uppercase tracking-widest text-zinc-500 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-400"
+                >
+                  {formatDateFromObj(project.startDate)}
+                </time>
+
+                <div className="space-y-3">
+                  <h1 className="font-heading text-4xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100 sm:text-5xl">
+                    {project.companyName}
+                  </h1>
+                  <p className="max-w-2xl text-base leading-7 text-zinc-600 dark:text-zinc-300">
+                    {project.shortDescription}
+                  </p>
+                </div>
+
+                {/* Category + tech stack inline */}
+                <div className="flex flex-wrap gap-1.5">
+                  {project.category.map((cat) => (
+                    <span
+                      key={cat}
+                      className="rounded-full bg-zinc-900 px-3 py-1 text-xs font-medium text-white dark:bg-zinc-100 dark:text-zinc-900"
+                    >
+                      {cat}
+                    </span>
+                  ))}
+                  {project.techStack.map((tech) => (
+                    <span
+                      key={tech}
+                      className="rounded-full border border-zinc-200 bg-zinc-50 px-3 py-1 text-xs font-medium text-zinc-600 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-400"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+
+                {/* Action buttons */}
+                <div className="flex flex-wrap items-center gap-3 pt-2">
+                  {project.githubLink && (
+                    <Link
+                      href={project.githubLink}
+                      target="_blank"
+                      className={cn(
+                        buttonVariants({ variant: "outline", size: "sm" }),
+                        "h-9 gap-2 rounded-full border-zinc-200 px-4 text-sm dark:border-zinc-700",
+                      )}
+                    >
+                      <Icons.gitHub className="h-4 w-4" />
+                      Source Code
+                    </Link>
+                  )}
+                  {project.websiteLink && (
+                    <Link
+                      href={project.websiteLink}
+                      target="_blank"
+                      className={cn(
+                        buttonVariants({ size: "sm" }),
+                        "h-9 gap-2 rounded-full px-4 text-sm",
+                      )}
+                    >
+                      <Icons.externalLink className="h-4 w-4" />
+                      Live Demo
+                    </Link>
+                  )}
                 </div>
               </div>
 
-              <div className="flex flex-wrap items-center gap-3">
+              {/* Right — logo */}
+              <div className="flex flex-col items-center gap-4">
+                <div className="flex aspect-square w-full items-center justify-center overflow-hidden rounded-2xl border border-zinc-100 bg-gradient-to-br from-zinc-50 to-zinc-100 p-6 dark:border-zinc-700 dark:from-zinc-800 dark:to-zinc-900">
+                  <div className="relative h-full w-full">
+                    <Image
+                      src={project.companyLogoImg}
+                      alt={project.companyName}
+                      fill
+                      className="object-contain"
+                      priority
+                    />
+                  </div>
+                </div>
+
                 <Link
                   href={siteConfig.links.github}
                   target="_blank"
                   rel="noreferrer"
-                  className="flex items-center gap-3 rounded-[1.25rem] border border-black/10 bg-white/80 px-4 py-3 transition-colors hover:bg-white dark:border-white/10 dark:bg-white/[0.04] dark:hover:bg-white/[0.08]"
+                  className="flex w-full items-center gap-3 rounded-xl border border-zinc-200 bg-zinc-50/80 px-3 py-2.5 transition-colors hover:bg-zinc-100 dark:border-zinc-700 dark:bg-zinc-800/80 dark:hover:bg-zinc-800"
                 >
                   <Image
                     src={profileImg}
                     alt="Shiven Goomer"
-                    width={40}
-                    height={40}
-                    className="rounded-full border border-black/10 bg-neutral-100 dark:border-white/10 dark:bg-neutral-900"
+                    width={32}
+                    height={32}
+                    className="rounded-full"
                   />
-                  <div className="hidden text-left sm:block">
-                    <span className="block text-sm font-semibold text-neutral-900 dark:text-white">
+                  <div className="text-left">
+                    <span className="block text-xs font-semibold text-zinc-900 dark:text-zinc-100">
                       Shiven Goomer
                     </span>
-                    <span className="mt-1 block text-xs text-neutral-500 dark:text-neutral-400">
+                    <span className="block text-[10px] text-zinc-500 dark:text-zinc-400">
                       @{siteConfig.username}
                     </span>
                   </div>
                 </Link>
-
-                {project.githubLink ? (
-                  <CustomTooltip text="Source Code">
-                    <Link
-                      href={project.githubLink}
-                      target="_blank"
-                      className="rounded-full border border-black/10 bg-white/80 p-3 transition-colors hover:bg-white dark:border-white/10 dark:bg-white/[0.04] dark:hover:bg-white/[0.08]"
-                    >
-                      <Icons.gitHub className="h-5 w-5 text-neutral-700 dark:text-neutral-200" />
-                    </Link>
-                  </CustomTooltip>
-                ) : null}
-
-                {project.websiteLink ? (
-                  <CustomTooltip text="Live Site">
-                    <Link
-                      href={project.websiteLink}
-                      target="_blank"
-                      className="rounded-full border border-black/10 bg-white/80 p-3 transition-colors hover:bg-white dark:border-white/10 dark:bg-white/[0.04] dark:hover:bg-white/[0.08]"
-                    >
-                      <Icons.externalLink className="h-5 w-5 text-neutral-700 dark:text-neutral-200" />
-                    </Link>
-                  </CustomTooltip>
-                ) : null}
               </div>
             </div>
           </div>
         </section>
 
-        <section className="grid gap-6 lg:grid-cols-[0.36fr_0.64fr]">
-          <div className="rounded-[2rem] border border-black/10 bg-white/80 p-6 shadow-[0_20px_60px_rgba(15,23,42,0.06)] backdrop-blur dark:border-white/10 dark:bg-white/5">
-            <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold tracking-tight text-neutral-950 dark:text-white">
-              <IconTerminal2 className="h-5 w-5 text-primary" />
-              Tech Stack
-            </h2>
-            <ChipContainer textArr={project.techStack} />
-          </div>
-
-          <div className="rounded-[2rem] border border-black/10 bg-white/80 p-6 shadow-[0_20px_60px_rgba(15,23,42,0.06)] backdrop-blur dark:border-white/10 dark:bg-white/5">
-            <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold tracking-tight text-neutral-950 dark:text-white">
-              <IconLayoutKanban className="h-5 w-5 text-primary" />
-              Overview
-            </h2>
-            <ProjectDescription
-              paragraphs={project.descriptionDetails.paragraphs}
-              bullets={project.descriptionDetails.bullets}
-            />
-          </div>
-        </section>
-
-        <section className="space-y-5">
-          <div className="text-center">
-            <p className="text-xs font-medium uppercase tracking-[0.24em] text-neutral-500 dark:text-neutral-400">
-              Showcase
-            </p>
-            <h2 className="mt-3 font-heading text-3xl tracking-[-0.04em] text-neutral-950 dark:text-white">
-              Product screens and key workflows
-            </h2>
-            <p className="mx-auto mt-3 max-w-2xl text-sm leading-7 text-neutral-600 dark:text-neutral-300">
-              A responsive walkthrough of the main product surfaces, interaction
-              states, and workflow highlights for this project.
-            </p>
-          </div>
-          {hasShowcase ? (
-            <>
-              <div className="grid gap-4 md:hidden">
-                {showcaseItems.map((page, index) => (
-                  <ShowcaseDetailsCard
-                    key={`${page.title}-${index}`}
-                    item={page}
-                    index={index}
-                  />
-                ))}
+        {/* ── OVERVIEW (left) | PRODUCT SCREENS (right) ── */}
+        <section className="grid gap-6 lg:grid-cols-[0.42fr_0.58fr] lg:items-start">
+          {/* Overview */}
+          <div className="space-y-1">
+            <div className="rounded-2xl border border-zinc-200 bg-white/90 p-6 shadow-sm backdrop-blur dark:border-zinc-800 dark:bg-zinc-900/90 sm:p-7">
+              <div className="mb-5 flex items-center gap-2">
+                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-zinc-100 dark:bg-zinc-800">
+                  <IconLayoutKanban className="h-4 w-4 text-zinc-600 dark:text-zinc-300" />
+                </div>
+                <h2 className="text-lg font-semibold tracking-tight text-zinc-900 dark:text-zinc-100">
+                  Overview
+                </h2>
               </div>
-
-              <div className="hidden overflow-hidden rounded-[2rem] border border-black/10 bg-white/80 p-4 shadow-[0_20px_60px_rgba(15,23,42,0.06)] backdrop-blur dark:border-white/10 dark:bg-white/5 md:block">
-                <StickyScroll
-                  content={showcaseItems.map((page) => ({
-                    title: page.title,
-                    description: page.description || "",
-                    content: (
-                      <ShowcaseMediaCard
-                        title={page.title}
-                        images={page.validImages}
-                        className="h-full w-full"
-                      />
-                    ),
-                  }))}
-                />
-              </div>
-            </>
-          ) : (
-            <div className="rounded-[2rem] border border-dashed border-black/15 bg-white/70 px-6 py-12 text-center text-sm leading-7 text-neutral-500 shadow-[0_20px_60px_rgba(15,23,42,0.04)] backdrop-blur dark:border-white/10 dark:bg-white/[0.03] dark:text-neutral-400">
-              This project does not have workflow screenshots yet.
+              <ProjectDescription
+                paragraphs={project.descriptionDetails.paragraphs}
+                bullets={project.descriptionDetails.bullets}
+              />
             </div>
-          )}
+          </div>
+
+          {/* Product Screens */}
+          <div className="rounded-2xl border border-zinc-200 bg-white/90 p-6 shadow-sm backdrop-blur dark:border-zinc-800 dark:bg-zinc-900/90 sm:p-7">
+            <div className="mb-5 flex items-center justify-between">
+              <h2 className="text-lg font-semibold tracking-tight text-zinc-900 dark:text-zinc-100">
+                Product Screens
+              </h2>
+              {hasShowcase && (
+                <span className="rounded-full bg-zinc-100 px-2.5 py-0.5 text-[10px] font-semibold text-zinc-500 dark:bg-zinc-800 dark:text-zinc-400">
+                  {showcaseItems.length} screens
+                </span>
+              )}
+            </div>
+            {hasShowcase ? (
+              <>
+                <div className="grid gap-4 md:hidden">
+                  {showcaseItems.map((page, index) => (
+                    <ShowcaseDetailsCard
+                      key={`${page.title}-${index}`}
+                      item={page}
+                      index={index}
+                    />
+                  ))}
+                </div>
+                <div className="hidden md:block">
+                  <ProjectStepper items={showcaseItems} />
+                </div>
+              </>
+            ) : (
+              <div className="flex min-h-[200px] items-center justify-center rounded-xl border border-dashed border-zinc-200 bg-zinc-50/50 text-center dark:border-zinc-700 dark:bg-zinc-800/30">
+                <div>
+                  <div className="mx-auto mb-3 flex h-10 w-10 items-center justify-center rounded-full bg-zinc-100 dark:bg-zinc-800">
+                    <Icons.image className="h-5 w-5 text-zinc-400" />
+                  </div>
+                  <p className="text-sm text-zinc-400 dark:text-zinc-500">
+                    Screenshots coming soon
+                  </p>
+                </div>
+              </div>
+            )}
+          </div>
         </section>
 
+        {/* Back to all */}
         <div className="flex justify-center pt-2">
           <Link
             href="/projects"
             className={cn(
               buttonVariants({ variant: "outline" }),
-              "rounded-full border-black/10 bg-white/80 dark:border-white/10 dark:bg-white/5",
+              "rounded-full border-zinc-200 bg-white/80 dark:border-zinc-700 dark:bg-zinc-800/80",
             )}
           >
             <Icons.chevronLeft className="mr-2 h-4 w-4" />
