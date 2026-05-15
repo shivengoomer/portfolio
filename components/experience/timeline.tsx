@@ -1,32 +1,26 @@
 "use client";
 
 import Image from "next/image";
-import React, { useState, useEffect } from "react";
-import dynamic from "next/dynamic";
-import { useTheme } from "next-themes";
+import Link from "next/link";
 
 import { AnimatedSection } from "@/components/common/animated-section";
 import { Icons } from "@/components/common/icons";
 import { ExperienceInterface } from "@/config/experience";
 
-// Dynamically import BorderGlow for the premium card effect
-const BorderGlow = dynamic(() => import("@/components/BorderGlow"), {
-  ssr: false,
-  loading: () => <div className="h-64 animate-pulse rounded-[24px] bg-zinc-100 dark:bg-zinc-800/50" />,
-});
-
-const getMonthYear = (date: Date): string => {
-  const d = new Date(date);
-  return d.toLocaleDateString("en-US", { month: "short", year: "numeric" });
-};
+const formatMonthYear = (date: Date): string =>
+  new Intl.DateTimeFormat("en-US", {
+    month: "short",
+    year: "numeric",
+  }).format(new Date(date));
 
 const getDurationText = (
   startDate: Date,
-  endDate: Date | "Present"
+  endDate: Date | "Present",
 ): string => {
-  const start = getMonthYear(startDate);
-  const end = typeof endDate === "string" ? "Present" : getMonthYear(endDate);
-  return `${start} – ${end}`;
+  const start = formatMonthYear(startDate);
+  const end = typeof endDate === "string" ? "Present" : formatMonthYear(endDate);
+
+  return `${start} - ${end}`;
 };
 
 interface TimelineProps {
@@ -34,132 +28,127 @@ interface TimelineProps {
 }
 
 export default function Timeline({ experiences }: TimelineProps) {
-  const { theme, systemTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  const isDark =
-    mounted && (theme === "dark" || (theme === "system" && systemTheme === "dark"));
-
-  const borderColors = isDark
-    ? ["#0ea5e9", "#8b5cf6", "#ec4899"]
-    : ["#e0f2fe", "#ede9fe", "#fbcfe8"];
-
   return (
-    <div className="relative space-y-12 pl-4 sm:pl-0">
-      {/* Premium glowing dashed vertical timeline line */}
-      <div className="absolute bottom-0 left-[27px] top-4 hidden w-[2px] bg-[linear-gradient(to_bottom,transparent_0%,rgba(63,63,70,0.2)_10%,rgba(63,63,70,0.2)_90%,transparent_100%)] dark:bg-[linear-gradient(to_bottom,transparent_0%,rgba(161,161,170,0.15)_10%,rgba(161,161,170,0.15)_90%,transparent_100%)] sm:block" />
+    <div className="relative">
+      <div className="absolute bottom-8 left-7 top-8 hidden w-px bg-gradient-to-b from-transparent via-zinc-300 to-transparent dark:via-zinc-700 sm:block" />
 
-      {experiences.map((experience, index) => (
-        <AnimatedSection
-          key={experience.id}
-          delay={0.1 * (index + 1)}
-          direction="up"
-          className="group relative flex flex-col gap-6 sm:flex-row"
-        >
-          {/* Timeline Node & Logo */}
-          <div className="relative z-10 hidden sm:flex sm:w-16 sm:flex-shrink-0 sm:justify-center">
-            <div className="flex h-[54px] w-[54px] items-center justify-center rounded-2xl border border-zinc-200 bg-white/90 shadow-sm backdrop-blur transition-transform duration-300 group-hover:scale-110 dark:border-zinc-700 dark:bg-zinc-900/90">
-              {experience.logo ? (
-                <Image
-                  src={experience.logo}
-                  alt={experience.company}
-                  width={36}
-                  height={36}
-                  className="rounded-xl object-contain p-1"
-                />
-              ) : (
-                <Icons.work className="h-6 w-6 text-zinc-400" />
-              )}
+      <div className="space-y-5">
+        {experiences.map((experience, index) => (
+          <AnimatedSection
+            key={experience.id}
+            delay={0.05 * index}
+            direction="up"
+            className="group relative grid gap-4 sm:grid-cols-[3.75rem_1fr]"
+          >
+            <div className="relative z-10 hidden sm:block">
+              <div className="grid h-14 w-14 place-items-center rounded-2xl border border-zinc-200 bg-white shadow-sm transition-transform group-hover:scale-105 dark:border-zinc-800 dark:bg-zinc-950">
+                {experience.logo ? (
+                  <Image
+                    src={experience.logo}
+                    alt={experience.company}
+                    width={42}
+                    height={42}
+                    className="h-10 w-10 object-contain"
+                  />
+                ) : (
+                  <Icons.work className="h-7 w-7 text-zinc-500" />
+                )}
+              </div>
             </div>
-          </div>
 
-          {/* Experience Card */}
-          <div className="w-full flex-1">
-            <BorderGlow
-              borderRadius={24}
-              glowIntensity={0.65}
-              colors={borderColors} // Match hero grainient theme
-              className="w-full bg-white/95 transition-transform duration-300 dark:bg-zinc-900/95 backdrop-blur"
-            >
-              <div className="relative flex h-full flex-col justify-between overflow-hidden p-6 sm:p-8">
-                {/* Mobile Logo & Header */}
-                <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
-                  <div className="flex items-start gap-4 sm:hidden">
-                    {experience.logo && (
-                      <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl border border-zinc-200 bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-800">
-                        <Image
-                          src={experience.logo}
-                          alt={experience.company}
-                          width={32}
-                          height={32}
-                          className="rounded-lg object-contain p-0.5"
-                        />
-                      </div>
+            <article className="relative overflow-hidden rounded-2xl border border-zinc-200 bg-white/85 p-5 shadow-sm backdrop-blur transition-transform group-hover:-translate-y-0.5 dark:border-zinc-800 dark:bg-zinc-900/85 sm:p-6">
+              <span className="absolute inset-y-0 left-0 w-1 bg-amber-600 opacity-0 transition-opacity group-hover:opacity-100" />
+
+              <div className="flex flex-col gap-5 md:flex-row md:items-start md:justify-between">
+                <div className="flex min-w-0 gap-4">
+                  <div className="grid h-14 w-14 flex-shrink-0 place-items-center rounded-2xl border border-zinc-200 bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-950 sm:hidden">
+                    {experience.logo ? (
+                      <Image
+                        src={experience.logo}
+                        alt={experience.company}
+                        width={42}
+                        height={42}
+                        className="h-10 w-10 object-contain"
+                      />
+                    ) : (
+                      <Icons.work className="h-7 w-7 text-zinc-500" />
                     )}
-                    <div>
-                      <h3 className="text-xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">
+                  </div>
+
+                  <div className="min-w-0">
+                    <div className="flex flex-wrap items-center gap-2">
+                      <h2 className="text-lg font-semibold tracking-tight text-zinc-950 dark:text-zinc-100">
                         {experience.position}
-                      </h3>
-                      <p className="mt-0.5 font-medium text-primary">
+                      </h2>
+                      {experience.companyUrl ? (
+                        <a
+                          href={experience.companyUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex text-zinc-400 transition-colors hover:text-zinc-900 dark:hover:text-zinc-100"
+                          aria-label={`Visit ${experience.company}`}
+                        >
+                          <Icons.externalLink className="h-4 w-4" />
+                        </a>
+                      ) : null}
+                    </div>
+
+                    <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">
+                      <span className="font-medium text-zinc-700 dark:text-zinc-300">
                         {experience.company}
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Desktop Header */}
-                  <div className="hidden sm:block">
-                    <h3 className="text-2xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">
-                      {experience.position}
-                    </h3>
-                    <div className="mt-1 flex items-center gap-2 text-sm font-medium text-primary">
-                      <span>{experience.company}</span>
-                      <span className="text-zinc-300 dark:text-zinc-600">•</span>
-                      <span className="text-zinc-500 dark:text-zinc-400">{experience.location}</span>
-                    </div>
-                  </div>
-
-                  {/* Date Badge */}
-                  <div className="inline-flex w-fit items-center rounded-full border border-zinc-200/60 bg-zinc-100/50 px-3.5 py-1.5 font-mono text-xs font-semibold tracking-tight text-zinc-600 backdrop-blur dark:border-zinc-700/60 dark:bg-zinc-800/50 dark:text-zinc-300">
-                    <Icons.calendar className="mr-2 h-3.5 w-3.5 opacity-70" />
-                    {getDurationText(experience.startDate, experience.endDate)}
+                      </span>{" "}
+                      · {experience.location}
+                    </p>
                   </div>
                 </div>
 
-                {/* Description Content */}
-                <ul className="mb-8 space-y-3">
-                  {experience.description.map((desc, i) => (
-                    <li
-                      key={i}
-                      className="flex items-start gap-3 text-[15px] leading-relaxed text-zinc-600 dark:text-zinc-300"
-                    >
-                      <Icons.chevronRight className="mt-1 h-4 w-4 flex-shrink-0 text-primary/70" />
-                      <span>{desc}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                {/* Tech Stack Pills */}
-                <div className="mt-auto border-t border-zinc-100 pt-6 dark:border-zinc-800/60">
-                  <div className="flex flex-wrap gap-2">
-                    {experience.skills.map((skill) => (
-                      <span
-                        key={skill}
-                        className="inline-flex items-center rounded-lg border border-zinc-200 bg-white px-2.5 py-1 text-xs font-semibold text-zinc-600 shadow-sm transition-colors hover:bg-zinc-50 dark:border-zinc-700/80 dark:bg-zinc-800/80 dark:text-zinc-300 dark:hover:bg-zinc-700/80"
-                      >
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
+                <div className="inline-flex w-fit items-center rounded-full border border-amber-600/25 bg-amber-600/10 px-3 py-1.5 text-xs font-medium text-amber-800 dark:text-amber-300">
+                  <Icons.calendar className="mr-2 h-3.5 w-3.5" />
+                  {getDurationText(experience.startDate, experience.endDate)}
                 </div>
               </div>
-            </BorderGlow>
-          </div>
-        </AnimatedSection>
-      ))}
+
+              <ul className="mt-5 space-y-3">
+                {experience.description.map((desc) => (
+                  <li
+                    key={desc}
+                    className="flex gap-3 text-sm leading-7 text-zinc-600 dark:text-zinc-300"
+                  >
+                    <span className="mt-3 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-amber-600" />
+                    <span>{desc}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <div className="mt-6 flex flex-col gap-4 border-t border-zinc-200 pt-5 dark:border-zinc-800 sm:flex-row sm:items-center sm:justify-between">
+                <div className="flex flex-wrap gap-2">
+                  {experience.skills.slice(0, 5).map((skill) => (
+                    <span
+                      key={skill}
+                      className="rounded-full border border-violet-300/25 bg-violet-300/10 px-3 py-1 text-xs font-medium text-violet-700 dark:text-violet-200"
+                    >
+                      {skill}
+                    </span>
+                  ))}
+                  {experience.skills.length > 5 ? (
+                    <span className="rounded-full border border-zinc-200 bg-zinc-50 px-3 py-1 text-xs font-medium text-zinc-500 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-400">
+                      +{experience.skills.length - 5} more
+                    </span>
+                  ) : null}
+                </div>
+
+                <Link
+                  href={`/experience/${experience.id}`}
+                  className="inline-flex w-fit items-center gap-2 rounded-full border border-zinc-200 bg-white px-4 py-2 text-xs font-medium text-zinc-700 transition-colors hover:bg-zinc-50 hover:text-zinc-950 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-200 dark:hover:bg-zinc-700"
+                >
+                  View details
+                  <Icons.chevronRight className="h-3.5 w-3.5" />
+                </Link>
+              </div>
+            </article>
+          </AnimatedSection>
+        ))}
+      </div>
     </div>
   );
 }

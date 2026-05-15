@@ -73,4 +73,13 @@ export const pagesConfig: PagesConfig = {
         "Shiven Goomer's professional journey and experience timeline.",
     },
   },
+  leetcode: {
+    title: "LeetCode",
+    description: "Coding profile, solved problems, and contest activity.",
+    metadata: {
+      title: "LeetCode",
+      description:
+        "Shiven Goomer's LeetCode profile with solved problems and contest activity.",
+    },
+  },
 };

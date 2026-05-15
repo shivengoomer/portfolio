@@ -42,7 +42,7 @@ export const experiences: ExperienceInterface[] = [
       "Full Stack Development"
     ],
     companyUrl: "",
-    logo: "https://media.licdn.com/dms/image/v2/C560BAQFairlu33bMJw/company-logo_200_200/company-logo_200_200/0/1630604650807?e=1774483200&v=beta&t=BPDBqXspFuelchLRcuHZxlFaJD0joBXqqsoIFzfQL00", pinned: true
+    logo: "/experience/hoc.png", pinned: true
   },
   {
     id: "gncipl",

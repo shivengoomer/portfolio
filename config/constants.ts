@@ -90,6 +90,7 @@ export type ValidPages =
   | "skills"
   | "projects"
   | "experience"
+  | "leetcode"
   | "contact"
   | "certificates"
   | "resume";
