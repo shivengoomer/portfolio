@@ -41,6 +41,6 @@ Skills: Python`,
     repoOwner: "CS50",
     link: "https://drive.google.com/file/d/1SPZIsrWSeq-TxZu7IAQ9_yLu5GV4e0nV/view?usp=sharing",
     companyUrl: "https://cs50.harvard.edu",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Harvard_University_logo.svg/2880px-Harvard_University_logo.svg.png",
+    logo: "https://pll.harvard.edu/themes/custom/twel_scholar/logo.svg",
   },
 ];

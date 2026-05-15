@@ -5,8 +5,10 @@ import Script from "next/script";
 import { ClientPageWrapper } from "@/components/common/client-page-wrapper";
 import { Icons } from "@/components/common/icons";
 import { GitHubProfileCard } from "@/components/github/github-profile-card";
+import { HeroGrainientBg } from "@/components/common/hero-grainient-bg";
 import { LeetCodeProfileCard } from "@/components/leetcode/leetcode-profile-card";
 import ProjectCard from "@/components/projects/project-card";
+import { HomeSkillsMarquee } from "@/components/skills/home-skills-marquee";
 import { buttonVariants } from "@/components/ui/button";
 import { HoverEffectGrid } from "@/components/ui/card-hover-effect";
 import { pagesConfig } from "@/config/pages";
@@ -60,22 +62,24 @@ export default function IndexPage() {
       <div className="relative isolate">
         {/* ── HERO ── */}
         <section
-          className="relative -mt-20 flex min-h-screen overflow-hidden bg-[url('/bg-portfolio.gif')] bg-cover bg-[62%_bottom] px-4 pb-20 pt-40 sm:px-6 lg:px-8"
+          className="relative -mt-20 flex min-h-screen items-center overflow-hidden bg-[url('/bg-portfolio.gif')] bg-cover bg-[62%_bottom] px-4 pb-20 pt-28 sm:px-6 sm:pt-32 lg:px-8 lg:pt-24"
           aria-label="Hero"
         >
-          <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-background/95 to-transparent" />
+          <HeroGrainientBg />
+          <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-background via-background/80 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-br from-background/40 via-background/35 to-transparent dark:from-background/80 dark:via-background/30" />
 
-          <div className="relative z-10 mx-auto grid w-full max-w-6xl items-center gap-12 ">
-            {/* Left — text */}
-            <div className="max-w-xl space-y-6 rounded-3xl border border-white/35 bg-white/82 p-6 shadow-[0_24px_70px_rgba(15,23,42,0.16)] backdrop-blur-sm dark:border-white/10 dark:bg-zinc-950/74 sm:p-8">
+          <div className="relative z-10 mx-auto flex w-full max-w-6xl items-center justify-start lg:pl-2 xl:pl-0">
+            {/* Hero copy */}
+            <div className="max-w-2xl space-y-7 rounded-[2rem] border border-white/30 bg-white/72 p-7 shadow-[0_30px_90px_rgba(15,23,42,0.18)] backdrop-blur-xl dark:border-white/10 dark:bg-zinc-950/65 sm:p-9 lg:translate-x-[-1.75rem] lg:translate-y-3 xl:translate-x-[-3rem]">
               <div className="space-y-4">
-                <h1 className="relative font-heading text-5xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100 sm:text-6xl">
+                <p className="text-xs font-medium uppercase tracking-[0.24em] text-zinc-600 dark:text-zinc-400">
+                  Full Stack Developer · B.Tech IT
+                </p>
+                <h1 className="relative max-w-xl font-heading text-5xl font-bold tracking-tight text-zinc-950 dark:text-white sm:text-6xl lg:text-7xl">
                   Shiven Goomer
                 </h1>
-                <p className="text-lg text-zinc-500 dark:text-zinc-400">
-                  Full Stack Developer · B.Tech CSE
-                </p>
-                <p className="max-w-lg text-base leading-7 text-zinc-600 dark:text-zinc-300">
+                <p className="max-w-lg text-base leading-8 text-zinc-700 dark:text-zinc-300">
                   I build things for the web — polished interfaces, scalable
                   APIs, and AI&#8209;powered tooling that feels simple to use.
                 </p>
@@ -96,7 +100,7 @@ export default function IndexPage() {
                   href="/resume"
                   className={cn(
                     buttonVariants({ variant: "outline", size: "lg" }),
-                    "h-11 rounded-full border-zinc-200 bg-white/80 px-6 text-sm text-zinc-700 backdrop-blur hover:bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-900/80 dark:text-zinc-200 dark:hover:bg-zinc-800/80",
+                    "h-11 rounded-full border-zinc-200/80 bg-white/75 px-6 text-sm text-zinc-700 backdrop-blur hover:bg-white dark:border-zinc-800 dark:bg-zinc-900/70 dark:text-zinc-200 dark:hover:bg-zinc-800/80",
                   )}
                 >
                   Download CV
@@ -120,7 +124,7 @@ export default function IndexPage() {
                           : undefined
                       }
                       aria-label={link.name}
-                      className="inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-white/70 px-3.5 py-2 text-sm text-zinc-600 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-sm dark:border-zinc-800 dark:bg-zinc-900/70 dark:text-zinc-300"
+                      className="inline-flex items-center gap-2 rounded-full border border-zinc-200/80 bg-white/70 px-3.5 py-2 text-sm text-zinc-700 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-sm dark:border-zinc-800 dark:bg-zinc-900/70 dark:text-zinc-200"
                     >
                       <Icon className="h-4 w-4" />
                       {link.name}
@@ -131,6 +135,8 @@ export default function IndexPage() {
             </div>
           </div>
         </section>
+
+        <HomeSkillsMarquee />
 
         {/* ── CODE PROFILES ── */}
         <section

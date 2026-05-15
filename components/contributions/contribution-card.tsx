@@ -120,7 +120,7 @@ export default function ContributionCard({
       {/* Modal preview */}
       {selected && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm"
+          className="fixed inset-0 z-[10000] flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm"
           role="dialog"
           aria-modal="true"
           onClick={() => setSelected(null)}
@@ -131,7 +131,7 @@ export default function ContributionCard({
           >
             <button
               onClick={() => setSelected(null)}
-              className="absolute right-3 top-3 z-10 rounded-full bg-zinc-100 p-2 text-zinc-500 shadow-sm hover:shadow dark:bg-zinc-800 dark:text-zinc-400"
+              className="absolute right-3 top-3 z-[10001] rounded-full bg-zinc-100 p-2 text-zinc-500 shadow-sm hover:shadow dark:bg-zinc-800 dark:text-zinc-400"
               aria-label="Close preview"
             >
               <Icons.close size={18} />

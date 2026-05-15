@@ -8,7 +8,7 @@ import { AnimatePresence } from "framer-motion";
 export const InfiniteMovingCards = ({
   items,
   direction = "left",
-  speed = "fast",
+  speed = "super-slow",
   pauseOnHover = true,
   className,
 }: {
@@ -18,25 +18,32 @@ export const InfiniteMovingCards = ({
     brandColor?: number[]; // [R, G, B]
   }[];
   direction?: "left" | "right";
-  speed?: "fast" | "normal" | "slow";
+  speed?:
+  | "fast"
+  | "normal"
+  | "slow"
+  | "slower"
+  | "very-slow"
+  | "super-slow";
   pauseOnHover?: boolean;
   className?: string;
 }) => {
   const containerRef = React.useRef<HTMLDivElement>(null);
   const scrollerRef = React.useRef<HTMLUListElement>(null);
 
+  const [start, setStart] = useState(false);
+
   useEffect(() => {
     addAnimation();
   }, []);
 
-  const [start, setStart] = useState(false);
-  
   function addAnimation() {
     if (containerRef.current && scrollerRef.current) {
       const scrollerContent = Array.from(scrollerRef.current.children);
 
       scrollerContent.forEach((item) => {
         const duplicatedItem = item.cloneNode(true);
+
         if (scrollerRef.current) {
           scrollerRef.current.appendChild(duplicatedItem);
         }
@@ -44,50 +51,51 @@ export const InfiniteMovingCards = ({
 
       getDirection();
       getSpeed();
+
       setStart(true);
     }
   }
 
   const getDirection = () => {
-    if (containerRef.current) {
-      if (direction === "left") {
-        containerRef.current.style.setProperty(
-          "--animation-direction",
-          "forwards"
-        );
-      } else {
-        containerRef.current.style.setProperty(
-          "--animation-direction",
-          "reverse"
-        );
-      }
-    }
+    if (!containerRef.current) return;
+
+    containerRef.current.style.setProperty(
+      "--animation-direction",
+      direction === "left" ? "forwards" : "reverse"
+    );
   };
 
   const getSpeed = () => {
-    if (containerRef.current) {
-      if (speed === "fast") {
-        containerRef.current.style.setProperty("--animation-duration", "20s");
-      } else if (speed === "normal") {
-        containerRef.current.style.setProperty("--animation-duration", "35s");
-      } else {
-        containerRef.current.style.setProperty("--animation-duration", "40s");
-      }
-    }
+    if (!containerRef.current) return;
+
+    const speedMap = {
+      fast: "20s",
+      normal: "40s",
+      slow: "70s",
+      slower: "100s",
+      "very-slow": "140s",
+      "super-slow": "220s",
+    };
+
+    containerRef.current.style.setProperty(
+      "--animation-duration",
+      speedMap[speed]
+    );
   };
 
   return (
     <div
       ref={containerRef}
       className={cn(
-        "scroller relative z-20 max-w-7xl overflow-hidden [mask-image:linear-gradient(to_right,transparent,white_20%,white_80%,transparent)]",
+        "scroller relative z-20 max-w-7xl overflow-hidden",
+        "[mask-image:linear-gradient(to_right,transparent,white_10%,white_90%,transparent)]",
         className
       )}
     >
       <ul
         ref={scrollerRef}
         className={cn(
-          "flex min-w-full shrink-0 gap-4 py-4 w-max flex-nowrap",
+          "flex min-w-full w-max shrink-0 flex-nowrap gap-5 py-4",
           start && "animate-scroll",
           pauseOnHover && "hover:[animation-play-state:paused]"
         )}
@@ -105,27 +113,35 @@ const SkillCard = ({ item }: { item: any }) => {
 
   return (
     <li
-      className="w-[150px] group/canvas-card max-w-full relative rounded-2xl border border-white/10 flex-shrink-0 bg-neutral-900/40 backdrop-blur-md px-4 py-6 md:w-[200px] overflow-hidden"
+      className={cn(
+        "group/canvas-card relative flex h-[160px] w-[170px] flex-shrink-0 overflow-hidden rounded-3xl",
+        "bg-neutral-900/20 backdrop-blur-xl dark:text-white text-black",
+        "transition-all duration-500 hover:-translate-y-1",
+        "shadow-[0_8px_30px_rgb(0,0,0,0.12)]"
+      )}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
       <AnimatePresence>
         {hovered && (
           <CanvasRevealEffect
-            animationSpeed={0.5}
+            animationSpeed={0.4}
             colors={[item.brandColor || [59, 130, 246]]}
             containerClassName="absolute inset-0 z-0"
           />
         )}
       </AnimatePresence>
-      <div className="relative z-20 flex flex-col items-center justify-center h-full">
-        <div className="w-12 h-12 flex items-center justify-center relative mb-4">
+
+      <div className="relative z-20 flex h-full w-full flex-col items-center justify-center px-4 text-center">
+        <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-white/5 backdrop-blur-md">
           {item.icon}
         </div>
-        <div className="text-sm leading-[1.6] text-gray-100 font-normal">
+
+        <div className="text-sm font-medium tracking-wide dark:text-white ">
           {item.name}
         </div>
       </div>
+
     </li>
   );
 };
