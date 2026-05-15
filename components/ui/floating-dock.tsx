@@ -1,6 +1,6 @@
 "use client";
 import { cn } from "@/lib/utils";
-import { IconLayoutNavbarCollapse } from "@tabler/icons-react";
+import { IconLayoutNavbarCollapse, IconX } from "@tabler/icons-react";
 import {
   AnimatePresence,
   MotionValue,
@@ -21,65 +21,7 @@ export const FloatingDock = ({
   mobileClassName?: string;
 }) => {
   return (
-    <>
-      <FloatingDockDesktop items={items} className={desktopClassName} />
-      <FloatingDockMobile items={items} className={mobileClassName} />
-    </>
-  );
-};
-
-const FloatingDockMobile = ({
-  items,
-  className,
-}: {
-  items: { title: string; icon: React.ReactNode; href: string }[];
-  className?: string;
-}) => {
-  const [open, setOpen] = useState(false);
-  return (
-    <div className={cn("relative block md:hidden", className)}>
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            layoutId="nav"
-            className="absolute inset-x-0 bottom-full mb-2 flex flex-col gap-2"
-          >
-            {items.map((item, idx) => (
-              <motion.div
-                key={item.title}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{
-                  opacity: 1,
-                  y: 0,
-                }}
-                exit={{
-                  opacity: 0,
-                  y: 10,
-                  transition: {
-                    delay: idx * 0.05,
-                  },
-                }}
-                transition={{ delay: (items.length - 1 - idx) * 0.05 }}
-              >
-                <a
-                  href={item.href}
-                  key={item.title}
-        className="flex h-10 w-10 items-center justify-center rounded-full bg-zinc-50 dark:bg-zinc-900"
-                >
-                  <div className="h-4 w-4">{item.icon}</div>
-                </a>
-              </motion.div>
-            ))}
-          </motion.div>
-        )}
-      </AnimatePresence>
-      <button
-        onClick={() => setOpen(!open)}
-        className="flex h-10 w-10 items-center justify-center rounded-full bg-zinc-50 dark:bg-zinc-800"
-      >
-        <IconLayoutNavbarCollapse className="h-5 w-5 text-zinc-500 dark:text-zinc-400" />
-      </button>
-    </div>
+    <FloatingDockDesktop items={items} className={desktopClassName} />
   );
 };
 
@@ -95,8 +37,11 @@ const FloatingDockDesktop = ({
     <motion.div
       onMouseMove={(e: any) => mouseX.set(e.pageX)}
       onMouseLeave={() => mouseX.set(Infinity)}
+      onTouchMove={(e: any) => mouseX.set(e.touches[0].pageX)}
+      onTouchEnd={() => mouseX.set(Infinity)}
+      onTouchCancel={() => mouseX.set(Infinity)}
       className={cn(
-        "mx-auto hidden h-16 items-end gap-4 rounded-2xl bg-zinc-50 px-4 pb-3 md:flex dark:bg-zinc-900",
+        "mx-auto flex h-14 md:h-16 items-end gap-2 md:gap-4 rounded-2xl bg-zinc-50 px-2 md:px-4 pb-2 md:pb-3 dark:bg-zinc-900 overflow-x-auto no-scrollbar",
         className,
       )}
     >
@@ -165,6 +110,9 @@ function IconContainer({
         style={{ width, height }}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
+        onTouchStart={() => setHovered(true)}
+        onTouchEnd={() => setHovered(false)}
+        onTouchCancel={() => setHovered(false)}
         className="relative flex aspect-square items-center justify-center rounded-full bg-zinc-200 dark:bg-zinc-800"
       >
         <AnimatePresence>

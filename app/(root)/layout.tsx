@@ -18,10 +18,9 @@ export default function MarketingLayout({ children }: MarketingLayoutProps) {
   return (
     <div className="relative flex min-h-screen w-full flex-col overflow-x-clip">
       {/* Floating Dock Nav */}
-      <div className="fixed left-1/2 top-6 z-[5000] -translate-x-1/2">
+      <div className="fixed left-1/2 top-6 z-[5000] w-[90%] max-w-fit -translate-x-1/2">
         <FloatingDock
           desktopClassName="border border-black/10 bg-white/70 shadow-[0_18px_45px_rgba(15,23,42,0.08)] backdrop-blur-xl dark:border-white/10 dark:bg-zinc-950/70"
-          mobileClassName="translate-y-20 border border-black/10 bg-white/75 backdrop-blur-xl dark:border-white/10 dark:bg-zinc-950/70"
           items={[
             {
               title: "Home",

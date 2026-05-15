@@ -114,7 +114,7 @@ const SkillCard = ({ item }: { item: any }) => {
   return (
     <li
       className={cn(
-        "group/canvas-card relative flex h-[160px] w-[170px] flex-shrink-0 overflow-hidden rounded-3xl",
+        "group/canvas-card relative flex h-[120px] w-[130px] md:h-[160px] md:w-[170px] flex-shrink-0 overflow-hidden rounded-2xl md:rounded-3xl",
         "bg-neutral-900/20 backdrop-blur-xl dark:text-white text-black",
         "transition-all duration-500 hover:-translate-y-1",
         "shadow-[0_8px_30px_rgb(0,0,0,0.12)]"
@@ -132,12 +132,12 @@ const SkillCard = ({ item }: { item: any }) => {
         )}
       </AnimatePresence>
 
-      <div className="relative z-20 flex h-full w-full flex-col items-center justify-center px-4 text-center">
-        <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-white/5 backdrop-blur-md">
+      <div className="relative z-20 flex h-full w-full flex-col items-center justify-center px-2 md:px-4 text-center">
+        <div className="mb-3 md:mb-5 flex h-10 w-10 md:h-14 md:w-14 items-center justify-center rounded-xl md:rounded-2xl bg-white/5 backdrop-blur-md">
           {item.icon}
         </div>
 
-        <div className="text-sm font-medium tracking-wide dark:text-white ">
+        <div className="text-xs md:text-sm font-medium tracking-wide dark:text-white ">
           {item.name}
         </div>
       </div>

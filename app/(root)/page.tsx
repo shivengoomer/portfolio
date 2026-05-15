@@ -62,26 +62,29 @@ export default function IndexPage() {
       <div className="relative isolate">
         {/* ── HERO ── */}
         <section
-          className="relative -mt-20 flex min-h-screen items-center overflow-hidden bg-[url('/bg-portfolio.gif')] bg-cover bg-[62%_bottom] px-4 pb-20 pt-28 sm:px-6 sm:pt-32 lg:px-8 lg:pt-24"
+          className="relative -mt-20 flex min-h-screen items-start overflow-hidden bg-[url('/bg-portfolio.gif')] bg-cover bg-[62%_bottom] px-4 pb-20 pt-28 sm:px-6 sm:pt-32 lg:px-8 lg:pt-32"
           aria-label="Hero"
         >
           <HeroGrainientBg />
-          <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-background via-background/80 to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-br from-background/40 via-background/35 to-transparent dark:from-background/80 dark:via-background/30" />
 
-          <div className="relative z-10 mx-auto flex w-full max-w-6xl items-center justify-start lg:pl-2 xl:pl-0">
+          {/* Bottom fade */}
+          <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-background via-background/80 to-transparent" />
+
+          <div className="relative z-10 mx-auto flex w-full max-w-6xl items-start justify-start lg:pl-2 xl:pl-0">
             {/* Hero copy */}
-            <div className="max-w-2xl space-y-7 rounded-[2rem] border border-white/30 bg-white/72 p-7 shadow-[0_30px_90px_rgba(15,23,42,0.18)] backdrop-blur-xl dark:border-white/10 dark:bg-zinc-950/65 sm:p-9 lg:translate-x-[-1.75rem] lg:translate-y-3 xl:translate-x-[-3rem]">
+            <div className="max-w-xl space-y-7 rounded-[2rem] border border-border bg-background/85 backdrop-blur-sm p-7 shadow-[0_30px_90px_rgba(15,23,42,0.18)] sm:p-9 lg:translate-x-[-1.75rem] lg:-translate-y-12 xl:translate-x-[-3rem]">
               <div className="space-y-4">
-                <p className="text-xs font-medium uppercase tracking-[0.24em] text-zinc-600 dark:text-zinc-400">
+                <p className="text-xs font-medium uppercase tracking-[0.24em] text-white text-muted-foreground">
                   Full Stack Developer · B.Tech IT
                 </p>
-                <h1 className="relative max-w-xl font-heading text-5xl font-bold tracking-tight text-zinc-950 dark:text-white sm:text-6xl lg:text-7xl">
+
+                <h1 className="relative max-w-xl font-heading text-5xl font-bold tracking-tight text-foreground sm:text-6xl lg:text-7xl">
                   Shiven Goomer
                 </h1>
-                <p className="max-w-lg text-base leading-8 text-zinc-700 dark:text-zinc-300">
-                  I build things for the web — polished interfaces, scalable
-                  APIs, and AI&#8209;powered tooling that feels simple to use.
+
+                <p className="max-w-lg text-white leading-8 text-muted-foreground">
+                  I build things for the web — polished interfaces, scalable APIs, and
+                  AI&#8209;powered tooling that feels simple to use.
                 </p>
               </div>
 
@@ -96,11 +99,12 @@ export default function IndexPage() {
                   View Projects
                   <Icons.arrowRight className="ml-2 h-4 w-4" />
                 </Link>
+
                 <Link
                   href="/resume"
                   className={cn(
                     buttonVariants({ variant: "outline", size: "lg" }),
-                    "h-11 rounded-full border-zinc-200/80 bg-white/75 px-6 text-sm text-zinc-700 backdrop-blur hover:bg-white dark:border-zinc-800 dark:bg-zinc-900/70 dark:text-zinc-200 dark:hover:bg-zinc-800/80",
+                    "h-11 rounded-full border-border bg-background/90 px-6 text-sm text-foreground hover:bg-accent hover:text-accent-foreground",
                   )}
                 >
                   Download CV
@@ -111,20 +115,15 @@ export default function IndexPage() {
               <div className="flex flex-wrap items-center gap-2 pt-1">
                 {SocialLinks.map((link) => {
                   const Icon = link.icon;
+
                   return (
                     <Link
                       key={link.name}
                       href={link.link}
-                      target={
-                        link.link.startsWith("http") ? "_blank" : undefined
-                      }
-                      rel={
-                        link.link.startsWith("http")
-                          ? "noreferrer"
-                          : undefined
-                      }
+                      target={link.link.startsWith("http") ? "_blank" : undefined}
+                      rel={link.link.startsWith("http") ? "noreferrer" : undefined}
                       aria-label={link.name}
-                      className="inline-flex items-center gap-2 rounded-full border border-zinc-200/80 bg-white/70 px-3.5 py-2 text-sm text-zinc-700 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-sm dark:border-zinc-800 dark:bg-zinc-900/70 dark:text-zinc-200"
+                      className="inline-flex items-center gap-2 rounded-full border border-border bg-background/90 px-3.5 py-2 text-sm text-foreground transition-all duration-200 hover:-translate-y-0.5 hover:bg-accent hover:text-accent-foreground hover:shadow-sm"
                     >
                       <Icon className="h-4 w-4" />
                       {link.name}

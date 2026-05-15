@@ -16,7 +16,7 @@ export function HomeSkillsMarquee() {
 
     return {
       name: skill.name,
-      icon: <Icon className="h-8 w-8" />,
+      icon: <Icon className="h-6 w-6 md:h-8 md:w-8" />,
       brandColor: colors[index % colors.length],
     };
   });

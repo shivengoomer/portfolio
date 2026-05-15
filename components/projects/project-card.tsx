@@ -29,9 +29,9 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         colors={["#3b82f6", "#8b5cf6", "#06b6d4"]}
         className="h-full"
       >
-        <article className="flex h-full w-full cursor-pointer flex-col p-5">
-          {/* Square image */}
-          <div className="relative aspect-square w-full overflow-hidden rounded-xl border border-zinc-100 bg-gradient-to-b from-white to-zinc-50 p-4 dark:border-zinc-700 dark:from-zinc-800 dark:to-zinc-900">
+        <article className="flex h-full w-full cursor-pointer flex-col p-4 sm:p-5">
+          {/* Image Container */}
+          <div className="relative aspect-[4/3] sm:aspect-square w-full overflow-hidden rounded-xl border border-zinc-100 bg-gradient-to-b from-white to-zinc-50 p-3 sm:p-4 dark:border-zinc-700 dark:from-zinc-800 dark:to-zinc-900">
             <Image
               src={project.companyLogoImg}
               className="rounded-lg object-contain"
@@ -42,12 +42,12 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           </div>
 
           {/* Title */}
-          <h3 className="mt-4 text-lg font-bold tracking-tight text-zinc-900 dark:text-zinc-100">
+          <h3 className="mt-3 sm:mt-4 text-base sm:text-lg font-bold tracking-tight text-zinc-900 dark:text-zinc-100">
             {project.companyName}
           </h3>
 
           {/* Description */}
-          <p className="mt-1.5 flex-grow text-sm leading-6 text-zinc-600 line-clamp-2 dark:text-zinc-300">
+          <p className="mt-1 sm:mt-1.5 flex-grow text-xs sm:text-sm leading-5 sm:leading-6 text-zinc-600 line-clamp-2 dark:text-zinc-300">
             {project.shortDescription}
           </p>
 
@@ -69,9 +69,9 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           </div>
 
           {/* Footer */}
-          <div className="mt-4 flex items-center justify-between border-t border-zinc-100 pt-3 dark:border-zinc-800">
-            <span className="flex items-center text-sm font-semibold text-zinc-900 transition-all group-hover:translate-x-1 dark:text-zinc-100">
-              Read more <Icons.chevronRight className="ml-1 h-4 w-4" />
+          <div className="mt-3 sm:mt-4 flex items-center justify-between border-t border-zinc-100 pt-3 dark:border-zinc-800">
+            <span className="flex items-center text-xs sm:text-sm font-semibold text-zinc-900 transition-all group-hover:translate-x-1 dark:text-zinc-100">
+              Read more <Icons.chevronRight className="ml-1 h-3 w-3 sm:h-4 sm:w-4" />
             </span>
             <div className="flex gap-2">
               {project.githubLink && (
