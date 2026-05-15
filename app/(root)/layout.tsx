@@ -1,6 +1,6 @@
 import { SiteFooter } from "@/components/common/site-footer";
 import { DarkModeToggle } from "@/components/common/dark-mode-toggle";
-import { FloatingDock } from "@/components/ui/floating-dock";
+import { FloatingDockWithTheme } from "@/components/common/floating-dock-with-theme";
 import {
   IconHome,
   IconTerminal2,
@@ -29,8 +29,8 @@ export default function MarketingLayout({ children }: MarketingLayoutProps) {
     <div className="relative flex min-h-screen w-full flex-col overflow-x-clip">
       {/* Floating Dock Nav */}
       <div className="fixed left-1/2 top-6 z-[5000] w-[90%] max-w-fit -translate-x-1/2">
-        <FloatingDock
-          desktopClassName="border border-black/10 bg-white/70 shadow-[0_18px_45px_rgba(15,23,42,0.08)] backdrop-blur-xl dark:border-white/10 dark:bg-zinc-950/70"
+        <FloatingDockWithTheme
+          className="border border-black/10 bg-white/70 shadow-[0_18px_45px_rgba(15,23,42,0.08)] backdrop-blur-xl dark:border-white/10 dark:bg-zinc-950/70"
           items={[
             {
               title: "Home",
@@ -79,7 +79,7 @@ export default function MarketingLayout({ children }: MarketingLayoutProps) {
       </div>
 
       {/* Dark Mode Toggle — top right */}
-      <div className="fixed right-6 top-7 z-[5000]">
+      <div className="fixed right-6 top-7 z-[5000] hidden md:block">
         <DarkModeToggle />
       </div>
 

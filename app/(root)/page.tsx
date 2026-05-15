@@ -84,9 +84,20 @@ export default function IndexPage() {
       <div className="relative isolate">
         {/* ── HERO ── */}
         <section
-          className="relative -mt-20 flex min-h-screen items-start overflow-hidden bg-[url('/bg-portfolio.gif')] bg-cover bg-[62%_bottom] px-4 pb-20 pt-28 sm:px-6 sm:pt-32 lg:px-8 lg:pt-32"
+          className="relative -mt-20 flex min-h-screen items-start overflow-hidden px-4 pb-20 pt-28 sm:px-6 sm:pt-32 lg:px-8 lg:pt-32"
           aria-label="Hero"
         >
+          {/* Background Video */}
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="absolute inset-0 h-full w-full object-cover"
+          >
+            <source src="/bg-portfolio.webm" type="video/webm" />
+          </video>
+
           <HeroGrainientBg />
 
           {/* Bottom fade */}
@@ -110,7 +121,7 @@ export default function IndexPage() {
                   <BlurText
                     key={rotatingWords[currentWord]}
                     text={rotatingWords[currentWord]}
-                    delay={120}
+                    delay={180}
                     animateBy="words"
                     direction="top"
                     className="font-bold text-blue-700"

@@ -3,6 +3,14 @@ const nextConfig = {
   images: {
     domains: ["media.licdn.com"],
   },
+   images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "example.com",
+      },
+    ],
+  },
   async headers() {
     return [
       {
