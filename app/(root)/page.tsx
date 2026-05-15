@@ -1,7 +1,7 @@
+"use client";
 import { Metadata } from "next";
 import Link from "next/link";
 import Script from "next/script";
-
 import { ClientPageWrapper } from "@/components/common/client-page-wrapper";
 import { Icons } from "@/components/common/icons";
 import { GitHubProfileCard } from "@/components/github/github-profile-card";
@@ -18,14 +18,9 @@ import { featuredSkills } from "@/config/skills";
 import { siteConfig } from "@/config/site";
 import { experiences } from "@/config/experience";
 import { cn, formatDateFromObj } from "@/lib/utils";
+import { useEffect, useState } from "react";
+import BlurText from "@/components/BlurText";
 
-export const metadata: Metadata = {
-  title: "Shiven Goomer",
-  description: pagesConfig.home.metadata.description,
-  alternates: {
-    canonical: siteConfig.url,
-  },
-};
 
 function formatExperienceDate(endDate: Date | "Present", startDate: Date) {
   const start = formatDateFromObj(startDate);
@@ -48,10 +43,37 @@ export default function IndexPage() {
       siteConfig.links.twitter,
     ].filter(Boolean),
   };
+  const rotatingWords = [
+    "Scalable APIs",
+    "AI Tooling",
+    "Cloud Systems",
+    "Real-Time Apps",
+    "DevOps Workflows",
+    "Backend Architecture",
+    "Microservices",
+    "Full-Stack Apps",
+    "Distributed Systems",
+    "Automation",
+    "Dockerized Apps",
+    "Modern UI",
+    "Developer Tools",
+    "Production Systems",
+    "Secure Authentication",
+  ];
 
+  const [currentWord, setCurrentWord] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentWord((prev) => (prev + 1) % rotatingWords.length);
+    }, 2000);
+
+    return () => clearInterval(interval);
+  }, []);
   const highlightedExperience = experiences.slice(0, 2);
 
   return (
+
     <ClientPageWrapper>
       <Script
         id="schema-person"
@@ -70,25 +92,35 @@ export default function IndexPage() {
           {/* Bottom fade */}
           <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-background via-background/80 to-transparent" />
 
-          <div className="relative z-10 mx-auto flex w-full max-w-6xl items-start justify-start lg:pl-2 xl:pl-0">
+          <div className="relative z-10 mx-auto flex w-full max-w-6xl justify-start lg:pl-2 xl:pl-0">
             {/* Hero copy */}
-            <div className="max-w-xl space-y-7 rounded-[2rem] border border-border bg-background/85 backdrop-blur-sm p-7 shadow-[0_30px_90px_rgba(15,23,42,0.18)] sm:p-9 lg:translate-x-[-1.75rem] lg:-translate-y-12 xl:translate-x-[-3rem]">
+            <div className="mt-20 max-w-2xl space-y-7 justify-center rounded-[2rem] border border-border bg-background/85 backdrop-blur-sm p-7 shadow-[0_30px_90px_rgba(15,23,42,0.18)] sm:p-9 lg:translate-x-[-1.75rem] lg:-translate-y-12 xl:translate-x-[-3rem]">
               <div className="space-y-4">
-                <p className="text-xs font-medium uppercase tracking-[0.24em] text-white text-muted-foreground">
+                <p className="text-sm text-center font-medium uppercase tracking-[0.24em] text-white text-muted-foreground">
                   Full Stack Developer · B.Tech IT
                 </p>
 
-                <h1 className="relative max-w-xl font-heading text-5xl font-bold tracking-tight text-foreground sm:text-6xl lg:text-7xl">
+                <h1 className="relative max-w-xl text-center  font-heading text-4xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl">
                   Shiven Goomer
                 </h1>
 
-                <p className="max-w-lg text-white leading-8 text-muted-foreground">
-                  I build things for the web — polished interfaces, scalable APIs, and
-                  AI&#8209;powered tooling that feels simple to use.
-                </p>
+                <div className="max-w-3xl bg-white/50 backdrop-blur-lg rounded-full px-6 py-3 text-center leading-8 text-lg font-medium text-blue-900 flex flex-wrap items-center justify-center gap-2">
+                  <span>I build</span>
+
+                  <BlurText
+                    key={rotatingWords[currentWord]}
+                    text={rotatingWords[currentWord]}
+                    delay={120}
+                    animateBy="words"
+                    direction="top"
+                    className="font-bold text-blue-700"
+                  />
+
+                  <span>for the modern web.</span>
+                </div>
               </div>
 
-              <div className="flex flex-wrap gap-3">
+              <div className="flex flex-wrap gap-3 items-center justify-center">
                 <Link
                   href="/projects"
                   className={cn(
@@ -112,7 +144,7 @@ export default function IndexPage() {
               </div>
 
               {/* Social row */}
-              <div className="flex flex-wrap items-center gap-2 pt-1">
+              <div className="flex flex-wrap items-center gap-2 pt-2 justify-center ">
                 {SocialLinks.map((link) => {
                   const Icon = link.icon;
 

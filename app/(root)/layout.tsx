@@ -9,10 +9,20 @@ import {
   IconMail,
   IconBriefcase,
 } from "@tabler/icons-react";
-
+import { Metadata } from "next";
+import { pagesConfig } from "@/config/pages";
+import { siteConfig } from "@/config/site";
 interface MarketingLayoutProps {
   children: React.ReactNode;
 }
+export const metadata: Metadata = {
+  title: "Shiven Goomer",
+  description: pagesConfig.home.metadata.description,
+  alternates: {
+    canonical: siteConfig.url,
+  },
+};
+
 
 export default function MarketingLayout({ children }: MarketingLayoutProps) {
   return (
