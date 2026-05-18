@@ -13,7 +13,7 @@ export const siteConfig = {
   },
   ogImage: "https://media.licdn.com/dms/image/v2/D5603AQHyWzU6h-mleA/profile-displayphoto-scale_400_400/B56Zg9EdqjHUAg-/0/1753371239937?e=1761782400&v=beta&t=riIo7SKQfjzQ1qXdTlOKTh80xE8H3KakuNxsSnj0Jew",
   iconIco:
-    "",
+  "",
   logoIcon:
     "",
   keywords: [

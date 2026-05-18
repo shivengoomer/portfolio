@@ -87,6 +87,7 @@ export const Projects: ProjectInterface[] = [
         "Responsive UI with Tailwind CSS and shadcn/ui component library",
       ],
     },
+    websiteLink: "https://msit-satyam.vercel.app"
     priority: 2,
   },
   {
@@ -145,6 +146,7 @@ export const Projects: ProjectInterface[] = [
         "Responsive Tailwind CSS UI optimized for academic audiences",
       ],
     },
+    websiteLink: "https://mbalibrary.vercel.app/",
     priority: 4,
   },
   {
