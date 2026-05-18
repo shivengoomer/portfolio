@@ -36,6 +36,8 @@ export const Projects: ProjectInterface[] = [
     category: ["Full Stack", "Web Dev"],
     shortDescription:
       "Full-stack academic journal portal for MSIT's peer-reviewed multidisciplinary research publication (ISSN: 2319-7897).",
+    websiteLink: "https://msit-satyam.vercel.app",
+
     githubLink: "https://github.com/shivengoomer/satyam-journal-portal",
     techStack: [
       "React",
@@ -87,7 +89,6 @@ export const Projects: ProjectInterface[] = [
         "Responsive UI with Tailwind CSS and shadcn/ui component library",
       ],
     },
-    websiteLink: "https://msit-satyam.vercel.app"
     priority: 2,
   },
   {
@@ -97,7 +98,7 @@ export const Projects: ProjectInterface[] = [
     category: ["Full Stack", "Web Dev", "UI/UX"],
     shortDescription:
       "Official digital library portal for the MBA department of Maharaja Surajmal Institute, featuring resources, staff info, and live collection stats.",
-    githubLink: "https://github.com/shivengoomer/mba-library",
+    websiteLink: "https://mbalibrary.vercel.app/", githubLink: "https://github.com/shivengoomer/mba-library",
     techStack: [
       "React",
       "Node.js",
@@ -146,7 +147,6 @@ export const Projects: ProjectInterface[] = [
         "Responsive Tailwind CSS UI optimized for academic audiences",
       ],
     },
-    websiteLink: "https://mbalibrary.vercel.app/",
     priority: 4,
   },
   {
