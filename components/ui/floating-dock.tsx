@@ -1,6 +1,5 @@
 "use client";
 import { cn } from "@/lib/utils";
-import { IconLayoutNavbarCollapse, IconX } from "@tabler/icons-react";
 import {
   AnimatePresence,
   MotionValue,
@@ -9,19 +8,32 @@ import {
   useSpring,
   useTransform,
 } from "framer-motion";
+import Link from "next/link";
+import type { ReactNode } from "react";
 import { useRef, useState } from "react";
+
+type DockItem = {
+  title: string;
+  icon: ReactNode;
+  href?: string;
+  onClick?: () => void;
+  className?: string;
+};
 
 export const FloatingDock = ({
   items,
   desktopClassName,
   mobileClassName,
 }: {
-  items: { title: string; icon: React.ReactNode; href?: string; onClick?: () => void; className?: string }[];
+  items: DockItem[];
   desktopClassName?: string;
   mobileClassName?: string;
 }) => {
   return (
-    <FloatingDockDesktop items={items} className={desktopClassName} />
+    <>
+      <FloatingDockMobile items={items} className={mobileClassName} />
+      <FloatingDockDesktop items={items} className={desktopClassName} />
+    </>
   );
 };
 
@@ -29,7 +41,7 @@ const FloatingDockDesktop = ({
   items,
   className,
 }: {
-  items: { title: string; icon: React.ReactNode; href?: string; onClick?: () => void; className?: string }[];
+  items: DockItem[];
   className?: string;
 }) => {
   let mouseX = useMotionValue(Infinity);
@@ -41,7 +53,7 @@ const FloatingDockDesktop = ({
       onTouchEnd={() => mouseX.set(Infinity)}
       onTouchCancel={() => mouseX.set(Infinity)}
       className={cn(
-        "mx-auto flex h-14 md:h-16 items-end gap-2 md:gap-4 rounded-2xl bg-zinc-50 px-2 md:px-4 pb-2 md:pb-3 dark:bg-zinc-900",
+        "mx-auto hidden h-16 items-end gap-4 rounded-2xl bg-zinc-50 px-4 pb-3 dark:bg-zinc-900 md:flex",
         className,
       )}
     >
@@ -51,6 +63,87 @@ const FloatingDockDesktop = ({
     </motion.div>
   );
 };
+
+const FloatingDockMobile = ({
+  items,
+  className,
+}: {
+  items: DockItem[];
+  className?: string;
+}) => {
+  return (
+    <div
+      className={cn(
+        "mx-auto flex h-12 w-full items-center justify-between gap-1 overflow-x-auto rounded-2xl border border-black/10 bg-white/75 px-2 shadow-[0_12px_30px_rgba(15,23,42,0.1)] backdrop-blur-xl dark:border-white/10 dark:bg-zinc-950/75 md:hidden",
+        className,
+      )}
+    >
+      {items.map((item) => (
+        <MobileDockItem key={item.title} {...item} />
+      ))}
+    </div>
+  );
+};
+
+function MobileDockItem({ title, icon, href, onClick, className }: DockItem) {
+  const [pulseKey, setPulseKey] = useState(0);
+
+  const content = (
+    <motion.span
+      onTapStart={() => setPulseKey((key) => key + 1)}
+      whileTap={{ scale: 0.9, y: 2 }}
+      transition={{ type: "spring", stiffness: 420, damping: 24 }}
+      className="relative flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-full bg-zinc-100 p-2 text-zinc-700 shadow-sm transition-colors dark:bg-zinc-900 dark:text-zinc-200"
+    >
+      <span className="pointer-events-none absolute inset-0 rounded-full ring-1 ring-black/5 dark:ring-white/10" />
+      <AnimatePresence>
+        {pulseKey > 0 && (
+          <motion.span
+            key={pulseKey}
+            initial={{ opacity: 0.35, scale: 0.25 }}
+            animate={{ opacity: 0, scale: 1.8 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.45, ease: "easeOut" }}
+            className="absolute inset-0 rounded-full bg-zinc-400/35 dark:bg-white/25"
+          />
+        )}
+      </AnimatePresence>
+      <motion.span
+        className="relative z-10 flex h-full w-full items-center justify-center"
+        whileTap={{ rotate: -8 }}
+        transition={{ type: "spring", stiffness: 500, damping: 20 }}
+      >
+        {icon}
+      </motion.span>
+    </motion.span>
+  );
+
+  if (href) {
+    return (
+      <Link
+        href={href}
+        aria-label={title}
+        className={cn("flex shrink-0 items-center justify-center", className)}
+      >
+        {content}
+      </Link>
+    );
+  }
+
+  return (
+    <button
+      onClick={onClick}
+      type="button"
+      aria-label={title}
+      className={cn(
+        "flex shrink-0 items-center justify-center border-none bg-transparent p-0",
+        className,
+      )}
+    >
+      {content}
+    </button>
+  );
+}
 
 function IconContainer({
   mouseX,
@@ -142,14 +235,18 @@ function IconContainer({
 
   if (href) {
     return (
-      <a href={href} className={className}>
+      <Link href={href} className={className}>
         {content}
-      </a>
+      </Link>
     );
   }
 
   return (
-    <button onClick={onClick} type="button" className={cn("border-none bg-transparent p-0", className)}>
+    <button
+      onClick={onClick}
+      type="button"
+      className={cn("border-none bg-transparent p-0", className)}
+    >
       {content}
     </button>
   );
