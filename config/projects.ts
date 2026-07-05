@@ -30,6 +30,81 @@ export interface ProjectInterface {
 
 export const Projects: ProjectInterface[] = [
   {
+    id: "ClassPlus",
+    companyName: "ClassPlus",
+    type: "Professional",
+    category: ["Full Stack", "Web Dev", "AI"],
+    shortDescription:
+      "Enterprise-grade AI-powered assessment suite and virtual classroom for curriculum-aligned exam generation, live progress tracking, and student performance analytics.",
+    websiteLink: "https://classplus.shivengoomer.dev", // Replace with your live URL if deployed
+    githubLink: "https://github.com/shivengoomer/classplus", // Adjust to your preferred repo link
+    techStack: [
+      "Next.js",
+      "TypeScript",
+      "Express",
+      "MongoDB",
+      "Redis",
+      "BullMQ",
+      "Groq API",
+      "WebSockets",
+      "Clerk",
+      "Tailwind CSS",
+      "Zustand",
+      "PDFKit",
+    ],
+    startDate: new Date("2024-06-01"),
+    endDate: new Date("2024-09-01"),
+    companyLogoImg: "/projects/classplus/logo.png",
+    pagesInfoArr: [
+      {
+        title: "Home Page",
+        description:
+          "An intuitive landing page explaining the assessment suite capabilities, role-based workflows, and features for teachers, students, and parents.",
+        imgArr: ["/projects/classplus/home.png"],
+      },
+      {
+        title: "Assessment Creator",
+        description:
+          "Configure dynamic blueprints, upload textbook materials, and run LLM parsing to instantly generate CBSE-aligned exam sheets with matching answer keys.",
+        imgArr: ["/projects/classplus/creator.png"],
+      },
+      {
+        title: "Grading & Feedback Suite",
+        description:
+          "AI-driven automated grading system providing detailed qualitative feedback, grading metrics, and concept gap tagging for student submissions.",
+        imgArr: ["/projects/classplus/grading.png"],
+      },
+      {
+        title: "Student Practice Lab",
+        description:
+          "Personalized virtual tutor and practice arena offering 24/7 concept explanations, doubt escalation to teachers, and an SM-2 spaced repetition queue.",
+        imgArr: ["/projects/classplus/student.png"],
+      },
+      {
+        title: "Parent Analytics Portal",
+        description:
+          "Read-only competency tracker providing parents with real-time grade metrics, class announcement feeds, and upcoming deadlines.",
+        imgArr: ["/projects/classplus/parent.png"],
+      },
+    ],
+    descriptionDetails: {
+      paragraphs: [
+        "Built ClassPlus, an advanced EdTech ecosystem that automates assessment generation and streamlines student performance tracking for curriculum layouts.",
+        "Architected with a decoupled queue-backed pattern, offloading heavy PDF/Word text extractions and Groq LLM generations to background workers to guarantee smooth performance at scale.",
+      ],
+      bullets: [
+        "Full-stack monorepo separating Next.js 14 App Router client-side views and an Express API gateway",
+        "Asynchronous background worker pool using Redis and BullMQ to handle intensive text generation and automated grading workflows",
+        "Real-time generation state updates pushed dynamically to client dashboards via an integrated WebSocket server",
+        "Automated on-the-fly printable school exam generation using custom PDFKit document compiler pipelines",
+        "Granular role-based access control leveraging Clerk authentication to bridge Teachers, Students, and Parents",
+        "Intelligent practice assistant incorporating SM-2 spaced repetition logic to flag and target conceptual weaknesses",
+      ],
+    },
+    priority: 1,
+  },
+
+  {
     id: "satyam-journal-portal",
     companyName: "SATYAM – MSIT Journal of Research",
     type: "Professional",
