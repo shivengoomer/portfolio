@@ -31,10 +31,10 @@ export default function ProjectCard({ project }: ProjectCardProps) {
       >
         <article className="flex h-full w-full cursor-pointer flex-col p-4 sm:p-5">
           {/* Image Container */}
-          <div className="relative aspect-[4/3] sm:aspect-square w-full overflow-hidden rounded-xl border border-zinc-100 bg-gradient-to-b from-white to-zinc-50 p-3 sm:p-4 dark:border-zinc-700 dark:from-zinc-800 dark:to-zinc-900">
+          <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl border border-zinc-100 bg-gradient-to-b from-white to-zinc-50 p-3 sm:p-4 dark:border-zinc-700 dark:from-zinc-800 dark:to-zinc-900">
             <Image
               src={project.companyLogoImg}
-              className="rounded-lg object-contain"
+              className="rounded-lg object-contain drop-shadow-sm"
               alt={project.companyName}
               fill
               sizes="(max-width: 768px) 100vw, 33vw"

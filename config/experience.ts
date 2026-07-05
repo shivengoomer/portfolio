@@ -16,13 +16,13 @@ export interface ExperienceInterface {
 export const experiences: ExperienceInterface[] = [
   {
     id: "houseofcotton",
-    position: "Full Stack Developer",
+    position: "Web Developer",
     company: "House of Cotton Private Limited",
     location: "India",
     startDate: new Date("2025-08-01"),
     endDate: "Present",
     description: [
-      "Working as a Part-time Full Stack Developer building scalable web applications using modern JavaScript frameworks.",
+      "Working as a Part-time Web Developer building scalable web applications using modern JavaScript frameworks.",
       "Developing and maintaining frontend interfaces with React while implementing backend APIs using Node.js.",
       "Collaborating with the product and design teams to deliver responsive, user-friendly, and performance-optimized features."
     ],
