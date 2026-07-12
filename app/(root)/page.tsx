@@ -18,8 +18,9 @@ import { featuredSkills } from "@/config/skills";
 import { siteConfig } from "@/config/site";
 import { experiences } from "@/config/experience";
 import { cn, formatDateFromObj } from "@/lib/utils";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import BlurText from "@/components/BlurText";
+import { motion } from "framer-motion";
 
 
 function formatExperienceDate(endDate: Date | "Present", startDate: Date) {
@@ -72,6 +73,35 @@ export default function IndexPage() {
   }, []);
   const highlightedExperience = experiences.slice(0, 2);
 
+  const [heroQuoteIndex, setHeroQuoteIndex] = useState(0);
+  const heroQuotes = [
+    "Happy to see you here! 👋",
+    "Let's build something great. 🚀",
+    "Specialized in Next.js & Cloud Systems.",
+    "Feel free to check out my projects below!",
+    "B.Tech IT | Engineering scalable web apps.",
+    "Based in India. Shipped worldwide.",
+    "Click my avatar to cycle info!"
+  ];
+
+  const [heroTilt, setHeroTilt] = useState({ x: 0, y: 0 });
+  const heroCardRef = useRef<HTMLDivElement>(null);
+
+  const handleHeroMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!heroCardRef.current) return;
+    const box = heroCardRef.current.getBoundingClientRect();
+    const x = e.clientX - box.left - box.width / 2;
+    const y = e.clientY - box.top - box.height / 2;
+    setHeroTilt({
+      x: (y / (box.height / 2)) * -8,
+      y: (x / (box.width / 2)) * 8,
+    });
+  };
+
+  const handleHeroMouseLeave = () => {
+    setHeroTilt({ x: 0, y: 0 });
+  };
+
   return (
 
     <ClientPageWrapper>
@@ -103,9 +133,9 @@ export default function IndexPage() {
           {/* Bottom fade */}
           <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-background via-background/80 to-transparent" />
 
-          <div className="relative z-10 mx-auto flex w-full max-w-6xl justify-start lg:pl-2 xl:pl-0">
+          <div className="relative z-10 mx-auto w-full max-w-6xl flex flex-col justify-start lg:pl-2 xl:pl-0 pt-16 lg:pt-24">
             {/* Hero copy */}
-            <div className="mt-20 max-w-2xl space-y-7 justify-center rounded-[2rem] border border-border bg-background/85 backdrop-blur-sm p-7 shadow-[0_30px_90px_rgba(15,23,42,0.18)] sm:p-9 lg:translate-x-[-1.75rem] lg:-translate-y-12 xl:translate-x-[-3rem]">
+            <div className="mt-20 lg:mt-0 max-w-2xl space-y-7 justify-center rounded-[2rem] border border-border bg-background/85 backdrop-blur-sm p-7 shadow-[0_30px_90px_rgba(15,23,42,0.18)] sm:p-9 lg:translate-x-[-1.75rem] lg:-translate-y-12 xl:translate-x-[-3rem]">
               <div className="space-y-4">
                 <p className="text-sm text-center font-medium uppercase tracking-[0.24em] text-white text-muted-foreground">
                   Full Stack Developer · B.Tech IT
@@ -175,6 +205,91 @@ export default function IndexPage() {
                 })}
               </div>
             </div>
+
+            {/* Avatar Column (Mobile/Tablet only - centered flow below card) */}
+            <div className="lg:hidden w-full flex items-center justify-center relative select-none mt-16 z-[40]">
+              <motion.div
+                onClick={() => setHeroQuoteIndex((prev) => (prev + 1) % heroQuotes.length)}
+                className="flex flex-col items-center relative cursor-pointer w-full max-w-[280px]"
+              >
+                {/* Mobile Welcome Greeting - Clean Text Only */}
+                <div className="mb-6 w-full text-center pointer-events-none">
+                  <div className="text-[8px] text-indigo-400 font-mono tracking-[0.2em] uppercase mb-1">
+                    SHIVEN_SAYS:
+                  </div>
+                  <motion.p
+                    key={heroQuoteIndex}
+                    initial={{ opacity: 0, y: 3 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="font-heading text-base font-bold text-zinc-100 uppercase tracking-tight"
+                  >
+                    {heroQuotes[heroQuoteIndex]}
+                  </motion.p>
+                  <div className="text-[7px] text-zinc-500 font-mono uppercase tracking-[0.25em] mt-1.5">
+                    [ CLICK AVATAR TO CYCLE ]
+                  </div>
+                </div>
+
+                {/* Mobile Floating Avatar container (scale-x-[-1] mirrored) */}
+                <div className="w-72 h-[360px] relative drop-shadow-[0_15px_30px_rgba(139,92,246,0.25)] flex items-center justify-center z-10">
+                  <img 
+                    src="/shiven-pixel-full-body.png" 
+                    alt="Shiven Pixel Avatar" 
+                    className="object-contain w-full h-full pixelated scale-x-[-1]"
+                  />
+                </div>
+              </motion.div>
+            </div>
+          </div>
+
+          {/* Extreme Right Floating Avatar (Desktop only - GIGANTIC SIZING & ABSOLUTE ALIGNED) */}
+          <div className="hidden lg:flex absolute right-2 xl:right-0 top-[55%] pb-5 -translate-y-1/2 z-[40] select-none lg:translate-x-12 xl:translate-x-20">
+            <motion.div
+              ref={heroCardRef}
+              layoutId="hero-avatar"
+              onMouseMove={handleHeroMouseMove}
+              onMouseLeave={handleHeroMouseLeave}
+              onClick={() => setHeroQuoteIndex((prev) => (prev + 1) % heroQuotes.length)}
+              initial={{ opacity: 0, scale: 0.9, y: 30 }}
+              animate={{
+                opacity: 1,
+                scale: 1,
+                y: 0,
+                rotateX: heroTilt.x,
+                rotateY: heroTilt.y,
+              }}
+              transition={{
+                x: { type: "spring", stiffness: 60, damping: 14, delay: 0.5 },
+                y: { type: "spring", stiffness: 60, damping: 14, delay: 0.5 },
+                scale: { type: "spring", stiffness: 60, damping: 14, delay: 0.5 },
+                opacity: { duration: 0.6, delay: 0.5 },
+                rotateX: { type: "spring", stiffness: 150, damping: 20 },
+                rotateY: { type: "spring", stiffness: 150, damping: 20 },
+              }}
+              style={{ transformStyle: "preserve-3d" }}
+              className="flex flex-col items-center relative cursor-pointer w-full"
+            >
+
+              {/* 3D Floating Avatar container (30% SIZE INCREASE & CUSTOM ZOOM) */}
+              <motion.div
+                animate={{
+                  y: [0, -8, 0],
+                }}
+                transition={{
+                  duration: 3.5,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+                style={{ transform: "translateZ(30px)" }}
+                className="w-[480px] h-[590px] xl:w-[640px] xl:h-[720px] relative drop-shadow-[0_25px_50px_rgba(139,92,246,0.25)] flex items-center justify-center z-10 hover:scale-[1.02] transition-transform duration-300"
+              >
+                <img 
+                  src="/shiven-pixel-full-body.png" 
+                  alt="Shiven Pixel Avatar" 
+                  className="object-contain w-full h-full pixelated scale-x-[-1] scale-130 xl:scale-140"
+                />
+              </motion.div>
+            </motion.div>
           </div>
         </section>
 
