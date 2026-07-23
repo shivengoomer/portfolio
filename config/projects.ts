@@ -30,14 +30,14 @@ export interface ProjectInterface {
 
 export const Projects: ProjectInterface[] = [
   {
-    id: "ClassPlus",
-    companyName: "ClassPlus",
+    id: "Mentora",
+    companyName: "Mentora",
     type: "Professional",
     category: ["Full Stack", "Web Dev", "AI"],
     shortDescription:
       "Enterprise-grade AI-powered assessment suite and virtual classroom for curriculum-aligned exam generation, live progress tracking, and student performance analytics.",
-    websiteLink: "https://classplus.shivengoomer.dev", // Replace with your live URL if deployed
-    githubLink: "https://github.com/shivengoomer/classplus", // Adjust to your preferred repo link
+    websiteLink: "https://mentora.shivengoomer.dev", // Replace with your live URL if deployed
+    githubLink: "https://github.com/shivengoomer/mentora", // Adjust to your preferred repo link
     techStack: [
       "Next.js",
       "TypeScript",
@@ -54,42 +54,42 @@ export const Projects: ProjectInterface[] = [
     ],
     startDate: new Date("2024-06-01"),
     endDate: new Date("2024-09-01"),
-    companyLogoImg: "/projects/classplus/logo.png",
+    companyLogoImg: "/projects/Mentora/logo.png",
     pagesInfoArr: [
       {
         title: "Home Page",
         description:
           "An intuitive landing page explaining the assessment suite capabilities, role-based workflows, and features for teachers, students, and parents.",
-        imgArr: ["/projects/classplus/home.png"],
+        imgArr: ["/projects/Mentora/home.png"],
       },
       {
         title: "Assessment Creator",
         description:
           "Configure dynamic blueprints, upload textbook materials, and run LLM parsing to instantly generate CBSE-aligned exam sheets with matching answer keys.",
-        imgArr: ["/projects/classplus/creator.png"],
+        imgArr: ["/projects/Mentora/creator.png"],
       },
       {
         title: "Grading & Feedback Suite",
         description:
           "AI-driven automated grading system providing detailed qualitative feedback, grading metrics, and concept gap tagging for student submissions.",
-        imgArr: ["/projects/classplus/grading.png"],
+        imgArr: ["/projects/Mentora/grading.png"],
       },
       {
         title: "Student Practice Lab",
         description:
           "Personalized virtual tutor and practice arena offering 24/7 concept explanations, doubt escalation to teachers, and an SM-2 spaced repetition queue.",
-        imgArr: ["/projects/classplus/student.png"],
+        imgArr: ["/projects/Mentora/student.png"],
       },
       {
         title: "Parent Analytics Portal",
         description:
           "Read-only competency tracker providing parents with real-time grade metrics, class announcement feeds, and upcoming deadlines.",
-        imgArr: ["/projects/classplus/parent.png"],
+        imgArr: ["/projects/Mentora/parent.png"],
       },
     ],
     descriptionDetails: {
       paragraphs: [
-        "Built ClassPlus, an advanced EdTech ecosystem that automates assessment generation and streamlines student performance tracking for curriculum layouts.",
+        "Built Mentora, an advanced EdTech ecosystem that automates assessment generation and streamlines student performance tracking for curriculum layouts.",
         "Architected with a decoupled queue-backed pattern, offloading heavy PDF/Word text extractions and Groq LLM generations to background workers to guarantee smooth performance at scale.",
       ],
       bullets: [
