@@ -54,37 +54,37 @@ export const Projects: ProjectInterface[] = [
     ],
     startDate: new Date("2024-06-01"),
     endDate: new Date("2024-09-01"),
-    companyLogoImg: "/projects/Mentora/logo.png",
+    companyLogoImg: "/projects/mentora/logo.png",
     pagesInfoArr: [
       {
         title: "Home Page",
         description:
           "An intuitive landing page explaining the assessment suite capabilities, role-based workflows, and features for teachers, students, and parents.",
-        imgArr: ["/projects/Mentora/home.png"],
+        imgArr: ["/projects/mentora/home.png"],
       },
       {
         title: "Assessment Creator",
         description:
           "Configure dynamic blueprints, upload textbook materials, and run LLM parsing to instantly generate CBSE-aligned exam sheets with matching answer keys.",
-        imgArr: ["/projects/Mentora/creator.png"],
+        imgArr: ["/projects/mentora/creator.png"],
       },
       {
         title: "Grading & Feedback Suite",
         description:
           "AI-driven automated grading system providing detailed qualitative feedback, grading metrics, and concept gap tagging for student submissions.",
-        imgArr: ["/projects/Mentora/grading.png"],
+        imgArr: ["/projects/mentora/grading.png"],
       },
       {
         title: "Student Practice Lab",
         description:
           "Personalized virtual tutor and practice arena offering 24/7 concept explanations, doubt escalation to teachers, and an SM-2 spaced repetition queue.",
-        imgArr: ["/projects/Mentora/student.png"],
+        imgArr: ["/projects/mentora/student.png"],
       },
       {
         title: "Parent Analytics Portal",
         description:
           "Read-only competency tracker providing parents with real-time grade metrics, class announcement feeds, and upcoming deadlines.",
-        imgArr: ["/projects/Mentora/parent.png"],
+        imgArr: ["/projects/mentora/parent.png"],
       },
     ],
     descriptionDetails: {
