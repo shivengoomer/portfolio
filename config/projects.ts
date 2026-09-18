@@ -30,6 +30,79 @@ export interface ProjectInterface {
 
 export const Projects: ProjectInterface[] = [
   {
+    id: "nifty50-qa-platform",
+    companyName: "Nifty50 Market Intelligence Platform",
+    type: "Professional",
+    category: ["Full Stack", "FinTech", "AI / LLM"],
+    shortDescription:
+      "Quantitative trading and market intelligence platform for Nifty 50 equities featuring real-time technical screeners, TradingView charts, multi-chart terminals, and factor scoring models.",
+    githubLink: "https://github.com/shivengoomer/nifty50-qa-platform",
+    techStack: [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "Python",
+      "FastAPI",
+      "TradingView Lightweight Charts",
+      "PyTest",
+    ],
+    startDate: new Date("2024-06-01"),
+    endDate: new Date("2024-11-01"),
+    companyLogoImg: "/projects/nifty50/logo.png",
+    pagesInfoArr: [
+      {
+        title: "Market Overview Dashboard",
+        description:
+          "Real-time quantitative metrics, breadth indicators (bullish/bearish distribution, breakouts, volume spikes), and composite rankings across the NIFTY 50 universe.",
+        imgArr: ["/projects/nifty50/dashboard.png"],
+      },
+      {
+        title: "Quantitative Stock Screener",
+        description:
+          "Multi-parameter equity screener with custom technical filters (RSI, market bias, sector, signals) and preset strategies (Top Score, Breakout Watch, High Volume).",
+        imgArr: ["/projects/nifty50/screener.png"],
+      },
+      {
+        title: "Stock Analytics & Setup Summary",
+        description:
+          "Deep-dive equity analysis featuring automated setup summaries, momentum and risk scoring, quantitative support/resistance boundaries, and plain-English factor breakdowns.",
+        imgArr: ["/projects/nifty50/analytics.png"],
+      },
+      {
+        title: "TradingView Charts & Factor Breakdown",
+        description:
+          "Interactive TradingView candlestick charts with multi-timeframe navigation, volume profiling, and comprehensive quantitative factor breakdown scores.",
+        imgArr: ["/projects/nifty50/charts.png"],
+      },
+      {
+        title: "Portfolio Intelligence & Watchlist",
+        description:
+          "Personalized watchlist tracking starred NIFTY 50 securities with live bias ratios, relative volume, RSI indicators, and one-click terminal analysis.",
+        imgArr: ["/projects/nifty50/watchlist.png"],
+      },
+      {
+        title: "Pro Multi-Chart Trading Terminal",
+        description:
+          "Institutional-grade trading terminal featuring 4-way split multi-timeframe charts, VWAP and EMA-20 overlays, and live Level-2 Market Depth order book visualization.",
+        imgArr: ["/projects/nifty50/terminal.png"],
+      },
+    ],
+    descriptionDetails: {
+      paragraphs: [
+        "Engineered an enterprise financial intelligence and quantitative trading platform designed for processing, analyzing, and visualizing Nifty 50 equity data in real time.",
+      ],
+      bullets: [
+        "Full-stack web application built with Next.js, TypeScript, Tailwind CSS, and FastAPI",
+        "Interactive TradingView candlestick charts with dynamic indicator overlays and factor scoring models",
+        "Real-time market screener, breadth analysis, and personalized quant watchlists",
+        "Institutional multi-chart trading terminal with Level-2 market depth order book",
+        "Robust PyTest automated QA and API regression pipelines ensuring high data reliability",
+      ],
+    },
+    priority: 1,
+  },
+  {
     id: "Mentora",
     companyName: "Mentora",
     type: "Professional",
@@ -173,14 +246,9 @@ export const Projects: ProjectInterface[] = [
     category: ["Full Stack", "Web Dev", "UI/UX"],
     shortDescription:
       "Official digital library portal for the MBA department of Maharaja Surajmal Institute, featuring resources, staff info, and live collection stats.",
-    websiteLink: "https://mbalibrary.vercel.app/", githubLink: "https://github.com/shivengoomer/mba-library",
-    techStack: [
-      "React",
-      "Node.js",
-      "Express",
-      "MongoDB",
-      "Tailwind CSS",
-    ],
+    websiteLink: "https://mbalibrary.vercel.app/",
+    githubLink: "https://github.com/shivengoomer/mba-library",
+    techStack: ["React", "Node.js", "Express", "MongoDB", "Tailwind CSS"],
     startDate: new Date("2025-01-01"),
     endDate: new Date("2025-03-01"),
     companyLogoImg: "/projects/mba-library/logo.png",
@@ -822,14 +890,14 @@ export const Projects: ProjectInterface[] = [
       paragraphs: [
         "Built a direct peer-to-peer file sharing application that guarantees privacy by ensuring no files are uploaded to any central server.",
         "The architecture leverages FastAPI and WebSockets exclusively for signaling (exchanging connection details like SDP offers/answers and ICE candidates).",
-        "Once a WebRTC connection is established, files are chunked into 16KB packets and sent directly via DataChannels from the uploader to the downloader, after which they are reassembled locally."
+        "Once a WebRTC connection is established, files are chunked into 16KB packets and sent directly via DataChannels from the uploader to the downloader, after which they are reassembled locally.",
       ],
       bullets: [
         "FastAPI and WebSockets for real-time signaling and room management",
         "WebRTC DataChannels for secure, direct P2P data transfer",
         "No server-side file storage; fully decentralized transfer",
         "Binary chunking and local reassembly using browser Blob APIs",
-        "Real-time peer presence and offline state handling"
+        "Real-time peer presence and offline state handling",
       ],
     },
     priority: 2,

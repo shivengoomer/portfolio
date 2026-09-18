@@ -15,84 +15,96 @@ export interface ExperienceInterface {
 
 export const experiences: ExperienceInterface[] = [
   {
-    id: "houseofcotton",
-    position: "Web Developer",
-    company: "House of Cotton Private Limited",
-    location: "India",
-    startDate: new Date("2025-08-01"),
+    id: "panscience",
+    position: "Quantitative Finance Intern",
+    company: "PanScience Innovations",
+    location: "Delhi, India",
+    startDate: new Date("2026-08-01"),
     endDate: "Present",
+    companyUrl: "https://www.linkedin.com/company/panscience-innovations/",
+    logo: "/experience/panscience.png",
     description: [
-      "Working as a Part-time Web Developer building scalable web applications using modern JavaScript frameworks.",
-      "Developing and maintaining frontend interfaces with React while implementing backend APIs using Node.js.",
-      "Collaborating with the product and design teams to deliver responsive, user-friendly, and performance-optimized features."
+      "Working on a GenAI-powered Legal Case Law Retrieval (LCLR) system for a power/utilities sector client, aggregating regulatory orders, judgements, and petitions for automated retrieval and summarization.",
+      "Contributing to PSI-Quant, an AI-native quant research and trading platform (Next.js trader terminal, Python quant libraries, Go/Rust services) with backtesting, risk, and an LLM-driven trading agent."
     ],
     achievements: [
-      "Built and deployed multiple production-ready features improving platform usability and performance.",
-      "Integrated backend APIs and database systems to support scalable application workflows.",
-      "Contributed to improving code quality and maintainability through modular development practices.",
-      "Worked in an agile environment delivering updates and features in iterative development cycles."
+      "Engineered GenAI-powered Legal Case Law Retrieval (LCLR) system for automated retrieval and summarization of regulatory orders, judgements, and petitions.",
+      "Contributed to PSI-Quant platform spanning Next.js trader terminal, Python quant libraries, and Go/Rust services.",
+      "Implemented backtesting algorithms, risk modeling, and an LLM-driven autonomous trading agent.",
+      "Designed retrieval and aggregation workflows tailored to power and utilities sector client compliance requirements."
     ],
     skills: [
-      "React",
-      "Node.js",
-      "MongoDB",
-      "JavaScript",
-      "TypeScript",
-      "REST APIs",
-      "Full Stack Development"
+      "Python",
+      "GenAI",
+      "LLMs",
+      "Next.js",
+      "FastAPI",
+      "Go",
+      "Rust",
+      "Quantitative Finance",
+      "Docker"
     ],
-    companyUrl: "",
-    logo: "/experience/hoc.png", pinned: true
+    pinned: true,
   },
   {
-    id: "gncipl",
-    position: "Full Stack Web Development Intern",
-    company: "Global Next Consulting India Pvt. Ltd. (GNCIPL)",
-    location: "Delhi,India",
-    startDate: new Date("2025-07-03"),
-    endDate: new Date("2025-08-14"),
+    id: "houseofcouton",
+    position: "Web Development Intern",
+    company: "House of Couton",
+    location: "Remote",
+    startDate: new Date("2025-08-01"),
+    endDate: new Date("2026-08-31"),
     description: [
-      "Completed a six-week Full Stack Web Development Internship delivering client-facing applications using React.js, Node.js, and MongoDB.",
-      "Implemented multiple mini-projects within the internship, each focusing on building production-ready features for client workflows.",
-      "Worked closely with clients and technical leadership to ensure secure, reliable, and high-quality code delivery.",
+      "Engineered FastAPI and Express.js backends with 10+ RESTful API endpoints, JWT-based role authentication, and PostgreSQL + MongoDB data stores, supporting multi-role workflows across 5+ client prototype deployments.",
+      "Built Python web scrapers for automated institutional and club data acquisition, feeding structured pipelines into PostgreSQL and MongoDB and eliminating manual client data collection overhead.",
+      "Implemented client-specified algorithms for ranking, filtering, and data processing logic tailored to individual product prototype requirements across multiple project verticals.",
+      "Integrated Groq AI inference (Llama 3) with prompt-optimized, low-token requests and retry-safe async pipelines, achieving 99%+ API reliability under concurrent load across client-facing AI features."
     ],
     achievements: [
-      "Successfully delivered 6 mini-projects during the internship, all production-ready and adhering to strict confidentiality policies.",
-      "Improved client workflows and system performance with full-stack features.",
-      "Presented final project reports and deployed working applications to clients with positive feedback.",
-      "Gained hands-on experience with Docker-based deployments and workflow automation.",
-      "Maintained high professional standards and client communication throughout the internship.",
-      "Received recognition from technical leadership for quality, reliability, and adherence to deadlines.",
+      "Engineered FastAPI and Express.js backends with 10+ RESTful API endpoints and JWT role-based authentication across 5+ client deployments.",
+      "Built automated Python web scrapers feeding structured data pipelines into PostgreSQL and MongoDB, eliminating manual overhead.",
+      "Implemented custom ranking, filtering, and processing algorithms for multi-vertical product prototypes.",
+      "Integrated Groq AI (Llama 3) inference with prompt-optimized requests and retry-safe async pipelines, achieving 99%+ API reliability under concurrent load."
     ],
     skills: [
-      "React",
-      "Node.js",
+      "FastAPI",
+      "Express.js",
+      "PostgreSQL",
       "MongoDB",
-      "JavaScript",
-      "TypeScript",
-      "Docker",
-      "Full Stack Development",
+      "Python",
+      "Groq",
+      "Llama 3",
+      "REST APIs",
+      "JWT Authentication",
+      "Web Scraping"
     ],
-    companyUrl: "https://www.gncipl.com",
-    logo: "/experience/gncipl-logo.png",
+    companyUrl: "",
+    logo: "/experience/hoc.png",
     pinned: true,
   },
   {
     id: "geekroom",
     position: "Head – Emerging Technology",
     company: "Geek Room",
-    location: "India",
+    location: "MSIT, Delhi",
     startDate: new Date("2023-01-01"),
-    endDate: new Date("2025-12-31"),
+    endDate: "Present",
     description: [
-      "Conducted sessions on Docker, Linux basics, and Web Development with a focus on real-world deployment.",
-      "Built Flask backend for an inter-departmental bulk mail sender project.",
+      "Conducted workshops on Docker, Linux, and deployment workflows for 75+ students.",
+      "Built a Flask-based bulk email system used for 500+ institutional emails."
     ],
     achievements: [
-      "Led knowledge-sharing sessions on Docker, Linux, and web development.",
-      "Developed a Flask-based backend application for automated bulk mailing across departments.",
+      "Conducted technical workshops on Docker, Linux, and modern deployment workflows for 75+ students.",
+      "Developed and deployed a Flask-based bulk email delivery platform used for 500+ institutional emails across departments.",
+      "Coordinated community tech initiatives, buildathons, and developer mentorship programs."
     ],
-    skills: ["Docker", "Linux", "Flask", "Python", "Web-Dev"],
+    skills: [
+      "Docker",
+      "Linux",
+      "Flask",
+      "Python",
+      "Technical Leadership",
+      "Web Development"
+    ],
     logo: "/experience/geekroom-logo.png",
     companyUrl: "https://www.linkedin.com/company/geek-room-msit/",
   },
@@ -100,18 +112,25 @@ export const experiences: ExperienceInterface[] = [
     id: "ieee",
     position: "Core Committee Member",
     company: "IEEE Student Branch",
-    location: "India",
+    location: "MSIT, Delhi",
     startDate: new Date("2024-01-01"),
-    endDate: new Date("2025-12-31"),
+    endDate: "Present",
     description: [
-      "Managed event logistics and contributed to program planning & execution.",
+      "Organized inter/intra-college hackathons, buildathons, and CTF events, coordinating technical operations and participant management."
     ],
     achievements: [
-      "Coordinated and supported successful execution of multiple IEEE student branch events.",
-      "Contributed to program design and logistics for student engagement initiatives.",
+      "Organized inter- and intra-college hackathons, buildathons, and CTF events.",
+      "Coordinated technical operations and participant management for competitive technical events.",
+      "Collaborated with cross-functional student teams to execute university-wide technical initiatives."
     ],
-    skills: ["Event Management", "Leadership", "Collaboration", "Planning"],
+    skills: [
+      "Hackathon Organization",
+      "Event Operations",
+      "Technical Leadership",
+      "Community Management"
+    ],
     logo: "/experience/ieee-logo.png",
     companyUrl: "https://www.msit.in/society",
   },
 ];
+

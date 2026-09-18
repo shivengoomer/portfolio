@@ -3,7 +3,18 @@
 import React, { useEffect, useState } from "react";
 import { PremiumLoader } from "./premium-loader";
 
+// Set to true to re-enable the visit intro loader page
+const ENABLE_LOADER = false;
+
 export function LoaderProvider({ children }: { children: React.ReactNode }) {
+  if (!ENABLE_LOADER) {
+    return <>{children}</>;
+  }
+
+  return <ActiveLoaderProvider>{children}</ActiveLoaderProvider>;
+}
+
+function ActiveLoaderProvider({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true);
   const [mounted, setMounted] = useState(false);
 

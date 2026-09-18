@@ -81,6 +81,8 @@ export type ValidCategory =
   | "n8n"
   | "API Integration"
   | "3D Modeling"
+  | "FinTech"
+  | "AI / LLM"
   | "Analytics";
 
 export type ValidExpType = "Personal" | "Professional";

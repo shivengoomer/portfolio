@@ -16,18 +16,12 @@ import { featuredProjects } from "@/config/projects";
 import { SocialLinks } from "@/config/socials";
 import { featuredSkills } from "@/config/skills";
 import { siteConfig } from "@/config/site";
-import { experiences } from "@/config/experience";
-import { cn, formatDateFromObj } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 import { useEffect, useState, useRef } from "react";
 import BlurText from "@/components/BlurText";
 import { motion } from "framer-motion";
-
-
-function formatExperienceDate(endDate: Date | "Present", startDate: Date) {
-  const start = formatDateFromObj(startDate);
-  if (endDate === "Present") return `${start} - Present`;
-  return `${start} - ${formatDateFromObj(endDate)}`;
-}
+import { DeliveryFramework } from "@/components/common/delivery-framework";
+import GlassSurface from "@/components/GlassSurface";
 
 export default function IndexPage() {
   const personSchema = {
@@ -71,7 +65,6 @@ export default function IndexPage() {
 
     return () => clearInterval(interval);
   }, []);
-  const highlightedExperience = experiences.slice(0, 2);
 
   const [heroQuoteIndex, setHeroQuoteIndex] = useState(0);
   const heroQuotes = [
@@ -134,19 +127,36 @@ export default function IndexPage() {
           <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-background via-background/80 to-transparent" />
 
           <div className="relative z-10 mx-auto w-full max-w-6xl flex flex-col justify-start lg:pl-2 xl:pl-0 pt-16 lg:pt-24">
-            {/* Hero copy */}
-            <div className="mt-20 lg:mt-0 max-w-2xl space-y-7 justify-center rounded-[2rem] border border-border bg-background/85 backdrop-blur-sm p-7 shadow-[0_30px_90px_rgba(15,23,42,0.18)] sm:p-9 lg:translate-x-[-1.75rem] lg:-translate-y-12 xl:translate-x-[-3rem]">
+            {/* Hero copy with GlassSurface */}
+            <GlassSurface
+              width="100%"
+              height="auto"
+              borderRadius={32}
+              borderWidth={0.06}
+              brightness={100}
+              opacity={0.35}
+              blur={20}
+              displace={1.5}
+              backgroundOpacity={0.35}
+              saturation={1.6}
+              distortionScale={-20}
+              redOffset={2}
+              greenOffset={5}
+              blueOffset={8}
+              className="mt-20 lg:mt-0 max-w-2xl lg:translate-x-[-1.75rem] lg:-translate-y-12 xl:translate-x-[-3rem]"
+              contentClassName="space-y-7 p-7 sm:p-9 justify-center w-full"
+            >
               <div className="space-y-4">
-                <p className="text-sm text-center font-medium uppercase tracking-[0.24em] text-white text-muted-foreground">
+                <p className="text-xs sm:text-sm text-center font-semibold uppercase tracking-[0.22em] text-zinc-600 dark:text-zinc-300">
                   Full Stack Developer · B.Tech IT
                 </p>
 
-                <h1 className="relative max-w-xl text-center  font-heading text-4xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl">
+                <h1 className="relative max-w-xl text-center font-heading text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-zinc-950 dark:text-white drop-shadow-sm">
                   Shiven Goomer
                 </h1>
 
-                <div className="max-w-3xl bg-white/50 backdrop-blur-lg rounded-full px-6 py-3 text-center leading-8 text-lg font-medium text-blue-900 flex flex-wrap items-center justify-center gap-2">
-                  <span>I build</span>
+                <div className="max-w-3xl rounded-full border border-black/[0.08] bg-black/[0.04] px-6 py-2.5 text-center text-base sm:text-lg font-medium text-zinc-800 shadow-[inset_0_1px_1px_rgba(255,255,255,0.6)] backdrop-blur-md dark:border-white/[0.14] dark:bg-white/[0.07] dark:text-zinc-100 dark:shadow-[inset_0_1px_1px_rgba(255,255,255,0.12)] flex flex-wrap items-center justify-center gap-2">
+                  <span className="text-zinc-700 dark:text-zinc-200">I build</span>
 
                   <BlurText
                     key={rotatingWords[currentWord]}
@@ -154,10 +164,10 @@ export default function IndexPage() {
                     delay={180}
                     animateBy="words"
                     direction="top"
-                    className="font-bold text-blue-700"
+                    className="font-bold text-purple-600 dark:text-cyan-400 drop-shadow-sm"
                   />
 
-                  <span>for the modern web.</span>
+                  <span className="text-zinc-700 dark:text-zinc-200">for the modern web.</span>
                 </div>
               </div>
 
@@ -185,7 +195,7 @@ export default function IndexPage() {
               </div>
 
               {/* Social row */}
-              <div className="flex flex-wrap items-center gap-2 pt-2 justify-center ">
+              <div className="flex flex-wrap items-center gap-2 pt-2 justify-center">
                 {SocialLinks.map((link) => {
                   const Icon = link.icon;
 
@@ -204,7 +214,7 @@ export default function IndexPage() {
                   );
                 })}
               </div>
-            </div>
+            </GlassSurface>
 
             {/* Avatar Column (Mobile/Tablet only - centered flow below card) */}
             <div className="lg:hidden w-full flex items-center justify-center relative select-none mt-16 z-[40]">
@@ -369,14 +379,17 @@ export default function IndexPage() {
           </div>
         </section>
 
-        {/* ── ABOUT + EXPERIENCE ── */}
+        {/* ── DELIVERY FRAMEWORK / PROJECT TIMELINE ── */}
+        <DeliveryFramework />
+
+        {/* ── ABOUT ── */}
         <section
           id="about"
           className="px-4 py-16 sm:px-6 md:py-24 lg:px-8"
           aria-labelledby="about-title"
         >
-          <div className="mx-auto grid max-w-6xl gap-4 lg:grid-cols-2">
-            <article className="relative flex min-h-[28rem] flex-col justify-between overflow-hidden rounded-2xl border border-white/10 bg-zinc-950 p-8 text-white shadow-sm">
+          <div className="mx-auto max-w-6xl">
+            <article className="relative flex min-h-[22rem] flex-col justify-between overflow-hidden rounded-3xl border border-white/10 bg-zinc-950 p-8 sm:p-12 text-white shadow-sm">
               <div className="absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
               <div className="absolute bottom-0 left-8 right-8 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
@@ -387,11 +400,11 @@ export default function IndexPage() {
                 </div>
                 <h2
                   id="about-title"
-                  className="font-heading text-4xl font-semibold tracking-tight text-white sm:text-5xl"
+                  className="font-heading text-3xl font-semibold tracking-tight text-white sm:text-4xl lg:text-5xl"
                 >
                   Building things that matter
                 </h2>
-                <p className="mt-5 max-w-lg text-sm leading-7 text-white/55">
+                <p className="mt-5 max-w-2xl text-sm sm:text-base leading-7 sm:leading-8 text-white/60">
                   I live at the intersection of product thinking and
                   engineering, where calm interfaces meet strong execution. My
                   work centers on React, Next.js, Node.js, and AI-enabled
@@ -402,7 +415,7 @@ export default function IndexPage() {
                   {featuredSkills.map((skill) => (
                     <span
                       key={skill.name}
-                      className="rounded-full border border-violet-300/25 bg-violet-300/10 px-3 py-1.5 text-xs font-medium text-violet-100 transition-colors hover:border-violet-300/45 hover:bg-violet-300/20"
+                      className="rounded-full border border-violet-300/25 bg-violet-300/10 px-3.5 py-1.5 text-xs font-medium text-violet-100 transition-colors hover:border-violet-300/45 hover:bg-violet-300/20"
                     >
                       {skill.name}
                     </span>
@@ -410,78 +423,10 @@ export default function IndexPage() {
                 </div>
               </div>
 
-              <div className="relative mt-10 text-[10px] font-medium uppercase tracking-[0.1em] text-white/20">
-                Est. 2024
+              <div className="relative mt-8 flex items-center justify-between text-[10px] font-medium uppercase tracking-[0.1em] text-white/30">
+                <span>Est. 2024</span>
+                <span>Full Stack Developer</span>
               </div>
-            </article>
-
-            <article className="relative flex min-h-[28rem] flex-col justify-between overflow-hidden rounded-2xl border border-zinc-200 bg-stone-100 p-8 shadow-sm dark:border-zinc-800 dark:bg-zinc-900">
-              <svg
-                aria-hidden="true"
-                className="absolute bottom-5 right-5 opacity-[0.06] dark:opacity-[0.14]"
-                width="80"
-                height="80"
-                viewBox="0 0 80 80"
-              >
-                <defs>
-                  <pattern
-                    id="experience-dots"
-                    x="0"
-                    y="0"
-                    width="10"
-                    height="10"
-                    patternUnits="userSpaceOnUse"
-                  >
-                    <circle cx="1" cy="1" r="1" fill="currentColor" />
-                  </pattern>
-                </defs>
-                <rect width="80" height="80" fill="url(#experience-dots)" />
-              </svg>
-
-              <div className="relative">
-                <div className="mb-5 flex items-center gap-2 text-[10px] font-medium uppercase tracking-[0.18em] text-zinc-500 dark:text-zinc-400">
-                  <span className="h-1.5 w-1.5 rounded-full bg-amber-600" />
-                  Timeline
-                </div>
-                <h2 className="font-heading text-4xl font-semibold tracking-tight text-zinc-950 dark:text-zinc-100">
-                  Experience
-                </h2>
-
-                <div className="mt-6 space-y-3">
-                  {highlightedExperience.map((exp) => (
-                    <div
-                      key={exp.id}
-                      className="group relative overflow-hidden rounded-xl border border-black/[0.06] bg-white p-4 transition-transform hover:translate-x-1 dark:border-white/10 dark:bg-zinc-950"
-                    >
-                      <span className="absolute inset-y-0 left-0 w-1 bg-amber-600 opacity-0 transition-opacity group-hover:opacity-100" />
-                      <div className="flex gap-4">
-                        <div className="min-w-0 flex-1">
-                          <h3 className="truncate text-sm font-semibold text-zinc-950 dark:text-zinc-100">
-                            {exp.position}
-                          </h3>
-                          <p className="mt-1 text-xs text-zinc-500 dark:text-zinc-400">
-                            {exp.company} · {exp.location}
-                          </p>
-                        </div>
-                        <p className="shrink-0 pt-0.5 text-[10px] text-zinc-400">
-                          {formatExperienceDate(exp.endDate, exp.startDate)}
-                        </p>
-                      </div>
-                      <p className="mt-3 line-clamp-2 text-xs leading-6 text-zinc-500 dark:text-zinc-400">
-                        {exp.description[0]}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <Link
-                href="/experience"
-                className="relative mt-6 inline-flex w-fit items-center gap-2 rounded-full border border-amber-600/30 bg-amber-600/10 px-4 py-2 text-xs font-medium text-amber-800 transition-colors hover:border-amber-600/50 hover:bg-amber-600/15 dark:text-amber-300"
-              >
-                View full experience
-                <Icons.arrowRight className="h-3.5 w-3.5" />
-              </Link>
             </article>
           </div>
         </section>
