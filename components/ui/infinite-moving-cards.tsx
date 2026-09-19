@@ -11,11 +11,15 @@ export const InfiniteMovingCards = ({
   speed = "super-slow",
   pauseOnHover = true,
   className,
+  variant = "card",
 }: {
   items: {
     icon: React.ReactNode;
     name: string;
     brandColor?: number[]; // [R, G, B]
+    color?: string;
+    glow?: string;
+    className?: string;
   }[];
   direction?: "left" | "right";
   speed?:
@@ -27,6 +31,7 @@ export const InfiniteMovingCards = ({
   | "super-slow";
   pauseOnHover?: boolean;
   className?: string;
+  variant?: "card" | "clean";
 }) => {
   const containerRef = React.useRef<HTMLDivElement>(null);
   const scrollerRef = React.useRef<HTMLUListElement>(null);
@@ -95,16 +100,46 @@ export const InfiniteMovingCards = ({
       <ul
         ref={scrollerRef}
         className={cn(
-          "flex min-w-full w-max shrink-0 flex-nowrap gap-5 py-4",
+          "flex min-w-full w-max shrink-0 flex-nowrap py-4",
+          variant === "clean"
+            ? "items-center gap-12 sm:gap-16 md:gap-20"
+            : "gap-5",
           start && "animate-scroll",
           pauseOnHover && "hover:[animation-play-state:paused]"
         )}
       >
-        {items.map((item, idx) => (
-          <SkillCard item={item} key={item.name + idx} />
-        ))}
+        {items.map((item, idx) =>
+          variant === "clean" ? (
+            <CleanSkillItem item={item} key={item.name + idx} />
+          ) : (
+            <SkillCard item={item} key={item.name + idx} />
+          )
+        )}
       </ul>
     </div>
+  );
+};
+
+const CleanSkillItem = ({ item }: { item: any }) => {
+  return (
+    <li
+      className="group relative flex items-center justify-center shrink-0 px-2 py-3 select-none cursor-pointer transition-transform duration-300 hover:scale-115 hover:-translate-y-1"
+      aria-label={item.name}
+    >
+      <div
+        className={cn(
+          "flex items-center justify-center transition-all duration-300",
+          item.className,
+          item.glow && "group-hover:drop-shadow-[0_0_14px_var(--icon-glow)]"
+        )}
+        style={{
+          color: item.color,
+          "--icon-glow": item.glow || item.color || "rgba(255,255,255,0.4)",
+        } as React.CSSProperties}
+      >
+        {item.icon}
+      </div>
+    </li>
   );
 };
 
@@ -133,7 +168,7 @@ const SkillCard = ({ item }: { item: any }) => {
       </AnimatePresence>
 
       <div className="relative z-20 flex h-full w-full flex-col items-center justify-center px-2 md:px-4 text-center">
-        <div className="mb-3 md:mb-5 flex h-10 w-10 md:h-14 md:w-14 items-center justify-center rounded-xl md:rounded-2xl bg-white/5 backdrop-blur-md">
+        <div className="mb-3 md:mb-5 flex h-10 w-10 md:h-14 md:w-14 items-center justify-center rounded-xl md:rounded-2xl">
           {item.icon}
         </div>
 

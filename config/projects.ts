@@ -36,7 +36,7 @@ export const Projects: ProjectInterface[] = [
     category: ["Full Stack", "FinTech", "AI / LLM"],
     shortDescription:
       "Quantitative trading and market intelligence platform for Nifty 50 equities featuring real-time technical screeners, TradingView charts, multi-chart terminals, and factor scoring models.",
-    githubLink: "https://github.com/shivengoomer/nifty50-qa-platform",
+    githubLink: "https://github.com/shivengoomer",
     techStack: [
       "Next.js",
       "React",
@@ -272,9 +272,9 @@ export const Projects: ProjectInterface[] = [
         imgArr: ["/projects/mba-library/stats.png"],
       },
       {
-        title: "Leadership & Staff",
+        title: "Faculty & Staff",
         description:
-          "Dedicated section showcasing MBA department leadership and library staff with photos and designations.",
+          "Dedicated section showcasing MBA department faculty and library staff with photos and designations.",
         imgArr: ["/projects/mba-library/team.png"],
       },
     ],
@@ -344,7 +344,7 @@ export const Projects: ProjectInterface[] = [
         "Optimized uploads via Cloudinary + jsPDF",
       ],
     },
-    priority: 1,
+    priority: 3,
   },
   {
     id: "clix",
@@ -408,7 +408,7 @@ export const Projects: ProjectInterface[] = [
         "Users can manage their own URLs and Admins can manage all system data",
       ],
     },
-    priority: 2,
+    priority: 3,
   },
   {
     id: "vibeStudio",
@@ -664,7 +664,7 @@ export const Projects: ProjectInterface[] = [
         "WhatsApp integration using Baileys",
       ],
     },
-    priority: 2,
+    priority: 1,
   },
   {
     id: "snippetly",

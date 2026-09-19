@@ -139,8 +139,18 @@ export default function LeetCodePage() {
 
   return (
     <ClientPageWrapper>
-      <div className="px-4 pb-20 pt-10 sm:px-6 lg:px-8 lg:pb-24">
-        <div className="mx-auto max-w-6xl space-y-8">
+      <div className="relative min-h-screen overflow-hidden px-4 pb-20 pt-28 sm:px-6 sm:pt-32 lg:px-8 lg:pt-36 lg:pb-24">
+        {/* Ambient Top Glow & Technical Micro-Grid Backdrop */}
+        <div
+          className="pointer-events-none absolute -top-40 left-1/2 -translate-x-1/2 h-[500px] w-full max-w-7xl bg-[radial-gradient(ellipse_60%_50%_at_50%_0%,rgba(6,182,212,0.12),rgba(168,85,247,0.08),transparent_80%)] blur-3xl dark:bg-[radial-gradient(ellipse_60%_50%_at_50%_0%,rgba(6,182,212,0.18),rgba(168,85,247,0.12),transparent_80%)]"
+          aria-hidden="true"
+        />
+        <div
+          className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:32px_32px] [mask-image:radial-gradient(ellipse_70%_50%_at_50%_0%,#000_60%,transparent_100%)] opacity-80"
+          aria-hidden="true"
+        />
+
+        <div className="relative z-10 mx-auto max-w-6xl space-y-8">
           <section className="overflow-hidden rounded-2xl border border-zinc-200 bg-white/85 p-6 shadow-sm backdrop-blur dark:border-zinc-800 dark:bg-zinc-900/85 sm:p-8 lg:p-10">
             <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
               <div className="max-w-3xl">

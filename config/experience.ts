@@ -11,6 +11,7 @@ export interface ExperienceInterface {
   companyUrl?: string;
   logo?: string;
   pinned?: boolean | false;
+  category?: "Engineering" | "Community";
 }
 
 export const experiences: ExperienceInterface[] = [
@@ -21,6 +22,7 @@ export const experiences: ExperienceInterface[] = [
     location: "Delhi, India",
     startDate: new Date("2026-08-01"),
     endDate: "Present",
+    category: "Engineering",
     companyUrl: "https://www.linkedin.com/company/panscience-innovations/",
     logo: "/experience/panscience.png",
     description: [
@@ -53,6 +55,7 @@ export const experiences: ExperienceInterface[] = [
     location: "Remote",
     startDate: new Date("2025-08-01"),
     endDate: new Date("2026-08-31"),
+    category: "Engineering",
     description: [
       "Engineered FastAPI and Express.js backends with 10+ RESTful API endpoints, JWT-based role authentication, and PostgreSQL + MongoDB data stores, supporting multi-role workflows across 5+ client prototype deployments.",
       "Built Python web scrapers for automated institutional and club data acquisition, feeding structured pipelines into PostgreSQL and MongoDB and eliminating manual client data collection overhead.",
@@ -82,12 +85,47 @@ export const experiences: ExperienceInterface[] = [
     pinned: true,
   },
   {
+    id: "gncipl",
+    position: "Full Stack Web Development Intern",
+    company: "Global Next Consulting India Pvt. Ltd. (GNCIPL)",
+    location: "India",
+    startDate: new Date("2025-07-01"),
+    endDate: new Date("2025-08-31"),
+    category: "Engineering",
+    description: [
+      "Developed and deployed full-stack web features (React.js, Node.js, MongoDB) for client-facing applications.",
+      "Enhanced workflows and ensured secure, reliable performance of applications.",
+      "Collaborated with clients and engineering leads to deliver final project reports and production-ready codebases.",
+    ],
+    achievements: [
+      "Successfully delivered 6 mini-projects during the internship, all production-ready and adhering to strict confidentiality policies.",
+      "Improved client workflows and system performance with full-stack features.",
+      "Presented final project reports and deployed working applications to clients with positive feedback.",
+      "Gained hands-on experience with Docker-based deployments and workflow automation.",
+      "Maintained high professional standards and client communication throughout the internship.",
+      "Received recognition from engineering leads for quality, reliability, and adherence to deadlines.",
+    ],
+    skills: [
+      "React",
+      "Node.js",
+      "MongoDB",
+      "JavaScript",
+      "TypeScript",
+      "Docker",
+      "Full Stack Development",
+    ],
+    companyUrl: "https://www.gncipl.com",
+    logo: "/experience/gncipl-logo.png",
+    pinned: true,
+  },
+  {
     id: "geekroom",
     position: "Head – Emerging Technology",
     company: "Geek Room",
     location: "MSIT, Delhi",
-    startDate: new Date("2023-01-01"),
-    endDate: "Present",
+    startDate: new Date("2024-01-01"),
+    endDate: new Date("2026-03-01"),
+    category: "Community",
     description: [
       "Conducted workshops on Docker, Linux, and deployment workflows for 75+ students.",
       "Built a Flask-based bulk email system used for 500+ institutional emails."
@@ -102,7 +140,7 @@ export const experiences: ExperienceInterface[] = [
       "Linux",
       "Flask",
       "Python",
-      "Technical Leadership",
+      "Technical Mentorship",
       "Web Development"
     ],
     logo: "/experience/geekroom-logo.png",
@@ -114,7 +152,8 @@ export const experiences: ExperienceInterface[] = [
     company: "IEEE Student Branch",
     location: "MSIT, Delhi",
     startDate: new Date("2024-01-01"),
-    endDate: "Present",
+    endDate: new Date("2025-11-01"),
+    category: "Community",
     description: [
       "Organized inter/intra-college hackathons, buildathons, and CTF events, coordinating technical operations and participant management."
     ],
@@ -126,8 +165,8 @@ export const experiences: ExperienceInterface[] = [
     skills: [
       "Hackathon Organization",
       "Event Operations",
-      "Technical Leadership",
-      "Community Management"
+      "Technical Mentorship",
+      "Community Building"
     ],
     logo: "/experience/ieee-logo.png",
     companyUrl: "https://www.msit.in/society",

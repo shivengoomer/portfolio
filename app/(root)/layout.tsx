@@ -82,7 +82,7 @@ export default function MarketingLayout({ children }: MarketingLayoutProps) {
         <DarkModeToggle />
       </div>
 
-      <main className="mt-20 flex-1">{children}</main>
+      <main className="relative flex-1">{children}</main>
       <SiteFooter />
     </div>
   );
