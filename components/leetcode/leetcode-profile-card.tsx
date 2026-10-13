@@ -51,9 +51,9 @@ type LeetCodePayload = {
 };
 
 const difficultyStyles: Record<ProblemDifficulty, string> = {
-  Easy: "bg-emerald-500",
-  Medium: "bg-amber-500",
-  Hard: "bg-rose-500",
+  Easy: "bg-text-muted/40",
+  Medium: "bg-text-muted/60",
+  Hard: "bg-text-muted/80",
 };
 
 const formatNumber = (value?: number) =>
@@ -89,11 +89,11 @@ function buildHeatmapDays(calendar?: string) {
 }
 
 function getHeatmapColor(count: number) {
-  if (count === 0) return "bg-zinc-200 dark:bg-zinc-800";
-  if (count < 2) return "bg-emerald-300 dark:bg-emerald-900";
-  if (count < 4) return "bg-emerald-500 dark:bg-emerald-700";
-  if (count < 7) return "bg-emerald-600 dark:bg-emerald-500";
-  return "bg-emerald-800 dark:bg-emerald-300";
+  if (count === 0) return "bg-border/60";
+  if (count < 2) return "bg-accent/25";
+  if (count < 4) return "bg-accent/50";
+  if (count < 7) return "bg-accent/75";
+  return "bg-accent";
 }
 
 function isProblemDifficulty(value: Difficulty): value is ProblemDifficulty {
@@ -158,17 +158,17 @@ export function LeetCodeProfileCard() {
   );
 
   return (
-    <article className="overflow-hidden rounded-2xl border border-zinc-200 bg-white/85 shadow-sm backdrop-blur dark:border-zinc-800 dark:bg-zinc-900/85">
-      <div className="flex flex-col gap-5 border-b border-zinc-200 p-6 dark:border-zinc-800 sm:flex-row sm:items-start sm:justify-between">
+    <article className="editorial-card overflow-hidden rounded-2xl">
+      <div className="flex flex-col gap-5 border-b border-border p-6 sm:flex-row sm:items-start sm:justify-between">
         <div className="flex items-center gap-4">
-          <span className="grid h-12 w-12 place-items-center rounded-xl border border-amber-500/25 bg-amber-500/10 text-amber-600 dark:text-amber-300">
+          <span className="grid h-12 w-12 place-items-center rounded-xl border border-accent/20 bg-accent-soft text-accent">
             <Icons.leetcode className="h-6 w-6" />
           </span>
           <div>
-            <p className="text-xs font-medium uppercase tracking-[0.2em] text-zinc-500 dark:text-zinc-400">
+            <p className="font-heading text-xs font-semibold uppercase tracking-[0.12em] text-text-muted">
               LeetCode Profile
             </p>
-            <h3 className="mt-1 font-heading text-2xl font-semibold text-zinc-950 dark:text-zinc-100">
+            <h3 className="mt-1 font-heading text-2xl font-semibold text-text">
               {user?.username ?? "shivengoomer"}
             </h3>
           </div>
@@ -176,7 +176,7 @@ export function LeetCodeProfileCard() {
 
         <Link
           href="/leetcode"
-          className="inline-flex w-fit items-center gap-2 rounded-full border border-zinc-200 bg-white/80 px-4 py-2 text-xs font-medium text-zinc-700 transition-colors hover:bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-800/80 dark:text-zinc-200 dark:hover:bg-zinc-800"
+          className="inline-flex w-fit items-center gap-2 rounded-full border border-border bg-surface-2 px-4 py-2 text-xs font-medium text-text transition-colors hover:border-accent hover:text-accent"
         >
           Full stats
           <Icons.arrowRight className="h-3.5 w-3.5" />
@@ -185,14 +185,14 @@ export function LeetCodeProfileCard() {
 
       <div className="p-6">
         {isLoading ? (
-          <div className="grid min-h-[16rem] place-items-center text-sm text-zinc-500 dark:text-zinc-400">
+          <div className="grid min-h-[16rem] place-items-center text-sm text-text-muted">
             <span className="inline-flex items-center gap-2">
-              <Icons.spinner className="h-4 w-4 animate-spin" />
+              <Icons.spinner className="h-4 w-4 animate-spin text-accent" />
               Loading coding stats
             </span>
           </div>
         ) : error ? (
-          <div className="rounded-xl border border-rose-500/20 bg-rose-500/10 p-4 text-sm text-rose-700 dark:text-rose-300">
+          <div className="rounded-xl border border-border bg-surface-2 p-4 text-sm text-text-muted">
             {error}
           </div>
         ) : (
@@ -209,12 +209,12 @@ export function LeetCodeProfileCard() {
               ].map((item) => (
                 <div
                   key={item.label}
-                  className="rounded-xl border border-zinc-200 bg-zinc-50/80 p-4 dark:border-zinc-800 dark:bg-zinc-950/70"
+                  className="rounded-xl border border-border bg-surface-2 p-4"
                 >
-                  <p className="text-[10px] font-medium uppercase tracking-[0.16em] text-zinc-500 dark:text-zinc-400">
+                  <p className="font-heading text-[10px] font-semibold uppercase tracking-[0.12em] text-text-muted">
                     {item.label}
                   </p>
-                  <p className="mt-2 font-heading text-2xl font-semibold text-zinc-950 dark:text-zinc-100">
+                  <p className="mt-2 font-heading text-2xl font-semibold text-text">
                     {item.value}
                   </p>
                 </div>
@@ -233,19 +233,19 @@ export function LeetCodeProfileCard() {
                 .map((item) => (
                   <div
                     key={item.difficulty}
-                    className="rounded-xl border border-zinc-200 bg-white p-3 dark:border-zinc-800 dark:bg-zinc-950"
+                    className="rounded-xl border border-border bg-surface-2 p-3"
                   >
                     <div className="flex items-center justify-between gap-3">
-                      <span className="flex items-center gap-2 text-sm font-medium text-zinc-700 dark:text-zinc-200">
+                      <span className="flex items-center gap-2 text-sm font-medium text-text-muted">
                         <span
                           className={cn(
-                            "h-2.5 w-2.5 rounded-full",
+                            "h-2 w-2 rounded-full",
                             difficultyStyles[item.difficulty],
                           )}
                         />
                         {item.difficulty}
                       </span>
-                      <span className="font-semibold text-zinc-950 dark:text-zinc-100">
+                      <span className="font-semibold text-text">
                         {formatNumber(item.count)}
                       </span>
                     </div>
@@ -255,14 +255,14 @@ export function LeetCodeProfileCard() {
 
             <div>
               <div className="mb-3 flex items-center justify-between gap-3">
-                <p className="text-xs font-medium uppercase tracking-[0.18em] text-zinc-500 dark:text-zinc-400">
+                <p className="font-heading text-xs font-semibold uppercase tracking-[0.12em] text-text-muted">
                   6 Month Heatmap
                 </p>
-                <p className="text-xs text-zinc-500 dark:text-zinc-400">
+                <p className="text-xs text-text-muted">
                   {formatNumber(calendar?.totalActiveDays)} active days
                 </p>
               </div>
-              <div className="rounded-xl border border-zinc-200 bg-zinc-50/80 p-3 dark:border-zinc-800 dark:bg-zinc-950/70">
+              <div className="rounded-xl border border-border bg-surface-2 p-3">
                 <div className="grid grid-cols-[repeat(26,minmax(0,1fr))] gap-1">
                   {heatmapWeeks.map((week, weekIndex) => (
                     <div

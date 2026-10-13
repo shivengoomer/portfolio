@@ -28,6 +28,24 @@ const fontSans = localFont({
   display: "swap",
 });
 
+import { Oswald, Instrument_Serif } from "next/font/google";
+
+const fontOswald = Oswald({
+  subsets: ["latin"],
+  weight: ["500", "600"],
+  variable: "--font-oswald",
+  display: "swap",
+});
+
+const fontSerif = Instrument_Serif({
+  subsets: ["latin"],
+  weight: ["400"],
+  style: ["normal", "italic"],
+  variable: "--font-serif",
+  display: "swap",
+});
+
+
 const fontHeading = localFont({
   src: "../assets/fonts/CalSans-SemiBold.woff2",
   variable: "--font-heading",
@@ -83,7 +101,9 @@ export default function RootLayout({
         className={cn(
           "min-h-screen font-sans antialiased",
           fontSans.variable,
-          fontHeading.variable
+          fontHeading.variable,
+          fontOswald.variable,
+          fontSerif.variable
         )}
       >
         <ThemeProvider

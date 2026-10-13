@@ -18,9 +18,9 @@ export function FloatingDockWithTheme({ items, className }: { items: any[], clas
   const themeToggleItem = {
     title: isDark ? "Light Mode" : "Dark Mode",
     icon: isDark ? (
-      <IconSun className="h-full w-full text-zinc-600 dark:text-zinc-300" />
+      <IconSun className="h-full w-full text-text transition-colors hover:text-accent" />
     ) : (
-      <IconMoon className="h-full w-full text-zinc-600 dark:text-zinc-300" />
+      <IconMoon className="h-full w-full text-text transition-colors hover:text-accent" />
     ),
     onClick: () => setTheme(isDark ? "light" : "dark"),
     className: "md:hidden",

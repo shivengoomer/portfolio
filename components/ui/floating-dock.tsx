@@ -53,7 +53,7 @@ const FloatingDockDesktop = ({
       onTouchEnd={() => mouseX.set(Infinity)}
       onTouchCancel={() => mouseX.set(Infinity)}
       className={cn(
-        "mx-auto hidden h-16 items-end gap-4 rounded-2xl bg-zinc-50 px-4 pb-3 dark:bg-zinc-900 md:flex",
+        "mx-auto hidden h-16 items-end gap-4 rounded-2xl border border-border bg-surface-2 px-4 pb-3 shadow-lg md:flex",
         className,
       )}
     >
@@ -74,7 +74,7 @@ const FloatingDockMobile = ({
   return (
     <div
       className={cn(
-        "mx-auto flex h-12 w-full items-center justify-between gap-1 overflow-x-auto rounded-2xl border border-black/10 bg-white/75 px-2 shadow-[0_12px_30px_rgba(15,23,42,0.1)] backdrop-blur-xl dark:border-white/10 dark:bg-zinc-950/75 md:hidden",
+        "mx-auto flex h-12 w-full items-center justify-between gap-1 overflow-x-auto rounded-2xl border border-border bg-surface-2 px-2 shadow-lg backdrop-blur-xl md:hidden",
         className,
       )}
     >
@@ -93,9 +93,9 @@ function MobileDockItem({ title, icon, href, onClick, className }: DockItem) {
       onTapStart={() => setPulseKey((key) => key + 1)}
       whileTap={{ scale: 0.9, y: 2 }}
       transition={{ type: "spring", stiffness: 420, damping: 24 }}
-      className="relative flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-full bg-zinc-100 p-2 text-zinc-700 shadow-sm transition-colors dark:bg-zinc-900 dark:text-zinc-200"
+      className="relative flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-full border border-border bg-surface p-2 text-text shadow-sm transition-colors hover:border-accent hover:text-accent"
     >
-      <span className="pointer-events-none absolute inset-0 rounded-full ring-1 ring-black/5 dark:ring-white/10" />
+      <span className="pointer-events-none absolute inset-0 rounded-full ring-1 ring-border/20" />
       <AnimatePresence>
         {pulseKey > 0 && (
           <motion.span
@@ -104,7 +104,7 @@ function MobileDockItem({ title, icon, href, onClick, className }: DockItem) {
             animate={{ opacity: 0, scale: 1.8 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.45, ease: "easeOut" }}
-            className="absolute inset-0 rounded-full bg-zinc-400/35 dark:bg-white/25"
+            className="absolute inset-0 rounded-full bg-accent-soft"
           />
         )}
       </AnimatePresence>
@@ -209,7 +209,7 @@ function IconContainer({
       onTouchStart={() => setHovered(true)}
       onTouchEnd={() => setHovered(false)}
       onTouchCancel={() => setHovered(false)}
-      className="relative flex aspect-square items-center justify-center rounded-full bg-zinc-200 dark:bg-zinc-800"
+      className="relative flex aspect-square items-center justify-center rounded-full border border-border bg-surface text-text transition-colors hover:border-accent hover:text-accent shadow-sm"
     >
       <AnimatePresence>
         {hovered && (
@@ -218,7 +218,7 @@ function IconContainer({
             animate={{ opacity: 1, y: 0, x: "-50%", filter: "blur(0px)" }}
             exit={{ opacity: 0, y: -5, x: "-50%", filter: "blur(4px)" }}
             transition={{ duration: 0.15, ease: "easeOut" }}
-            className="absolute top-[calc(100%+12px)] left-1/2 w-fit rounded-lg border border-white/10 bg-black/80 backdrop-blur-xl px-3 py-1.5 text-xs font-semibold tracking-wide text-white/90 whitespace-pre shadow-2xl z-[9000] pointer-events-none"
+            className="absolute top-[calc(100%+12px)] left-1/2 w-fit rounded-lg border border-border bg-surface px-3 py-1.5 font-heading text-xs font-semibold uppercase tracking-[0.12em] text-text whitespace-pre shadow-xl z-[9000] pointer-events-none"
           >
             {title}
           </motion.div>

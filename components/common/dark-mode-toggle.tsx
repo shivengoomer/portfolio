@@ -12,7 +12,7 @@ export function DarkModeToggle() {
   if (!mounted) {
     return (
       <button
-        className="flex h-9 w-9 items-center justify-center rounded-full border border-black/10 bg-white/80 backdrop-blur dark:border-white/10 dark:bg-white/5"
+        className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-surface text-text"
         aria-label="Toggle theme"
       >
         <span className="h-4 w-4" />
@@ -25,12 +25,12 @@ export function DarkModeToggle() {
   return (
     <button
       onClick={() => setTheme(isDark ? "light" : "dark")}
-      className="group relative flex h-9 w-9 items-center justify-center rounded-full border border-black/10 bg-white/80 backdrop-blur transition-all duration-200 hover:shadow-md dark:border-white/10 dark:bg-white/5"
+      className="group relative flex h-9 w-9 items-center justify-center rounded-full border border-border bg-surface text-text shadow-sm transition-all duration-200 hover:border-accent hover:text-accent hover:shadow-md"
       aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
     >
       {/* Sun icon */}
       <svg
-        className={`h-4 w-4 text-neutral-700 transition-all duration-300 dark:text-neutral-300 ${
+        className={`h-4 w-4 transition-all duration-300 ${
           isDark ? "rotate-90 scale-0 opacity-0" : "rotate-0 scale-100 opacity-100"
         }`}
         fill="none"
@@ -46,7 +46,7 @@ export function DarkModeToggle() {
       </svg>
       {/* Moon icon */}
       <svg
-        className={`absolute h-4 w-4 text-neutral-300 transition-all duration-300 ${
+        className={`absolute h-4 w-4 transition-all duration-300 ${
           isDark ? "rotate-0 scale-100 opacity-100" : "-rotate-90 scale-0 opacity-0"
         }`}
         fill="none"

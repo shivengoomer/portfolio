@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 
 import { Icons } from "@/components/common/icons";
+import { cn } from "@/lib/utils";
 
 type GitHubPayload = {
   user?: {
@@ -89,17 +90,17 @@ export function GitHubProfileCard() {
   ];
 
   return (
-    <article className="overflow-hidden rounded-2xl border border-zinc-200 bg-white/85 shadow-sm backdrop-blur dark:border-zinc-800 dark:bg-zinc-900/85">
-      <div className="flex flex-col gap-5 border-b border-zinc-200 p-6 dark:border-zinc-800 sm:flex-row sm:items-start sm:justify-between">
+    <article className="editorial-card overflow-hidden rounded-2xl">
+      <div className="flex flex-col gap-5 border-b border-border p-6 sm:flex-row sm:items-start sm:justify-between">
         <div className="flex items-center gap-4">
-          <span className="grid h-12 w-12 place-items-center rounded-xl border border-zinc-200 bg-zinc-50 text-zinc-950 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-100">
+          <span className="grid h-12 w-12 place-items-center rounded-xl border border-border bg-surface-2 text-text">
             <Icons.gitHub className="h-6 w-6" />
           </span>
           <div>
-            <p className="text-xs font-medium uppercase tracking-[0.2em] text-zinc-500 dark:text-zinc-400">
+            <p className="font-heading text-xs font-semibold uppercase tracking-[0.12em] text-text-muted">
               GitHub Profile
             </p>
-            <h3 className="mt-1 font-heading text-2xl font-semibold text-zinc-950 dark:text-zinc-100">
+            <h3 className="mt-1 font-heading text-2xl font-bold text-text">
               @{user?.login ?? "shivengoomer"}
             </h3>
           </div>
@@ -109,7 +110,7 @@ export function GitHubProfileCard() {
           href={user?.html_url ?? "https://github.com/shivengoomer"}
           target="_blank"
           rel="noreferrer"
-          className="inline-flex w-fit items-center gap-2 rounded-full border border-zinc-200 bg-white/80 px-4 py-2 text-xs font-medium text-zinc-700 transition-colors hover:bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-800/80 dark:text-zinc-200 dark:hover:bg-zinc-800"
+          className="inline-flex w-fit items-center gap-2 rounded-[12px] border border-border bg-transparent px-4 py-2 text-xs font-semibold text-text transition-colors hover:bg-surface-2"
         >
           Open GitHub
           <Icons.externalLink className="h-3.5 w-3.5" />
@@ -118,14 +119,14 @@ export function GitHubProfileCard() {
 
       <div className="p-6">
         {isLoading ? (
-          <div className="grid min-h-[20rem] place-items-center text-sm text-zinc-500 dark:text-zinc-400">
+          <div className="grid min-h-[20rem] place-items-center text-sm text-text-muted">
             <span className="inline-flex items-center gap-2">
-              <Icons.spinner className="h-4 w-4 animate-spin" />
+              <Icons.spinner className="h-4 w-4 animate-spin text-accent" />
               Loading GitHub profile
             </span>
           </div>
         ) : error ? (
-          <div className="rounded-xl border border-rose-500/20 bg-rose-500/10 p-4 text-sm text-rose-700 dark:text-rose-300">
+          <div className="rounded-xl border border-border bg-surface-2 p-4 text-sm text-text-muted">
             {error}
           </div>
         ) : (
@@ -134,12 +135,12 @@ export function GitHubProfileCard() {
               {achievements.map((item) => (
                 <div
                   key={item.label}
-                  className="rounded-xl border border-zinc-200 bg-zinc-50/80 p-4 dark:border-zinc-800 dark:bg-zinc-950/70"
+                  className="rounded-xl border border-border bg-surface-2 p-4"
                 >
-                  <p className="text-[10px] font-medium uppercase tracking-[0.16em] text-zinc-500 dark:text-zinc-400">
+                  <p className="text-[10px] font-medium uppercase tracking-[0.12em] text-text-muted">
                     {item.label}
                   </p>
-                  <p className="mt-2 font-heading text-2xl font-semibold text-zinc-950 dark:text-zinc-100">
+                  <p className="mt-2 font-heading text-2xl font-bold text-text">
                     {item.value}
                   </p>
                 </div>
@@ -148,16 +149,16 @@ export function GitHubProfileCard() {
 
             <div>
               <div className="mb-3 flex items-center justify-between gap-3">
-                <p className="text-xs font-medium uppercase tracking-[0.18em] text-zinc-500 dark:text-zinc-400">
+                <p className="font-heading text-xs font-semibold uppercase tracking-[0.12em] text-text-muted">
                   Contribution Graph
                 </p>
-                <p className="text-xs text-zinc-500 dark:text-zinc-400">
+                <p className="text-xs text-text-muted">
                   Live GitHub heatmap
                 </p>
               </div>
-              <div className="overflow-hidden rounded-xl border border-zinc-200 bg-white p-3 dark:border-zinc-800 dark:bg-zinc-950">
+              <div className="overflow-hidden rounded-xl border border-border bg-surface p-3">
                 <img
-                  src="https://ghchart.rshah.org/22c55e/shivengoomer"
+                  src="https://ghchart.rshah.org/F25C2A/shivengoomer"
                   alt="GitHub contribution heatmap for shivengoomer"
                   className="h-auto min-h-[7rem] w-full object-contain"
                   loading="lazy"
@@ -167,7 +168,7 @@ export function GitHubProfileCard() {
 
             <div className="grid gap-4 lg:grid-cols-[0.9fr_1.1fr]">
               <div>
-                <p className="mb-3 text-xs font-medium uppercase tracking-[0.18em] text-zinc-500 dark:text-zinc-400">
+                <p className="mb-3 font-heading text-xs font-semibold uppercase tracking-[0.12em] text-text-muted">
                   Badges
                 </p>
                 <div className="flex flex-wrap gap-2">
@@ -176,26 +177,29 @@ export function GitHubProfileCard() {
                     "Open Source Active",
                     "Full Stack Projects",
                     "Consistent Coder",
-                  ].map((badge) => (
-                    <span
-                      key={badge}
-                      className="rounded-full border border-emerald-500/25 bg-emerald-500/10 px-3 py-1.5 text-xs font-medium text-emerald-700 dark:text-emerald-300"
-                    >
-                      {badge}
-                    </span>
-                  ))}
+                  ].map((badge, idx) => {
+                    const tintClass = idx % 3 === 0 ? "bg-tint-green" : idx % 3 === 1 ? "bg-tint-pink" : "bg-tint-lavender";
+                    return (
+                      <span
+                        key={badge}
+                        className={cn("rounded-full px-3 py-1 text-xs font-bold text-tint-ink", tintClass)}
+                      >
+                        {badge}
+                      </span>
+                    );
+                  })}
                 </div>
               </div>
 
               <div>
-                <p className="mb-3 text-xs font-medium uppercase tracking-[0.18em] text-zinc-500 dark:text-zinc-400">
+                <p className="mb-3 font-heading text-xs font-semibold uppercase tracking-[0.12em] text-text-muted">
                   Top Languages
                 </p>
                 <div className="flex flex-wrap gap-2">
                   {(stats?.topLanguages ?? []).map((language) => (
                     <span
                       key={language.name}
-                      className="rounded-full border border-zinc-200 bg-white px-3 py-1.5 text-xs font-medium text-zinc-700 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-200"
+                      className="rounded-full border border-border bg-surface-2 px-3 py-1.5 text-xs font-medium text-text-muted"
                     >
                       {language.name} · {language.count}
                     </span>

@@ -29,47 +29,47 @@ export default function MarketingLayout({ children }: MarketingLayoutProps) {
       {/* Floating Dock Nav */}
       <div className="fixed left-1/2 top-3 z-[5000] w-[calc(100%-1rem)] max-w-md -translate-x-1/2 md:top-6 md:w-[90%] md:max-w-fit">
         <FloatingDockWithTheme
-          className="border border-black/10 bg-white/70 shadow-[0_18px_45px_rgba(15,23,42,0.08)] backdrop-blur-xl dark:border-white/10 dark:bg-zinc-950/70"
+          className="border border-border bg-surface-2/90 shadow-xl backdrop-blur-xl"
           items={[
             {
               title: "Home",
               icon: (
-                <IconHome className="h-full w-full text-zinc-600 dark:text-zinc-300" />
+                <IconHome className="h-full w-full text-text transition-colors hover:text-accent" />
               ),
               href: "/",
             },
             {
               title: "Skills",
               icon: (
-                <IconTerminal2 className="h-full w-full text-zinc-600 dark:text-zinc-300" />
+                <IconTerminal2 className="h-full w-full text-text transition-colors hover:text-accent" />
               ),
               href: "/skills",
             },
             {
               title: "Projects",
               icon: (
-                <IconNewSection className="h-full w-full text-zinc-600 dark:text-zinc-300" />
+                <IconNewSection className="h-full w-full text-text transition-colors hover:text-accent" />
               ),
               href: "/projects",
             },
             {
               title: "Experience",
               icon: (
-                <IconBriefcase className="h-full w-full text-zinc-600 dark:text-zinc-300" />
+                <IconBriefcase className="h-full w-full text-text transition-colors hover:text-accent" />
               ),
               href: "/experience",
             },
             {
               title: "Certificates",
               icon: (
-                <IconCertificate className="h-full w-full text-zinc-600 dark:text-zinc-300" />
+                <IconCertificate className="h-full w-full text-text transition-colors hover:text-accent" />
               ),
               href: "/cert",
             },
             {
               title: "Contact",
               icon: (
-                <IconMail className="h-full w-full text-zinc-600 dark:text-zinc-300" />
+                <IconMail className="h-full w-full text-text transition-colors hover:text-accent" />
               ),
               href: "/contact",
             },
