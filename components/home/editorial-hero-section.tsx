@@ -242,11 +242,12 @@ export function EditorialHeroSection() {
         initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-        className="font-oswald font-[500] lowercase text-orange-400 tracking-tight mt-3 sm:mt-4 text-center"
+        className="font-oswald font-[500] lowercase text-yellow-300 tracking-tight mt-3 sm:mt-4 text-center"
         style={{
           fontFamily: "var(--font-oswald), Oswald, sans-serif",
           fontSize: "clamp(1.15rem, 3.2vw, 2.9rem)",
           lineHeight: "1.15",
+          paddingTop: "1.3%",
           textShadow: "0 2px 16px rgba(0,0,0,0.5)",
         }}
       >
@@ -263,6 +264,7 @@ export function EditorialHeroSection() {
           fontFamily: "var(--font-serif), 'Instrument Serif', Georgia, serif",
           fontSize: "clamp(1.2rem, 2.5vw, 2.25rem)",
           textShadow: "0 2px 14px rgba(0,0,0,0.55)",
+          paddingTop: "2%"
         }}
       >
         I build quant trading platforms and AI retrieval systems{" "}
@@ -323,60 +325,6 @@ export function EditorialHeroSection() {
         </Link>
       </motion.div>
 
-
-
-      {/* ── 6. THIN 3-ITEM STAT STRIP SEPARATED BY VERTICAL DIVIDERS ── */}
-      <motion.div
-        initial={shouldReduceMotion ? false : { opacity: 0, y: 15 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.52 }}
-        className="flex items-center justify-center gap-2.5 sm:gap-6 md:gap-8 mt-3.5 sm:mt-4 px-3 sm:px-6 md:px-7 py-1.5 sm:py-2 rounded-full bg-black/35 backdrop-blur-md border border-white/15 shadow-xl max-w-[94vw] sm:max-w-none"
-      >
-        {/* Stat 1: Projects Shipped (REAL: 18+) */}
-        <div className="flex flex-col items-center text-center">
-          <span
-            className="font-oswald font-semibold text-lg sm:text-2xl text-white tracking-tight leading-none"
-            style={{ fontFamily: "var(--font-oswald), Oswald, sans-serif" }}
-          >
-            18+
-          </span>
-          <span className="text-[9px] sm:text-[10px] md:text-[11px] uppercase tracking-wider text-zinc-300 mt-0.5 font-sans whitespace-nowrap">
-            Projects Shipped
-          </span>
-        </div>
-
-        {/* Divider 1 */}
-        <div className="h-5 sm:h-6 w-px bg-white/20" />
-
-        {/* Stat 2: Hackathons (REAL: 5+) */}
-        <div className="flex flex-col items-center text-center">
-          <span
-            className="font-oswald font-semibold text-lg sm:text-2xl text-white tracking-tight leading-none"
-            style={{ fontFamily: "var(--font-oswald), Oswald, sans-serif" }}
-          >
-            5+
-          </span>
-          <span className="text-[9px] sm:text-[10px] md:text-[11px] uppercase tracking-wider text-zinc-300 mt-0.5 font-sans whitespace-nowrap">
-            Hackathons
-          </span>
-        </div>
-
-        {/* Divider 2 */}
-        <div className="h-5 sm:h-6 w-px bg-white/20" />
-
-        {/* Stat 3: CGPA / Years building (Placeholder metric) */}
-        <div className="flex flex-col items-center text-center">
-          <span
-            className="font-oswald font-semibold text-sm sm:text-lg text-amber-300/90 tracking-tight leading-none"
-            style={{ fontFamily: "var(--font-oswald), Oswald, sans-serif" }}
-          >
-            [add metric]
-          </span>
-          <span className="text-[9px] sm:text-[10px] md:text-[11px] uppercase tracking-wider text-zinc-300 mt-0.5 font-sans whitespace-nowrap">
-            CGPA / Years
-          </span>
-        </div>
-      </motion.div>
     </div>
   );
 }

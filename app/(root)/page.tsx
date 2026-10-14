@@ -85,7 +85,7 @@ export default function IndexPage() {
               muted
               loop
               playsInline
-              className="h-full w-full object-cover object-center"
+              className="h-full w-full object-cover object-center opacity-70"
             >
               <source src="/bg-portfolio.webm" type="video/webm" />
             </video>
@@ -94,7 +94,7 @@ export default function IndexPage() {
           </div>
 
           {/* Exact Editorial Style Hero for Shiven Goomer */}
-          <div className="relative z-10 w-full flex flex-col items-center justify-center">
+          <div className="relative z-10 w-full flex flex-col items-center justify-center ">
             <EditorialHeroSection />
           </div>
         </section>
