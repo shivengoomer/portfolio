@@ -39,6 +39,7 @@ export default function EditorialProjectsShowcase({
 }: EditorialProjectsShowcaseProps) {
   const [activeCategory, setActiveCategory] = useState<FilterCategory>("all");
   const [searchQuery, setSearchQuery] = useState("");
+  const [showAll, setShowAll] = useState(false);
 
   const projectList = useMemo(() => {
     if (allProjects && allProjects.length > 0) return allProjects;
@@ -242,7 +243,7 @@ export default function EditorialProjectsShowcase({
         </div>
       ) : (
         /* ── VIEW B: CURATED EDITORIAL 3-TIER SHOWCASE (DEFAULT) ── */
-        <div className="space-y-14 sm:space-y-18">
+        <div className="space-y-10 sm:space-y-14 sm:space-y-18">
           {/* 1. PRIMARY FEATURED SHOWCASE (NIFTY50 QUANT) */}
           <section aria-labelledby="primary-project-title">
             <PrimaryProjectCard project={primary} />
@@ -266,10 +267,18 @@ export default function EditorialProjectsShowcase({
                 <span className="font-mono text-[11px] text-zinc-400">02 Featured</span>
               </div>
 
-              <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-                {secondary.map((project) => (
-                  <SecondaryProjectCard key={project.id} project={project} />
-                ))}
+              {/* Mobile: only show first secondary if not showAll; Desktop: all */}
+              <div className="grid grid-cols-1 gap-3 md:gap-6 md:grid-cols-2">
+                {secondary
+                  .filter((_, i) => showAll || i < 1)
+                  .map((project) => (
+                    <SecondaryProjectCard key={project.id} project={project} />
+                  ))}
+                {!showAll && secondary.length > 1 && (
+                  <div className="md:hidden">
+                    {secondary.slice(1).map((project) => null)}
+                  </div>
+                )}
               </div>
             </section>
           )}
@@ -294,11 +303,28 @@ export default function EditorialProjectsShowcase({
                 </span>
               </div>
 
-              <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                {remaining.map((project) => (
-                  <CompactProjectCard key={project.id} project={project} />
-                ))}
+              {/* Mobile: limit remaining to 3 (total 5 counting primary + 1 secondary) */}
+              <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:gap-6 lg:grid-cols-3">
+                {remaining
+                  .filter((_, i) => showAll || i < 3)
+                  .map((project) => (
+                    <CompactProjectCard key={project.id} project={project} />
+                  ))}
               </div>
+
+              {/* Mobile "View all" button */}
+              {!showAll && remaining.length > 3 && (
+                <div className="flex justify-center md:hidden">
+                  <button
+                    type="button"
+                    onClick={() => setShowAll(true)}
+                    className="inline-flex items-center gap-1.5 rounded-full border border-zinc-300 bg-white/80 px-5 py-2 text-xs font-semibold text-zinc-700 shadow-sm transition-colors hover:border-zinc-400 dark:border-zinc-700 dark:bg-zinc-900/80 dark:text-zinc-300 dark:hover:border-zinc-600"
+                  >
+                    View all {projectList.length} projects
+                    <ArrowRight className="h-3.5 w-3.5" />
+                  </button>
+                </div>
+              )}
             </section>
           )}
         </div>
@@ -372,8 +398,8 @@ function PrimaryProjectCard({ project }: { project: ProjectInterface }) {
       <div className="pointer-events-none absolute -bottom-20 -left-20 h-80 w-80 rounded-full bg-purple-500/10 blur-3xl transition-opacity duration-500 group-hover:opacity-100 opacity-40 dark:bg-purple-500/15" />
 
       <article className="relative z-10 grid grid-cols-1 lg:grid-cols-12 lg:items-center">
-        {/* ── LEFT: BROWSER WINDOW MOCKUP FRAME ── */}
-        <div className="lg:col-span-7 p-4 sm:p-6 lg:p-7">
+        {/* ── BROWSER WINDOW MOCKUP ── — hidden on mobile */}
+        <div className="hidden md:block lg:col-span-7 p-4 sm:p-6 lg:p-7">
           <div className="overflow-hidden rounded-xl border border-zinc-200/80 bg-zinc-950 shadow-lg dark:border-zinc-800">
             {/* macOS Window Titlebar */}
             <div className="flex h-8 items-center justify-between border-b border-zinc-800 bg-zinc-900/90 px-3 backdrop-blur">
@@ -404,9 +430,9 @@ function PrimaryProjectCard({ project }: { project: ProjectInterface }) {
           </div>
         </div>
 
-        {/* ── RIGHT: EDITORIAL & ARCHITECTURE CONTENT ── */}
-        <div className="flex flex-col justify-between p-6 sm:p-8 lg:col-span-5 lg:pl-0">
-          <div className="space-y-4">
+        {/* ── EDITORIAL & ARCHITECTURE CONTENT ── */}
+        <div className="flex flex-col justify-between p-4 sm:p-6 sm:p-8 lg:col-span-5 lg:pl-0">
+          <div className="space-y-3 sm:space-y-4">
             {/* Status Pill & External Links */}
             <div className="flex items-center justify-between">
               <span className="inline-flex items-center gap-1.5 rounded-full border border-cyan-500/30 bg-cyan-500/10 px-2.5 py-1 font-mono text-[10px] font-bold uppercase tracking-wider text-cyan-600 dark:text-cyan-400">
@@ -414,23 +440,23 @@ function PrimaryProjectCard({ project }: { project: ProjectInterface }) {
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan-400 opacity-75" />
                   <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-cyan-500" />
                 </span>
-                FLAGSHIP SYSTEM · QUANTITATIVE PLATFORM
+                <span className="hidden sm:inline">FLAGSHIP SYSTEM · </span>QUANTITATIVE PLATFORM
               </span>
               <ExternalLinks project={project} />
             </div>
 
             {/* Project Headline */}
             <div>
-              <h2 className="font-heading text-2xl font-bold tracking-tight text-zinc-950 transition-colors group-hover:text-cyan-600 dark:text-zinc-100 dark:group-hover:text-cyan-400 sm:text-3xl">
+              <h2 className="font-heading text-base font-bold tracking-tight text-zinc-950 transition-colors group-hover:text-cyan-600 dark:text-zinc-100 dark:group-hover:text-cyan-400 sm:text-2xl md:text-3xl">
                 {project.companyName}
               </h2>
-              <p className="mt-2 text-xs sm:text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+              <p className="mt-1 line-clamp-3 text-xs leading-relaxed text-zinc-600 dark:text-zinc-400 sm:mt-2 sm:line-clamp-none sm:text-sm">
                 Enterprise-grade quantitative analytics and trading platform for all 50 NSE equities, featuring real-time algorithmic screeners, interactive TradingView charts, and low-latency API pipelines.
               </p>
             </div>
 
-            {/* Key Architecture Features */}
-            <div className="space-y-1.5 pt-1">
+            {/* Key Architecture Features — hidden on mobile */}
+            <div className="hidden space-y-1.5 pt-1 sm:block">
               <div className="flex items-center gap-2 text-xs text-zinc-700 dark:text-zinc-300">
                 <CheckCircle2 className="h-3.5 w-3.5 text-cyan-500 shrink-0" />
                 <span>Real-Time NSE Technical Screeners & Market Breadth</span>
@@ -445,12 +471,21 @@ function PrimaryProjectCard({ project }: { project: ProjectInterface }) {
               </div>
             </div>
 
-            {/* Curated Tech Chips */}
-            <div className="flex flex-wrap gap-1.5 pt-2">
-              {project.techStack.slice(0, 6).map((tech) => (
+            {/* Curated Tech Chips — max 3 on mobile */}
+            <div className="flex flex-wrap gap-1.5 pt-1 sm:pt-2">
+              {project.techStack.slice(0, 3).map((tech) => (
                 <span
                   key={tech}
                   className="rounded-md border border-zinc-200/80 bg-zinc-100/70 px-2 py-0.5 font-mono text-[10px] font-medium text-zinc-700 dark:border-zinc-800 dark:bg-zinc-800/60 dark:text-zinc-300"
+                >
+                  {tech}
+                </span>
+              ))}
+              {/* Show remaining on desktop */}
+              {project.techStack.slice(3, 6).map((tech) => (
+                <span
+                  key={tech}
+                  className="hidden rounded-md border border-zinc-200/80 bg-zinc-100/70 px-2 py-0.5 font-mono text-[10px] font-medium text-zinc-700 sm:inline dark:border-zinc-800 dark:bg-zinc-800/60 dark:text-zinc-300"
                 >
                   {tech}
                 </span>
@@ -459,9 +494,9 @@ function PrimaryProjectCard({ project }: { project: ProjectInterface }) {
           </div>
 
           {/* Action Row */}
-          <div className="mt-6 flex items-center justify-between border-t border-zinc-200/80 pt-4 dark:border-zinc-800/80">
+          <div className="mt-4 flex items-center justify-between border-t border-zinc-200/80 pt-3 sm:mt-6 sm:pt-4 dark:border-zinc-800/80">
             <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-zinc-950 transition-colors group-hover:text-cyan-600 dark:text-zinc-100 dark:group-hover:text-cyan-400">
-              Explore Architecture & System Case Study
+              <span className="hidden sm:inline">Explore Architecture & System </span>Case Study
               <ArrowRight className="h-3.5 w-3.5 transition-transform duration-200 ease-out group-hover:translate-x-1" />
             </span>
           </div>
@@ -498,8 +533,8 @@ function SecondaryProjectCard({ project }: { project: ProjectInterface }) {
       className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-zinc-200/90 bg-gradient-to-b from-white/90 via-white/70 to-zinc-50/80 shadow-[0_8px_24px_rgba(0,0,0,0.04)] backdrop-blur-xl transition-all duration-300 ease-out hover:-translate-y-1 hover:border-zinc-300 hover:shadow-[0_16px_36px_rgba(0,0,0,0.1)] dark:border-zinc-800/90 dark:from-zinc-900/90 dark:via-zinc-900/60 dark:to-zinc-950/80 dark:shadow-[0_12px_32px_rgba(0,0,0,0.4)] dark:hover:border-zinc-700 dark:hover:shadow-[0_16px_40px_rgba(0,0,0,0.6)] hover:no-underline"
     >
       <article className="flex h-full flex-col">
-        {/* Mockup Frame Header */}
-        <div className="overflow-hidden border-b border-zinc-200/80 bg-zinc-950 dark:border-zinc-800">
+        {/* Mockup Frame Header — hidden on mobile */}
+        <div className="hidden overflow-hidden border-b border-zinc-200/80 bg-zinc-950 md:block dark:border-zinc-800">
           <div className="flex h-7 items-center justify-between border-b border-zinc-800/80 bg-zinc-900/90 px-3">
             <div className="flex items-center gap-1.5">
               <span className="h-2 w-2 rounded-full bg-rose-500/80" />
@@ -526,8 +561,8 @@ function SecondaryProjectCard({ project }: { project: ProjectInterface }) {
         </div>
 
         {/* Content Details */}
-        <div className="flex flex-1 flex-col justify-between p-6">
-          <div className="space-y-3">
+        <div className="flex flex-1 flex-col justify-between p-4 sm:p-6">
+          <div className="space-y-2 sm:space-y-3">
             {/* Dedicated Badges */}
             <div className="flex items-center justify-between">
               {isDtox ? (
@@ -549,18 +584,18 @@ function SecondaryProjectCard({ project }: { project: ProjectInterface }) {
             </div>
 
             {/* Title */}
-            <h3 className="font-heading text-xl font-bold tracking-tight text-zinc-950 transition-colors group-hover:text-purple-600 dark:text-zinc-100 dark:group-hover:text-purple-400">
+            <h3 className="font-heading text-base font-bold tracking-tight text-zinc-950 transition-colors group-hover:text-purple-600 dark:text-zinc-100 dark:group-hover:text-purple-400 sm:text-xl">
               {displayTitle}
             </h3>
 
             {/* Description */}
-            <p className="text-xs sm:text-sm leading-relaxed text-zinc-600 dark:text-zinc-400 line-clamp-2">
+            <p className="line-clamp-2 text-xs leading-relaxed text-zinc-600 dark:text-zinc-400 sm:text-sm">
               {project.shortDescription}
             </p>
 
-            {/* Tech Stack Badges */}
+            {/* Tech Stack Badges — max 3 on mobile */}
             <div className="flex flex-wrap gap-1.5 pt-1">
-              {project.techStack.slice(0, 5).map((tech) => (
+              {project.techStack.slice(0, 3).map((tech) => (
                 <span
                   key={tech}
                   className="rounded-md border border-zinc-200/80 bg-zinc-100/70 px-2 py-0.5 font-mono text-[10px] font-medium text-zinc-700 dark:border-zinc-800 dark:bg-zinc-800/60 dark:text-zinc-300"
@@ -568,10 +603,18 @@ function SecondaryProjectCard({ project }: { project: ProjectInterface }) {
                   {tech}
                 </span>
               ))}
+              {project.techStack.slice(3, 5).map((tech) => (
+                <span
+                  key={tech}
+                  className="hidden rounded-md border border-zinc-200/80 bg-zinc-100/70 px-2 py-0.5 font-mono text-[10px] font-medium text-zinc-700 sm:inline dark:border-zinc-800 dark:bg-zinc-800/60 dark:text-zinc-300"
+                >
+                  {tech}
+                </span>
+              ))}
             </div>
           </div>
 
-          <div className="mt-5 flex items-center border-t border-zinc-200/60 pt-3 dark:border-zinc-800/60">
+          <div className="mt-4 flex items-center border-t border-zinc-200/60 pt-3 sm:mt-5 dark:border-zinc-800/60">
             <span className="inline-flex items-center gap-1 text-xs font-semibold text-zinc-950 transition-colors group-hover:text-purple-600 dark:text-zinc-100 dark:group-hover:text-purple-400">
               View system case study
               <span className="transition-transform duration-200 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
@@ -600,8 +643,8 @@ function CompactProjectCard({ project }: { project: ProjectInterface }) {
       className="group relative flex h-full flex-col overflow-hidden rounded-xl border border-zinc-200/80 bg-gradient-to-b from-white/90 to-zinc-50/70 shadow-sm backdrop-blur-sm transition-all duration-300 ease-out hover:-translate-y-1 hover:border-zinc-400 hover:shadow-md dark:border-zinc-800/80 dark:from-zinc-900/90 dark:to-zinc-950/70 dark:hover:border-zinc-700 hover:no-underline"
     >
       <article className="flex h-full flex-col">
-        {/* Sleek Mini Window Chrome */}
-        <div className="overflow-hidden border-b border-zinc-200/80 bg-zinc-950 dark:border-zinc-800">
+        {/* Sleek Mini Window Chrome — hidden on mobile */}
+        <div className="hidden overflow-hidden border-b border-zinc-200/80 bg-zinc-950 md:block dark:border-zinc-800">
           <div className="flex h-6 items-center justify-between border-b border-zinc-800/80 bg-zinc-900/90 px-2.5">
             <div className="flex items-center gap-1">
               <span className="h-1.5 w-1.5 rounded-full bg-zinc-600" />
@@ -627,20 +670,20 @@ function CompactProjectCard({ project }: { project: ProjectInterface }) {
         </div>
 
         {/* Content */}
-        <div className="flex flex-1 flex-col justify-between p-5">
-          <div className="space-y-2.5">
+        <div className="flex flex-1 flex-col justify-between p-4 sm:p-5">
+          <div className="space-y-1.5 sm:space-y-2.5">
             <div className="flex items-center justify-between gap-2">
-              <h3 className="font-heading text-base font-bold tracking-tight text-zinc-900 transition-colors group-hover:text-cyan-600 dark:text-zinc-100 dark:group-hover:text-cyan-400 line-clamp-1">
+              <h3 className="font-heading text-sm font-bold tracking-tight text-zinc-900 transition-colors group-hover:text-cyan-600 dark:text-zinc-100 dark:group-hover:text-cyan-400 line-clamp-1 sm:text-base">
                 {project.companyName}
               </h3>
               <ExternalLinks project={project} />
             </div>
 
-            <p className="text-xs leading-relaxed text-zinc-600 dark:text-zinc-400 line-clamp-2">
+            <p className="line-clamp-2 text-xs leading-relaxed text-zinc-600 dark:text-zinc-400">
               {project.shortDescription}
             </p>
 
-            <div className="flex flex-wrap gap-1 pt-1">
+            <div className="flex flex-wrap gap-1 pt-0.5 sm:pt-1">
               {project.techStack.slice(0, 3).map((tech) => (
                 <span
                   key={tech}
@@ -657,9 +700,9 @@ function CompactProjectCard({ project }: { project: ProjectInterface }) {
             </div>
           </div>
 
-          <div className="mt-4 flex items-center border-t border-zinc-200/60 pt-3 dark:border-zinc-800/60">
+          <div className="mt-3 flex items-center border-t border-zinc-200/60 pt-2.5 sm:mt-4 sm:pt-3 dark:border-zinc-800/60">
             <span className="inline-flex items-center gap-1 text-xs font-semibold text-zinc-900 transition-colors group-hover:text-cyan-600 dark:text-zinc-100 dark:group-hover:text-cyan-400">
-              View project
+              Case study
               <span className="transition-transform duration-200 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
                 ↗
               </span>

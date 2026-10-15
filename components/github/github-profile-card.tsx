@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 
 import { Icons } from "@/components/common/icons";
@@ -46,6 +46,7 @@ export function GitHubProfileCard() {
   const [data, setData] = useState<GitHubPayload | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const heatmapScrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     let isMounted = true;
@@ -82,6 +83,13 @@ export function GitHubProfileCard() {
     };
   }, []);
 
+  // Scroll heatmap to the right (latest weeks) on mount
+  useEffect(() => {
+    if (heatmapScrollRef.current) {
+      heatmapScrollRef.current.scrollLeft = heatmapScrollRef.current.scrollWidth;
+    }
+  }, [data]);
+
   const user = data?.user;
   const stats = data?.stats;
   const achievements = [
@@ -91,16 +99,17 @@ export function GitHubProfileCard() {
 
   return (
     <article className="editorial-card overflow-hidden rounded-2xl">
-      <div className="flex flex-col gap-5 border-b border-border p-6 sm:flex-row sm:items-start sm:justify-between">
-        <div className="flex items-center gap-4">
-          <span className="grid h-12 w-12 place-items-center rounded-xl border border-border bg-surface-2 text-text">
-            <Icons.gitHub className="h-6 w-6" />
+      {/* Header */}
+      <div className="flex flex-col gap-3 border-b border-border p-4 sm:flex-row sm:items-start sm:justify-between sm:gap-5 sm:p-6">
+        <div className="flex items-center gap-3 sm:gap-4">
+          <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl border border-border bg-surface-2 text-text sm:h-12 sm:w-12">
+            <Icons.gitHub className="h-5 w-5 sm:h-6 sm:w-6" />
           </span>
           <div>
-            <p className="font-heading text-xs font-semibold uppercase tracking-[0.12em] text-text-muted">
+            <p className="font-heading text-[10px] font-semibold uppercase tracking-[0.12em] text-text-muted sm:text-xs">
               GitHub Profile
             </p>
-            <h3 className="mt-1 font-heading text-2xl font-bold text-text">
+            <h3 className="mt-0.5 font-heading text-lg font-bold text-text sm:mt-1 sm:text-2xl">
               @{user?.login ?? "shivengoomer"}
             </h3>
           </div>
@@ -110,16 +119,16 @@ export function GitHubProfileCard() {
           href={user?.html_url ?? "https://github.com/shivengoomer"}
           target="_blank"
           rel="noreferrer"
-          className="inline-flex w-fit items-center gap-2 rounded-[12px] border border-border bg-transparent px-4 py-2 text-xs font-semibold text-text transition-colors hover:bg-surface-2"
+          className="inline-flex w-fit items-center gap-1.5 rounded-[12px] border border-border bg-transparent px-3 py-1.5 text-xs font-semibold text-text transition-colors hover:bg-surface-2 md:px-4 md:py-2"
         >
           Open GitHub
           <Icons.externalLink className="h-3.5 w-3.5" />
         </Link>
       </div>
 
-      <div className="p-6">
+      <div className="p-4 sm:p-6">
         {isLoading ? (
-          <div className="grid min-h-[20rem] place-items-center text-sm text-text-muted">
+          <div className="grid min-h-[12rem] place-items-center text-sm text-text-muted md:min-h-[20rem]">
             <span className="inline-flex items-center gap-2">
               <Icons.spinner className="h-4 w-4 animate-spin text-accent" />
               Loading GitHub profile
@@ -130,23 +139,25 @@ export function GitHubProfileCard() {
             {error}
           </div>
         ) : (
-          <div className="space-y-6">
-            <div className="grid gap-3 sm:grid-cols-2">
+          <div className="space-y-4 sm:space-y-6">
+            {/* Stats grid — 3-col on mobile, 2-col on sm+ */}
+            <div className="grid grid-cols-3 gap-2 sm:grid-cols-2 sm:gap-3">
               {achievements.map((item) => (
                 <div
                   key={item.label}
-                  className="rounded-xl border border-border bg-surface-2 p-4"
+                  className="rounded-xl border border-border bg-surface-2 px-3 py-2 sm:p-4"
                 >
                   <p className="text-[10px] font-medium uppercase tracking-[0.12em] text-text-muted">
                     {item.label}
                   </p>
-                  <p className="mt-2 font-heading text-2xl font-bold text-text">
+                  <p className="mt-1 font-heading text-lg font-bold text-text sm:mt-2 sm:text-2xl">
                     {item.value}
                   </p>
                 </div>
               ))}
             </div>
 
+            {/* Contribution heatmap */}
             <div>
               <div className="mb-3 flex items-center justify-between gap-3">
                 <p className="font-heading text-xs font-semibold uppercase tracking-[0.12em] text-text-muted">
@@ -156,13 +167,21 @@ export function GitHubProfileCard() {
                   Live GitHub heatmap
                 </p>
               </div>
+              {/* Mobile: scrollable with inner min-width; Desktop: full-width */}
               <div className="overflow-hidden rounded-xl border border-border bg-surface p-3">
-                <img
-                  src="https://ghchart.rshah.org/F25C2A/shivengoomer"
-                  alt="GitHub contribution heatmap for shivengoomer"
-                  className="h-auto min-h-[7rem] w-full object-contain"
-                  loading="lazy"
-                />
+                <div
+                  ref={heatmapScrollRef}
+                  className="overflow-x-auto md:overflow-x-hidden"
+                >
+                  <div className="min-w-[520px] md:min-w-0">
+                    <img
+                      src="https://ghchart.rshah.org/F25C2A/shivengoomer"
+                      alt="GitHub contribution heatmap for shivengoomer"
+                      className="h-auto min-h-[7rem] w-full object-contain"
+                      loading="lazy"
+                    />
+                  </div>
+                </div>
               </div>
             </div>
 

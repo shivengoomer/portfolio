@@ -72,14 +72,14 @@ export function DeliveryFramework() {
   return (
     <section
       id="experience-timeline"
-      className="relative px-4 py-16 sm:px-6 md:py-24 lg:px-8 overflow-hidden"
+      className="relative px-4 py-10 sm:px-6 md:py-24 lg:px-8 overflow-hidden"
       aria-label="Experience Timeline"
     >
       <div className="relative z-10 mx-auto max-w-6xl">
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-12 xl:gap-16 items-start">
           
-          {/* ── LEFT COLUMN: CAREER CONSOLE & STATS ── */}
-          <div className="lg:col-span-5 lg:sticky lg:top-24 space-y-6">
+          {/* ── LEFT COLUMN: CAREER CONSOLE & STATS — hidden on mobile ── */}
+          <div className="hidden lg:block lg:col-span-5 lg:sticky lg:top-24 space-y-6">
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -199,8 +199,8 @@ export function DeliveryFramework() {
 
           {/* ── RIGHT COLUMN: CONNECTED TIMELINE & EXPERIENCE CARDS ── */}
           <div className="lg:col-span-7 relative">
-            {/* Filter Pills Header */}
-            <div className="mb-6 flex items-center justify-between gap-2 border-b border-border pb-3">
+            {/* Filter Pills Header — desktop only */}
+            <div className="mb-6 hidden items-center justify-between gap-2 border-b border-border pb-3 md:flex">
               <div className="flex items-center gap-2">
                 <button
                   type="button"
@@ -239,6 +239,24 @@ export function DeliveryFramework() {
                   Community ({communityCount})
                 </button>
               </div>
+            </div>
+
+            {/* Mobile summary strip — replaces left column */}
+            <div className="mb-4 flex items-center justify-between rounded-xl border border-border bg-surface-2 px-4 py-2.5 md:hidden">
+              <div className="flex items-center gap-3">
+                <span className="inline-flex items-center gap-1.5 font-mono text-[10px] font-semibold uppercase tracking-wider text-text-muted">
+                  <span className="h-1.5 w-1.5 rounded-full bg-success animate-pulse" />
+                  {activeCount} Active
+                </span>
+                <span className="text-border">·</span>
+                <span className="font-mono text-[10px] text-text-muted">{experiences.length} Roles</span>
+              </div>
+              <Link
+                href="/experience"
+                className="inline-flex items-center gap-1 text-[10px] font-semibold text-accent-text hover:underline"
+              >
+                View all <ArrowRight className="h-3 w-3" />
+              </Link>
             </div>
 
             {/* Vertical Line Spine in --border */}
@@ -282,15 +300,17 @@ export function DeliveryFramework() {
                       {/* Experience Card */}
                       <div
                         className={cn(
-                          "editorial-card flex-1 overflow-hidden rounded-2xl p-5 sm:p-6 transition-all duration-300 ease-out",
-                          "hover:-translate-y-1 hover:border-accent"
+                          "editorial-card flex-1 overflow-hidden rounded-2xl transition-all duration-300 ease-out",
+                          "hover:-translate-y-0.5 hover:border-accent",
+                          // Mobile: tight padding; Desktop: normal
+                          "p-3.5 sm:p-5 md:p-6"
                         )}
                       >
                         {/* Header: Company Logo, Title, and Metadata */}
-                        <div className="flex items-start gap-3.5 sm:gap-4">
+                        <div className="flex items-start gap-3 sm:gap-3.5 md:gap-4">
                           {/* Company Logo Badge */}
                           {exp.logo && (
-                            <div className="relative flex h-12 w-12 sm:h-13 sm:w-13 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-border bg-surface p-1.5 shadow-sm">
+                            <div className="relative flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-lg border border-border bg-surface p-1 shadow-sm sm:h-12 sm:w-12 sm:rounded-xl sm:p-1.5">
                               <Image
                                 src={exp.logo}
                                 alt={`${exp.company} logo`}
@@ -303,16 +323,16 @@ export function DeliveryFramework() {
 
                           {/* Role Title & Company Header */}
                           <div className="flex-1 min-w-0">
-                            <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 sm:gap-3">
-                              <div className="flex flex-wrap items-center gap-2">
-                                <h3 className="font-heading text-base sm:text-lg font-bold tracking-tight text-text transition-colors group-hover:text-accent">
+                            <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-0.5 sm:gap-3">
+                              <div className="flex flex-wrap items-center gap-1.5">
+                                <h3 className="font-heading text-sm font-bold tracking-tight text-text transition-colors group-hover:text-accent sm:text-base md:text-lg">
                                   {exp.position}
                                 </h3>
 
-                                {/* Role Track Badge using Hero Sticker Tints */}
+                                {/* Role Track Badge — hidden on mobile */}
                                 <span
                                   className={cn(
-                                    "inline-flex items-center gap-1 rounded-md px-2 py-0.5 font-mono text-[10px] font-bold uppercase tracking-wider text-tint-ink",
+                                    "hidden items-center gap-1 rounded-md px-2 py-0.5 font-mono text-[10px] font-bold uppercase tracking-wider text-tint-ink sm:inline-flex",
                                     isEngineering ? "bg-tint-green" : "bg-tint-pink"
                                   )}
                                 >
@@ -324,9 +344,9 @@ export function DeliveryFramework() {
                                   {isEngineering ? "Engineering" : "Community"}
                                 </span>
 
-                                {/* Current Role Status */}
+                                {/* Current Role Status — compact on mobile */}
                                 {isCurrent && (
-                                  <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-surface-2 px-2.5 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-wider text-text">
+                                  <span className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-2 px-2 py-0.5 font-mono text-[9px] font-semibold uppercase tracking-wider text-text sm:gap-1.5 sm:px-2.5 sm:text-[10px]">
                                     <span className="relative flex h-1.5 w-1.5">
                                       <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-success opacity-75" />
                                       <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-success" />
@@ -344,7 +364,7 @@ export function DeliveryFramework() {
                             </div>
 
                             {/* Company & Location */}
-                            <div className="mt-1 flex flex-wrap items-center gap-1.5 text-xs sm:text-sm font-medium text-text">
+                            <div className="mt-0.5 flex flex-wrap items-center gap-1 text-[11px] font-medium text-text sm:mt-1 sm:gap-1.5 sm:text-xs md:text-sm">
                               {exp.companyUrl ? (
                                 <a
                                   href={exp.companyUrl}
@@ -362,21 +382,21 @@ export function DeliveryFramework() {
                               )}
                               <span className="text-border" aria-hidden="true">·</span>
                               <span className="inline-flex items-center gap-1 text-text-muted font-normal">
-                                <MapPin className="h-3 w-3 opacity-60" />
+                                <MapPin className="hidden h-3 w-3 opacity-60 sm:inline" />
                                 {exp.location}
                               </span>
                             </div>
                           </div>
                         </div>
 
-                        {/* Primary Overview Paragraph */}
-                        <p className="mt-3.5 text-xs sm:text-[13px] leading-relaxed text-text-muted">
+                        {/* Primary Overview Paragraph — HIDDEN on mobile */}
+                        <p className="mt-3.5 hidden text-xs leading-relaxed text-text-muted sm:block md:text-[13px]">
                           {exp.description[0]}
                         </p>
 
-                        {/* Expandable Key Impact / Achievements */}
+                        {/* Expandable Key Impact / Achievements — HIDDEN on mobile */}
                         {exp.achievements && exp.achievements.length > 0 && (
-                          <div className="mt-3">
+                          <div className="mt-3 hidden sm:block">
                             <button
                               type="button"
                               onClick={() => toggleExpand(exp.id)}
@@ -416,19 +436,36 @@ export function DeliveryFramework() {
                           </div>
                         )}
 
-                        {/* Tech Stack Pills */}
+                        {/* Tech Stack Pills — mobile: max 2 + "View details" link; Desktop: up to 6 */}
                         {exp.skills && exp.skills.length > 0 && (
-                          <div className="mt-4 flex flex-wrap gap-1.5 pt-3 border-t border-border" aria-label="Technologies used">
+                          <div className="mt-2.5 flex flex-wrap items-center gap-1.5 border-t border-border pt-2.5 sm:mt-4 sm:pt-3" aria-label="Technologies used">
+                            {/* Mobile: 2 pills + link */}
+                            {exp.skills.slice(0, 2).map((skill) => (
+                              <span
+                                key={skill}
+                                className="rounded-md border border-border bg-surface-2 px-2 py-0.5 font-sans text-[10px] text-text-muted sm:hidden"
+                              >
+                                {skill}
+                              </span>
+                            ))}
+                            <Link
+                              href={`/experience/${exp.id}`}
+                              className="inline-flex items-center gap-1 text-[10px] font-semibold text-accent-text hover:underline sm:hidden"
+                            >
+                              Details <ArrowRight className="h-3 w-3" />
+                            </Link>
+
+                            {/* Desktop: up to 6 pills */}
                             {exp.skills.slice(0, 6).map((skill) => (
                               <span
                                 key={skill}
-                                className="rounded-md border border-border bg-surface-2 px-2 py-0.5 font-sans text-[10px] sm:text-[11px] text-text-muted"
+                                className="hidden rounded-md border border-border bg-surface-2 px-2 py-0.5 font-sans text-[11px] text-text-muted sm:inline"
                               >
                                 {skill}
                               </span>
                             ))}
                             {exp.skills.length > 6 && (
-                              <span className="font-sans text-[10px] sm:text-[11px] text-text-muted self-center px-1 font-medium">
+                              <span className="hidden font-sans text-[11px] text-text-muted self-center px-1 font-medium sm:inline">
                                 +{exp.skills.length - 6} more
                               </span>
                             )}
