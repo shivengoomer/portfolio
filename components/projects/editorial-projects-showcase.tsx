@@ -267,18 +267,16 @@ export default function EditorialProjectsShowcase({
                 <span className="font-mono text-[11px] text-zinc-400">02 Featured</span>
               </div>
 
-              {/* Mobile: only show first secondary if not showAll; Desktop: all */}
+              {/* Mobile: only show first secondary if not showAll; Desktop: always all */}
               <div className="grid grid-cols-1 gap-3 md:gap-6 md:grid-cols-2">
-                {secondary
-                  .filter((_, i) => showAll || i < 1)
-                  .map((project) => (
-                    <SecondaryProjectCard key={project.id} project={project} />
-                  ))}
-                {!showAll && secondary.length > 1 && (
-                  <div className="md:hidden">
-                    {secondary.slice(1).map((project) => null)}
+                {secondary.map((project, i) => (
+                  <div
+                    key={project.id}
+                    className={i > 0 && !showAll ? "hidden md:block" : undefined}
+                  >
+                    <SecondaryProjectCard project={project} />
                   </div>
-                )}
+                ))}
               </div>
             </section>
           )}
@@ -303,13 +301,16 @@ export default function EditorialProjectsShowcase({
                 </span>
               </div>
 
-              {/* Mobile: limit remaining to 3 (total 5 counting primary + 1 secondary) */}
+              {/* Mobile: limit remaining to 3; Desktop: always show all */}
               <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:gap-6 lg:grid-cols-3">
-                {remaining
-                  .filter((_, i) => showAll || i < 3)
-                  .map((project) => (
-                    <CompactProjectCard key={project.id} project={project} />
-                  ))}
+                {remaining.map((project, i) => (
+                  <div
+                    key={project.id}
+                    className={i >= 3 && !showAll ? "md:block hidden" : undefined}
+                  >
+                    <CompactProjectCard project={project} />
+                  </div>
+                ))}
               </div>
 
               {/* Mobile "View all" button */}

@@ -28,19 +28,36 @@ const fontSans = localFont({
   display: "swap",
 });
 
-import { Oswald, Instrument_Serif } from "next/font/google";
-
-const fontOswald = Oswald({
-  subsets: ["latin"],
-  weight: ["500", "600"],
+const fontOswald = localFont({
+  src: [
+    {
+      path: "../assets/fonts/Oswald-500.woff2",
+      weight: "500",
+      style: "normal",
+    },
+    {
+      path: "../assets/fonts/Oswald-600.woff2",
+      weight: "600",
+      style: "normal",
+    },
+  ],
   variable: "--font-oswald",
   display: "swap",
 });
 
-const fontSerif = Instrument_Serif({
-  subsets: ["latin"],
-  weight: ["400"],
-  style: ["normal", "italic"],
+const fontSerif = localFont({
+  src: [
+    {
+      path: "../assets/fonts/InstrumentSerif-Regular.woff2",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../assets/fonts/InstrumentSerif-Italic.woff2",
+      weight: "400",
+      style: "italic",
+    },
+  ],
   variable: "--font-serif",
   display: "swap",
 });
