@@ -1,95 +1,67 @@
 import { Metadata } from "next";
-import Link from "next/link";
-
-import PageContainer from "@/components/common/page-container";
-import { ContactForm } from "@/components/forms/contact-form";
-import { pagesConfig } from "@/config/pages";
-import { SocialLinks } from "@/config/socials";
-import { CopyEmailButton } from "@/components/common/copy-email-button";
+import { ClientPageWrapper } from "@/components/common/client-page-wrapper";
+import { ReachOutConsole } from "@/components/contact/reach-out-console";
 
 export const metadata: Metadata = {
-  title: pagesConfig.contact.metadata.title,
-  description: pagesConfig.contact.metadata.description,
+  title: "Reach Out | Shiven Goomer",
+  description:
+    "Direct line, verified channels, and dispatch console to connect with Shiven Goomer for full-time engineering roles, technical advisory, and high-impact systems.",
 };
 
 export default function ContactPage() {
   return (
-    <PageContainer
-      title={pagesConfig.contact.title}
-      description={pagesConfig.contact.description}
-    >
-      <div className="grid gap-6 lg:grid-cols-[0.42fr_0.58fr]">
-        {/* ── Left Column — Contact Info ── */}
-        <div className="flex flex-col gap-5">
-          {/* Intro */}
-          <section className="rounded-2xl border border-zinc-200 bg-white/85 p-6 shadow-sm backdrop-blur dark:border-zinc-800 dark:bg-zinc-900/80">
-            <h2 className="font-heading text-xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-100">
-              Let&apos;s build something together
-            </h2>
-            <p className="mt-2 text-sm leading-6 text-zinc-600 dark:text-zinc-300">
-              I&apos;m always open to new projects, collaborations, and
-              interesting conversations. Drop me a line and I&apos;ll respond
-              within 24 hours.
-            </p>
+    <ClientPageWrapper>
+      <div className="relative min-h-screen overflow-hidden px-4 pt-28 pb-16 sm:px-6 sm:pt-32 sm:pb-20 md:pt-36 md:pb-24 lg:px-8">
+        {/* Ambient Top Glow & Technical Micro-Grid Backdrop */}
+        <div
+          className="pointer-events-none absolute -top-40 left-1/2 -translate-x-1/2 h-[500px] w-full max-w-7xl bg-[radial-gradient(ellipse_60%_50%_at_50%_0%,rgba(232,80,31,0.12),rgba(57,211,83,0.08),transparent_80%)] blur-3xl dark:bg-[radial-gradient(ellipse_60%_50%_at_50%_0%,rgba(242,92,42,0.16),rgba(57,211,83,0.1),transparent_80%)]"
+          aria-hidden="true"
+        />
+        <div
+          className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:32px_32px] [mask-image:radial-gradient(ellipse_70%_50%_at_50%_0%,#000_60%,transparent_100%)] opacity-80"
+          aria-hidden="true"
+        />
 
-            {/* Email with copy */}
-            <div className="mt-4">
-              <CopyEmailButton email="shivengoomer@gmail.com" />
-            </div>
-          </section>
-
-          {/* Social links */}
-          <section className="rounded-2xl border border-zinc-200 bg-white/85 p-6 shadow-sm backdrop-blur dark:border-zinc-800 dark:bg-zinc-900/80">
-            <h3 className="text-xs font-medium uppercase tracking-[0.2em] text-zinc-500 dark:text-zinc-400">
-              Connect
-            </h3>
-            <div className="mt-4 flex items-center gap-3">
-              {SocialLinks.map((s) => (
-                <Link
-                  key={s.name}
-                  href={s.link}
-                  className="group flex h-12 w-12 items-center justify-center rounded-xl border border-zinc-200 bg-zinc-50 text-zinc-600 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-sm dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-300"
-                  target={s.link.startsWith("http") ? "_blank" : undefined}
-                  rel={s.link.startsWith("http") ? "noreferrer" : undefined}
-                  aria-label={s.name}
-                >
-                  <s.icon className="h-6 w-6" />
-                </Link>
-              ))}
-            </div>
-          </section>
-
-          {/* Location + Timezone */}
-          <section className="rounded-2xl border border-zinc-200 bg-white/85 p-6 shadow-sm backdrop-blur dark:border-zinc-800 dark:bg-zinc-900/80">
-            <div className="flex items-center gap-2.5">
-              <span className="relative flex h-2.5 w-2.5">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-                <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-500" />
+        <div className="relative z-10 mx-auto max-w-5xl space-y-10 sm:space-y-12">
+          {/* Editorial Section Header */}
+          <header className="space-y-4">
+            <div className="inline-flex items-center gap-2 rounded-full border border-border/80 bg-surface/70 px-3 py-1 font-mono text-[11px] font-semibold tracking-wider text-text-muted shadow-sm backdrop-blur-md">
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-success opacity-75" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-success" />
               </span>
-              <p className="text-sm font-medium text-zinc-900 dark:text-zinc-100">
-                Available for opportunities
-              </p>
+              <span>DIRECT DISPATCH · LATENCY &lt; 12H · UTC+5:30</span>
             </div>
-            <p className="mt-2 text-sm text-zinc-500 dark:text-zinc-400">
-              New Delhi · IST UTC+5:30
-            </p>
-          </section>
-        </div>
 
-        {/* ── Right Column — Contact Form ── */}
-        <section className="rounded-2xl border border-zinc-200 bg-white/85 p-6 shadow-sm backdrop-blur dark:border-zinc-800 dark:bg-zinc-900/80">
-          <h2 className="font-heading text-xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-100">
-            Send a message
-          </h2>
-          <p className="mt-2 text-sm leading-6 text-zinc-500 dark:text-zinc-400">
-            A little context goes a long way — project scope, timeline, or even
-            a rough idea is enough to start.
-          </p>
-          <div className="mt-6">
-            <ContactForm />
-          </div>
-        </section>
+            <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+              <div>
+                <h1 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-text">
+                  Direct Line &amp; Reach Out
+                </h1>
+                <p className="mt-2 max-w-2xl text-sm sm:text-base leading-relaxed text-text-muted">
+                  The fastest route to reach me for full-time engineering roles, technical advisory,
+                  quantitative architectures, or exploring new systems together.
+                </p>
+              </div>
+
+              {/* Quick telemetry badges */}
+              <div className="flex flex-wrap items-center gap-2 font-mono text-[11px]">
+                <div className="flex items-center gap-1.5 rounded-lg border border-border/80 bg-surface/60 px-2.5 py-1 text-text-muted backdrop-blur">
+                  <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+                  <span>Available Q2/Q3 2026</span>
+                </div>
+                <div className="flex items-center gap-1.5 rounded-lg border border-border/80 bg-surface/60 px-2.5 py-1 text-text-muted backdrop-blur">
+                  <span className="h-1.5 w-1.5 rounded-full bg-success" />
+                  <span>Zero Bureaucracy</span>
+                </div>
+              </div>
+            </div>
+          </header>
+
+          {/* Main Reach Out Console */}
+          <ReachOutConsole />
+        </div>
       </div>
-    </PageContainer>
+    </ClientPageWrapper>
   );
 }

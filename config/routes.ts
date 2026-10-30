@@ -13,8 +13,8 @@ export const routesConfig: any = {
       href: "/experience",
     },
     {
-      title: "Code",
-      href: "/leetcode",
+      title: "City",
+      href: "/#github-city",
     },
     {
       title: "Certificates",

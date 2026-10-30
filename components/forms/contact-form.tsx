@@ -20,167 +20,144 @@ import { Textarea } from "@/components/ui/textarea";
 import { useModalStore } from "@/hooks/use-modal-store";
 
 const formSchema = z.object({
-  name: z.string().min(3, {
-    message: "Name must contain at least 3 characters.",
-  }),
+  name: z.string().min(3, { message: "Name must be at least 3 characters." }),
   email: z.string().email("Please enter a valid email."),
-  message: z.string().min(10, {
-    message: "Please write something more descriptive.",
-  }),
+  message: z.string().min(10, { message: "Please write a bit more — context helps a lot." }),
   social: z.string().url().optional().or(z.literal("")),
 });
+
+type FormValues = z.infer<typeof formSchema>;
 
 export function ContactForm() {
   const storeModal = useModalStore();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const form = useForm<z.infer<typeof formSchema>>({
+  const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      name: "",
-      email: "",
-      message: "",
-      social: "",
-    },
+    defaultValues: { name: "", email: "", message: "", social: "" },
   });
 
-  // 2. Define a submit handler.
-  async function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: FormValues) {
     setIsSubmitting(true);
-
     try {
       const response = await fetch("/api/contact", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(values),
       });
 
       if (response.status === 200) {
         form.reset();
         storeModal.onOpen({
-          title: "Thank you!",
+          title: "Message sent!",
           description:
-            "Your message has been received! I appreciate your contact and will get back to you shortly.",
+            "Got it — I'll get back to you within 24 hours. Check your inbox for a confirmation.",
           icon: Icons.successAnimated,
         });
-
         return;
       }
 
-      form.setError("root", {
-        message: "Something went wrong. Please try again in a moment.",
-      });
-    } catch (err) {
-      console.log("Err!", err);
-      form.setError("root", {
-        message: "Unable to send right now. Please email me directly instead.",
-      });
+      form.setError("root", { message: "Something went wrong. Please try again." });
+    } catch {
+      form.setError("root", { message: "Can't reach the server right now — email me directly instead." });
     } finally {
       setIsSubmitting(false);
     }
   }
 
+  const fieldClass =
+    "rounded-xl border border-border bg-surface-2 text-text placeholder:text-text-muted/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50 focus-visible:border-accent/60 transition-all duration-150";
+  const labelClass = "text-xs font-semibold uppercase tracking-[0.12em] text-text-muted";
+
   return (
     <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(onSubmit)}
-        className="min-w-full space-y-6"
-      >
-        <FormField
-          control={form.control}
-          name="name"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel className="text-sm font-medium text-zinc-700 dark:text-zinc-200">
-                Name
-              </FormLabel>
-              <FormControl>
-                <Input
-                  placeholder="Enter your name"
-                  autoComplete="name"
-                  className="rounded-xl border-zinc-200 bg-white focus:ring-2 focus:ring-primary dark:border-zinc-700 dark:bg-zinc-900"
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="email"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel className="text-sm font-medium text-neutral-700 dark:text-neutral-200">
-                Email
-              </FormLabel>
-              <FormControl>
-                <Input
-                  placeholder="Enter your email"
-                  autoComplete="email"
-                  type="email"
-                  className="rounded-xl border-zinc-200 bg-white focus:ring-2 focus:ring-primary dark:border-zinc-700 dark:bg-zinc-900"
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
+        {/* Name + Email side by side on md+ */}
+        <div className="grid gap-5 sm:grid-cols-2">
+          <FormField
+            control={form.control}
+            name="name"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className={labelClass}>Name</FormLabel>
+                <FormControl>
+                  <Input placeholder="Your name" autoComplete="name" className={fieldClass} {...field} />
+                </FormControl>
+                <FormMessage className="text-xs" />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="email"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className={labelClass}>Email</FormLabel>
+                <FormControl>
+                  <Input placeholder="you@company.com" autoComplete="email" type="email" className={fieldClass} {...field} />
+                </FormControl>
+                <FormMessage className="text-xs" />
+              </FormItem>
+            )}
+          />
+        </div>
+
         <FormField
           control={form.control}
           name="message"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="text-sm font-medium text-neutral-700 dark:text-neutral-200">
-                Message
-              </FormLabel>
+              <FormLabel className={labelClass}>Message</FormLabel>
               <FormControl>
                 <Textarea
-                  placeholder="Tell me a little about your project or role"
-                  rows={6}
-                  className="rounded-xl border-zinc-200 bg-white focus:ring-2 focus:ring-primary dark:border-zinc-700 dark:bg-zinc-900"
+                  placeholder="What are you building? Share scope, timeline, or even a rough idea — I'm all ears."
+                  rows={5}
+                  className={`${fieldClass} resize-none`}
                   {...field}
                 />
               </FormControl>
-              <FormMessage />
+              <FormMessage className="text-xs" />
             </FormItem>
           )}
         />
+
         <FormField
           control={form.control}
           name="social"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="text-sm font-medium text-neutral-700 dark:text-neutral-200">
-                Social (optional)
+              <FormLabel className={labelClass}>
+                Link{" "}
+                <span className="normal-case font-normal tracking-normal text-text-muted/60">(optional)</span>
               </FormLabel>
               <FormControl>
-                <Input
-                  placeholder="LinkedIn, GitHub, or website"
-                  autoComplete="url"
-                  className="rounded-xl border-zinc-200 bg-white focus:ring-2 focus:ring-primary dark:border-zinc-700 dark:bg-zinc-900"
-                  {...field}
-                />
+                <Input placeholder="LinkedIn, GitHub, portfolio…" autoComplete="url" className={fieldClass} {...field} />
               </FormControl>
-              <FormMessage />
+              <FormMessage className="text-xs" />
             </FormItem>
           )}
         />
-        {form.formState.errors.root?.message ? (
-          <p className="text-sm text-destructive">
+
+        {form.formState.errors.root?.message && (
+          <p className="rounded-lg border border-destructive/20 bg-destructive/8 px-4 py-2.5 text-sm text-destructive">
             {form.formState.errors.root.message}
           </p>
-        ) : null}
+        )}
+
         <Button
           type="submit"
           size="lg"
           disabled={isSubmitting}
-          className="h-12 w-full rounded-xl px-6"
+          className="h-12 w-full rounded-xl font-semibold tracking-wide"
         >
-          {isSubmitting ? "Sending..." : "Send Message →"}
+          {isSubmitting ? (
+            <span className="flex items-center gap-2">
+              <Icons.spinner className="h-4 w-4 animate-spin" />
+              Sending…
+            </span>
+          ) : (
+            "Send Message →"
+          )}
         </Button>
       </form>
     </Form>

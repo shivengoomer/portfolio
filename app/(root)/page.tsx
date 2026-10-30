@@ -1,8 +1,7 @@
 "use client";
 import Script from "next/script";
 import { ClientPageWrapper } from "@/components/common/client-page-wrapper";
-import { GitHubProfileCard } from "@/components/github/github-profile-card";
-import { LeetCodeProfileCard } from "@/components/leetcode/leetcode-profile-card";
+import { GitHubScrollCityGraph } from "@/components/github/github-scroll-city-graph";
 import { FeaturedWorkShowcase } from "@/components/home/featured-work-showcase";
 import { HomeSkillsMarquee } from "@/components/skills/home-skills-marquee";
 import { Projects } from "@/config/projects";
@@ -52,39 +51,6 @@ function Reveal({
   );
 }
 
-// ─── Mobile-only tab toggle ───────────────────────────────────────────────────
-function CodeProfileTabs() {
-  const [activeTab, setActiveTab] = useState<"github" | "leetcode">("github");
-  return (
-    <div className="md:hidden">
-      <div className="mb-3 flex rounded-xl border border-border bg-surface-2 p-1">
-        <button
-          type="button"
-          onClick={() => setActiveTab("github")}
-          className={`flex-1 rounded-lg py-2 text-xs font-semibold transition-colors ${
-            activeTab === "github"
-              ? "bg-background text-text shadow-sm"
-              : "text-text-muted hover:text-text"
-          }`}
-        >
-          GitHub
-        </button>
-        <button
-          type="button"
-          onClick={() => setActiveTab("leetcode")}
-          className={`flex-1 rounded-lg py-2 text-xs font-semibold transition-colors ${
-            activeTab === "leetcode"
-              ? "bg-background text-text shadow-sm"
-              : "text-text-muted hover:text-text"
-          }`}
-        >
-          LeetCode
-        </button>
-      </div>
-      {activeTab === "github" ? <GitHubProfileCard /> : <LeetCodeProfileCard />}
-    </div>
-  );
-}
 
 // ─── Main page ────────────────────────────────────────────────────────────────
 export default function IndexPage() {
@@ -159,48 +125,37 @@ export default function IndexPage() {
           <HomeSkillsMarquee />
         </Reveal>
 
-        {/* ── CODE PROFILES ── */}
+        {/* ── GITHUB 2D TO 3D SCROLL CITY ── */}
         <Reveal y={40} delay={0}>
           <section
+            id="github-city"
             className="scroll-mt-20 px-4 py-8 sm:px-6 md:py-20 lg:px-8"
-            aria-labelledby="code-profiles-title"
+            aria-labelledby="github-city-title"
           >
             <div className="mx-auto max-w-6xl space-y-4 sm:space-y-6">
               {/* Section heading */}
               <Reveal y={24} delay={0.05}>
                 <div className="max-w-2xl space-y-2 sm:space-y-3">
-                  <p className="font-heading text-[10px] font-semibold uppercase tracking-[0.12em] text-text-muted sm:text-xs">
-                    Code Profiles
+                  <p className="font-heading text-[10px] font-semibold uppercase tracking-[0.14em] text-text-muted sm:text-xs flex items-center gap-2">
+                    <span className="h-1.5 w-1.5 rounded-full bg-[#39d353]" />
+                    GitHub Activity
                   </p>
                   <h2
-                    id="code-profiles-title"
+                    id="github-city-title"
                     className="font-heading text-xl font-semibold tracking-tight text-text sm:text-3xl"
                   >
-                    GitHub + LeetCode
+                    Contribution City
                   </h2>
                   <p className="text-sm leading-6 text-text-muted sm:text-base sm:leading-7">
-                    Live snapshots of shipped code, contribution activity,
-                    competitive programming stats, and coding consistency.
+                    Scroll down to watch daily commits elevate from a flat 2D contribution graph into an isometric 3D city skyline.
                   </p>
                 </div>
               </Reveal>
 
-              {/* Mobile: two-tab toggle */}
-              <Reveal y={24} delay={0.1}>
-                <CodeProfileTabs />
+              {/* Scroll-Driven 2D to 3D City Graph */}
+              <Reveal y={32} delay={0.1}>
+                <GitHubScrollCityGraph />
               </Reveal>
-
-              {/* Desktop: side-by-side */}
-              <div className="hidden gap-4 md:grid xl:grid-cols-2 xl:items-start">
-                <Reveal y={32} delay={0.08}>
-                  <GitHubProfileCard />
-                </Reveal>
-                <Reveal y={32} delay={0.16}>
-                  <div className="xl:sticky xl:top-24">
-                    <LeetCodeProfileCard />
-                  </div>
-                </Reveal>
-              </div>
             </div>
           </section>
         </Reveal>
