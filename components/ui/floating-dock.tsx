@@ -53,7 +53,7 @@ const FloatingDockDesktop = ({
       onTouchEnd={() => mouseX.set(Infinity)}
       onTouchCancel={() => mouseX.set(Infinity)}
       className={cn(
-        "mx-auto hidden h-16 items-end gap-4 rounded-2xl border border-border bg-surface-2 px-4 pb-3 shadow-lg md:flex",
+        "mx-auto hidden h-14 md:h-16 items-center gap-2 sm:gap-3 md:gap-4 rounded-2xl border border-border bg-surface-2 px-3 sm:px-4 py-2 shadow-lg md:flex",
         className,
       )}
     >
@@ -74,7 +74,7 @@ const FloatingDockMobile = ({
   return (
     <div
       className={cn(
-        "mx-auto flex h-10 w-full items-center justify-between gap-0.5 overflow-x-auto rounded-2xl border border-border bg-surface-2 px-1.5 shadow-md backdrop-blur-xl md:hidden",
+        "mx-auto flex h-12 w-fit max-w-full items-center justify-center gap-1.5 rounded-2xl border border-border bg-surface-2/95 px-2.5 py-1.5 shadow-lg backdrop-blur-xl md:hidden",
         className,
       )}
     >
@@ -91,11 +91,11 @@ function MobileDockItem({ title, icon, href, onClick, className }: DockItem) {
   const content = (
     <motion.span
       onTapStart={() => setPulseKey((key) => key + 1)}
-      whileTap={{ scale: 0.9, y: 2 }}
+      whileTap={{ scale: 0.9, y: 1 }}
       transition={{ type: "spring", stiffness: 420, damping: 24 }}
-      className="relative flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-full border border-border bg-surface p-2 text-text shadow-sm transition-colors hover:border-accent hover:text-accent"
+      className="relative flex h-8 w-8 sm:h-9 sm:w-9 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-border/80 bg-surface p-1.5 text-text shadow-sm transition-colors hover:border-accent hover:text-accent"
     >
-      <span className="pointer-events-none absolute inset-0 rounded-full ring-1 ring-border/20" />
+      <span className="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-border/20" />
       <AnimatePresence>
         {pulseKey > 0 && (
           <motion.span
@@ -104,7 +104,7 @@ function MobileDockItem({ title, icon, href, onClick, className }: DockItem) {
             animate={{ opacity: 0, scale: 1.8 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.45, ease: "easeOut" }}
-            className="absolute inset-0 rounded-full bg-accent-soft"
+            className="absolute inset-0 rounded-xl bg-accent-soft"
           />
         )}
       </AnimatePresence>
