@@ -2,229 +2,53 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 
-import { Icons } from "@/components/common/icons";
-import { ExperienceInterface } from "@/config/experience";
+import { type ExperienceInterface } from "@/config/experience";
+import { cn } from "@/lib/utils";
 
-const formatMonthYear = (date: Date): string =>
-  new Intl.DateTimeFormat("en-US", {
-    month: "short",
-    year: "numeric",
-  }).format(new Date(date));
+const formatDate = (date: Date | "Present") => typeof date === "string" ? date : new Intl.DateTimeFormat("en-US", { month: "short", year: "numeric" }).format(date);
+const duration = (experience: ExperienceInterface) => `${formatDate(experience.startDate)} — ${formatDate(experience.endDate)}`;
 
-const getDurationText = (
-  startDate: Date,
-  endDate: Date | "Present",
-): string => {
-  const start = formatMonthYear(startDate);
-  const end = typeof endDate === "string" ? "Present" : formatMonthYear(endDate);
-  return `${start} – ${end}`;
-};
-
-interface TimelineProps {
-  experiences: ExperienceInterface[];
+function CompanyMark({ experience, large = false }: { experience: ExperienceInterface; large?: boolean }) {
+  return <div className={cn("grid shrink-0 place-items-center rounded-2xl border border-white/10 bg-black/25", large ? "h-20 w-20 sm:h-24 sm:w-24" : "h-12 w-12 sm:h-14 sm:w-14")}>
+    {experience.logo ? <Image src={experience.logo} alt={`${experience.company} logo`} width={large ? 76 : 42} height={large ? 76 : 42} className={cn("object-contain", large ? "h-14 w-14 sm:h-16 sm:w-16" : "h-9 w-9")} /> : <span className="font-heading text-xl text-accent">SG</span>}
+  </div>;
 }
 
-// ── individual animated card ──────────────────────────────────
-function TimelineCard({
-  experience,
-  index,
-}: {
-  experience: ExperienceInterface;
-  index: number;
-}) {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-60px 0px" });
-
-  const isPresent = experience.endDate === "Present";
-
-  return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 28, scale: 0.98 }}
-      animate={
-        isInView
-          ? {
-              opacity: 1,
-              y: 0,
-              scale: 1,
-              transition: {
-                type: "spring",
-                stiffness: 90,
-                damping: 20,
-                delay: index * 0.07,
-              },
-            }
-          : {}
-      }
-      className="group relative grid gap-3 sm:grid-cols-[3.75rem_1fr] sm:gap-4"
-    >
-      {/* ── Timeline dot / company logo (desktop sidebar) ── */}
-      <div className="relative z-10 hidden sm:block">
-        <motion.div
-          whileHover={{ scale: 1.08 }}
-          transition={{ type: "spring", stiffness: 400, damping: 22 }}
-          className="grid h-14 w-14 place-items-center rounded-2xl border border-zinc-200 bg-white shadow-sm dark:border-zinc-800 dark:bg-zinc-950"
-        >
-          {experience.logo ? (
-            <Image
-              src={experience.logo}
-              alt={experience.company}
-              width={42}
-              height={42}
-              className="h-10 w-10 object-contain"
-            />
-          ) : (
-            <Icons.work className="h-7 w-7 text-zinc-500" />
-          )}
-        </motion.div>
+function FeaturedRole({ experience }: { experience: ExperienceInterface }) {
+  const reduceMotion = useReducedMotion();
+  return <motion.article initial={reduceMotion ? false : { opacity: 0, y: 26 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.25 }} transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }} className="relative overflow-hidden rounded-[1.75rem] border border-white/10 bg-[#180a11] p-6 shadow-[0_28px_80px_rgba(0,0,0,0.35)] sm:p-10">
+    <div className="pointer-events-none absolute -right-32 -top-32 h-80 w-80 rounded-full bg-accent/10 blur-3xl" />
+    <div className="relative grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
+      <div>
+        <div className="flex items-center gap-4"><CompanyMark experience={experience} large /><div><p className="font-mono text-[11px] uppercase tracking-[0.2em] text-accent">Current chapter</p><p className="mt-1 text-sm text-text-muted">{experience.company} · {experience.location}</p></div></div>
+        <h2 className="mt-8 max-w-3xl font-heading text-4xl font-extrabold uppercase leading-[0.9] tracking-[-0.04em] text-text sm:text-5xl">{experience.position}</h2>
+        <p className="mt-5 max-w-2xl text-base leading-relaxed text-text-muted sm:text-lg">{experience.description[0]}</p>
       </div>
-
-      {/* ── Card ── */}
-      <article className="relative overflow-hidden rounded-xl border border-zinc-200 bg-white/85 p-4 shadow-sm backdrop-blur transition-shadow hover:shadow-md dark:border-zinc-800 dark:bg-zinc-900/85 sm:rounded-2xl sm:p-6">
-        {/* Left accent stripe */}
-        <span className="absolute inset-y-0 left-0 w-0.5 rounded-r bg-amber-500 opacity-0 transition-opacity duration-300 group-hover:opacity-100 sm:w-1" />
-
-        {/* ── Top row: logo (mobile) + title + date ── */}
-        <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-          <div className="flex min-w-0 gap-3 sm:gap-4">
-            {/* Mobile-only inline logo */}
-            <div className="grid h-10 w-10 flex-shrink-0 place-items-center rounded-xl border border-zinc-200 bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-950 sm:hidden">
-              {experience.logo ? (
-                <Image
-                  src={experience.logo}
-                  alt={experience.company}
-                  width={36}
-                  height={36}
-                  className="h-8 w-8 object-contain"
-                />
-              ) : (
-                <Icons.work className="h-5 w-5 text-zinc-500" />
-              )}
-            </div>
-
-            <div className="min-w-0">
-              <div className="flex flex-wrap items-center gap-1.5">
-                <h2 className="text-sm font-semibold tracking-tight text-zinc-950 dark:text-zinc-100 sm:text-lg">
-                  {experience.position}
-                </h2>
-                {experience.companyUrl ? (
-                  <a
-                    href={experience.companyUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex text-zinc-400 transition-colors hover:text-zinc-900 dark:hover:text-zinc-100"
-                    aria-label={`Visit ${experience.company}`}
-                  >
-                    <Icons.externalLink className="h-3.5 w-3.5" />
-                  </a>
-                ) : null}
-              </div>
-
-              <p className="mt-0.5 text-xs text-zinc-500 dark:text-zinc-400 sm:mt-1 sm:text-sm">
-                <span className="font-medium text-zinc-700 dark:text-zinc-300">
-                  {experience.company}
-                </span>
-                {" · "}
-                {experience.location}
-              </p>
-            </div>
-          </div>
-
-          {/* Date badge */}
-          <div
-            className={`inline-flex w-fit items-center gap-1.5 self-start rounded-full border px-2.5 py-1 text-[10px] font-medium sm:text-xs ${
-              isPresent
-                ? "border-emerald-500/25 bg-emerald-500/10 text-emerald-700 dark:text-emerald-400"
-                : "border-amber-600/25 bg-amber-600/10 text-amber-800 dark:text-amber-300"
-            }`}
-          >
-            {isPresent && (
-              <span className="relative flex h-1.5 w-1.5">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500" />
-              </span>
-            )}
-            <Icons.calendar className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
-            {getDurationText(experience.startDate, experience.endDate)}
-          </div>
-        </div>
-
-        {/* ── Description bullets ── clamp on mobile ── */}
-        <ul className="mt-3 space-y-2 sm:mt-5 sm:space-y-3">
-          {experience.description.map((desc, i) => (
-            <li
-              key={desc}
-              className={`flex gap-2 text-xs leading-6 text-zinc-600 dark:text-zinc-300 sm:gap-3 sm:text-sm sm:leading-7 ${
-                // hide 3rd+ bullets on mobile
-                i >= 2 ? "hidden sm:flex" : ""
-              }`}
-            >
-              <span className="mt-2.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-amber-500 sm:mt-3" />
-              <span>{desc}</span>
-            </li>
-          ))}
-        </ul>
-
-        {/* ── Footer: skills + link ── */}
-        <div className="mt-3 flex flex-col gap-3 border-t border-zinc-200 pt-3 dark:border-zinc-800 sm:mt-6 sm:flex-row sm:items-center sm:justify-between sm:pt-5">
-          {/* Skills — max 3 on mobile */}
-          <div className="flex flex-wrap gap-1.5">
-            {experience.skills.slice(0, 3).map((skill) => (
-              <span
-                key={skill}
-                className="rounded-full border border-violet-300/25 bg-violet-300/10 px-2.5 py-0.5 text-[10px] font-medium text-violet-700 dark:text-violet-200 sm:px-3 sm:py-1 sm:text-xs"
-              >
-                {skill}
-              </span>
-            ))}
-            {/* Desktop: show up to 5, hidden on mobile */}
-            {experience.skills.slice(3, 5).map((skill) => (
-              <span
-                key={skill}
-                className="hidden rounded-full border border-violet-300/25 bg-violet-300/10 px-3 py-1 text-xs font-medium text-violet-700 dark:text-violet-200 sm:inline-flex"
-              >
-                {skill}
-              </span>
-            ))}
-            {experience.skills.length > 5 ? (
-              <span className="rounded-full border border-zinc-200 bg-zinc-50 px-2.5 py-0.5 text-[10px] font-medium text-zinc-500 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-400 sm:px-3 sm:py-1 sm:text-xs">
-                +{experience.skills.length - 5} more
-              </span>
-            ) : experience.skills.length > 3 ? (
-              <span className="rounded-full border border-zinc-200 bg-zinc-50 px-2.5 py-0.5 text-[10px] font-medium text-zinc-500 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-400 sm:hidden">
-                +{experience.skills.length - 3} more
-              </span>
-            ) : null}
-          </div>
-
-          {/* View details link */}
-          <Link
-            href={`/experience/${experience.id}`}
-            className="inline-flex w-fit items-center gap-1.5 rounded-full border border-zinc-200 bg-white px-3 py-1.5 text-[10px] font-medium text-zinc-700 transition-colors hover:bg-zinc-50 hover:text-zinc-950 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-200 dark:hover:bg-zinc-700 sm:px-4 sm:py-2 sm:text-xs"
-          >
-            View details
-            <Icons.chevronRight className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
-          </Link>
-        </div>
-      </article>
-    </motion.div>
-  );
-}
-
-export default function Timeline({ experiences }: TimelineProps) {
-  return (
-    <div className="relative">
-      {/* Vertical line — desktop only */}
-      <div className="absolute bottom-8 left-7 top-8 hidden w-px bg-gradient-to-b from-transparent via-zinc-300 to-transparent dark:via-zinc-700 sm:block" />
-
-      <div className="space-y-3 sm:space-y-5">
-        {experiences.map((experience, index) => (
-          <TimelineCard key={experience.id} experience={experience} index={index} />
-        ))}
+      <div className="border-l-0 border-white/10 pt-2 lg:border-l lg:pl-8">
+        <p className="font-mono text-xs uppercase tracking-[0.15em] text-[#8fdda9]"><span className="mr-2 inline-block h-2 w-2 rounded-full bg-[#7FD6A0]" />{duration(experience)}</p>
+        <div className="mt-8 space-y-3 border-y border-white/10 py-5">{experience.achievements.slice(0, 2).map((achievement) => <p key={achievement} className="text-sm leading-relaxed text-text-muted">{achievement}</p>)}</div>
+        <Link href={`/experience/${experience.id}`} className="group mt-7 inline-flex items-center gap-2 text-sm font-semibold text-text transition-colors hover:text-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent">Read the full role <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" /></Link>
       </div>
     </div>
-  );
+  </motion.article>;
+}
+
+function RoleRow({ experience, index }: { experience: ExperienceInterface; index: number }) {
+  const reduceMotion = useReducedMotion();
+  const isCommunity = experience.category === "Community";
+  return <motion.article initial={reduceMotion ? false : { opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.15 }} transition={{ delay: Math.min(index * 0.06, 0.24), duration: 0.55, ease: [0.22, 1, 0.36, 1] }} className="group relative grid gap-5 border-b border-white/10 px-2 py-7 transition-colors hover:bg-[#240e17] sm:grid-cols-[64px_minmax(180px,0.8fr)_1.3fr_auto] sm:items-center sm:gap-6 sm:px-5 sm:py-8">
+    <CompanyMark experience={experience} />
+    <div><p className="font-mono text-[10px] uppercase tracking-[0.16em] text-text-muted">{isCommunity ? "Community / leadership" : "Engineering / delivery"}</p><h3 className="mt-2 font-heading text-2xl font-bold uppercase leading-none tracking-tight text-text">{experience.position}</h3><p className="mt-2 text-sm text-text-muted">{experience.company} · {experience.location}</p></div>
+    <p className="max-w-xl text-sm leading-relaxed text-text-muted">{experience.description[0]}</p>
+    <div className="flex items-center justify-between gap-4 sm:flex-col sm:items-end"><span className="font-mono text-[11px] uppercase tracking-wider text-text-muted">{duration(experience)}</span><Link href={`/experience/${experience.id}`} className="inline-flex items-center gap-2 text-sm font-semibold text-text transition-colors hover:text-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent">Details <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" /></Link></div>
+  </motion.article>;
+}
+
+export default function Timeline({ experiences }: { experiences: ExperienceInterface[] }) {
+  const [lead, ...roles] = experiences;
+  if (!lead) return null;
+  return <div className="space-y-16 sm:space-y-20"><FeaturedRole experience={lead} /><section><div className="mb-5 flex items-center justify-between border-b border-white/10 pb-4"><h2 className="font-mono text-xs font-semibold uppercase tracking-[0.2em] text-text-muted">Previous chapters</h2><span className="font-mono text-xs text-text-muted">{String(roles.length).padStart(2, "0")} / ROLES</span></div><div className="border-t border-white/10">{roles.map((experience, index) => <RoleRow key={experience.id} experience={experience} index={index} />)}</div></section></div>;
 }

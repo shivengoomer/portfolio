@@ -79,6 +79,19 @@
     color-scheme: light dark;
   }
 
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+
+  .lenis.lenis-smooth {
+    scroll-behavior: auto;
+  }
+
+  .lenis.lenis-stopped {
+    overflow: clip;
+  }
+
   ::selection {
     background: var(--accent-soft);
     color: var(--text);
@@ -93,6 +106,32 @@
 
 .dark .editorial-card {
   box-shadow: var(--card-highlight);
+}
+
+/* The exhibition pages are intentionally dark in both global theme modes. */
+.retro-surface {
+  --bg: #12070d;
+  --surface: #180a11;
+  --surface-2: #24111a;
+  --border: #3a2530;
+  --text: #fdf9e7;
+  --text-muted: #b5a3ab;
+  --accent: #f25c2a;
+  --accent-text: #f25c2a;
+  --accent-soft: rgba(242, 92, 42, 0.14);
+  --success: #7fd6a0;
+  color: var(--text);
+}
+
+/* Consistent, responsive editorial breathing room across the site. */
+.site-gutter {
+  padding-inline: clamp(1.25rem, 5vw, 8rem);
+}
+
+@media (max-width: 640px) {
+  .retro-surface {
+    overflow-x: clip;
+  }
 }
 
 .card {

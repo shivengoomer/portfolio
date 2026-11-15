@@ -91,31 +91,33 @@ export default function IndexPage() {
         {/* ── HERO ── with parallax scroll effect */}
         <section
           ref={heroRef}
-          className="relative flex min-h-[95vh] w-full items-center justify-center overflow-hidden px-4 py-16 sm:py-24"
+          className="relative isolate flex min-h-[95vh] w-full items-center justify-center overflow-hidden bg-[#12070d] px-4 py-16 sm:py-24"
           aria-label="Hero"
         >
           {/* Background Video — parallax */}
           <motion.div
             style={{ y: heroY }}
-            className="absolute inset-0 overflow-hidden pointer-events-none -z-10"
+            className="pointer-events-none absolute inset-0 z-0 overflow-hidden"
           >
             <video
               autoPlay
               muted
               loop
               playsInline
-              className="h-full w-full object-cover object-center opacity-70"
+              className="h-full w-full object-cover object-[56%_center] opacity-62 brightness-[0.84] saturate-[1.04] sm:object-center sm:opacity-76"
             >
               <source src="/bg-portfolio.webm" type="video/webm" />
             </video>
-            <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-background via-background/80 to-transparent pointer-events-none" />
+            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(18,7,13,0.3)_0%,rgba(18,7,13,0.08)_42%,rgba(18,7,13,0.56)_100%)] sm:bg-[linear-gradient(180deg,rgba(18,7,13,0.18)_0%,rgba(18,7,13,0.02)_44%,rgba(18,7,13,0.46)_100%)]" />
+            <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-[#12070d] via-[#12070d]/80 to-transparent pointer-events-none" />
           </motion.div>
 
           {/* Hero content — fades + scales out on scroll */}
           <motion.div
             style={{ opacity: heroOpacity, scale: heroScale }}
-            className="relative z-10 w-full flex flex-col items-center justify-center"
+            className="relative z-10 flex w-full flex-col items-center justify-center"
           >
+            <div className="pointer-events-none absolute -inset-x-4 -inset-y-8 -z-10 bg-[radial-gradient(ellipse_62%_58%_at_50%_45%,rgba(18,7,13,0.45),transparent_72%)] sm:bg-[radial-gradient(ellipse_56%_58%_at_50%_45%,rgba(18,7,13,0.3),transparent_72%)]" />
             <EditorialHeroSection />
           </motion.div>
         </section>
@@ -137,17 +139,20 @@ export default function IndexPage() {
               <Reveal y={24} delay={0.05}>
                 <div className="max-w-2xl space-y-2 sm:space-y-3">
                   <p className="font-heading text-[10px] font-semibold uppercase tracking-[0.14em] text-text-muted sm:text-xs flex items-center gap-2">
-                    <span className="h-1.5 w-1.5 rounded-full bg-[#39d353]" />
-                    GitHub Activity
+                    <span className="relative flex h-2 w-2">
+                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#39d353] opacity-75" />
+                      <span className="relative inline-flex h-2 w-2 rounded-full bg-[#39d353]" />
+                    </span>
+                    Production Cadence · 3D Isometric Voxel City
                   </p>
                   <h2
                     id="github-city-title"
-                    className="font-heading text-xl font-semibold tracking-tight text-text sm:text-3xl"
+                    className="font-heading text-2xl font-bold tracking-tight text-text sm:text-4xl"
                   >
-                    Contribution City
+                    GitHub Contribution Metropolis
                   </h2>
                   <p className="text-sm leading-6 text-text-muted sm:text-base sm:leading-7">
-                    Scroll down to watch daily commits elevate from a flat 2D contribution graph into an isometric 3D city skyline.
+                    Every commit is an architectural voxel building. Scroll down or drag to explore the skyline as daily engineering activity rises into an interactive 3D metropolis.
                   </p>
                 </div>
               </Reveal>
@@ -170,7 +175,7 @@ export default function IndexPage() {
           <DeliveryFramework />
         </Reveal>
 
-        {/* ── HACKATHONS, EVENTS & COMMUNITY SHOWCASE ── */}
+        {/* ── HACKATHONS, EVENTS & CERTIFICATES SHOWCASE ── */}
         <Reveal y={48} delay={0}>
           <HackathonsShowcase />
         </Reveal>
