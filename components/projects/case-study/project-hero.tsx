@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import {
   ExternalLink,
   Github,
@@ -12,6 +13,7 @@ import {
   ArrowLeft,
   ChevronLeft,
   ChevronRight,
+  PlaneTakeoff,
 } from "lucide-react";
 import { Icons } from "@/components/common/icons";
 import { ProjectInterface } from "@/config/projects";
@@ -31,10 +33,22 @@ export default function ProjectHero({
   prevProject,
   nextProject,
 }: ProjectHeroProps) {
+  const reduceMotion = useReducedMotion();
+  const [isLaunching, setIsLaunching] = useState(false);
   const isDtox = project.id === "wpbot-news";
   const displayTitle = isDtox
     ? "D-TOX: AI Security Assistant"
     : project.companyName;
+
+  const launchDemo = (event: React.MouseEvent<HTMLButtonElement>) => {
+    if (!project.websiteLink) return;
+    if (event.metaKey || event.ctrlKey || event.shiftKey || event.button !== 0 || reduceMotion) {
+      window.open(project.websiteLink, "_blank", "noopener,noreferrer");
+      return;
+    }
+    setIsLaunching(true);
+    window.setTimeout(() => window.location.assign(project.websiteLink!), 1200);
+  };
 
   const heroImage =
     caseStudy?.heroImage ||
@@ -113,7 +127,7 @@ export default function ProjectHero({
             className="space-y-6"
           >
             {/* Category + badge */}
-            <div className="flex flex-wrap items-center gap-2">
+            <div className="hidden flex-wrap items-center gap-2 sm:flex">
               {isDtox ? (
                 <span className="inline-flex items-center gap-1.5 rounded-full border border-accent/30 bg-accent/10 px-3 py-1 font-mono text-[11px] font-bold uppercase tracking-wider text-accent">
                   <Trophy className="h-3 w-3" />
@@ -148,15 +162,15 @@ export default function ProjectHero({
             {/* CTA buttons */}
             <div className="flex flex-wrap items-center gap-3">
               {project.websiteLink ? (
-                <a
-                  href={project.websiteLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <button
+                  type="button"
+                  onClick={launchDemo}
+                  disabled={isLaunching}
                   className="inline-flex items-center gap-2 rounded-xl bg-accent px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:brightness-110"
                 >
                   <ExternalLink className="h-4 w-4" />
-                  Live Demo ↗
-                </a>
+                  {isLaunching ? "Taking off…" : "Live Demo ↗"}
+                </button>
               ) : (
                 <span className="inline-flex items-center gap-2 rounded-xl border border-border bg-surface px-4 py-2.5 text-sm font-semibold text-text-muted cursor-default">
                   <Lock className="h-4 w-4" />
@@ -204,7 +218,7 @@ export default function ProjectHero({
             initial={{ opacity: 0, y: 32, scale: 0.97 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ duration: 0.65, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
-            className="relative"
+            className="relative hidden sm:block"
           >
             {heroImage && (
               <div className="relative overflow-hidden rounded-2xl border border-border shadow-2xl">
@@ -234,6 +248,30 @@ export default function ProjectHero({
           </motion.div>
         </div>
       </div>
+
+      <AnimatePresence>
+        {isLaunching && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] overflow-hidden bg-[#12070d]/95 backdrop-blur-sm"
+            aria-live="polite"
+          >
+            <div className="absolute inset-0 opacity-35 [background-image:radial-gradient(rgba(242,92,42,0.3)_1px,transparent_1px)] [background-size:24px_24px]" />
+            <motion.div
+              initial={{ x: "-20vw", y: "16vh", rotate: -12, opacity: 0 }}
+              animate={{ x: "105vw", y: "-26vh", rotate: 12, opacity: 1 }}
+              transition={{ duration: 1.15, ease: [0.22, 1, 0.36, 1] }}
+              className="absolute left-0 top-1/2 text-accent"
+            >
+              <PlaneTakeoff className="h-24 w-24 -rotate-12 drop-shadow-[0_0_30px_rgba(242,92,42,0.85)] sm:h-32 sm:w-32" strokeWidth={1.4} />
+              <div className="absolute right-full top-1/2 h-1 w-[42vw] -translate-y-1/2 bg-gradient-to-l from-accent/90 via-orange-300/35 to-transparent blur-[2px]" />
+            </motion.div>
+            <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="absolute bottom-12 left-1/2 -translate-x-1/2 font-mono text-xs uppercase tracking-[0.28em] text-[#f8e7d7]">Launching live demo</motion.p>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }

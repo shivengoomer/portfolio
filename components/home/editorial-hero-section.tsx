@@ -183,10 +183,9 @@ export function EditorialHeroSection() {
           initial={shouldReduceMotion ? false : { opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="font-oswald font-bold uppercase text-white tracking-[-0.01em] leading-[0.88] md:leading-[0.85] text-center w-full select-none"
+          className="w-full select-none text-center font-oswald text-[clamp(3.1rem,12vw,4.5rem)] font-bold uppercase leading-[0.88] tracking-[-0.01em] text-white md:text-[clamp(3.5rem,7.5vw,9.2rem)] md:leading-[0.85]"
           style={{
             fontFamily: "var(--font-oswald), Oswald, sans-serif",
-            fontSize: "clamp(2.5rem, 7.5vw, 9.2rem)",
             textShadow: "0 4px 20px rgba(0,0,0,0.9), 0 0 35px rgba(255,255,255,0.35), 0 0 60px rgba(242,92,42,0.35)",
           }}
         >

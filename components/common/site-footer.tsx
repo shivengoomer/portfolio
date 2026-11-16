@@ -39,7 +39,7 @@ export function SiteFooter({ className }: React.HTMLAttributes<HTMLElement>) {
   const smoothTop = () => window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
 
   return (
-    <footer ref={footerRef} className={cn("retro-surface relative isolate overflow-hidden bg-[#170A10] text-white", className)}>
+    <footer id="site-footer" ref={footerRef} className={cn("retro-surface relative z-[60] isolate overflow-hidden bg-[#170A10] text-white", className)}>
       <div className="pointer-events-none absolute inset-0 opacity-40 [background-image:radial-gradient(rgba(242,92,42,0.22)_1px,transparent_1px)] [background-size:28px_28px] [mask-image:linear-gradient(to_bottom,black,transparent_68%)]" />
       <div className="pointer-events-none absolute left-[8%] top-16 h-px w-20 bg-accent/70 before:absolute before:-left-1 before:-top-1 before:h-2.5 before:w-2.5 before:bg-accent" />
 
@@ -47,12 +47,12 @@ export function SiteFooter({ className }: React.HTMLAttributes<HTMLElement>) {
         <div className="grid gap-10 border-b border-white/10 pb-12 lg:grid-cols-[1.25fr_0.75fr] lg:items-end lg:pb-16">
           <motion.div initial={reduceMotion ? false : { opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.4 }} transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}>
             <div className="mb-5 flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] text-[#8fdda9]"><span className="relative h-2 w-2"><span className="absolute inset-0 rounded-full bg-[#7FD6A0] motion-safe:animate-ping" /><span className="absolute inset-0 rounded-full bg-[#7FD6A0]" /></span>Available for the right build</div>
-            <h2 className="max-w-5xl font-heading text-[clamp(3.4rem,8vw,7.8rem)] font-extrabold uppercase leading-[0.84] tracking-[-0.06em] text-[#f8e7d7]">LET&apos;S BUILD<br />SOMETHING.</h2>
+            <h2 className="max-w-3xl font-heading text-[clamp(3rem,5.6vw,6rem)] font-extrabold uppercase leading-[0.9] tracking-[-0.05em] text-[#f8e7d7]">LET&apos;S BUILD<br />SOMETHING.</h2>
             <p className="mt-7 max-w-md text-base leading-relaxed text-zinc-400 sm:text-lg">Open to software engineering opportunities &amp; collaborations.</p>
           </motion.div>
 
-          <motion.div initial={reduceMotion ? false : { opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.4 }} transition={{ delay: 0.12, duration: 0.65, ease: [0.22, 1, 0.36, 1] }} className="lg:justify-self-end">
-            <a href={`mailto:${EMAIL}`} onMouseMove={(event) => { if (reduceMotion) return; const box = event.currentTarget.getBoundingClientRect(); setMagnet({ x: (event.clientX - (box.left + box.width / 2)) * 0.16, y: (event.clientY - (box.top + box.height / 2)) * 0.16 }); }} onMouseLeave={() => setMagnet({ x: 0, y: 0 })} className="group inline-flex flex-col items-start focus:outline-none focus-visible:ring-2 focus-visible:ring-accent">
+          <motion.div initial={reduceMotion ? false : { opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.4 }} transition={{ delay: 0.12, duration: 0.65, ease: [0.22, 1, 0.36, 1] }} className="lg:justify-self-end mr-4">
+            <a href={`mailto:${EMAIL}`} onMouseMove={(event) => { if (reduceMotion) return; const box = event.currentTarget.getBoundingClientRect(); setMagnet({ x: (event.clientX - (box.left + box.width / 2)) * 0.16, y: (event.clientY - (box.top + box.height / 2)) * 0.16 }); }} onMouseLeave={() => setMagnet({ x: 0, y: 0 })} className="group inline-flex flex-col gap-4 items-start focus:outline-none focus-visible:ring-2 focus-visible:ring-accent">
               <motion.span animate={reduceMotion ? {} : magnet} transition={{ type: "spring", stiffness: 250, damping: 16 }} className="inline-flex items-center gap-3 rounded-full bg-accent px-7 py-4 font-heading text-lg font-bold uppercase tracking-wide text-white shadow-[0_12px_34px_rgba(242,92,42,0.28)] transition-colors group-hover:bg-[#ff6a36]">
                 Let&apos;s talk <ArrowUpRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </motion.span>
@@ -69,8 +69,8 @@ export function SiteFooter({ className }: React.HTMLAttributes<HTMLElement>) {
         </nav>
       </div>
 
-      <motion.div style={reduceMotion ? {} : { y: signatureY, opacity: signatureOpacity }} onMouseMove={(event) => { if (reduceMotion) return; const box = event.currentTarget.getBoundingClientRect(); setSignatureOffset({ x: ((event.clientX - (box.left + box.width / 2)) / box.width) * 8, y: ((event.clientY - (box.top + box.height / 2)) / box.height) * 3 }); }} onMouseLeave={() => setSignatureOffset({ x: 0, y: 0 })} className="site-gutter relative mx-auto mt-4 max-w-[1760px] select-none overflow-hidden">
-        <motion.div animate={reduceMotion ? {} : signatureOffset} transition={{ type: "spring", stiffness: 120, damping: 18 }} className="whitespace-nowrap text-center font-heading text-[clamp(3.7rem,13.1vw,13rem)] font-extrabold uppercase leading-[0.75] tracking-[-0.075em]" style={{ backgroundImage: "linear-gradient(180deg,#fff7ef_0%,#eec8ad_52%,#8d5041_100%)", WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent", WebkitTextFillColor: "transparent" }} aria-hidden="true">SHIVEN GOOMER</motion.div>
+      <motion.div style={reduceMotion ? {} : { y: signatureY, opacity: signatureOpacity }} onMouseMove={(event) => { if (reduceMotion) return; const box = event.currentTarget.getBoundingClientRect(); setSignatureOffset({ x: ((event.clientX - (box.left + box.width / 2)) / box.width) * 8, y: ((event.clientY - (box.top + box.height / 2)) / box.height) * 3 }); }} onMouseLeave={() => setSignatureOffset({ x: 0, y: 0 })} className="site-gutter relative mx-auto mt-6 max-w-[1760px] select-none overflow-hidden">
+        <motion.div animate={reduceMotion ? {} : signatureOffset} transition={{ type: "spring", stiffness: 120, damping: 18 }} className="whitespace-nowrap text-center font-heading text-[clamp(3rem,10.5vw,10.5rem)] font-extrabold uppercase leading-[0.8] tracking-[-0.07em]" style={{ backgroundImage: "linear-gradient(180deg,#fff7ef_0%,#eec8ad_52%,#8d5041_100%)", WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent", WebkitTextFillColor: "transparent" }} aria-hidden="true">SHIVEN GOOMER</motion.div>
       </motion.div>
 
       <div className="site-gutter relative mx-auto flex max-w-[1760px] items-center justify-between gap-4 border-t border-white/10 py-7 font-mono text-[10px] uppercase tracking-[0.14em] text-zinc-600"><span>© {new Date().getFullYear()} Shiven Goomer</span><button type="button" onClick={smoothTop} className="group inline-flex items-center gap-2 text-zinc-400 transition-colors hover:text-[#f8e7d7] focus:outline-none focus-visible:ring-2 focus-visible:ring-accent">Back to top <MoveUp className="h-3.5 w-3.5 transition-transform group-hover:-translate-y-0.5" /></button></div>

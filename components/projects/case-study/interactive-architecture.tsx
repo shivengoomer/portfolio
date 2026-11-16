@@ -663,7 +663,7 @@ export default function InteractiveArchitecture({
                 animate={{ x: 0, opacity: 1 }}
                 exit={{ x: "100%", opacity: 0 }}
                 transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                className="absolute top-0 right-0 z-40 h-full w-full max-w-sm sm:max-w-md border-l border-border bg-surface/95 p-6 shadow-2xl backdrop-blur-xl overflow-y-auto"
+                className="absolute inset-x-3 top-3 bottom-3 z-40 w-auto max-w-none overflow-hidden rounded-2xl border border-border bg-surface/95 shadow-2xl backdrop-blur-xl sm:inset-x-auto sm:top-0 sm:right-0 sm:bottom-0 sm:h-full sm:w-full sm:max-w-md sm:rounded-none sm:border-y-0 sm:border-r-0 sm:border-l"
               >
                 <button
                   onClick={() => setActiveNodeId(null)}
@@ -673,7 +673,8 @@ export default function InteractiveArchitecture({
                   <X className="h-4 w-4" />
                 </button>
 
-                <div className="space-y-6">
+                <div className="h-full overflow-y-auto overscroll-contain touch-pan-y [-webkit-overflow-scrolling:touch] p-5 sm:p-6">
+                  <div className="space-y-6">
                   <div className="space-y-2">
                     <div className="flex items-center gap-2">
                       <span
@@ -800,6 +801,7 @@ export default function InteractiveArchitecture({
                           );
                         })}
                     </div>
+                  </div>
                   </div>
                 </div>
               </motion.div>
