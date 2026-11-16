@@ -739,6 +739,120 @@ const caseStudies: CaseStudyData[] = [
       { value: "< 200ms", label: "FAISS similarity query", note: "in-memory index" },
     ],
   },
+  {
+    projectId: "indiair-intelligence",
+    headline: "Every disclosure preserved. Every event match explainable.",
+    heroImage: "/projects/indiair-intelligence/cover.svg",
+    features: [
+      { title: "Multi-source disclosure intake", description: "Collects regulatory announcements from NSE and BSE alongside reports and slide decks from 50+ issuer investor-relations sites.", icon: "Globe", span: "wide" },
+      { title: "Immutable provenance", description: "Lands source JSON and downloaded documents as byte-identical records with SHA-256 fingerprints in object storage before classification.", icon: "ShieldAlert" },
+      { title: "Confidence-scored matching", description: "Resolves company identity, classifies event type, and routes high-, mid-, and low-confidence matches through explicit outcomes.", icon: "Brain" },
+      { title: "Auditable review", description: "Keeps unmatched disclosures and human decisions in review queues and append-only audit logs—rather than discarding uncertain evidence.", icon: "FileSearch", span: "wide" },
+    ],
+    architecture: {
+      nodes: [
+        { id: "client", label: "Research Console", tech: "React 19 + Vite", category: "CLIENT", role: "Company, event, content, calendar, watchlist, search, chat, and admin research UI", detail: "The browser client calls FastAPI v1 resources and presents the evidence surface. It is built with React 19, Vite, React Router, TanStack Table/Virtual, react-pdf, Recharts, and Tailwind.", x: 12, y: 50, color: "#F59E0B", iconKey: "react", inputs: ["Filters", "Review actions"], outputs: ["REST / WebSocket calls"] },
+        { id: "api", label: "API v1 + Auth", tech: "FastAPI + JWT / RBAC", category: "API GATEWAY", role: "Routes application queries and privileged admin mutations", detail: "The v1 router exposes auth, companies, disclosures, events, content, feed, calendar, search, chat, audio, transcript, live, and administrator endpoints. The app applies security headers, request tracing, authentication, and role checks.", x: 36, y: 28, color: "#10B981", iconKey: "fastapi", inputs: ["HTTP requests", "WebSocket sessions"], outputs: ["Validated reads / writes"] },
+        { id: "adapters", label: "Source Adapters", tech: "NSE · BSE · Issuer IR", category: "INGESTION", role: "Fetches exchange announcements and issuer-hosted reports or decks", detail: "Source profiles and adapters normalize external payloads. They emit a RawDisclosure candidate and fetch metadata; they do not attach source content directly to an Event.", x: 36, y: 75, color: "#38B2AC", iconKey: "globe", inputs: ["Exchange / IR responses"], outputs: ["Payload + document URL"] },
+        { id: "pipeline", label: "Evidence Pipeline", tech: "Domain + ingestion modules", category: "PROCESSING", role: "Implements the RawDisclosure lifecycle and confidence-scored event attachment", detail: "The pipeline executes primary source-key deduplication, raw-object landing, attachment SHA-256, cross-source duplicate resolution, identity/classification, and disclosure-match scoring. Only this path creates an event-attached ContentItem.", x: 62, y: 72, color: "#0EA5E9", iconKey: "layers", inputs: ["Raw disclosure", "Attachment bytes"], outputs: ["Candidate + confidence"] },
+        { id: "evidence", label: "Evidence Store", tech: "PostgreSQL + MinIO / S3", category: "PERSISTENCE", role: "Preserves relational audit state and immutable source bytes", detail: "PostgreSQL stores disclosures, candidates, review queues, ContentItems, SourceVersions, companies, securities and audit state. MinIO/S3 keeps byte-identical JSON and PDF objects; Redis provides cache, throttling and locks.", x: 62, y: 28, color: "#8B5CF6", iconKey: "database", inputs: ["Canonical records", "Hashes", "Audit actions"], outputs: ["Evidence read model"] },
+        { id: "review", label: "Review Control Plane", tech: "Admin routes + WebSocket", category: "HUMAN-IN-THE-LOOP", role: "Resolves uncertain matches, duplicates, unmatched items, and ingestion exceptions", detail: "Administrative API routes and an ingestion WebSocket serve duplicate, unmatched, event-review, OCR, speech, browser, live and ingestion operations. Review decisions are retained as auditable state transitions.", x: 88, y: 50, color: "#EC4899", iconKey: "shield", inputs: ["Mid-confidence candidates"], outputs: ["Confirmed / reassigned / new event"] },
+      ],
+      edges: [
+        { from: "client", to: "api", label: "Query / command", protocol: "REST + JWT", payload: "Search, research, mutations", type: "rest" },
+        { from: "adapters", to: "pipeline", label: "Raw intake", protocol: "HTTP", payload: "Payload, metadata, attachment URL", type: "stream" },
+        { from: "pipeline", to: "evidence", label: "Land / dedup / score", protocol: "SQL + S3", payload: "RawDisclosure, SourceVersion, candidate", type: "compute" },
+        { from: "api", to: "evidence", label: "Application reads", protocol: "SQL / cache", payload: "Companies, events, content", type: "rest" },
+        { from: "evidence", to: "review", label: "Review queue", protocol: "Admin API", payload: "Mid-confidence / exception state", type: "event" },
+        { from: "review", to: "evidence", label: "Audited resolution", protocol: "Transactional write", payload: "Confirm, reassign, mint event", type: "event" },
+      ],
+    },
+    engineeringDecisions: [
+      { problem: "The same disclosure can arrive from NSE, BSE, and an issuer website, creating duplicate or contradictory records.", decision: "Use source-key idempotency first, then SHA-256 and company/time/title cross-source deduplication with canonical-record linking.", result: "Replays are safe and duplicate evidence is retained with provenance instead of silently dropped.", detail: "A primary key prevents duplicate delivery from one source; byte hashes and a configurable time-window/title-similarity rule identify re-hosted documents across sources." },
+      { problem: "An incorrect event or company attachment undermines investor research.", decision: "Land every fetched item as an unattached RawDisclosure, then apply confidence bands and require manual handling for ambiguous matches.", result: "The system targets zero cross-company leakage while retaining every uncertain item for reprocessing.", detail: "Scores ≥0.90 auto-attach, 0.60–0.89 enter review, and lower-scoring matches remain parked rather than being discarded." },
+    ],
+    outcomes: [
+      { value: "750", label: "companies in Stage 1 scope", note: "NSE / BSE identity coverage" },
+      { value: "50+", label: "issuer IR sources", note: "alongside exchange feeds" },
+      { value: "3", label: "matching outcomes", note: "auto-attach, review, retain" },
+    ],
+  },
+  {
+    projectId: "scraper-leads",
+    headline: "From a target market prompt to verified, compliant outreach operations.",
+    heroImage: "/projects/scraper-leads/cover.svg",
+    features: [
+      { title: "Prompt-to-scrape planning", description: "Turns an ICP request into localized search targets, coordinates, scraper parameters, and a containerized acquisition job.", icon: "ScanLine", span: "wide" },
+      { title: "Dual-provider AI gateway", description: "Routes scoring and strategy work across Groq and Gemini, with deterministic local heuristics available when cloud providers are unavailable.", icon: "Brain" },
+      { title: "Contact verification", description: "Validates email syntax and live DNS MX records, then distinguishes generic inboxes from potential decision-maker contacts.", icon: "CheckCircle2" },
+      { title: "Campaign safeguards", description: "Builds multi-touch outreach sequences while enforcing suppression lists and DPDP, CAN-SPAM, and GDPR-oriented guardrails.", icon: "ShieldAlert", span: "wide" },
+    ],
+    architecture: {
+      nodes: [
+        { id: "operator", label: "Lead Workspace", tech: "React 19 + Vite", category: "CLIENT", role: "CRM, scraper, campaign, and market-analysis operator UI", detail: "The React SPA contains lead/pipeline, campaign, scraper, analytics, and market-analyst workflows behind bearer-token authentication.", x: 12, y: 50, color: "#F59E0B", iconKey: "react", inputs: ["ICP prompt", "Campaign input"], outputs: ["REST commands"] },
+        { id: "auth", label: "Auth + Vault", tech: "bcrypt · PyJWT · Fernet", category: "SECURITY", role: "Authenticates users, encrypts stored secrets, and applies request limits", detail: "The FastAPI service implements login, refresh, logout, account settings, encrypted provider configuration, and sliding rate limiting.", x: 36, y: 28, color: "#10B981", iconKey: "shield", inputs: ["Credentials", "API keys"], outputs: ["JWT", "Protected config"] },
+        { id: "core", label: "FastAPI Core", tech: "server.py · port 5050", category: "APPLICATION", role: "Owns leads, jobs, AI, outreach, analytics, exports, and API state", detail: "The FastAPI monolith exposes geocoding, scrape job lifecycle, lead updates, AI planning/scoring, verification, suppression, outreach, analytics, chat, and export endpoints.", x: 38, y: 73, color: "#0EA5E9", iconKey: "fastapi", inputs: ["JWT request", "Prompt / filter"], outputs: ["Job state", "Lead state"] },
+        { id: "providers", label: "AI + Scraper I/O", tech: "Groq · Gemini · gosom", category: "EXTERNAL I/O", role: "Executes planning/scoring and containerized Google Maps acquisition", detail: "The AI router chooses Groq, Gemini, or deterministic fallback. Scrape jobs are dispatched to gosom/google-maps-scraper in Docker on port 8080.", x: 62, y: 72, color: "#EC4899", iconKey: "brain", inputs: ["Prompt", "Geo target"], outputs: ["Plan", "Scrape results"] },
+        { id: "verify", label: "Contact Verification", tech: "email-validator + dnspython", category: "VALIDATION", role: "Scores contact reachability and enforces outreach suppression", detail: "Email syntax, live MX records, generic inbox classification, and suppression-list checks are applied before outreach work is generated.", x: 62, y: 28, color: "#38B2AC", iconKey: "check", inputs: ["Email / domain"], outputs: ["MX verdict", "Eligibility"] },
+        { id: "data", label: "Leads Database", tech: "SQLite WAL + Alembic", category: "PERSISTENCE", role: "Durably stores leads, jobs, configurations, suppression entries, and analytics input", detail: "leads.db uses WAL journal mode and a 5000 ms busy timeout. Alembic migrations own schema changes; online backups retain seven recent versions.", x: 88, y: 50, color: "#8B5CF6", iconKey: "database", inputs: ["Leads", "AI / verification output"], outputs: ["Metrics", "Recovery snapshots"] },
+      ],
+      edges: [
+        { from: "operator", to: "auth", label: "Authenticate", protocol: "JWT", payload: "Credentials / session", type: "rest" },
+        { from: "operator", to: "core", label: "Operate", protocol: "REST", payload: "CRM, jobs, campaigns", type: "rest" },
+        { from: "core", to: "providers", label: "Plan / scrape", protocol: "HTTPS", payload: "Prompt, location, scraper job", type: "compute" },
+        { from: "core", to: "verify", label: "Validate", protocol: "Local service", payload: "Email / domain", type: "compute" },
+        { from: "providers", to: "data", label: "Import intelligence", protocol: "SQLite", payload: "Leads, scores, results", type: "event" },
+        { from: "verify", to: "data", label: "Persist verdict", protocol: "SQLite", payload: "MX / suppression state", type: "event" },
+      ],
+    },
+    engineeringDecisions: [
+      { problem: "AI availability and quality vary across providers and outages should not stop sales operations.", decision: "Add a transparent multi-provider gateway with Groq, Gemini, and deterministic local fallback heuristics.", result: "Lead scoring, planning, and outreach generation retain a defined path even when a cloud model is unavailable.", detail: "Provider outputs are validated against Pydantic schemas and rate-limited, while a local deterministic mode remains available for core workflows." },
+      { problem: "Discovered contact data is only useful if it is reachable and can be used responsibly.", decision: "Combine RFC-style email validation, live MX checks, generic-inbox filtering, and suppression-list enforcement.", result: "The platform makes contact quality and outreach controls first-class operational data.", detail: "The verification path caches domain lookups and feeds transparent reachability scoring, while suppression records block excluded recipients and domains." },
+    ],
+    outcomes: [
+      { value: "3", label: "AI execution paths", note: "Groq, Gemini, local fallback" },
+      { value: "₹", label: "native deal economics", note: "Indian-number formatting" },
+      { value: "7", label: "rolling backups", note: "online database retention" },
+    ],
+  },
+  {
+    projectId: "recon-desk",
+    headline: "Turn D2C settlement leakage into a traceable claim with evidence.",
+    heroImage: "/projects/recon-desk/cover.svg",
+    features: [
+      { title: "Controlled partner imports", description: "Imports orders, settlements, COD remittances, and freight invoices with saved mappings, row previews, approval, versioning, and rollback.", icon: "FileSearch", span: "wide" },
+      { title: "Rules-based matching", description: "Uses set-based SQL and rate-card expectations to identify settled, short-paid, overdue, overcharged, and over-paid orders.", icon: "Code2" },
+      { title: "Human review queue", description: "Keeps suggested matches for lines without an order ID pending human approval—no automated closure of ambiguous transactions.", icon: "CheckCircle2" },
+      { title: "Evidence-backed recovery", description: "Groups exceptions into partner claims with expected-versus-received snapshots, source rows, CSV export, and money-at-risk views.", icon: "BarChart3", span: "wide" },
+    ],
+    architecture: {
+      nodes: [
+        { id: "files", label: "Partner Files", tech: "CSV + Excel", category: "INPUT", role: "Orders, settlements, COD remittances, and freight invoice source files", detail: "Partner reports are uploaded as CSV or Excel. The workflow supports previews, rejected-row downloads, and idempotent re-upload.", x: 12, y: 50, color: "#A78BFA", iconKey: "file", inputs: ["Orders", "Settlements", "Invoices"], outputs: ["Raw rows"] },
+        { id: "console", label: "Finance Console", tech: "Next.js 15 + React 19", category: "CLIENT", role: "Role-gated operations for imports, orders, claims, review, rate cards, and audit", detail: "The App Router frontend serves finance-executive and co-founder workflows for imports, dashboard, orders, claims, suggestions, rate cards, settings, and the audit log.", x: 36, y: 28, color: "#F59E0B", iconKey: "nextjs", inputs: ["Staff action"], outputs: ["REST request"] },
+        { id: "ingest", label: "Import Control Plane", tech: "FastAPI + SQLAlchemy 2", category: "INGESTION", role: "Inspect, map, approve, rollback, bulk-load, and report rejected records", detail: "The imports and mappings routers expose file inspection, batch creation, mapping fields, approval, rollback, and rejects.csv. The ingest package performs parsing, normalisation, mapping suggestions, and bulk import.", x: 38, y: 73, color: "#0EA5E9", iconKey: "fastapi", inputs: ["File", "Mapping version"], outputs: ["Batch", "Reject CSV"] },
+        { id: "match", label: "Match Runs", tech: "Set-based SQL", category: "RECONCILIATION", role: "Computes expected-versus-received order state from imported lines and rate cards", detail: "The matching API creates match runs and serves the latest run. It produces settled, short-paid, unpaid-past-due, freight-overcharged, pending, and over-paid outcomes using configurable tolerance rules.", x: 62, y: 72, color: "#10B981", iconKey: "database", inputs: ["Imported rows", "Rate cards"], outputs: ["Variance evidence", "Suggestions"] },
+        { id: "review", label: "Review Queue", tech: "Confirm / reject API", category: "HUMAN REVIEW", role: "Requires staff resolution for suggestions and records that lack a reliable order ID", detail: "Suggestions are explicit resources with confirm and reject endpoints; heuristic suggestions do not automatically close financial records.", x: 62, y: 28, color: "#38B2AC", iconKey: "check", inputs: ["Candidate match"], outputs: ["Confirmed decision"] },
+        { id: "data", label: "Financial State", tech: "PostgreSQL 16 + Alembic", category: "PERSISTENCE", role: "Stores imports, mappings, orders, claims, rate cards, settings, and audit events", detail: "PostgreSQL is used locally through Docker and in production through Neon. Alembic owns schema migration; the deployed backend runs in Docker on an Azure VM through GitHub Actions.", x: 88, y: 50, color: "#8B5CF6", iconKey: "database", inputs: ["Batch", "Match result", "Decision"], outputs: ["Dashboard", "Claim export"] },
+      ],
+      edges: [
+        { from: "files", to: "ingest", label: "Inspect / upload", protocol: "CSV / Excel", payload: "Partner report", type: "stream" },
+        { from: "console", to: "ingest", label: "Map / approve", protocol: "REST", payload: "Mapping action", type: "rest" },
+        { from: "ingest", to: "match", label: "Run reconciliation", protocol: "SQL bulk load", payload: "Normalized records", type: "compute" },
+        { from: "match", to: "review", label: "Ambiguous match", protocol: "REST", payload: "Suggestion", type: "event" },
+        { from: "match", to: "data", label: "Persist result", protocol: "PostgreSQL", payload: "Status / variance", type: "event" },
+        { from: "review", to: "data", label: "Decision", protocol: "Transactional write", payload: "Confirm / reject", type: "event" },
+      ],
+    },
+    engineeringDecisions: [
+      { problem: "Partner reports have inconsistent columns and a bad mapping can corrupt financial reconciliation.", decision: "Make mappings partner- and file-kind-specific, preview them on sample rows, require approval, and version them with rollback.", result: "Import automation remains controlled and recoverable instead of trusting a one-time inference.", detail: "Rejected rows remain downloadable, and repeat uploads are idempotent to prevent double-counting during operational retries." },
+      { problem: "Automated matching can incorrectly close an order when settlement or COD records lack a reliable order ID.", decision: "Use rules-based, set-oriented SQL for deterministic matching and place ambiguous suggestions in a human review queue.", result: "The platform identifies leakage at scale without presenting heuristic suggestions as confirmed accounting state.", detail: "Expected amounts derive from rate cards; gaps above a configurable ₹10 tolerance become exceptions, while TCS and TDS remain visible but excluded from leakage." },
+    ],
+    outcomes: [
+      { value: "1L", label: "orders matched", note: "synthetic local Postgres benchmark" },
+      { value: "8.9s", label: "matching time", note: "for 1L orders + ~1.2L partner lines" },
+      { value: "₹10", label: "default gap tolerance", note: "configurable exception threshold" },
+    ],
+  },
 ];
 
 export function getCaseStudyData(projectId: string): CaseStudyData | null {

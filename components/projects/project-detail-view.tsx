@@ -51,7 +51,7 @@ export default function ProjectDetailView({
       <CaseStudyNavigation />
 
       {/* Main content — offset for desktop sidebar */}
-      <main className="lg:pl-52 xl:pl-56">
+      <main className="pb-16 lg:pb-0 lg:pl-52 xl:pl-56">
         {/* 1. Cinematic hero */}
         <ProjectHero
           project={project}

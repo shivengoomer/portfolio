@@ -40,6 +40,33 @@ const EDITORIAL_PROJECTS: EditorialProjectItem[] = [
     category: "Cybersecurity",
   },
   {
+    id: "indiair-intelligence",
+    name: "India IR Intelligence",
+    description: "Evidence-first investor-relations research for Indian equities.",
+    year: "2026",
+    image: "/projects/indiair-intelligence/cover.svg",
+    href: "/projects/indiair-intelligence",
+    category: "Financial Intelligence",
+  },
+  {
+    id: "scraper-leads",
+    name: "BizzInnovate LeadEngine",
+    description: "AI-assisted prospect discovery, qualification, and outreach operations.",
+    year: "2026",
+    image: "/projects/scraper-leads/cover.svg",
+    href: "/projects/scraper-leads",
+    category: "Market Intelligence",
+  },
+  {
+    id: "recon-desk",
+    name: "Recon Desk",
+    description: "Evidence-backed reconciliation for D2C settlements and freight.",
+    year: "2026",
+    image: "/projects/recon-desk/cover.svg",
+    href: "/projects/recon-desk",
+    category: "Financial Operations",
+  },
+  {
     id: "satyam-journal-portal",
     name: "SATYAM Research Portal",
     description: "Peer-reviewed publishing platform with automated editorial review workflows.",
@@ -138,13 +165,13 @@ export function FeaturedWorkShowcase({}: FeaturedWorkShowcaseProps) {
             href="/projects"
             className="group inline-flex items-center gap-2 rounded-full border border-border bg-surface-2 px-5 py-2.5 font-mono text-xs font-semibold text-text shadow-sm transition-all hover:border-accent hover:text-accent w-fit"
           >
-            <span>Browse All 18 Projects</span>
+            <span>Browse All 22 Projects</span>
             <ArrowRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-1" />
           </Link>
         </div>
 
-        {/* ── REUSABLE EDITORIAL PROJECT LIST WITH SIGNATURE FLOATING PREVIEW (FIRST 4 PROJECTS) ── */}
-        <ProjectList projects={EDITORIAL_PROJECTS.slice(0, 4)} />
+        {/* ── REUSABLE EDITORIAL PROJECT LIST WITH SIGNATURE FLOATING PREVIEW ── */}
+        <ProjectList projects={EDITORIAL_PROJECTS.slice(0, 7)} />
         
       </div>
     </section>

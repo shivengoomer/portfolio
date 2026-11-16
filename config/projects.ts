@@ -178,6 +178,134 @@ export const Projects: ProjectInterface[] = [
   },
 
   {
+    id: "indiair-intelligence",
+    companyName: "India IR Intelligence",
+    type: "Personal",
+    category: ["Full Stack", "FinTech", "Analytics"],
+    shortDescription:
+      "Enterprise investor-relations intelligence and evidence platform for researching Indian equities.",
+    githubLink: "https://github.com/shivengoomer/indiair-intelligence",
+    techStack: [
+      "React",
+      "TypeScript",
+      "Vite",
+      "Tailwind CSS",
+      "FastAPI",
+      "PostgreSQL",
+      "Docker",
+      "Playwright",
+    ],
+    startDate: new Date("2026-11-01"),
+    endDate: new Date("2026-11-01"),
+    companyLogoImg: "/projects/indiair-intelligence/cover.svg",
+    pagesInfoArr: [
+      {
+        title: "Investor Relations Intelligence",
+        description:
+          "A research workspace for collecting, evaluating, and preserving evidence from Indian-equity investor-relations sources.",
+        imgArr: ["/projects/indiair-intelligence/cover.svg"],
+      },
+    ],
+    descriptionDetails: {
+      paragraphs: [
+        "Built an investor-relations and evidence platform focused on making Indian-equity research more structured, traceable, and actionable.",
+      ],
+      bullets: [
+        "React and TypeScript frontend built with Vite and Tailwind CSS",
+        "FastAPI backend with PostgreSQL-backed data workflows and Alembic migrations",
+        "Containerized development and production infrastructure with Docker Compose",
+        "Automated browser workflows and quality checks using Playwright",
+      ],
+    },
+    priority: 1,
+  },
+  {
+    id: "scraper-leads",
+    companyName: "BizzInnovate LeadEngine",
+    type: "Personal",
+    category: ["Full Stack", "AI / LLM", "Analytics"],
+    shortDescription:
+      "AI-assisted B2B market-intelligence platform for lead discovery, enrichment, qualification, and compliant outreach workflows.",
+    githubLink: "https://github.com/shivengoomer/scraper-leads",
+    techStack: [
+      "React",
+      "Vite",
+      "FastAPI",
+      "Python",
+      "Docker",
+      "SQLite",
+      "Groq API",
+      "Google Gemini",
+    ],
+    startDate: new Date("2026-10-01"),
+    endDate: new Date("2026-10-01"),
+    companyLogoImg: "/projects/scraper-leads/cover.svg",
+    pagesInfoArr: [
+      {
+        title: "AI Lead Discovery & Deal Pipeline",
+        description:
+          "An operational workspace for prompt-to-scrape discovery, verified contact enrichment, deal prioritization, and campaign preparation.",
+        imgArr: ["/projects/scraper-leads/cover.svg"],
+      },
+    ],
+    descriptionDetails: {
+      paragraphs: [
+        "Built an enterprise B2B market-intelligence platform that combines local business discovery, contact verification, AI qualification, and outbound pipeline management.",
+      ],
+      bullets: [
+        "Natural-language targeting that plans and dispatches localized Google Maps scraping jobs",
+        "Multi-provider AI routing across Groq and Gemini with deterministic offline fallbacks",
+        "Live email syntax and DNS MX verification with contact-quality scoring",
+        "Multi-touch campaign generation with suppression lists and compliance guardrails",
+        "FastAPI, React, SQLite, and Docker architecture with authenticated REST APIs",
+      ],
+    },
+    priority: 1,
+  },
+  {
+    id: "recon-desk",
+    companyName: "Recon Desk",
+    type: "Personal",
+    category: ["Full Stack", "FinTech", "Analytics"],
+    shortDescription:
+      "D2C operations platform for reconciling orders, settlements, COD remittances, and freight invoices into evidence-backed claims.",
+    githubLink: "https://github.com/shivengoomer/recon-desk",
+    techStack: [
+      "Next.js",
+      "TypeScript",
+      "FastAPI",
+      "Python",
+      "PostgreSQL",
+      "SQLAlchemy",
+      "Docker",
+      "Playwright",
+    ],
+    startDate: new Date("2026-11-01"),
+    endDate: new Date("2026-11-01"),
+    companyLogoImg: "/projects/recon-desk/cover.svg",
+    pagesInfoArr: [
+      {
+        title: "Settlement Reconciliation Workspace",
+        description:
+          "An evidence-first workspace for importing partner reports, matching settlement lines, quantifying leakage, and preparing claims.",
+        imgArr: ["/projects/recon-desk/cover.svg"],
+      },
+    ],
+    descriptionDetails: {
+      paragraphs: [
+        "Built a reconciliation workspace for D2C finance teams to identify short payments, overdue settlements, COD discrepancies, and freight overcharges from partner reports.",
+      ],
+      bullets: [
+        "Human-approved CSV and Excel imports with saved column mappings, versioning, and rollback",
+        "Set-based SQL matching engine for expected-versus-received settlement calculations",
+        "Evidence-backed claims, review queues, and leakage dashboards by partner and age",
+        "Role-based workflows for finance executives and founders with an auditable activity trail",
+        "FastAPI and PostgreSQL backend with a Next.js frontend, Docker deployment, and Playwright tests",
+      ],
+    },
+    priority: 1,
+  },
+  {
     id: "satyam-journal-portal",
     companyName: "SATYAM – MSIT Journal of Research",
     type: "Professional",

@@ -4,6 +4,7 @@ import React, { useState, useRef, useEffect, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import {
   FloatingProjectPreview,
@@ -99,7 +100,14 @@ export function ProjectList({ projects, className }: ProjectListProps) {
             <Link
               key={project.id}
               href={project.href}
-              onPointerEnter={() => setActiveProject(project)}
+              onPointerEnter={(event) => {
+                if (event.pointerType !== "touch") setActiveProject(project);
+              }}
+              onClick={(event) => {
+                if (window.innerWidth >= 768 || activeProject?.id === project.id) return;
+                event.preventDefault();
+                setActiveProject(project);
+              }}
               onFocus={() => handleRowFocus(project, idx)}
               onBlur={() => setActiveProject(null)}
               className={cn(
@@ -160,6 +168,33 @@ export function ProjectList({ projects, className }: ProjectListProps) {
                   {project.year}
                 </span>
               </div>
+
+              {/* Touch equivalent of the desktop hover preview. Tap once to inspect; tap again to open. */}
+              <AnimatePresence initial={false}>
+                {isHovered && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+                    className="block w-full overflow-hidden md:hidden"
+                  >
+                    <div className="relative mt-1 aspect-[16/9] w-full overflow-hidden rounded-xl border border-accent/30 bg-black/50 shadow-[0_16px_32px_rgba(0,0,0,0.3)]">
+                      <Image
+                        src={project.image}
+                        alt={`${project.name} preview`}
+                        fill
+                        sizes="(max-width: 767px) calc(100vw - 3rem), 0px"
+                        className="object-cover object-top"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+                      <span className="absolute bottom-3 left-3 rounded-full border border-white/15 bg-black/60 px-3 py-1.5 font-mono text-[10px] uppercase tracking-wider text-white backdrop-blur-md">
+                        Tap again to open ↗
+                      </span>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </Link>
           );
         })}
