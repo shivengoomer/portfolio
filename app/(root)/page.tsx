@@ -127,6 +127,11 @@ export default function IndexPage() {
           <HomeSkillsMarquee />
         </Reveal>
 
+        {/* ── CAREER / ENGINEERING HISTORY ── */}
+        <Reveal y={48} delay={0}>
+          <DeliveryFramework />
+        </Reveal>
+
         {/* ── GITHUB 2D TO 3D SCROLL CITY ── */}
         <Reveal y={40} delay={0}>
           <section
@@ -170,12 +175,7 @@ export default function IndexPage() {
           <FeaturedWorkShowcase projects={Projects} />
         </Reveal>
 
-        {/* ── DELIVERY FRAMEWORK / PROJECT TIMELINE ── */}
-        <Reveal y={48} delay={0}>
-          <DeliveryFramework />
-        </Reveal>
-
-        {/* ── HACKATHONS, EVENTS & CERTIFICATES SHOWCASE ── */}
+        {/* ── TIMELINE: HACKATHONS, EVENTS & CERTIFICATES ── */}
         <Reveal y={48} delay={0}>
           <HackathonsShowcase />
         </Reveal>
