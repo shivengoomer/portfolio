@@ -6,18 +6,20 @@ import { useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, Maximize2, X } from "lucide-react";
 
-import { type ProjectInterface } from "@/config/projects";
+import type { OutcomeMetric } from "@/config/case-study-data";
+import type { ProjectInterface } from "@/config/projects";
 import { cn } from "@/lib/utils";
 
 interface Props {
   primary: ProjectInterface;
+  primaryOutcomes: OutcomeMetric[];
   secondary: ProjectInterface[];
   remaining: ProjectInterface[];
 }
 
 const featureCopy: Record<string, string> = {
-  Mentora: "AI-powered assessments, from creation to evaluation.",
-  "wpbot-news": "Detecting digital threats where conversations happen.",
+  "scraper-leads": "AI-assisted prospect discovery, qualification, and outreach operations.",
+  "nifty50-qa-platform": "50 equities. Live market intelligence. One trading terminal.",
 };
 
 const conciseCopy: Record<string, string> = {
@@ -54,7 +56,7 @@ function shortCopy(project: ProjectInterface) {
   return conciseCopy[project.id] || project.shortDescription.split(" ").slice(0, 11).join(" ").replace(/[,.]$/, "") + ".";
 }
 
-export default function EditorialProjectsShowcase({ primary, secondary, remaining }: Props) {
+export default function EditorialProjectsShowcase({ primary, primaryOutcomes, secondary, remaining }: Props) {
   const [previewProject, setPreviewProject] = useState<ProjectInterface | null>(null);
   const [cursor, setCursor] = useState({ x: 0, y: 0 });
   const [inspectionProject, setInspectionProject] = useState<ProjectInterface | null>(null);
@@ -80,12 +82,11 @@ export default function EditorialProjectsShowcase({ primary, secondary, remainin
   return (
     <>
       <div className="space-y-20 sm:space-y-28">
-        <FlagshipProject project={primary} reduceMotion={reduceMotion} onInspect={setInspectionProject} />
+        <FlagshipProject project={primary} outcomes={primaryOutcomes} reduceMotion={reduceMotion} onInspect={setInspectionProject} />
 
         <section aria-labelledby="featured-engineering" className="space-y-8">
           <div className="flex items-center justify-between border-b border-white/10 pb-4">
             <h2 id="featured-engineering" className="font-mono text-xs font-semibold uppercase tracking-[0.2em] text-text-muted">Featured engineering work</h2>
-            <span className="font-mono text-xs text-text-muted">02 / SELECTED</span>
           </div>
           <div className="grid gap-8 lg:grid-cols-12">
             {secondary.map((project, index) => (
@@ -117,7 +118,12 @@ export default function EditorialProjectsShowcase({ primary, secondary, remainin
   );
 }
 
-function FlagshipProject({ project, onInspect, reduceMotion }: { project: ProjectInterface; onInspect: (project: ProjectInterface) => void; reduceMotion: boolean | null }) {
+function FlagshipProject({ project, outcomes, onInspect, reduceMotion }: {
+  project: ProjectInterface;
+  outcomes: OutcomeMetric[];
+  onInspect: (project: ProjectInterface) => void;
+  reduceMotion: boolean | null;
+}) {
   return (
     <motion.section
       initial={reduceMotion ? false : { opacity: 0, y: 28 }}
@@ -129,13 +135,16 @@ function FlagshipProject({ project, onInspect, reduceMotion }: { project: Projec
       <div className="pointer-events-none absolute -right-24 top-0 h-80 w-80 rounded-full bg-accent/10 blur-3xl" />
       <div className="relative grid gap-8 lg:grid-cols-[0.88fr_1.45fr] lg:items-end lg:gap-12 lg:p-8">
         <div className="order-2 lg:order-1 lg:pb-6">
-          <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-accent">01 / Flagship product</p>
-          <h2 className="mt-5 max-w-lg font-heading text-4xl font-extrabold uppercase leading-[0.9] tracking-tight text-text sm:text-5xl xl:text-6xl">Nifty50<br />Market Intelligence</h2>
-          <p className="mt-5 max-w-md text-lg leading-snug text-text-muted">50 equities. Live market intelligence. One trading terminal.</p>
-          <div className="mt-8 flex gap-8 border-y border-white/10 py-4 font-mono text-xs text-text-muted">
-            <span><b className="block text-base text-text">50</b>equities</span>
-            <span><b className="block text-base text-text">Live</b>terminal</span>
-          </div>
+          <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-accent">Flagship project</p>
+          <h2 className="mt-5 max-w-lg font-heading text-4xl font-extrabold uppercase leading-[0.9] tracking-tight text-text sm:text-5xl lg:text-4xl xl:text-5xl 2xl:text-6xl">{project.companyName}</h2>
+          <p className="mt-5 max-w-md text-lg leading-snug text-text-muted">{project.shortDescription}</p>
+          {outcomes.length > 0 && (
+            <div className="mt-8 flex flex-wrap gap-x-8 gap-y-3 border-y border-white/10 py-4 font-mono text-xs text-text-muted">
+              {outcomes.map(({ value, label }) => (
+                <span key={label}><b className="block text-base text-text">{value}</b>{label}</span>
+              ))}
+            </div>
+          )}
           <Link href={`/projects/${project.id}`} className="group mt-8 inline-flex items-center gap-3 text-sm font-semibold text-text transition-colors hover:text-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent">
             Explore project <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1.5" />
           </Link>
@@ -147,8 +156,7 @@ function FlagshipProject({ project, onInspect, reduceMotion }: { project: Projec
 }
 
 function FeaturedProjectShowcase({ project, index, onInspect, reduceMotion }: { project: ProjectInterface; index: number; onInspect: (project: ProjectInterface) => void; reduceMotion: boolean | null }) {
-  const isDtox = project.id === "wpbot-news";
-  const accent = isDtox ? "#8B5CF6" : "#22C55E";
+  const accent = index === 0 ? "#22C55E" : "#8B5CF6";
   return (
     <motion.article
       initial={reduceMotion ? false : { opacity: 0, y: 24 }}
@@ -160,8 +168,8 @@ function FeaturedProjectShowcase({ project, index, onInspect, reduceMotion }: { 
       <div className="pointer-events-none absolute inset-x-0 top-0 h-32 opacity-30 blur-3xl" style={{ background: accent }} />
       <ProjectImage project={project} onInspect={onInspect} className="mx-3 mt-3 sm:mx-5 sm:mt-5" />
       <div className="relative p-6 sm:p-8">
-        <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.2em]" style={{ color: accent }}>{isDtox ? "Security / AI" : "Education / AI"}</p>
-        <h3 className="mt-3 font-heading text-3xl font-bold uppercase tracking-tight text-text">{isDtox ? "D-TOX" : project.companyName}</h3>
+        <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.2em]" style={{ color: accent }}>{project.category.join(" · ")}</p>
+        <h3 className="mt-3 font-heading text-3xl font-bold uppercase tracking-tight text-text">{project.companyName}</h3>
         <p className="mt-3 max-w-md text-base text-text-muted">{featureCopy[project.id] || project.shortDescription}</p>
         <Link href={`/projects/${project.id}`} className="mt-7 inline-flex items-center gap-2 text-sm font-semibold text-text hover:text-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent">Explore <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" /></Link>
       </div>

@@ -3,12 +3,12 @@
 import React from "react";
 import Link from "next/link";
 import { ArrowRight, Sparkles } from "lucide-react";
-import { ProjectInterface } from "@/config/projects";
+import type { ProjectInterface } from "@/config/projects";
 import { ProjectList } from "./project-list";
 import { EditorialProjectItem } from "./floating-project-preview";
 
 interface FeaturedWorkShowcaseProps {
-  projects?: ProjectInterface[];
+  projects: ProjectInterface[];
 }
 
 const EDITORIAL_PROJECTS: EditorialProjectItem[] = [
@@ -113,7 +113,12 @@ const EDITORIAL_PROJECTS: EditorialProjectItem[] = [
   },
 ];
 
-export function FeaturedWorkShowcase({}: FeaturedWorkShowcaseProps) {
+export function FeaturedWorkShowcase({ projects }: FeaturedWorkShowcaseProps) {
+  const priorities = new Map(projects.map(({ id, priority }) => [id, priority]));
+  const orderedProjects = [...EDITORIAL_PROJECTS].sort(
+    (a, b) => (priorities.get(a.id) ?? Number.MAX_SAFE_INTEGER) - (priorities.get(b.id) ?? Number.MAX_SAFE_INTEGER),
+  );
+
   return (
     <section
       id="projects"
@@ -171,7 +176,7 @@ export function FeaturedWorkShowcase({}: FeaturedWorkShowcaseProps) {
         </div>
 
         {/* ── REUSABLE EDITORIAL PROJECT LIST WITH SIGNATURE FLOATING PREVIEW ── */}
-        <ProjectList projects={EDITORIAL_PROJECTS.slice(0, 7)} />
+        <ProjectList projects={orderedProjects.slice(0, 7)} />
         
       </div>
     </section>

@@ -16,13 +16,13 @@ function TacticalStarSticker({ shouldReduceMotion }: { shouldReduceMotion: boole
       drag
       dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
       dragElastic={0.45}
-      className="absolute top-[0.02em] right-[100%] mr-[0.08em] z-10 w-[0.88em] h-[0.88em] cursor-grab active:cursor-grabbing select-none drop-shadow-[0_4px_16px_rgba(0,0,0,0.6)] pointer-events-auto"
+      className="absolute top-[0.02em] right-[100%] mr-[0.08em] z-10 w-[0.88em] h-[0.88em] cursor-grab active:cursor-grabbing select-none pointer-events-auto"
       title="Drag me!"
     >
       <div className="relative w-full h-full flex items-center justify-center">
         <svg
           viewBox="0 0 100 100"
-          className="w-full h-full pointer-events-none drop-shadow-[0_0_12px_rgba(204,255,0,0.5)]"
+          className="w-full h-full pointer-events-none"
           preserveAspectRatio="xMidYMid meet"
         >
           <polygon
@@ -64,13 +64,13 @@ function TacticalStadiumSticker({ shouldReduceMotion }: { shouldReduceMotion: bo
       drag
       dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
       dragElastic={0.45}
-      className="relative z-10 w-[1.15em] h-[0.62em] cursor-grab active:cursor-grabbing select-none drop-shadow-[0_4px_16px_rgba(0,0,0,0.6)] pointer-events-auto"
+      className="relative z-10 w-[1.15em] h-[0.62em] cursor-grab active:cursor-grabbing select-none pointer-events-auto"
       title="Drag me!"
     >
       <div className="relative w-full h-full flex items-center justify-center">
         <svg
           viewBox="0 0 120 70"
-          className="w-full h-full pointer-events-none drop-shadow-[0_0_12px_rgba(255,183,3,0.5)]"
+          className="w-full h-full pointer-events-none"
           preserveAspectRatio="xMidYMid meet"
         >
           <rect
@@ -118,13 +118,13 @@ function CyanStarburstSticker({ shouldReduceMotion }: { shouldReduceMotion: bool
       drag
       dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
       dragElastic={0.45}
-      className="absolute top-[0.02em] left-[100%] ml-[0.08em] z-10 w-[0.88em] h-[0.88em] cursor-grab active:cursor-grabbing select-none drop-shadow-[0_4px_16px_rgba(0,0,0,0.6)] pointer-events-auto"
+      className="absolute top-[0.02em] left-[100%] ml-[0.08em] z-10 w-[0.88em] h-[0.88em] cursor-grab active:cursor-grabbing select-none pointer-events-auto"
       title="Drag me!"
     >
       <div className="relative w-full h-full flex items-center justify-center">
         <svg
           viewBox="0 0 100 100"
-          className="w-full h-full pointer-events-none drop-shadow-[0_0_12px_rgba(0,229,255,0.6)]"
+          className="w-full h-full pointer-events-none"
           preserveAspectRatio="xMidYMid meet"
         >
           <polygon
@@ -171,7 +171,7 @@ export function EditorialHeroSection() {
       
       {/* ── CINEMATIC VIBRANT ATMOSPHERIC LIGHT CONE ── */}
       <div
-        className="pointer-events-none absolute -top-12 left-1/2 -translate-x-1/2 w-[94vw] max-w-4xl h-[460px] rounded-full blur-2xl -z-10 opacity-80"
+        className="pointer-events-none absolute -top-12 left-1/2 -translate-x-1/2 w-[94vw] max-w-4xl h-[460px] rounded-full -z-10 opacity-80"
         style={{
           background: "radial-gradient(ellipse at center, rgba(255,106,0,0.3) 0%, rgba(204,255,0,0.12) 35%, rgba(0,229,255,0.08) 55%, transparent 75%)",
         }}
@@ -186,7 +186,7 @@ export function EditorialHeroSection() {
           className="w-full select-none text-center font-oswald text-[clamp(3.1rem,12vw,4.5rem)] font-bold uppercase leading-[0.88] tracking-[-0.01em] text-white md:text-[clamp(3.5rem,7.5vw,9.2rem)] md:leading-[0.85]"
           style={{
             fontFamily: "var(--font-oswald), Oswald, sans-serif",
-            textShadow: "0 4px 20px rgba(0,0,0,0.9), 0 0 35px rgba(255,255,255,0.35), 0 0 60px rgba(242,92,42,0.35)",
+            textShadow: "0 4px 20px rgba(0,0,0,0.85)",
           }}
         >
           {/* Word 1: SHIVEN (with Full Stack Lead starburst beside S) */}
@@ -230,7 +230,6 @@ export function EditorialHeroSection() {
             background: "linear-gradient(135deg, #FF9500 0%, #FF6B00 50%, #FF3D00 100%)",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
-            filter: "drop-shadow(0 2px 14px rgba(255,107,0,0.55)) drop-shadow(0 2px 4px rgba(0,0,0,0.9))",
           }}
         >
           0 → 1 ENGINEER. BUILT FOR PRODUCTION.
@@ -248,15 +247,15 @@ export function EditorialHeroSection() {
         }}
       >
         I turn complex ideas into working products — from{" "}
-        <span className="text-[#00E5FF] font-semibold drop-shadow-[0_0_12px_rgba(0,229,255,0.7)]">
+        <span className="text-[#00E5FF] font-semibold">
           AI retrieval pipelines
         </span>{" "}
         to{" "}
-        <span className="text-[#FFD166] font-semibold drop-shadow-[0_0_12px_rgba(255,209,102,0.7)]">
+        <span className="text-[#FFD166] font-semibold">
           financial systems
         </span>{" "}
         and{" "}
-        <span className="text-[#CCFF00] font-semibold drop-shadow-[0_0_12px_rgba(204,255,0,0.7)]">
+        <span className="text-[#CCFF00] font-semibold">
           scalable backend infrastructure
         </span>
         .
@@ -288,7 +287,7 @@ export function EditorialHeroSection() {
             </span>
           ))}
         </span>
-        <span className="col-span-2 text-center text-[#FFE066] font-semibold text-[11px] sm:text-xs sm:col-auto drop-shadow-[0_0_10px_rgba(255,224,102,0.5)]">
+        <span className="col-span-2 text-center text-[#FFE066] font-semibold text-[11px] sm:text-xs sm:col-auto">
           &amp; national hackathon podiums
         </span>
       </motion.div>
@@ -326,7 +325,7 @@ export function EditorialHeroSection() {
           href="/contact"
           className="inline-flex items-center gap-1.5 text-zinc-100 hover:text-white font-mono text-sm sm:text-sm tracking-wide transition-colors group mt-1"
         >
-          <span className="h-2 w-2 rounded-full bg-[#00FF88] shadow-[0_0_10px_#00FF88] animate-pulse" />
+          <span className="h-2 w-2 rounded-full bg-[#00FF88] shadow-[0_0_10px_#00FF88]" />
           <span>Let&apos;s Talk</span>
           <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 text-[#00E5FF]" />
         </Link>

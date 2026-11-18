@@ -2,7 +2,8 @@ import { type Metadata } from "next";
 
 import { ClientPageWrapper } from "@/components/common/client-page-wrapper";
 import EditorialProjectsShowcase from "@/components/projects/editorial-projects-showcase";
-import { Projects } from "@/config/projects";
+import { getCaseStudyData } from "@/config/case-study-data";
+import { featuredProjects, rankedProjects } from "@/config/projects";
 
 export const metadata: Metadata = {
   title: "Projects | Selected Work & Systems",
@@ -10,12 +11,9 @@ export const metadata: Metadata = {
 };
 
 export default function ProjectsPage() {
-  const sortedProjects = [...Projects].sort((a, b) => a.priority - b.priority);
-  const primary = sortedProjects.find((project) => project.id === "nifty50-qa-platform") || sortedProjects[0];
-  const secondaryIds = new Set(["Mentora", "wpbot-news"]);
-  const secondary = sortedProjects.filter((project) => secondaryIds.has(project.id) && project.id !== primary.id);
-  const featuredIds = new Set([primary.id, ...secondary.map((project) => project.id)]);
-  const remaining = sortedProjects.filter((project) => !featuredIds.has(project.id));
+  const [primary, ...secondary] = featuredProjects;
+  const primaryOutcomes = getCaseStudyData(primary.id)?.outcomes.slice(0, 2) ?? [];
+  const remaining = rankedProjects.slice(featuredProjects.length);
 
   return (
     <ClientPageWrapper>
@@ -28,7 +26,12 @@ export default function ProjectsPage() {
             <h1 className="mt-4 font-heading text-5xl font-extrabold uppercase tracking-[-0.06em] text-text sm:text-6xl lg:text-7xl">Selected Work.</h1>
             <p className="mt-4 text-lg leading-relaxed text-text-muted sm:text-xl">Real products. Complex problems. Built to ship.</p>
           </header>
-          <EditorialProjectsShowcase primary={primary} secondary={secondary} remaining={remaining} />
+          <EditorialProjectsShowcase
+            primary={primary}
+            primaryOutcomes={primaryOutcomes}
+            secondary={secondary}
+            remaining={remaining}
+          />
         </div>
       </main>
     </ClientPageWrapper>

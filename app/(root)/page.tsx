@@ -110,7 +110,7 @@ export default function IndexPage() {
               muted
               loop
               playsInline
-              className="h-full w-full [transform:translateZ(0)] object-cover object-[56%_center] opacity-62 brightness-[0.84] saturate-[1.04] sm:object-center sm:opacity-76"
+              className="h-full w-full [transform:translateZ(0)] object-cover object-[56%_center] opacity-60 sm:object-center sm:opacity-75"
             >
               <source src="/bg-portfolio.mp4" type='video/mp4; codecs="avc1.640028"' />
               <source src="/bg-portfolio.webm" type="video/webm" />

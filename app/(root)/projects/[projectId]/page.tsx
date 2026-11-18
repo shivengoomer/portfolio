@@ -5,7 +5,7 @@ import { join } from "node:path";
 
 import { ClientPageWrapper } from "@/components/common/client-page-wrapper";
 import ProjectDetailView from "@/components/projects/project-detail-view";
-import { Projects } from "@/config/projects";
+import { Projects, rankedProjects } from "@/config/projects";
 
 interface ProjectPageProps {
   params: {
@@ -51,17 +51,16 @@ export async function generateMetadata({
 }
 
 export default function Project({ params }: ProjectPageProps) {
-  const sortedProjects = [...Projects].sort((a, b) => a.priority - b.priority);
-  const currentIndex = sortedProjects.findIndex((p) => p.id === params.projectId);
+  const currentIndex = rankedProjects.findIndex((p) => p.id === params.projectId);
 
   if (currentIndex === -1) {
     redirect("/projects");
   }
 
-  const project = sortedProjects[currentIndex];
-  const prevProject = currentIndex > 0 ? sortedProjects[currentIndex - 1] : null;
+  const project = rankedProjects[currentIndex];
+  const prevProject = currentIndex > 0 ? rankedProjects[currentIndex - 1] : null;
   const nextProject =
-    currentIndex < sortedProjects.length - 1 ? sortedProjects[currentIndex + 1] : null;
+    currentIndex < rankedProjects.length - 1 ? rankedProjects[currentIndex + 1] : null;
 
   const showcaseItems = project.pagesInfoArr
     .map((page) => ({

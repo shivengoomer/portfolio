@@ -235,7 +235,7 @@ export const Projects: ProjectInterface[] = [
         "Automated browser workflows and quality checks using Playwright",
       ],
     },
-    priority: 1,
+    priority: -1,
   },
   {
     id: "scraper-leads",
@@ -292,7 +292,7 @@ export const Projects: ProjectInterface[] = [
         "FastAPI, React, SQLite, and Docker architecture with authenticated REST APIs",
       ],
     },
-    priority: 1,
+    priority: 0,
   },
   {
     id: "recon-desk",
@@ -1064,6 +1064,8 @@ export const Projects: ProjectInterface[] = [
   },
 ];
 
-export const featuredProjects = Projects.sort(
+export const rankedProjects = [...Projects].sort(
   (a, b) => a.priority - b.priority,
-).slice(0, 3);
+);
+
+export const featuredProjects = rankedProjects.slice(0, 3);
