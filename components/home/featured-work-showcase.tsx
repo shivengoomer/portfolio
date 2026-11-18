@@ -62,7 +62,7 @@ const EDITORIAL_PROJECTS: EditorialProjectItem[] = [
     name: "Recon Desk",
     description: "Evidence-backed reconciliation for D2C settlements and freight.",
     year: "2026",
-    image: "/projects/recon-desk/cover.svg",
+    image: "/projects/recon-desk/dashboard.webp",
     href: "/projects/recon-desk",
     category: "Financial Operations",
   },

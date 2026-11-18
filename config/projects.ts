@@ -314,13 +314,29 @@ export const Projects: ProjectInterface[] = [
     ],
     startDate: new Date("2026-11-01"),
     endDate: new Date("2026-11-01"),
-    companyLogoImg: "/projects/recon-desk/cover.svg",
+    companyLogoImg: "/projects/recon-desk/dashboard.webp",
     pagesInfoArr: [
       {
-        title: "Settlement Reconciliation Workspace",
+        title: "Money at Risk Dashboard",
         description:
           "An evidence-first workspace for importing partner reports, matching settlement lines, quantifying leakage, and preparing claims.",
-        imgArr: ["/projects/recon-desk/cover.svg"],
+        imgArr: ["/projects/recon-desk/dashboard.webp"],
+      },
+      {
+        title: "Partner Imports",
+        imgArr: ["/projects/recon-desk/imports.webp"],
+      },
+      {
+        title: "Order Reconciliation",
+        imgArr: ["/projects/recon-desk/orders.webp"],
+      },
+      {
+        title: "Match Review Queue",
+        imgArr: ["/projects/recon-desk/review.webp"],
+      },
+      {
+        title: "Partner Claims",
+        imgArr: ["/projects/recon-desk/claims.webp"],
       },
     ],
     descriptionDetails: {

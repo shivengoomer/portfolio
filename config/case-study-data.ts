@@ -818,12 +818,12 @@ const caseStudies: CaseStudyData[] = [
   {
     projectId: "recon-desk",
     headline: "Turn D2C settlement leakage into a traceable claim with evidence.",
-    heroImage: "/projects/recon-desk/cover.svg",
+    heroImage: "/projects/recon-desk/dashboard.webp",
     features: [
-      { title: "Controlled partner imports", description: "Imports orders, settlements, COD remittances, and freight invoices with saved mappings, row previews, approval, versioning, and rollback.", icon: "FileSearch", span: "wide" },
-      { title: "Rules-based matching", description: "Uses set-based SQL and rate-card expectations to identify settled, short-paid, overdue, overcharged, and over-paid orders.", icon: "Code2" },
-      { title: "Human review queue", description: "Keeps suggested matches for lines without an order ID pending human approval—no automated closure of ambiguous transactions.", icon: "CheckCircle2" },
-      { title: "Evidence-backed recovery", description: "Groups exceptions into partner claims with expected-versus-received snapshots, source rows, CSV export, and money-at-risk views.", icon: "BarChart3", span: "wide" },
+      { title: "Controlled partner imports", description: "Imports orders, settlements, COD remittances, and freight invoices with saved mappings, row previews, approval, versioning, and rollback.", image: "/projects/recon-desk/imports.webp", icon: "FileSearch", span: "wide" },
+      { title: "Rules-based matching", description: "Uses set-based SQL and rate-card expectations to identify settled, short-paid, overdue, overcharged, and over-paid orders.", image: "/projects/recon-desk/orders.webp", icon: "Code2" },
+      { title: "Human review queue", description: "Keeps suggested matches for lines without an order ID pending human approval—no automated closure of ambiguous transactions.", image: "/projects/recon-desk/review.webp", icon: "CheckCircle2" },
+      { title: "Evidence-backed recovery", description: "Groups exceptions into partner claims with expected-versus-received snapshots, source rows, CSV export, and money-at-risk views.", image: "/projects/recon-desk/claims.webp", icon: "BarChart3", span: "wide" },
     ],
     architecture: {
       nodes: [
