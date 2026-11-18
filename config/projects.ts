@@ -55,7 +55,7 @@ export const Projects: ProjectInterface[] = [
         title: "Market Overview Dashboard",
         description:
           "Real-time quantitative metrics, breadth indicators (bullish/bearish distribution, breakouts, volume spikes), and composite rankings across the NIFTY 50 universe.",
-        imgArr: ["/projects/nifty50/dashboard.png"],
+        imgArr: ["/projects/nifty50/dashboard.webp"],
       },
       {
         title: "Quantitative Stock Screener",
@@ -67,25 +67,25 @@ export const Projects: ProjectInterface[] = [
         title: "Stock Analytics & Setup Summary",
         description:
           "Deep-dive equity analysis featuring automated setup summaries, momentum and risk scoring, quantitative support/resistance boundaries, and plain-English factor breakdowns.",
-        imgArr: ["/projects/nifty50/analytics.png"],
+        imgArr: ["/projects/nifty50/analytics.webp"],
       },
       {
         title: "TradingView Charts & Factor Breakdown",
         description:
           "Interactive TradingView candlestick charts with multi-timeframe navigation, volume profiling, and comprehensive quantitative factor breakdown scores.",
-        imgArr: ["/projects/nifty50/charts.png"],
+        imgArr: ["/projects/nifty50/charts.webp"],
       },
       {
         title: "Portfolio Intelligence & Watchlist",
         description:
           "Personalized watchlist tracking starred NIFTY 50 securities with live bias ratios, relative volume, RSI indicators, and one-click terminal analysis.",
-        imgArr: ["/projects/nifty50/watchlist.png"],
+        imgArr: ["/projects/nifty50/watchlist.webp"],
       },
       {
         title: "Pro Multi-Chart Trading Terminal",
         description:
           "Institutional-grade trading terminal featuring 4-way split multi-timeframe charts, VWAP and EMA-20 overlays, and live Level-2 Market Depth order book visualization.",
-        imgArr: ["/projects/nifty50/terminal.png"],
+        imgArr: ["/projects/nifty50/terminal.webp"],
       },
     ],
     descriptionDetails: {
@@ -127,7 +127,7 @@ export const Projects: ProjectInterface[] = [
     ],
     startDate: new Date("2024-06-01"),
     endDate: new Date("2024-09-01"),
-    companyLogoImg: "/projects/mentora/logo.png",
+    companyLogoImg: "/projects/mentora/logo.webp",
     pagesInfoArr: [
       {
         title: "Home Page",
@@ -139,25 +139,25 @@ export const Projects: ProjectInterface[] = [
         title: "Assessment Creator",
         description:
           "Configure dynamic blueprints, upload textbook materials, and run LLM parsing to instantly generate CBSE-aligned exam sheets with matching answer keys.",
-        imgArr: ["/projects/mentora/creator.png"],
+        imgArr: ["/projects/mentora/creator.webp"],
       },
       {
         title: "Grading & Feedback Suite",
         description:
           "AI-driven automated grading system providing detailed qualitative feedback, grading metrics, and concept gap tagging for student submissions.",
-        imgArr: ["/projects/mentora/grading.png"],
+        imgArr: ["/projects/mentora/grading.webp"],
       },
       {
         title: "Student Practice Lab",
         description:
           "Personalized virtual tutor and practice arena offering 24/7 concept explanations, doubt escalation to teachers, and an SM-2 spaced repetition queue.",
-        imgArr: ["/projects/mentora/student.png"],
+        imgArr: ["/projects/mentora/student.webp"],
       },
       {
         title: "Parent Analytics Portal",
         description:
           "Read-only competency tracker providing parents with real-time grade metrics, class announcement feeds, and upcoming deadlines.",
-        imgArr: ["/projects/mentora/parent.png"],
+        imgArr: ["/projects/mentora/parent.webp"],
       },
     ],
     descriptionDetails: {
@@ -359,19 +359,19 @@ export const Projects: ProjectInterface[] = [
     ],
     startDate: new Date("2024-01-01"),
     endDate: new Date("2024-06-01"),
-    companyLogoImg: "/projects/satyam/logo.png",
+    companyLogoImg: "/projects/satyam/logo.webp",
     pagesInfoArr: [
       {
         title: "Journal Archives",
         description:
           "Browse published volumes and access research articles across Computer Science, Electronics, IT, and Management Sciences.",
-        imgArr: ["/projects/satyam/archives.png"],
+        imgArr: ["/projects/satyam/archives.webp"],
       },
       {
         title: "Manuscript Submission",
         description:
           "Online submission portal for authors to upload manuscripts for blind peer review with status tracking.",
-        imgArr: ["/projects/satyam/submission.png"],
+        imgArr: ["/projects/satyam/submission.webp"],
       },
       {
         title: "Editorial Board",
@@ -383,7 +383,7 @@ export const Projects: ProjectInterface[] = [
         title: "Author Guidelines",
         description:
           "Comprehensive instructions page for manuscript preparation and submission requirements.",
-        imgArr: ["/projects/satyam/guidelines.png"],
+        imgArr: ["/projects/satyam/guidelines.webp"],
       },
     ],
     descriptionDetails: {
@@ -417,25 +417,25 @@ export const Projects: ProjectInterface[] = [
         title: "Homepage & Notices",
         description:
           "Landing page with a live scrolling notices ticker for library events, announcements, and updates.",
-        imgArr: ["/projects/mba-library/homepage.png"],
+        imgArr: ["/projects/mba-library/homepage.webp"],
       },
       {
         title: "Library Services",
         description:
           "Showcases all library facilities including Wi-Fi, Koha software, EBSCO digital database access, printers, and case study resources.",
-        imgArr: ["/projects/mba-library/services.png"],
+        imgArr: ["/projects/mba-library/services.webp"],
       },
       {
         title: "Library Stats Dashboard",
         description:
           "Displays official collection statistics — 2,442 volumes, 468 titles, 1,067 e-journals, and 22,965 e-books — in a structured layout.",
-        imgArr: ["/projects/mba-library/stats.png"],
+        imgArr: ["/projects/mba-library/stats.webp"],
       },
       {
         title: "Faculty & Staff",
         description:
           "Dedicated section showcasing MBA department faculty and library staff with photos and designations.",
-        imgArr: ["/projects/mba-library/team.png"],
+        imgArr: ["/projects/mba-library/team.webp"],
       },
     ],
     descriptionDetails: {
@@ -474,19 +474,19 @@ export const Projects: ProjectInterface[] = [
     ],
     startDate: new Date("2024-08-01"),
     endDate: new Date("2025-01-01"),
-    companyLogoImg: "/projects/matty/logo.png",
+    companyLogoImg: "/projects/matty/logo.webp",
     pagesInfoArr: [
       {
         title: "Canvas Editor",
         description:
           "Drag-and-drop graphic design editor with text, shapes, and images running natively in the browser.",
-        imgArr: ["/projects/matty/editor.png"],
+        imgArr: ["/projects/matty/editor.webp"],
       },
       {
         title: "Design Management & Templates",
         description:
           "Save, edit, and reuse templates with cloud-based storage (MongoDB + Cloudinary) and real-time previews.",
-        imgArr: ["/projects/matty/templates.png"],
+        imgArr: ["/projects/matty/templates.webp"],
       },
     ],
     descriptionDetails: {
@@ -536,19 +536,19 @@ export const Projects: ProjectInterface[] = [
         title: "Dashboard & Analytics",
         description:
           "Responsive analytics dashboard showing clicks, visit trends, and URL management with charts.",
-        imgArr: ["/projects/clix/dashboard.png"],
+        imgArr: ["/projects/clix/dashboard.webp"],
       },
       {
         title: "URL Creation & Redirection",
         description:
           "Shorten long URLs with unique IDs and auto-redirect functionality with visit tracking.",
-        imgArr: ["/projects/clix/shorten.png"],
+        imgArr: ["/projects/clix/shorten.webp"],
       },
       {
         title: "User & Admin Management",
         description:
           "Authentication with JWT, role-based access control for users and admin panel.",
-        imgArr: ["/projects/clix/admin.png"],
+        imgArr: ["/projects/clix/admin.webp"],
       },
     ],
     descriptionDetails: {
@@ -581,7 +581,7 @@ export const Projects: ProjectInterface[] = [
     techStack: ["Node.js", "Docker", "JavaScript"],
     startDate: new Date("2025-06-01"),
     endDate: new Date("2025-07-01"),
-    companyLogoImg: "/projects/vibestudio/logo.png",
+    companyLogoImg: "/projects/vibestudio/logo.webp",
     pagesInfoArr: [
       {
         title: "CLI Interface & Workflow",
@@ -593,7 +593,7 @@ export const Projects: ProjectInterface[] = [
         title: "Pulling and Using Docker Image",
         description:
           "VibeStudio can be containerized using Docker for lightweight deployment. Users can pull the pre-built Docker image from the registry and run the CLI instantly without setup overhead.",
-        imgArr: ["/projects/vibestudio/pull.png"],
+        imgArr: ["/projects/vibestudio/pull.webp"],
       },
     ],
     descriptionDetails: {
@@ -668,19 +668,19 @@ export const Projects: ProjectInterface[] = [
     ],
     startDate: new Date("2025-09-01"),
     endDate: new Date("2025-10-01"),
-    companyLogoImg: "/projects/bookreview/logo.png",
+    companyLogoImg: "/projects/bookreview/logo.webp",
     pagesInfoArr: [
       {
         title: "Dashboard & Book List",
         description:
           "Displays all books with authors, ratings, and review counts.",
-        imgArr: ["/projects/bookreview/dashboard.png"],
+        imgArr: ["/projects/bookreview/dashboard.webp"],
       },
       {
         title: "Review System",
         description:
           "Users can rate and review books with average rating display.",
-        imgArr: ["/projects/bookreview/review.png"],
+        imgArr: ["/projects/bookreview/review.webp"],
       },
     ],
     descriptionDetails: {
@@ -707,7 +707,7 @@ export const Projects: ProjectInterface[] = [
     techStack: ["React", "Node.js", "MongoDB", "Tailwind CSS", "Recharts"],
     startDate: new Date("2025-08-01"),
     endDate: new Date("2025-09-01"),
-    companyLogoImg: "/projects/donation-tracker/logo.png",
+    companyLogoImg: "/projects/donation-tracker/logo.webp",
     pagesInfoArr: [
       {
         title: "Dashboard",
@@ -719,13 +719,13 @@ export const Projects: ProjectInterface[] = [
         title: "Analytics",
         description:
           "Shows donation trends via graphs and charts using Recharts.",
-        imgArr: ["/projects/donation-tracker/analytics.png"],
+        imgArr: ["/projects/donation-tracker/analytics.webp"],
       },
       {
         title: "Donation Table",
         description:
           "Tabular display of all donations with filter, sort, and pagination features.",
-        imgArr: ["/projects/donation-tracker/table.png"],
+        imgArr: ["/projects/donation-tracker/table.webp"],
       },
     ],
     descriptionDetails: {
@@ -751,19 +751,19 @@ export const Projects: ProjectInterface[] = [
     techStack: ["React", "Node.js", "Tailwind CSS"],
     startDate: new Date("2025-01-01"),
     endDate: new Date("2025-02-01"),
-    companyLogoImg: "/projects/newnaanstop/logo.png",
+    companyLogoImg: "/projects/newnaanstop/logo.webp",
     pagesInfoArr: [
       {
         title: "Homepage & Recipe Discovery",
         description:
           "Homepage with trending recipes and AI recommendations via Gemini API.",
-        imgArr: ["/projects/newnaanstop/homepage.png"],
+        imgArr: ["/projects/newnaanstop/homepage.webp"],
       },
       {
         title: "Recipe Details & YouTube Integration",
         description:
           "Detailed recipe info with integrated YouTube cooking tutorials.",
-        imgArr: ["/projects/newnaanstop/recipe-youtube.png"],
+        imgArr: ["/projects/newnaanstop/recipe-youtube.webp"],
       },
       {
         title: "AI Chatbot for Recipe Suggestions",
@@ -798,19 +798,19 @@ export const Projects: ProjectInterface[] = [
     ],
     startDate: new Date("2024-02-01"),
     endDate: new Date("2024-03-01"),
-    companyLogoImg: "/projects/wpbot-news/logo.png",
+    companyLogoImg: "/projects/wpbot-news/logo.webp",
     pagesInfoArr: [
       {
         title: "Phishing Link Detection",
         description:
           "Detects malicious links in real time using heuristics and reputation scoring.",
-        imgArr: ["/projects/wpbot-news/phishing.png"],
+        imgArr: ["/projects/wpbot-news/phishing.webp"],
       },
       {
         title: "Fake News Analysis",
         description:
           "NLP-based news source verification and similarity detection via FAISS.",
-        imgArr: ["/projects/wpbot-news/fakenews.png"],
+        imgArr: ["/projects/wpbot-news/fakenews.webp"],
       },
     ],
     descriptionDetails: {
@@ -837,7 +837,7 @@ export const Projects: ProjectInterface[] = [
     techStack: ["React", "Javascript"],
     startDate: new Date("2024-07-01"),
     endDate: new Date("2024-08-01"),
-    companyLogoImg: "/projects/snippetly/logo.png",
+    companyLogoImg: "/projects/snippetly/logo.webp",
     pagesInfoArr: [
       {
         title: "UI",
@@ -881,13 +881,13 @@ export const Projects: ProjectInterface[] = [
         title: "Home Page",
         description:
           "Homepage featuring a clean UI with a location-based search bar to find pets nearby and featured adoption listings.",
-        imgArr: ["/projects/adoptme/homepage.png"],
+        imgArr: ["/projects/adoptme/homepage.webp"],
       },
       {
         title: "Pet Listings",
         description:
           "Displays detailed cards for available pets with filters for type, age, and location.",
-        imgArr: ["/projects/adoptme/homepage.png"],
+        imgArr: ["/projects/adoptme/homepage.webp"],
       },
     ],
     descriptionDetails: {
@@ -924,13 +924,13 @@ export const Projects: ProjectInterface[] = [
     ],
     startDate: new Date("2024-06-01"),
     endDate: new Date("2024-07-01"),
-    companyLogoImg: "/projects/face-track/logo.png",
+    companyLogoImg: "/projects/face-track/logo.webp",
     pagesInfoArr: [
       {
         title: "Face Track Page",
         description:
           "Web interface for real-time webcam-based face detection and tracking powered by TensorFlow and OpenCV APIs.",
-        imgArr: ["/projects/face-track/facetrack.png"],
+        imgArr: ["/projects/face-track/facetrack.webp"],
       },
     ],
     descriptionDetails: {
@@ -965,13 +965,13 @@ export const Projects: ProjectInterface[] = [
         title: "Homepage",
         description:
           "Homepage featuring product listings, categories, and responsive search bar.",
-        imgArr: ["/projects/amazon/homepage.png"],
+        imgArr: ["/projects/amazon/homepage.webp"],
       },
       {
         title: "Cart",
         description:
           "Shopping cart page to manage added items with quantity and price calculations.",
-        imgArr: ["/projects/amazon/cart.png"],
+        imgArr: ["/projects/amazon/cart.webp"],
       },
     ],
     descriptionDetails: {
@@ -991,19 +991,19 @@ export const Projects: ProjectInterface[] = [
     techStack: ["n8n", "Baileys", "Node.js", "Google Drive API", "Webhook"],
     startDate: new Date("2025-10-01"),
     endDate: new Date("2025-10-05"),
-    companyLogoImg: "/projects/n8n-drive/logo.png",
+    companyLogoImg: "/projects/n8n-drive/logo.webp",
     pagesInfoArr: [
       {
         title: "Automation Flow",
         description:
           "Workflow built in n8n that connects Google Drive and WhatsApp using Baileys Webhook. It fetches Drive files and sends details directly to WhatsApp chats.",
-        imgArr: ["/projects/n8n-drive/flow.png"],
+        imgArr: ["/projects/n8n-drive/flow.webp"],
       },
       {
         title: "WhatsApp Integration",
         description:
           "Messages and Drive file links are automatically sent to users or groups through the Baileys WhatsApp API, with status logs visible in n8n.",
-        imgArr: ["/projects/n8n-drive/whatsapp.png"],
+        imgArr: ["/projects/n8n-drive/whatsapp.webp"],
       },
     ],
     descriptionDetails: {
@@ -1031,19 +1031,19 @@ export const Projects: ProjectInterface[] = [
     techStack: ["FastAPI", "WebSockets", "WebRTC", "Python", "JavaScript"],
     startDate: new Date("2025-02-01"),
     endDate: new Date("2025-03-01"),
-    companyLogoImg: "/projects/file-share/logo.png",
+    companyLogoImg: "/projects/file-share/logo.webp",
     pagesInfoArr: [
       {
         title: "Room Join & Signaling",
         description:
           "Users join a room via WebSocket. The FastAPI server manages room state and relays WebRTC signaling data (offer, answer, ICE candidates) between peers.",
-        imgArr: ["/projects/file-share/signaling.png"],
+        imgArr: ["/projects/file-share/signaling.webp"],
       },
       {
         title: "P2P DataChannel Transfer",
         description:
           "Files are transferred directly between peers using WebRTC DataChannels in 16KB chunks, bypassing the server entirely for maximum privacy.",
-        imgArr: ["/projects/file-share/transfer.png"],
+        imgArr: ["/projects/file-share/transfer.webp"],
       },
     ],
     descriptionDetails: {

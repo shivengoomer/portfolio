@@ -61,7 +61,7 @@ const caseStudies: CaseStudyData[] = [
     projectId: "nifty50-qa-platform",
     headline:
       "50 equities. Live quantitative intelligence. One institutional trading terminal.",
-    heroImage: "/projects/nifty50/dashboard.png",
+    heroImage: "/projects/nifty50/dashboard.webp",
     features: [
       {
         title: "Real-Time Market Screener",
@@ -75,7 +75,7 @@ const caseStudies: CaseStudyData[] = [
         title: "Quantitative Factor Scoring",
         description:
           "Composite momentum, risk, and setup scores computed server-side via FastAPI pipelines.",
-        image: "/projects/nifty50/analytics.png",
+        image: "/projects/nifty50/analytics.webp",
         icon: "BarChart3",
         span: "normal",
       },
@@ -83,7 +83,7 @@ const caseStudies: CaseStudyData[] = [
         title: "TradingView Integration",
         description:
           "Candlestick charts with multi-timeframe nav, VWAP/EMA overlays, and volume profiling.",
-        image: "/projects/nifty50/charts.png",
+        image: "/projects/nifty50/charts.webp",
         icon: "CandlestickChart",
         span: "normal",
       },
@@ -91,7 +91,7 @@ const caseStudies: CaseStudyData[] = [
         title: "Institutional Terminal",
         description:
           "4-way split multi-chart terminal with Level-2 market depth order book visualisation.",
-        image: "/projects/nifty50/terminal.png",
+        image: "/projects/nifty50/terminal.webp",
         icon: "Monitor",
         span: "wide",
       },
@@ -287,7 +287,7 @@ const caseStudies: CaseStudyData[] = [
         title: "AI Exam Generator",
         description:
           "Upload textbook material; Groq LLM generates CBSE-aligned exam sheets and answer keys in seconds.",
-        image: "/projects/mentora/creator.png",
+        image: "/projects/mentora/creator.webp",
         icon: "Sparkles",
         span: "wide",
       },
@@ -295,7 +295,7 @@ const caseStudies: CaseStudyData[] = [
         title: "Automated Grading",
         description:
           "AI grading engine provides concept-gap tagging, qualitative feedback, and detailed scoring metrics.",
-        image: "/projects/mentora/grading.png",
+        image: "/projects/mentora/grading.webp",
         icon: "CheckCircle2",
         span: "normal",
       },
@@ -303,7 +303,7 @@ const caseStudies: CaseStudyData[] = [
         title: "Student Practice Lab",
         description:
           "SM-2 spaced repetition surfaces weak concepts. 24/7 AI tutor answers doubts instantly.",
-        image: "/projects/mentora/student.png",
+        image: "/projects/mentora/student.webp",
         icon: "Brain",
         span: "normal",
       },
@@ -311,7 +311,7 @@ const caseStudies: CaseStudyData[] = [
         title: "Parent Analytics Portal",
         description:
           "Real-time competency tracker with grade metrics, announcements, and upcoming deadlines.",
-        image: "/projects/mentora/parent.png",
+        image: "/projects/mentora/parent.webp",
         icon: "BarChart3",
         span: "wide",
       },
@@ -509,13 +509,13 @@ const caseStudies: CaseStudyData[] = [
     projectId: "wpbot-news",
     headline:
       "Detecting phishing links, fake news, and deepfakes — where conversations happen.",
-    heroImage: "/projects/wpbot-news/phishing.png",
+    heroImage: "/projects/wpbot-news/phishing.webp",
     features: [
       {
         title: "Phishing Link Detection",
         description:
           "Real-time heuristic and reputation scoring flags malicious URLs shared in WhatsApp chats.",
-        image: "/projects/wpbot-news/phishing.png",
+        image: "/projects/wpbot-news/phishing.webp",
         icon: "ShieldAlert",
         span: "wide",
       },
@@ -523,7 +523,7 @@ const caseStudies: CaseStudyData[] = [
         title: "Fake News Analysis",
         description:
           "NLP-powered source verification and FAISS similarity search detects fabricated news stories.",
-        image: "/projects/wpbot-news/fakenews.png",
+        image: "/projects/wpbot-news/fakenews.webp",
         icon: "FileSearch",
         span: "normal",
       },
@@ -744,10 +744,10 @@ const caseStudies: CaseStudyData[] = [
     headline: "Every disclosure preserved. Every event match explainable.",
     heroImage: "/projects/indiair-intelligence/01-home.webp",
     features: [
-      { title: "Multi-source disclosure intake", description: "Collects regulatory announcements from NSE and BSE alongside reports and slide decks from 50+ issuer investor-relations sites.", icon: "Globe", span: "wide" },
-      { title: "Immutable provenance", description: "Lands source JSON and downloaded documents as byte-identical records with SHA-256 fingerprints in object storage before classification.", icon: "ShieldAlert" },
-      { title: "Confidence-scored matching", description: "Resolves company identity, classifies event type, and routes high-, mid-, and low-confidence matches through explicit outcomes.", icon: "Brain" },
-      { title: "Auditable review", description: "Keeps unmatched disclosures and human decisions in review queues and append-only audit logs—rather than discarding uncertain evidence.", icon: "FileSearch", span: "wide" },
+      { title: "Multi-source disclosure intake", description: "Collects regulatory announcements from NSE and BSE alongside reports and slide decks from 50+ issuer investor-relations sites.", image: "/projects/indiair-intelligence/19-disclosures.webp", icon: "Globe", span: "wide" },
+      { title: "Immutable provenance", description: "Lands source JSON and downloaded documents as byte-identical records with SHA-256 fingerprints in object storage before classification.", image: "/projects/indiair-intelligence/20-disclosure-detail.webp", icon: "ShieldAlert" },
+      { title: "Confidence-scored matching", description: "Resolves company identity, classifies event type, and routes high-, mid-, and low-confidence matches through explicit outcomes.", image: "/projects/indiair-intelligence/18-event-detail.webp", icon: "Brain" },
+      { title: "Auditable review", description: "Keeps unmatched disclosures and human decisions in review queues and append-only audit logs—rather than discarding uncertain evidence.", image: "/projects/indiair-intelligence/22-admin-review.webp", icon: "FileSearch", span: "wide" },
     ],
     architecture: {
       nodes: [
@@ -782,10 +782,10 @@ const caseStudies: CaseStudyData[] = [
     headline: "From a target market prompt to verified, compliant outreach operations.",
     heroImage: "/projects/scraper-leads/02-pipeline-table.webp",
     features: [
-      { title: "Prompt-to-scrape planning", description: "Turns an ICP request into localized search targets, coordinates, scraper parameters, and a containerized acquisition job.", icon: "ScanLine", span: "wide" },
-      { title: "Dual-provider AI gateway", description: "Routes scoring and strategy work across Groq and Gemini, with deterministic local heuristics available when cloud providers are unavailable.", icon: "Brain" },
-      { title: "Contact verification", description: "Validates email syntax and live DNS MX records, then distinguishes generic inboxes from potential decision-maker contacts.", icon: "CheckCircle2" },
-      { title: "Campaign safeguards", description: "Builds multi-touch outreach sequences while enforcing suppression lists and DPDP, CAN-SPAM, and GDPR-oriented guardrails.", icon: "ShieldAlert", span: "wide" },
+      { title: "Prompt-to-scrape planning", description: "Turns an ICP request into localized search targets, coordinates, scraper parameters, and a containerized acquisition job.", image: "/projects/scraper-leads/05-find-leads.webp", icon: "ScanLine", span: "wide" },
+      { title: "Dual-provider AI gateway", description: "Routes scoring and strategy work across Groq and Gemini, with deterministic local heuristics available when cloud providers are unavailable.", image: "/projects/scraper-leads/11-provider-settings.webp", icon: "Brain" },
+      { title: "Contact verification", description: "Validates email syntax and live DNS MX records, then distinguishes generic inboxes from potential decision-maker contacts.", image: "/projects/scraper-leads/04-lead-detail.webp", icon: "CheckCircle2" },
+      { title: "Campaign safeguards", description: "Builds multi-touch outreach sequences while enforcing suppression lists and DPDP, CAN-SPAM, and GDPR-oriented guardrails.", image: "/projects/scraper-leads/06-campaign-studio.webp", icon: "ShieldAlert", span: "wide" },
     ],
     architecture: {
       nodes: [
