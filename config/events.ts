@@ -29,7 +29,7 @@ export const hackathonEvents: EventItem[] = [
       "Invited as Official Hackathon Mentor for Lean In Hacks at IGDTUW, mentoring teams on system architecture, rapid prototyping, and product pitching.",
   },
   {
-    src: "/events/build-up-ideathon.jpg",
+    src: "/events/build-up-ideathon.webp",
     alt: "The Build-Up Ideathon Certificate of Appreciation",
     title: "The Build-Up Ideathon",
     subtitle: "Lead Organizer · Geek Room & GDG MSIT",
@@ -55,7 +55,7 @@ export const hackathonEvents: EventItem[] = [
       "Certificate of Appreciation presented to Shiven Goomer for being an Organizer and contributing actively in Digital Cyberhunt CTF, ensuring smooth execution throughout.",
   },
   {
-    src: "/events/geekroom-tenure-letter.png",
+    src: "/events/geekroom-tenure-letter.webp",
     alt: "Geek Room Tenure Award - Letter of Appreciation",
     title: "Geek Room Tenure Award",
     subtitle: "Letter of Appreciation · 1-Year Leadership",

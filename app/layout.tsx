@@ -6,7 +6,6 @@ import localFont from "next/font/local";
 import { Analytics } from "@/components/common/analytics";
 import { ThemeProvider } from "@/components/common/theme-provider";
 import { LoaderProvider } from "@/components/common/loader-provider";
-import { SmoothScroll } from "@/components/common/smooth-scroll";
 import { Toaster } from "@/components/ui/toaster";
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
@@ -133,9 +132,7 @@ export default function RootLayout({
             "dark",
           ]}
         >
-          <SmoothScroll>
-            <LoaderProvider>{children}</LoaderProvider>
-          </SmoothScroll>
+          <LoaderProvider>{children}</LoaderProvider>
           <Analytics />
           <Toaster />
           <ModalProvider />

@@ -1,14 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ["media.licdn.com"],
-  },
-   images: {
     remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "example.com",
-      },
+      { protocol: "https", hostname: "media.licdn.com" },
+      { protocol: "https", hostname: "example.com" },
     ],
   },
   async headers() {

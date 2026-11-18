@@ -39,14 +39,19 @@ export function ProjectList({ projects, className }: ProjectListProps) {
   }, [updateBounds]);
 
   // Handle pointer movement over the list
+  const rafRef = useRef(0);
   const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
-    if (!containerRef.current) return;
-    const rect = containerRef.current.getBoundingClientRect();
-    setPointerPos({
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top,
+    if (!containerRef.current || rafRef.current) return;
+    const { clientX, clientY } = e;
+    rafRef.current = requestAnimationFrame(() => {
+      rafRef.current = 0;
+      if (!containerRef.current) return;
+      const rect = containerRef.current.getBoundingClientRect();
+      setPointerPos({ x: clientX - rect.left, y: clientY - rect.top });
     });
   };
+
+  useEffect(() => () => cancelAnimationFrame(rafRef.current), []);
 
   const handlePointerLeave = () => {
     setActiveProject(null);

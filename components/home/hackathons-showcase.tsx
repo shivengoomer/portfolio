@@ -71,7 +71,7 @@ export function HackathonsShowcase() {
         idx === 0
           ? "/events/hackwie-certificate.jpg"
           : idx === 1
-          ? "/events/build-up-ideathon.jpg"
+          ? "/events/build-up-ideathon.webp"
           : "/events/digital-cyberhunt-ctf.jpg",
       title: cert.repo,
       subtitle: `${cert.repoOwner} · Certified Credential`,
@@ -322,7 +322,7 @@ export function HackathonsShowcase() {
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
               onClick={(e) => e.stopPropagation()}
-              data-lenis-prevent className="relative max-h-[90vh] w-full max-w-3xl overflow-hidden rounded-2xl border border-border bg-surface shadow-2xl"
+              className="relative max-h-[90vh] w-full max-w-3xl overflow-hidden rounded-2xl border border-border bg-surface shadow-2xl"
             >
               {/* Modal Header */}
               <div className="flex items-center justify-between border-b border-border bg-surface-2 p-4">

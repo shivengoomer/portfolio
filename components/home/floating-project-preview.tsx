@@ -120,7 +120,6 @@ export function FloatingProjectPreview({
                     src={activeProject.image}
                     alt={activeProject.name}
                     fill
-                    priority
                     sizes="460px"
                     className="object-cover object-top"
                   />

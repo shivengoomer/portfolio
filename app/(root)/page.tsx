@@ -1,13 +1,17 @@
 "use client";
 import Script from "next/script";
 import { ClientPageWrapper } from "@/components/common/client-page-wrapper";
-import { GitHubScrollCityGraph } from "@/components/github/github-scroll-city-graph";
+import dynamic from "next/dynamic";
+const GitHubScrollCityGraph = dynamic(
+  () => import("@/components/github/github-scroll-city-graph").then((m) => m.GitHubScrollCityGraph),
+  { ssr: false, loading: () => <div className="h-[640px] w-full rounded-3xl border border-border/80 bg-surface/70" /> }
+);
 import { FeaturedWorkShowcase } from "@/components/home/featured-work-showcase";
 import { HomeSkillsMarquee } from "@/components/skills/home-skills-marquee";
 import { Projects } from "@/config/projects";
 import { siteConfig } from "@/config/site";
 import { useEffect, useState, useRef } from "react";
-import { motion, useScroll, useTransform, useInView } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { DeliveryFramework } from "@/components/common/delivery-framework";
 import { HackathonsShowcase } from "@/components/home/hackathons-showcase";
 import { EditorialHeroSection } from "@/components/home/editorial-hero-section";
@@ -69,16 +73,6 @@ export default function IndexPage() {
     ].filter(Boolean),
   };
 
-  // Hero parallax
-  const heroRef = useRef<HTMLElement>(null);
-  const { scrollYProgress: heroScroll } = useScroll({
-    target: heroRef,
-    offset: ["start start", "end start"],
-  });
-  const heroY = useTransform(heroScroll, [0, 1], ["0%", "18%"]);
-  const heroOpacity = useTransform(heroScroll, [0, 0.75], [1, 0]);
-  const heroScale = useTransform(heroScroll, [0, 1], [1, 0.96]);
-
   const heroVideoRef = useRef<HTMLVideoElement>(null);
   useEffect(() => {
     const v = heroVideoRef.current;
@@ -102,38 +96,34 @@ export default function IndexPage() {
       <div className="relative isolate">
         {/* ── HERO ── with parallax scroll effect */}
         <section
-          ref={heroRef}
           className="relative isolate flex min-h-[95vh] w-full items-center justify-center overflow-hidden bg-[#12070d] px-4 py-16 sm:py-24"
           aria-label="Hero"
         >
           {/* Background Video — parallax */}
-          <motion.div
-            style={{ y: heroY }}
-            className="pointer-events-none absolute inset-0 z-0 overflow-hidden"
-          >
+          <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden [transform:translateZ(0)]">
             <video
               ref={heroVideoRef}
-              preload="metadata"
+              preload="auto"
+              poster="/bg-portfolio-poster.webp"
+              disablePictureInPicture
               autoPlay
               muted
               loop
               playsInline
-              className="h-full w-full object-cover object-[56%_center] opacity-62 brightness-[0.84] saturate-[1.04] sm:object-center sm:opacity-76"
+              className="h-full w-full [transform:translateZ(0)] object-cover object-[56%_center] opacity-62 brightness-[0.84] saturate-[1.04] sm:object-center sm:opacity-76"
             >
+              <source src="/bg-portfolio.mp4" type='video/mp4; codecs="avc1.640028"' />
               <source src="/bg-portfolio.webm" type="video/webm" />
             </video>
             <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(18,7,13,0.3)_0%,rgba(18,7,13,0.08)_42%,rgba(18,7,13,0.56)_100%)] sm:bg-[linear-gradient(180deg,rgba(18,7,13,0.18)_0%,rgba(18,7,13,0.02)_44%,rgba(18,7,13,0.46)_100%)]" />
             <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-[#12070d] via-[#12070d]/80 to-transparent pointer-events-none" />
-          </motion.div>
+          </div>
 
-          {/* Hero content — fades + scales out on scroll */}
-          <motion.div
-            style={{ opacity: heroOpacity, scale: heroScale }}
-            className="relative z-10 flex w-full flex-col items-center justify-center"
-          >
+          {/* Hero content */}
+          <div className="relative z-10 flex w-full flex-col items-center justify-center">
             <div className="pointer-events-none absolute -inset-x-4 -inset-y-8 -z-10 bg-[radial-gradient(ellipse_62%_58%_at_50%_45%,rgba(18,7,13,0.45),transparent_72%)] sm:bg-[radial-gradient(ellipse_56%_58%_at_50%_45%,rgba(18,7,13,0.3),transparent_72%)]" />
             <EditorialHeroSection />
-          </motion.div>
+          </div>
         </section>
 
         {/* ── SKILLS MARQUEE ── */}

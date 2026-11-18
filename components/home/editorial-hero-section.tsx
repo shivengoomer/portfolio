@@ -273,7 +273,7 @@ export function EditorialHeroSection() {
         <span className="uppercase tracking-wider text-[11px] sm:text-xs text-white font-semibold">
           Shipped code with
         </span>
-        <span className="inline-flex items-center -space-x-1.5 align-middle p-0.5 rounded-full bg-black/50 backdrop-blur-md border border-white/30 shadow-[0_4px_16px_rgba(0,0,0,0.5)]">
+        <span className="inline-flex items-center -space-x-1.5 align-middle p-0.5 rounded-full bg-black/70  border border-white/30 shadow-[0_4px_16px_rgba(0,0,0,0.5)]">
           {workedAtCompanies.map((c) => (
             <span
               key={c.name}
@@ -314,7 +314,7 @@ export function EditorialHeroSection() {
           <Link
             href="/resume"
             target="_blank"
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full border-2 border-white/60 text-white bg-black/50 backdrop-blur-md px-7 py-2.5 sm:px-8 sm:py-3 font-oswald font-semibold text-sm sm:text-base tracking-wider hover:border-[#00E5FF] hover:bg-white/15 active:scale-95 transition-all shadow-[0_0_20px_rgba(255,255,255,0.15)] hover:shadow-[0_0_28px_rgba(0,229,255,0.45)]"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full border-2 border-white/60 text-white bg-black/70  px-7 py-2.5 sm:px-8 sm:py-3 font-oswald font-semibold text-sm sm:text-base tracking-wider hover:border-[#00E5FF] hover:bg-white/15 active:scale-95 transition-all shadow-[0_0_20px_rgba(255,255,255,0.15)] hover:shadow-[0_0_28px_rgba(0,229,255,0.45)]"
           >
             <FileText className="h-4 w-4" />
             <span>View Resume</span>
