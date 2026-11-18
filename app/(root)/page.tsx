@@ -79,6 +79,18 @@ export default function IndexPage() {
   const heroOpacity = useTransform(heroScroll, [0, 0.75], [1, 0]);
   const heroScale = useTransform(heroScroll, [0, 1], [1, 0.96]);
 
+  const heroVideoRef = useRef<HTMLVideoElement>(null);
+  useEffect(() => {
+    const v = heroVideoRef.current;
+    if (!v) return;
+    const io = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting) v.play().catch(() => {});
+      else v.pause();
+    });
+    io.observe(v);
+    return () => io.disconnect();
+  }, []);
+
   return (
     <ClientPageWrapper>
       <Script
@@ -100,6 +112,8 @@ export default function IndexPage() {
             className="pointer-events-none absolute inset-0 z-0 overflow-hidden"
           >
             <video
+              ref={heroVideoRef}
+              preload="metadata"
               autoPlay
               muted
               loop
@@ -123,18 +137,13 @@ export default function IndexPage() {
         </section>
 
         {/* ── SKILLS MARQUEE ── */}
-        <Reveal y={20} delay={0}>
-          <HomeSkillsMarquee />
-        </Reveal>
+        <HomeSkillsMarquee />
 
         {/* ── CAREER / ENGINEERING HISTORY ── */}
-        <Reveal y={48} delay={0}>
-          <DeliveryFramework />
-        </Reveal>
+        <DeliveryFramework />
 
         {/* ── GITHUB 2D TO 3D SCROLL CITY ── */}
-        <Reveal y={40} delay={0}>
-          <section
+        <section
             id="github-city"
             className="scroll-mt-20 px-4 py-8 sm:px-6 md:py-20 lg:px-8"
             aria-labelledby="github-city-title"
@@ -168,17 +177,12 @@ export default function IndexPage() {
               </Reveal>
             </div>
           </section>
-        </Reveal>
 
         {/* ── FEATURED PROJECTS SHOWCASE ── */}
-        <Reveal y={48} delay={0}>
-          <FeaturedWorkShowcase projects={Projects} />
-        </Reveal>
+        <FeaturedWorkShowcase projects={Projects} />
 
         {/* ── TIMELINE: HACKATHONS, EVENTS & CERTIFICATES ── */}
-        <Reveal y={48} delay={0}>
-          <HackathonsShowcase />
-        </Reveal>
+        <HackathonsShowcase />
       </div>
     </ClientPageWrapper>
   );

@@ -229,7 +229,7 @@ export function GitHubScrollCityGraph({ className = "" }: { className?: string }
         powerPreference: "high-performance",
         failIfMajorPerformanceCaveat: false,
       });
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
       renderer.setClearColor(0x000000, 0);
       renderer.toneMapping = THREE.ACESFilmicToneMapping;
       renderer.toneMappingExposure = isDark ? 1.25 : 1.1;
@@ -431,7 +431,11 @@ export function GitHubScrollCityGraph({ className = "" }: { className?: string }
     const dummy = new THREE.Object3D();
     const roofDummy = new THREE.Object3D();
 
+    // Only render while the canvas is on screen (and tab visible).
+    let visible = true;
+    let running = false;
     const render = () => {
+      if (!visible) { running = false; return; }
       // Interpolate scroll / interactive animation
       const scrollProgress = scrollRef.current.progress;
       const is2D = manualModeRef.current === "2d";
@@ -490,7 +494,15 @@ export function GitHubScrollCityGraph({ className = "" }: { className?: string }
       renderer.render(scene, camera);
       animId = requestAnimationFrame(render);
     };
-    render();
+    const start = () => { if (!running) { running = true; animId = requestAnimationFrame(render); } };
+    const io = new IntersectionObserver(
+      ([entry]) => { visible = entry.isIntersecting && !document.hidden; if (visible) start(); },
+      { rootMargin: "120px 0px" }
+    );
+    io.observe(container);
+    const onVis = () => { visible = !document.hidden; if (visible) start(); };
+    document.addEventListener("visibilitychange", onVis);
+    start();
 
     /* ── Pointer Raycasting & Hover Illumination ── */
     const raycaster = new THREE.Raycaster();
@@ -590,6 +602,8 @@ export function GitHubScrollCityGraph({ className = "" }: { className?: string }
       window.removeEventListener("pointerup", onPointerUp);
       canvas.removeEventListener("pointerleave", onPointerLeave);
       cancelAnimationFrame(animId);
+      io.disconnect();
+      document.removeEventListener("visibilitychange", onVis);
 
       // Clean disposal
       bodyGeo.dispose();

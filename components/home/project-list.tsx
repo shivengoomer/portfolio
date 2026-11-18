@@ -79,7 +79,7 @@ export function ProjectList({ projects, className }: ProjectListProps) {
             alt=""
             width={460}
             height={290}
-            priority
+            loading="lazy"
           />
         ))}
       </div>

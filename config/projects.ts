@@ -197,13 +197,31 @@ export const Projects: ProjectInterface[] = [
     ],
     startDate: new Date("2026-11-01"),
     endDate: new Date("2026-11-01"),
-    companyLogoImg: "/projects/indiair-intelligence/cover.svg",
+    companyLogoImg: "/projects/indiair-intelligence/01-home.webp",
     pagesInfoArr: [
       {
-        title: "Investor Relations Intelligence",
-        description:
-          "A research workspace for collecting, evaluating, and preserving evidence from Indian-equity investor-relations sources.",
-        imgArr: ["/projects/indiair-intelligence/cover.svg"],
+        title: "Home",
+        imgArr: ["/projects/indiair-intelligence/01-home.webp"],
+      },
+      {
+        title: "Research Feed",
+        imgArr: ["/projects/indiair-intelligence/10-feed.webp"],
+      },
+      {
+        title: "Company Detail",
+        imgArr: ["/projects/indiair-intelligence/14-company-detail.webp"],
+      },
+      {
+        title: "Calendar",
+        imgArr: ["/projects/indiair-intelligence/15-calendar.webp"],
+      },
+      {
+        title: "Event Detail",
+        imgArr: ["/projects/indiair-intelligence/18-event-detail.webp"],
+      },
+      {
+        title: "Disclosure Detail",
+        imgArr: ["/projects/indiair-intelligence/20-disclosure-detail.webp"],
       },
     ],
     descriptionDetails: {
@@ -239,13 +257,27 @@ export const Projects: ProjectInterface[] = [
     ],
     startDate: new Date("2026-10-01"),
     endDate: new Date("2026-10-01"),
-    companyLogoImg: "/projects/scraper-leads/cover.svg",
+    companyLogoImg: "/projects/scraper-leads/02-pipeline-table.webp",
     pagesInfoArr: [
       {
-        title: "AI Lead Discovery & Deal Pipeline",
-        description:
-          "An operational workspace for prompt-to-scrape discovery, verified contact enrichment, deal prioritization, and campaign preparation.",
-        imgArr: ["/projects/scraper-leads/cover.svg"],
+        title: "Accounts & Deal Pipeline",
+        imgArr: ["/projects/scraper-leads/02-pipeline-table.webp"],
+      },
+      {
+        title: "Lead Discovery",
+        imgArr: ["/projects/scraper-leads/05-find-leads.webp"],
+      },
+      {
+        title: "Lead Detail",
+        imgArr: ["/projects/scraper-leads/04-lead-detail.webp"],
+      },
+      {
+        title: "Campaign Studio",
+        imgArr: ["/projects/scraper-leads/06-campaign-studio.webp"],
+      },
+      {
+        title: "Market Analytics",
+        imgArr: ["/projects/scraper-leads/09-analytics.webp"],
       },
     ],
     descriptionDetails: {

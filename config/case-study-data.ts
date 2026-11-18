@@ -742,7 +742,7 @@ const caseStudies: CaseStudyData[] = [
   {
     projectId: "indiair-intelligence",
     headline: "Every disclosure preserved. Every event match explainable.",
-    heroImage: "/projects/indiair-intelligence/cover.svg",
+    heroImage: "/projects/indiair-intelligence/01-home.webp",
     features: [
       { title: "Multi-source disclosure intake", description: "Collects regulatory announcements from NSE and BSE alongside reports and slide decks from 50+ issuer investor-relations sites.", icon: "Globe", span: "wide" },
       { title: "Immutable provenance", description: "Lands source JSON and downloaded documents as byte-identical records with SHA-256 fingerprints in object storage before classification.", icon: "ShieldAlert" },
@@ -780,7 +780,7 @@ const caseStudies: CaseStudyData[] = [
   {
     projectId: "scraper-leads",
     headline: "From a target market prompt to verified, compliant outreach operations.",
-    heroImage: "/projects/scraper-leads/cover.svg",
+    heroImage: "/projects/scraper-leads/02-pipeline-table.webp",
     features: [
       { title: "Prompt-to-scrape planning", description: "Turns an ICP request into localized search targets, coordinates, scraper parameters, and a containerized acquisition job.", icon: "ScanLine", span: "wide" },
       { title: "Dual-provider AI gateway", description: "Routes scoring and strategy work across Groq and Gemini, with deterministic local heuristics available when cloud providers are unavailable.", icon: "Brain" },
