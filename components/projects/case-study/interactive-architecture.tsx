@@ -244,12 +244,12 @@ export default function InteractiveArchitecture({
 
           <div className="hidden lg:flex items-center gap-2 font-mono text-xs text-text-muted">
             <span className="flex items-center gap-1.5 rounded-md border border-border bg-surface px-2.5 py-1">
-              <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-              Live Pipeline
+              <span className="h-2 w-2 rounded-full bg-accent animate-pulse" />
+              Active System
             </span>
             <span className="flex items-center gap-1.5 rounded-md border border-border bg-surface px-2.5 py-1">
               <span className="h-1.5 w-4 rounded-full bg-accent" />
-              Data Flow
+              Data Pipeline
             </span>
           </div>
         </div>
@@ -258,32 +258,32 @@ export default function InteractiveArchitecture({
         <div
           ref={containerRef}
           className={cn(
-            "relative overflow-hidden rounded-2xl border border-border bg-[#140810] shadow-2xl transition-all duration-300",
-            isFullscreen && "fixed inset-0 z-50 rounded-none border-none p-6 bg-[#0E050B]"
+            "relative overflow-hidden rounded-2xl border border-border bg-surface/40 shadow-xl transition-all duration-300",
+            isFullscreen && "fixed inset-0 z-50 rounded-none border-none p-6 bg-bg"
           )}
         >
-          {/* Subtle Grid Pattern */}
+          {/* Theme Dot Matrix Grid */}
           <div
-            className="absolute inset-0 pointer-events-none opacity-20"
+            className="absolute inset-0 pointer-events-none opacity-20 dark:opacity-25"
             style={{
               backgroundImage:
-                "radial-gradient(circle, rgba(242,92,42,0.2) 1px, transparent 1px)",
+                "radial-gradient(circle, var(--accent) 1px, transparent 1px)",
               backgroundSize: "28px 28px",
             }}
           />
 
-          {/* Ambient Lighting */}
+          {/* Ambient Lighting matching theme accent */}
           <div
-            className="pointer-events-none absolute -top-40 left-1/3 h-80 w-80 rounded-full blur-3xl opacity-15"
-            style={{ backgroundColor: "#F25C2A" }}
+            className="pointer-events-none absolute -top-40 left-1/3 h-80 w-80 rounded-full bg-accent/8 blur-3xl"
+            aria-hidden="true"
           />
           <div
-            className="pointer-events-none absolute -bottom-40 right-1/4 h-80 w-80 rounded-full blur-3xl opacity-10"
-            style={{ backgroundColor: "#0891B2" }}
+            className="pointer-events-none absolute -bottom-40 right-1/4 h-80 w-80 rounded-full bg-accent/5 blur-3xl"
+            aria-hidden="true"
           />
 
           {/* Canvas Controls Toolbar */}
-          <div className="absolute top-4 right-4 z-30 flex items-center gap-1 rounded-xl border border-border/80 bg-surface/90 p-1.5 shadow-lg backdrop-blur-md">
+          <div className="absolute top-4 right-4 z-30 flex items-center gap-1 rounded-xl border border-border bg-surface/95 p-1.5 shadow-md backdrop-blur-md">
             <button
               onClick={() => setIsFlowing(!isFlowing)}
               className={cn(
@@ -362,7 +362,18 @@ export default function InteractiveArchitecture({
                       animation: archFlowDash 1.2s linear infinite;
                     }
                   `}</style>
-                  {/* Arrow markers */}
+                  {/* Arrow markers using theme accent */}
+                  <marker
+                    id="arrow-accent"
+                    viewBox="0 0 10 10"
+                    refX="7"
+                    refY="5"
+                    markerWidth="6"
+                    markerHeight="6"
+                    orient="auto-start-reverse"
+                  >
+                    <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="var(--accent)" />
+                  </marker>
                   {nodes.map((n) => (
                     <marker
                       key={`arrow-${n.id}`}
@@ -374,7 +385,7 @@ export default function InteractiveArchitecture({
                       markerHeight="6"
                       orient="auto-start-reverse"
                     >
-                      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill={n.color || "#F25C2A"} />
+                      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill={n.color || "var(--accent)"} />
                     </marker>
                   ))}
                   <filter id="glow-edge" x="-20%" y="-20%" width="140%" height="140%">
@@ -399,7 +410,7 @@ export default function InteractiveArchitecture({
                     highlightedContext.connectedEdgeIndices.has(idx) ||
                     hoveredEdgeIndex === idx;
 
-                  const strokeColor = fromNode.color || "#F25C2A";
+                  const strokeColor = fromNode.color || "var(--accent)";
 
                   return (
                     <g
@@ -418,7 +429,7 @@ export default function InteractiveArchitecture({
                         onMouseLeave={() => setHoveredEdgeIndex(null)}
                       />
 
-                      {/* Main connection line */}
+                      {/* Main connection line using node-specific neon color */}
                       <path
                         id={`architecture-edge-${idx}`}
                         d={d}
@@ -426,7 +437,7 @@ export default function InteractiveArchitecture({
                         stroke={strokeColor}
                         strokeWidth={isHighlighted && (hoveredNodeId || activeNodeId) ? 2 : 1.5}
                         strokeDasharray="6 5"
-                        strokeOpacity={isHighlighted ? 0.75 : 0.3}
+                        strokeOpacity={isHighlighted ? 0.85 : 0.25}
                         markerEnd={`url(#arrow-${toNode.id})`}
                       />
 
@@ -443,11 +454,10 @@ export default function InteractiveArchitecture({
                             className="animate-flow-dash"
                             filter="url(#glow-edge)"
                           />
-                          {/* Visible packets travel source → target, making the data direction explicit. */}
                           {[0, 1].map((packet) => (
                             <circle
                               key={packet}
-                              r={4}
+                              r={3.5}
                               fill={strokeColor}
                               filter="url(#glow-edge)"
                               className="pointer-events-none"
@@ -477,11 +487,16 @@ export default function InteractiveArchitecture({
                             onMouseEnter={() => setHoveredEdgeIndex(idx)}
                             onMouseLeave={() => setHoveredEdgeIndex(null)}
                             className={cn(
-                              "mx-auto flex w-max items-center justify-center gap-1 rounded-full px-2 py-0.5 font-mono text-[9px] tracking-wide transition-all duration-200 shadow-sm cursor-pointer",
+                              "mx-auto flex w-max items-center justify-center gap-1.5 rounded-full px-2.5 py-0.5 font-mono text-[9px] tracking-wide transition-all duration-200 shadow-sm cursor-pointer border backdrop-blur-md",
                               hoveredEdgeIndex === idx
-                                ? "bg-accent text-white scale-105 border border-accent shadow-[0_0_12px_rgba(242,92,42,0.4)]"
-                                : "border border-border/80 bg-surface/90 text-text-muted backdrop-blur-md hover:border-accent/50 hover:text-text"
+                                ? "scale-105 shadow-md"
+                                : "bg-surface text-text-muted hover:text-text"
                             )}
+                            style={{
+                              borderColor: hoveredEdgeIndex === idx ? strokeColor : `${strokeColor}45`,
+                              backgroundColor: hoveredEdgeIndex === idx ? `${strokeColor}25` : undefined,
+                              color: hoveredEdgeIndex === idx ? strokeColor : undefined,
+                            }}
                           >
                             <span
                               className="h-1.5 w-1.5 rounded-full"
@@ -496,7 +511,7 @@ export default function InteractiveArchitecture({
                 })}
               </svg>
 
-              {/* ── HTML NODES LAYER ── */}
+              {/* ── HTML NODES LAYER (THEME COMPLIANT WITH NEON ACCENTS) ── */}
               {nodes.map((node) => {
                 const cx = (node.x / 100) * VW;
                 const cy = (node.y / 100) * VH;
@@ -510,7 +525,7 @@ export default function InteractiveArchitecture({
                   highlightedContext === null ||
                   highlightedContext.connectedNodeIds.has(node.id);
 
-                const nodeColor = node.color || "#F25C2A";
+                const nodeColor = node.color || "var(--accent)";
 
                 return (
                   <div
@@ -537,26 +552,30 @@ export default function InteractiveArchitecture({
                       }
                     }}
                   >
-                    {/* Node Card Shell */}
+                    {/* Node Card Shell — Distinct Neon Identity */}
                     <div
                       className={cn(
-                        "relative flex h-full w-full flex-col justify-between rounded-xl border p-2.5 backdrop-blur-md transition-all duration-200",
+                        "relative flex h-full w-full flex-col justify-between rounded-xl border p-2.5 backdrop-blur-md transition-all duration-200 bg-surface",
                         isSelected
-                          ? "bg-[#1F0E18] shadow-xl"
-                          : "bg-[#180B13]/90 hover:bg-[#200F1A] shadow-md"
+                          ? "shadow-lg ring-1"
+                          : isHovered
+                          ? "bg-surface-2 shadow-md"
+                          : "shadow-sm"
                       )}
                       style={{
                         borderColor: isSelected
                           ? nodeColor
                           : isHovered
-                          ? `${nodeColor}80`
-                          : "rgba(255,255,255,0.08)",
+                          ? `${nodeColor}90`
+                          : `${nodeColor}45`,
                         boxShadow: isSelected
-                          ? `0 0 20px ${nodeColor}25, 0 8px 24px rgba(0,0,0,0.6)`
+                          ? `0 0 20px ${nodeColor}35, 0 8px 24px rgba(0,0,0,0.3)`
+                          : isHovered
+                          ? `0 0 14px ${nodeColor}25`
                           : undefined,
                       }}
                     >
-                      {/* Top Bar: Category + Status Dot */}
+                      {/* Top Bar: Category Tag + Status Dot */}
                       <div className="flex items-center justify-between text-[9px] font-mono leading-none">
                         <span
                           className="font-semibold uppercase tracking-wider truncate max-w-[125px]"
@@ -564,30 +583,35 @@ export default function InteractiveArchitecture({
                         >
                           {node.category || "SERVICE"}
                         </span>
-                        <div className="flex items-center gap-1 text-[9px] text-text-muted">
+                        <div className="flex items-center gap-1 text-[9px]">
                           <span
                             className="h-1.5 w-1.5 rounded-full animate-pulse"
                             style={{ backgroundColor: nodeColor }}
                           />
-                          <span className="text-[8px] uppercase">LIVE</span>
+                          <span
+                            className="text-[8px] font-semibold uppercase tracking-wider"
+                            style={{ color: nodeColor }}
+                          >
+                            LIVE
+                          </span>
                         </div>
                       </div>
 
                       {/* Main Info: Tech Icon + Title & Tech Subtitle */}
                       <div className="flex items-center gap-2 min-w-0">
-                        {/* Icon Container */}
+                        {/* Icon Container with Distinct Neon Tint */}
                         <div
                           className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border transition-transform duration-200"
                           style={{
-                            backgroundColor: `${nodeColor}14`,
-                            borderColor: `${nodeColor}30`,
                             color: nodeColor,
+                            borderColor: `${nodeColor}45`,
+                            backgroundColor: `${nodeColor}14`,
                           }}
                         >
                           {renderTechIcon(node.iconKey, node.id, "h-4 w-4")}
                         </div>
 
-                        {/* Title & Tech */}
+                        {/* Title & Tech with Theme Typography */}
                         <div className="min-w-0 flex-1">
                           <h4 className="font-heading text-xs sm:text-sm font-bold uppercase tracking-tight text-text truncate">
                             {node.label}
@@ -600,13 +624,25 @@ export default function InteractiveArchitecture({
 
                       {/* Left Port Handle */}
                       <div
-                        className="absolute -left-1.5 top-1/2 -translate-y-1/2 h-2.5 w-2.5 rounded-full border border-bg"
+                        className="absolute -left-1.5 top-1/2 -translate-y-1/2 h-2.5 w-2.5 rounded-full border-2 border-surface shadow-sm"
                         style={{ backgroundColor: nodeColor }}
                       />
 
                       {/* Right Port Handle */}
                       <div
-                        className="absolute -right-1.5 top-1/2 -translate-y-1/2 h-2.5 w-2.5 rounded-full border border-bg"
+                        className="absolute -right-1.5 top-1/2 -translate-y-1/2 h-2.5 w-2.5 rounded-full border-2 border-surface shadow-sm"
+                        style={{ backgroundColor: nodeColor }}
+                      />
+
+                      {/* Top Port Handle */}
+                      <div
+                        className="absolute left-1/2 -top-1.5 -translate-x-1/2 h-2.5 w-2.5 rounded-full border-2 border-surface shadow-sm"
+                        style={{ backgroundColor: nodeColor }}
+                      />
+
+                      {/* Bottom Port Handle */}
+                      <div
+                        className="absolute left-1/2 -bottom-1.5 -translate-x-1/2 h-2.5 w-2.5 rounded-full border-2 border-surface shadow-sm"
                         style={{ backgroundColor: nodeColor }}
                       />
                     </div>
@@ -624,7 +660,7 @@ export default function InteractiveArchitecture({
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 10 }}
                 transition={{ duration: 0.15 }}
-                className="absolute bottom-4 left-4 z-30 flex items-center gap-3 rounded-xl border border-border/80 bg-surface/95 px-4 py-2 font-mono text-xs shadow-lg backdrop-blur-md"
+                className="absolute bottom-4 left-4 z-30 flex items-center gap-3 rounded-xl border border-border bg-surface px-4 py-2 font-mono text-xs shadow-lg backdrop-blur-md"
               >
                 <div className="flex items-center gap-1.5 text-text">
                   <span className="font-semibold text-accent">
@@ -646,7 +682,7 @@ export default function InteractiveArchitecture({
                 {edges[hoveredEdgeIndex].payload && (
                   <>
                     <span className="h-3 w-px bg-border" />
-                    <span className="text-[11px] text-accent/80">
+                    <span className="text-[11px] text-accent font-semibold">
                       {edges[hoveredEdgeIndex].payload}
                     </span>
                   </>
@@ -657,182 +693,212 @@ export default function InteractiveArchitecture({
 
           {/* Node Inspector Side Drawer */}
           <AnimatePresence>
-            {activeNode && (
-              <motion.div
-                initial={{ x: "100%", opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                exit={{ x: "100%", opacity: 0 }}
-                transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                className="absolute inset-x-3 top-3 bottom-3 z-40 w-auto max-w-none overflow-hidden rounded-2xl border border-border bg-surface/95 shadow-2xl backdrop-blur-xl sm:inset-x-auto sm:top-0 sm:right-0 sm:bottom-0 sm:h-full sm:w-full sm:max-w-md sm:rounded-none sm:border-y-0 sm:border-r-0 sm:border-l"
-              >
-                <button
-                  onClick={() => setActiveNodeId(null)}
-                  className="absolute top-5 right-5 flex h-8 w-8 items-center justify-center rounded-lg border border-border bg-surface-2 text-text-muted hover:text-text transition-colors"
-                  aria-label="Close inspector"
+            {activeNode && (() => {
+              const activeColor = activeNode.color || "var(--accent)";
+              return (
+                <motion.div
+                  initial={{ x: "100%", opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  exit={{ x: "100%", opacity: 0 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                  className="absolute top-0 right-0 z-40 h-full w-full max-w-sm sm:max-w-md border-l border-border bg-surface p-6 shadow-2xl backdrop-blur-xl overflow-y-auto"
                 >
-                  <X className="h-4 w-4" />
-                </button>
+                  <button
+                    onClick={() => setActiveNodeId(null)}
+                    className="absolute top-5 right-5 flex h-8 w-8 items-center justify-center rounded-lg border border-border bg-surface-2 text-text-muted hover:text-text transition-colors"
+                    aria-label="Close inspector"
+                  >
+                    <X className="h-4 w-4" />
+                  </button>
 
-                <div className="h-full overflow-y-auto overscroll-contain touch-pan-y [-webkit-overflow-scrolling:touch] p-5 sm:p-6">
                   <div className="space-y-6">
-                  <div className="space-y-2">
-                    <div className="flex items-center gap-2">
-                      <span
-                        className="rounded-full px-2.5 py-0.5 font-mono text-[10px] font-bold uppercase tracking-wider"
-                        style={{
-                          backgroundColor: `${activeNode.color || "#F25C2A"}20`,
-                          color: activeNode.color || "#F25C2A",
-                        }}
-                      >
-                        {activeNode.category || "SERVICE"}
-                      </span>
-                      <span className="flex items-center gap-1 font-mono text-[10px] text-emerald-400">
-                        <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                        Operational
-                      </span>
+                    <div className="space-y-2">
+                      <div className="flex items-center gap-2">
+                        <span
+                          className="rounded-full px-2.5 py-0.5 font-mono text-[10px] font-bold uppercase tracking-wider border"
+                          style={{
+                            backgroundColor: `${activeColor}15`,
+                            color: activeColor,
+                            borderColor: `${activeColor}35`,
+                          }}
+                        >
+                          {activeNode.category || "SERVICE"}
+                        </span>
+                        <span
+                          className="flex items-center gap-1 font-mono text-[10px]"
+                          style={{ color: activeColor }}
+                        >
+                          <span
+                            className="h-1.5 w-1.5 rounded-full animate-pulse"
+                            style={{ backgroundColor: activeColor }}
+                          />
+                          Operational
+                        </span>
+                      </div>
+
+                      <div className="flex items-center gap-3 pt-1">
+                        <div
+                          className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border"
+                          style={{
+                            color: activeColor,
+                            borderColor: `${activeColor}40`,
+                            backgroundColor: `${activeColor}15`,
+                          }}
+                        >
+                          {renderTechIcon(activeNode.iconKey, activeNode.id, "h-5 w-5")}
+                        </div>
+                        <div>
+                          <h3 className="font-heading text-xl font-bold uppercase tracking-tight text-text">
+                            {activeNode.label}
+                          </h3>
+                          <p className="font-mono text-xs text-text-muted">{activeNode.tech}</p>
+                        </div>
+                      </div>
                     </div>
 
-                    <div className="flex items-center gap-3 pt-1">
-                      <div
-                        className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border"
-                        style={{
-                          backgroundColor: `${activeNode.color || "#F25C2A"}15`,
-                          borderColor: `${activeNode.color || "#F25C2A"}40`,
-                          color: activeNode.color || "#F25C2A",
-                        }}
-                      >
-                        {renderTechIcon(activeNode.iconKey, activeNode.id, "h-5 w-5")}
+                    {activeNode.role && (
+                      <div className="rounded-xl border border-border bg-surface-2 p-3.5 space-y-1">
+                        <span className="font-mono text-[10px] uppercase tracking-wider text-text-muted">
+                          Primary Responsibility
+                        </span>
+                        <p className="text-xs sm:text-sm font-medium text-text leading-snug">
+                          {activeNode.role}
+                        </p>
                       </div>
-                      <div>
-                        <h3 className="font-heading text-xl font-bold uppercase tracking-tight text-text">
-                          {activeNode.label}
-                        </h3>
-                        <p className="font-mono text-xs text-text-muted">{activeNode.tech}</p>
-                      </div>
-                    </div>
-                  </div>
+                    )}
 
-                  {activeNode.role && (
-                    <div className="rounded-xl border border-border bg-surface-2/60 p-3.5 space-y-1">
+                    <div className="space-y-1.5">
                       <span className="font-mono text-[10px] uppercase tracking-wider text-text-muted">
-                        Primary Responsibility
+                        Implementation Details
                       </span>
-                      <p className="text-xs sm:text-sm font-medium text-text leading-snug">
-                        {activeNode.role}
+                      <p className="text-xs sm:text-sm text-text-muted leading-relaxed">
+                        {activeNode.detail}
                       </p>
                     </div>
-                  )}
 
-                  <div className="space-y-1.5">
-                    <span className="font-mono text-[10px] uppercase tracking-wider text-text-muted">
-                      Implementation Details
-                    </span>
-                    <p className="text-xs sm:text-sm text-text-muted leading-relaxed">
-                      {activeNode.detail}
-                    </p>
-                  </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                      {activeNode.inputs && activeNode.inputs.length > 0 && (
+                        <div className="rounded-xl border border-border bg-surface-2 p-3 space-y-2">
+                          <span
+                            className="font-mono text-[10px] uppercase tracking-wider flex items-center gap-1 font-semibold"
+                            style={{ color: activeColor }}
+                          >
+                            <span
+                              className="h-1 w-1 rounded-full"
+                              style={{ backgroundColor: activeColor }}
+                            />
+                            Ingests
+                          </span>
+                          <ul className="space-y-1 text-xs text-text-muted font-mono">
+                            {activeNode.inputs.map((inp, idx) => (
+                              <li key={idx} className="flex items-start gap-1.5">
+                                <span className="text-text-muted/60">↳</span>
+                                <span className="truncate">{inp}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
-                    {activeNode.inputs && activeNode.inputs.length > 0 && (
-                      <div className="rounded-xl border border-border bg-surface-2/40 p-3 space-y-2">
-                        <span className="font-mono text-[10px] uppercase tracking-wider text-accent flex items-center gap-1">
-                          <span className="h-1 w-1 rounded-full bg-accent" />
-                          Ingests
-                        </span>
-                        <ul className="space-y-1 text-xs text-text-muted font-mono">
-                          {activeNode.inputs.map((inp, idx) => (
-                            <li key={idx} className="flex items-start gap-1.5">
-                              <span className="text-text-muted/60">↳</span>
-                              <span className="truncate">{inp}</span>
-                            </li>
-                          ))}
-                        </ul>
+                      {activeNode.outputs && activeNode.outputs.length > 0 && (
+                        <div className="rounded-xl border border-border bg-surface-2 p-3 space-y-2">
+                          <span
+                            className="font-mono text-[10px] uppercase tracking-wider flex items-center gap-1 font-semibold"
+                            style={{ color: activeColor }}
+                          >
+                            <span
+                              className="h-1 w-1 rounded-full"
+                              style={{ backgroundColor: activeColor }}
+                            />
+                            Outputs
+                          </span>
+                          <ul className="space-y-1 text-xs text-text-muted font-mono">
+                            {activeNode.outputs.map((out, idx) => (
+                              <li key={idx} className="flex items-start gap-1.5">
+                                <span className="text-text-muted/60">↳</span>
+                                <span className="truncate">{out}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Connected Nodes Navigation */}
+                    <div className="space-y-2 pt-2 border-t border-border">
+                      <span className="font-mono text-[10px] uppercase tracking-wider text-text-muted">
+                        Connected Topology
+                      </span>
+                      <div className="flex flex-wrap gap-1.5">
+                        {edges
+                          .filter((e) => e.from === activeNode.id || e.to === activeNode.id)
+                          .map((e, idx) => {
+                            const otherId = e.from === activeNode.id ? e.to : e.from;
+                            const otherNode = nodes.find((n) => n.id === otherId);
+                            if (!otherNode) return null;
+                            const isOutgoing = e.from === activeNode.id;
+                            const oc = otherNode.color || "var(--accent)";
+
+                            return (
+                              <button
+                                key={idx}
+                                onClick={() => setActiveNodeId(otherNode.id)}
+                                className="group inline-flex items-center gap-1.5 rounded-lg border border-border bg-surface-2 px-2.5 py-1 text-xs font-mono text-text hover:border-accent transition-all"
+                              >
+                                <span
+                                  className="h-1.5 w-1.5 rounded-full"
+                                  style={{ backgroundColor: oc }}
+                                />
+                                <span className="text-[11px]">{otherNode.label}</span>
+                                <span className="text-[10px] text-text-muted">
+                                  ({isOutgoing ? "out" : "in"})
+                                </span>
+                                <ChevronRight className="h-3 w-3 text-text-muted group-hover:translate-x-0.5 transition-transform" />
+                              </button>
+                            );
+                          })}
                       </div>
-                    )}
-
-                    {activeNode.outputs && activeNode.outputs.length > 0 && (
-                      <div className="rounded-xl border border-border bg-surface-2/40 p-3 space-y-2">
-                        <span className="font-mono text-[10px] uppercase tracking-wider text-emerald-400 flex items-center gap-1">
-                          <span className="h-1 w-1 rounded-full bg-emerald-400" />
-                          Outputs
-                        </span>
-                        <ul className="space-y-1 text-xs text-text-muted font-mono">
-                          {activeNode.outputs.map((out, idx) => (
-                            <li key={idx} className="flex items-start gap-1.5">
-                              <span className="text-text-muted/60">↳</span>
-                              <span className="truncate">{out}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Connected Nodes Navigation */}
-                  <div className="space-y-2 pt-2 border-t border-border">
-                    <span className="font-mono text-[10px] uppercase tracking-wider text-text-muted">
-                      Connected Topology
-                    </span>
-                    <div className="flex flex-wrap gap-1.5">
-                      {edges
-                        .filter((e) => e.from === activeNode.id || e.to === activeNode.id)
-                        .map((e, idx) => {
-                          const otherId = e.from === activeNode.id ? e.to : e.from;
-                          const otherNode = nodes.find((n) => n.id === otherId);
-                          if (!otherNode) return null;
-                          const isOutgoing = e.from === activeNode.id;
-
-                          return (
-                            <button
-                              key={idx}
-                              onClick={() => setActiveNodeId(otherNode.id)}
-                              className="group inline-flex items-center gap-1.5 rounded-lg border border-border bg-surface-2/80 px-2.5 py-1 text-xs font-mono text-text hover:border-accent/50 hover:bg-surface-2 transition-all"
-                            >
-                              <span
-                                className="h-1.5 w-1.5 rounded-full"
-                                style={{ backgroundColor: otherNode.color || "#F25C2A" }}
-                              />
-                              <span className="text-[11px]">{otherNode.label}</span>
-                              <span className="text-[10px] text-text-muted">
-                                ({isOutgoing ? "out" : "in"})
-                              </span>
-                              <ChevronRight className="h-3 w-3 text-text-muted group-hover:translate-x-0.5 transition-transform" />
-                            </button>
-                          );
-                        })}
                     </div>
                   </div>
-                  </div>
-                </div>
-              </motion.div>
-            )}
+                </motion.div>
+              );
+            })()}
           </AnimatePresence>
         </div>
 
         {/* Filter Chips Bar */}
         <div className="mt-4 flex flex-wrap items-center justify-between gap-3 text-xs">
           <div className="flex flex-wrap items-center gap-1.5">
-            <span className="font-mono text-[11px] uppercase tracking-wider text-text-muted mr-1">
-              Filter Node:
+            <span className="font-mono text-[10px] uppercase tracking-wider text-text-muted mr-1 font-semibold">
+              FILTER NODE:
             </span>
-            {nodes.map((n) => (
-              <button
-                key={n.id}
-                onClick={() => setActiveNodeId(activeNodeId === n.id ? null : n.id)}
-                className={cn(
-                  "inline-flex items-center gap-1.5 rounded-lg border px-2.5 py-1 font-mono text-[11px] transition-all duration-180",
-                  activeNodeId === n.id
-                    ? "border-accent bg-accent/15 text-accent shadow-sm"
-                    : "border-border bg-surface text-text-muted hover:border-accent/40 hover:text-text"
-                )}
-              >
-                <span
-                  className="h-1.5 w-1.5 rounded-full"
-                  style={{ backgroundColor: n.color || "#F25C2A" }}
-                />
-                {n.label}
-              </button>
-            ))}
+            {nodes.map((n) => {
+              const c = n.color || "var(--accent)";
+              const isActive = activeNodeId === n.id;
+              return (
+                <button
+                  key={n.id}
+                  onClick={() => setActiveNodeId(isActive ? null : n.id)}
+                  className={cn(
+                    "inline-flex items-center gap-1.5 rounded-lg border px-2.5 py-1 font-mono text-[11px] transition-all duration-180",
+                    isActive
+                      ? "shadow-sm font-semibold"
+                      : "border-border bg-surface text-text-muted hover:text-text"
+                  )}
+                  style={{
+                    borderColor: isActive ? c : undefined,
+                    backgroundColor: isActive ? `${c}20` : undefined,
+                    color: isActive ? c : undefined,
+                  }}
+                >
+                  <span
+                    className="h-1.5 w-1.5 rounded-full"
+                    style={{ backgroundColor: c }}
+                  />
+                  {n.label}
+                </button>
+              );
+            })}
           </div>
 
           <span className="font-mono text-[11px] text-text-muted hidden sm:inline">

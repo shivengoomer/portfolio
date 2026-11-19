@@ -36,6 +36,7 @@ export const Projects: ProjectInterface[] = [
     category: ["Full Stack", "FinTech", "AI / LLM"],
     shortDescription:
       "Quantitative trading and market intelligence platform for Nifty 50 equities featuring real-time technical screeners, TradingView charts, multi-chart terminals, and factor scoring models.",
+    websiteLink: "https://nifty50-analysis-platform.vercel.app/",
     githubLink: "https://github.com/shivengoomer",
     techStack: [
       "Next.js",
@@ -184,6 +185,7 @@ export const Projects: ProjectInterface[] = [
     category: ["Full Stack", "FinTech", "Analytics"],
     shortDescription:
       "Enterprise investor-relations intelligence and evidence platform for researching Indian equities.",
+    websiteLink: "https://indiair-intelligence.pages.dev/",
     githubLink: "https://github.com/shivengoomer/indiair-intelligence",
     techStack: [
       "React",

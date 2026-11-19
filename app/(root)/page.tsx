@@ -126,7 +126,7 @@ export default function IndexPage() {
           </div>
         </section>
 
-        {/* ── SKILLS MARQUEE ── */}
+        {/* ── SKILLS MARQUEE: TECH I WORK WITH ── */}
         <HomeSkillsMarquee />
 
         {/* ── CAREER / ENGINEERING HISTORY ── */}

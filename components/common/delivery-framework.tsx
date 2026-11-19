@@ -7,39 +7,235 @@ import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { ArrowUpRight, ChevronDown } from "lucide-react";
 
 import { experiences, type ExperienceInterface } from "@/config/experience";
+import { cn } from "@/lib/utils";
 
-const formatDate = (date: Date | "Present") => typeof date === "string" ? date : new Intl.DateTimeFormat("en-US", { month: "short", year: "numeric" }).format(date);
-const dateRange = (item: ExperienceInterface) => `${formatDate(item.startDate)} — ${formatDate(item.endDate)}`;
-const accents = ["#FF7A45", "#FFB067", "#D78CFF", "#FFD166", "#6FD6E8"];
+const formatDate = (date: Date | "Present") =>
+  typeof date === "string"
+    ? date
+    : new Intl.DateTimeFormat("en-US", { month: "short", year: "numeric" }).format(date);
 
-function TimelineEntry({ item, index, expanded, onToggle }: { item: ExperienceInterface; index: number; expanded: boolean; onToggle: () => void }) {
+const dateRange = (item: ExperienceInterface) =>
+  `${formatDate(item.startDate)} — ${formatDate(item.endDate)}`;
+
+function TimelineEntry({
+  item,
+  index,
+  expanded,
+  onToggle,
+}: {
+  item: ExperienceInterface;
+  index: number;
+  expanded: boolean;
+  onToggle: () => void;
+}) {
   const reduceMotion = useReducedMotion();
-  const accent = accents[index % accents.length];
-  return <motion.article initial={reduceMotion ? false : { opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.12 }} transition={{ delay: Math.min(index * 0.06, 0.25), duration: 0.5, ease: [0.22, 1, 0.36, 1] }} className="group relative grid grid-cols-[52px_1fr] gap-5 py-6 first:pt-1 sm:grid-cols-[64px_minmax(0,1fr)_auto] sm:gap-7 sm:py-10">
-    <div className="relative z-10 grid h-12 w-12 place-items-center rounded-xl border border-white/10 bg-[#16090f] p-2.5 shadow-[0_10px_22px_rgba(0,0,0,0.3)] sm:h-14 sm:w-14"><span className="absolute -left-px inset-y-3 w-0.5 rounded-r" style={{ backgroundColor: accent }} />{item.logo ? <Image src={item.logo} alt={`${item.company} logo`} width={40} height={40} className="h-full w-full object-contain" /> : <span className="font-heading text-sm" style={{ color: accent }}>SG</span>}</div>
-    <div className="min-w-0"><div className="flex flex-col gap-2 sm:flex-row sm:items-baseline sm:justify-between"><div><h3 className="font-heading text-2xl font-bold tracking-[-0.03em] text-text sm:text-3xl">{item.position}</h3><p className="mt-1 text-base text-text-muted sm:text-lg">{item.company}<span className="hidden sm:inline"><span className="mx-1.5 text-white/20">·</span>{item.category || "Engineering"}</span></p></div><p className="order-first font-mono text-[11px] uppercase tracking-[0.1em] text-text-muted sm:order-none sm:whitespace-nowrap">{dateRange(item)}</p></div><p className="mt-6 hidden max-w-4xl text-base leading-relaxed text-text-muted sm:block sm:text-lg">{item.description[0]}</p><button type="button" onClick={onToggle} aria-expanded={expanded} className="mt-4 inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.15em] transition-colors hover:text-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent sm:mt-5" style={{ color: expanded ? accent : undefined }}><span>{expanded ? "Less" : "More"}</span><ChevronDown className={`h-3.5 w-3.5 transition-transform ${expanded ? "rotate-180" : ""}`} /></button><AnimatePresence>{expanded && <motion.div initial={reduceMotion ? false : { opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }} transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }} className="overflow-hidden"><div className="mt-6 border-l border-white/10 pl-5 sm:pl-6"><p className="font-mono text-[10px] uppercase tracking-[0.16em] text-text-muted">Selected outcomes</p><ul className="mt-4 space-y-3">{item.achievements.slice(0, 3).map((achievement, achievementIndex) => <li key={achievement} className="flex gap-3 text-sm leading-relaxed text-text-muted sm:text-base"><span className="font-mono text-xs" style={{ color: accent }}>{String(achievementIndex + 1).padStart(2, "0")}</span><span>{achievement}</span></li>)}</ul><Link href={`/experience/${item.id}`} className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-text transition-colors hover:text-accent">View role detail <ArrowUpRight className="h-4 w-4" /></Link></div></motion.div>}</AnimatePresence></div>
-    <div className="hidden self-center sm:block"><Link href={`/experience/${item.id}`} aria-label={`View ${item.position} details`} className="grid h-10 w-10 place-items-center rounded-full border border-white/10 text-text-muted transition-all hover:border-accent hover:bg-accent/10 hover:text-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"><ArrowUpRight className="h-4 w-4" /></Link></div>
-  </motion.article>;
+
+  return (
+    <motion.article
+      initial={reduceMotion ? false : { opacity: 0, y: 16 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.12 }}
+      transition={{
+        delay: Math.min(index * 0.05, 0.2),
+        duration: 0.45,
+        ease: [0.22, 1, 0.36, 1],
+      }}
+      className="group relative grid grid-cols-[48px_1fr] gap-4 py-6 first:pt-1 sm:grid-cols-[56px_minmax(0,1fr)_auto] sm:gap-6 sm:py-8"
+    >
+      {/* Company Logo Box */}
+      <div className="relative z-10 grid h-12 w-12 place-items-center rounded-xl border border-border bg-surface p-2 shadow-sm transition-transform duration-200 group-hover:scale-105 sm:h-14 sm:w-14">
+        <span className="absolute -left-px inset-y-2.5 w-0.5 rounded-r bg-accent" />
+        {item.logo ? (
+          <Image
+            src={item.logo}
+            alt={`${item.company} logo`}
+            width={40}
+            height={40}
+            className="h-full w-full object-contain"
+          />
+        ) : (
+          <span className="font-heading text-sm font-bold text-accent">
+            SG
+          </span>
+        )}
+      </div>
+
+      {/* Role Details */}
+      <div className="min-w-0">
+        <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
+          <div>
+            <h3 className="font-heading text-xl sm:text-2xl lg:text-3xl font-bold tracking-tight text-text">
+              {item.position}
+            </h3>
+            <p className="mt-1 text-sm sm:text-base font-medium text-text-muted">
+              <span className="text-text font-semibold">{item.company}</span>
+              <span className="mx-1.5 text-border">·</span>
+              <span>{item.category || "Engineering"}</span>
+              {item.location && (
+                <>
+                  <span className="mx-1.5 text-border hidden sm:inline">·</span>
+                  <span className="font-normal text-text-muted hidden sm:inline">
+                    {item.location}
+                  </span>
+                </>
+              )}
+            </p>
+          </div>
+          <p className="order-first font-mono text-[11px] uppercase tracking-wider text-accent font-semibold sm:order-none sm:whitespace-nowrap">
+            {dateRange(item)}
+          </p>
+        </div>
+
+        {/* Overview description */}
+        <p className="mt-3.5 max-w-4xl text-sm sm:text-base leading-relaxed text-text-muted">
+          {item.description[0]}
+        </p>
+
+        {/* Expand / Collapse Button */}
+        <button
+          type="button"
+          onClick={onToggle}
+          aria-expanded={expanded}
+          className={cn(
+            "mt-3.5 inline-flex items-center gap-1.5 font-mono text-xs font-semibold uppercase tracking-wider transition-colors hover:text-accent focus:outline-none",
+            expanded ? "text-accent" : "text-text-muted hover:text-text"
+          )}
+        >
+          <span>{expanded ? "Hide Details" : "Explore Dossier"}</span>
+          <ChevronDown
+            className={cn(
+              "h-3.5 w-3.5 transition-transform duration-200",
+              expanded && "rotate-180"
+            )}
+          />
+        </button>
+
+        {/* Expandable Key Outcomes */}
+        <AnimatePresence>
+          {expanded && (
+            <motion.div
+              initial={reduceMotion ? false : { opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+              className="overflow-hidden"
+            >
+              <div className="mt-4 border-l-2 border-border pl-4 sm:pl-6 space-y-3 pt-1">
+                <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-accent font-semibold">
+                  Selected Technical Outcomes
+                </p>
+                <ul className="space-y-2.5">
+                  {item.achievements.slice(0, 3).map((achievement, achievementIndex) => (
+                    <li
+                      key={achievement}
+                      className="flex gap-2.5 text-xs sm:text-sm leading-relaxed text-text-muted"
+                    >
+                      <span className="font-mono text-xs font-bold text-accent">
+                        {String(achievementIndex + 1).padStart(2, "0")}
+                      </span>
+                      <span className="text-text">{achievement}</span>
+                    </li>
+                  ))}
+                </ul>
+                <Link
+                  href={`/experience/${item.id}`}
+                  className="mt-4 inline-flex items-center gap-1.5 text-xs font-semibold text-text hover:text-accent transition-colors pt-1"
+                >
+                  View complete role dossier <ArrowUpRight className="h-3.5 w-3.5" />
+                </Link>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+
+      {/* Desktop Quick Link Icon */}
+      <div className="hidden self-center sm:block">
+        <Link
+          href={`/experience/${item.id}`}
+          aria-label={`View ${item.position} details`}
+          className="grid h-10 w-10 place-items-center rounded-full border border-border bg-surface text-text-muted shadow-sm transition-all hover:border-accent hover:bg-accent/10 hover:text-accent"
+        >
+          <ArrowUpRight className="h-4 w-4" />
+        </Link>
+      </div>
+    </motion.article>
+  );
 }
 
 export function DeliveryFramework() {
   const [openId, setOpenId] = useState<string | null>(null);
   const [showAll, setShowAll] = useState(false);
   const roles = showAll ? experiences : experiences.slice(0, 3);
-  return <section id="experience" className="retro-surface career-history relative overflow-hidden px-4 py-12 sm:px-6 sm:py-28 lg:px-8" aria-labelledby="experience-heading">
-    <div className="pointer-events-none absolute inset-0 opacity-25 [background-image:radial-gradient(rgba(255,122,69,0.22)_1px,transparent_1px)] [background-size:28px_28px]" />
-    <div className="pointer-events-none absolute -left-32 top-16 h-80 w-80 rounded-full bg-[#ff7a45]/10 blur-[100px]" />
-    <div className="relative mx-auto max-w-6xl">
-      <header className="flex flex-col gap-3 border-b border-white/10 pb-6 sm:flex-row sm:items-end sm:justify-between sm:gap-5 sm:pb-8">
-        <div>
-          <p className="flex items-center gap-2 font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-[#ff9a70]"><span className="career-pulse relative flex h-2.5 w-2.5" aria-hidden="true"><span className="career-pulse-ring absolute inset-0 rounded-full bg-[#ff7a45]" /><span className="relative m-[3px] h-1 w-1 rounded-full bg-[#ffe0d1]" /></span>Career / engineering history</p>
-          <h2 id="experience-heading" className="mt-3 font-heading text-4xl font-extrabold uppercase tracking-[-0.06em] text-text sm:mt-4 sm:text-6xl">Experience.</h2>
-          <p className="mt-4 hidden max-w-2xl text-lg leading-relaxed text-text-muted sm:block">The roles where systems shipped, teams moved, and technical work became visible impact.</p>
+
+  return (
+    <section
+      id="experience"
+      className="relative overflow-hidden bg-bg px-4 py-16 sm:px-6 sm:py-24 lg:px-8 border-t border-border"
+      aria-labelledby="experience-heading"
+    >
+      <div className="relative mx-auto max-w-6xl">
+        {/* Section Header */}
+        <header className="flex flex-col gap-4 border-b border-border pb-6 sm:flex-row sm:items-end sm:justify-between sm:pb-8">
+          <div>
+            <p className="flex items-center gap-2 font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-accent">
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-75" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
+              </span>
+              Career / engineering history
+            </p>
+            <h2
+              id="experience-heading"
+              className="mt-3 font-heading text-4xl sm:text-5xl lg:text-6xl font-extrabold uppercase tracking-tight text-text"
+            >
+              Experience.
+            </h2>
+            <p className="mt-3 max-w-2xl text-base sm:text-lg leading-relaxed text-text-muted">
+              The roles where systems shipped, teams moved, and technical work became visible impact.
+            </p>
+          </div>
+          <Link
+            href="/experience"
+            className="group inline-flex w-fit items-center gap-1.5 font-mono text-xs uppercase tracking-[0.14em] text-text-muted transition-colors hover:text-accent"
+          >
+            Full archive
+            <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+          </Link>
+        </header>
+
+        {/* Vertical Timeline Track */}
+        <div className="relative mt-8 sm:mt-12">
+          <div
+            className="absolute bottom-0 left-[23px] top-0 w-px bg-gradient-to-b from-accent/70 via-border to-transparent sm:left-7"
+            aria-hidden="true"
+          />
+          {roles.map((item, index) => (
+            <TimelineEntry
+              key={item.id}
+              item={item}
+              index={index}
+              expanded={openId === item.id}
+              onToggle={() =>
+                setOpenId((current) => (current === item.id ? null : item.id))
+              }
+            />
+          ))}
         </div>
-        <Link href="/experience" className="hidden w-fit items-center gap-2 font-mono text-xs uppercase tracking-[0.14em] text-text-muted transition-colors hover:text-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent sm:inline-flex">Full archive <ArrowUpRight className="h-3.5 w-3.5" /></Link>
-      </header>
-      <div className="relative mt-7 sm:mt-14"><div className="absolute bottom-0 left-[25px] top-0 w-px bg-gradient-to-b from-accent/60 via-white/10 to-transparent sm:left-7" />{roles.map((item, index) => <TimelineEntry key={item.id} item={item} index={index} expanded={openId === item.id} onToggle={() => setOpenId((current) => current === item.id ? null : item.id)} />)}</div>
-      {experiences.length > 3 && <button type="button" onClick={() => setShowAll((current) => !current)} className="ml-[52px] mt-5 rounded-full border border-white/15 px-5 py-3 font-mono text-xs uppercase tracking-[0.14em] text-text-muted transition-colors hover:border-accent hover:text-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent sm:ml-[64px]">{showAll ? "Show less" : `Show more (${experiences.length - 3})`}</button>}
-    </div>
-  </section>;
+
+        {/* Show More / Show Less Button */}
+        {experiences.length > 3 && (
+          <div className="mt-6 ml-[48px] sm:ml-[56px]">
+            <button
+              type="button"
+              onClick={() => setShowAll((current) => !current)}
+              className="rounded-full border border-border bg-surface px-5 py-2.5 font-mono text-xs uppercase tracking-[0.14em] text-text hover:border-accent hover:text-accent shadow-sm transition-all"
+            >
+              {showAll ? "Show less" : `Show more (${experiences.length - 3})`}
+            </button>
+          </div>
+        )}
+      </div>
+    </section>
+  );
 }
